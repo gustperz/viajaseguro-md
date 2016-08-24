@@ -1,0 +1,125 @@
+$toolbarHeight: 60px;
+#toolbar {
+    height: $toolbarHeight;
+    min-height: $toolbarHeight;
+    max-height: $toolbarHeight;
+    z-index: 55 !important;
+    background-color: $primary-color;
+    color: white;
+
+    md-icon {
+        color: white;
+    }
+
+    .navigation-toggle {
+        width: $toolbarHeight;
+        min-width: $toolbarHeight;
+        height: $toolbarHeight;
+        margin: 0;
+        padding-right: 0;
+        border-radius: 0;
+    }
+
+    .navigation-fold-toggle {
+        md-icon {
+            transition: transform 0.3s ease-in-out 0.1s;
+            transform: rotate(0deg);
+        }
+    }
+
+    .logo {
+        width: $navigationWidth;
+        padding: 0 16px 0 0;
+
+        .logo-image {
+            display: block;
+            background: material-color('light-blue', '600');
+            width: 32px;
+            min-width: 32px;
+            height: 32px;
+            line-height: 32px;
+            text-align: center;
+            color: #FFFFFF;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 2px;
+        }
+
+        .logo-text {
+            color: rgba(0, 0, 0, 0.87);
+            margin-left: 16px;
+            font-size: 16px;
+        }
+    }
+
+    #toolbar-date{
+        .md-datepicker-button{
+            padding: 8px 0;
+            width: 30px;
+        }
+
+        .md-datepicker-input-container{
+            border: 0 !important;
+            width: 0!important;
+            max-width: 0!important;
+        }
+
+        input, .md-datepicker-triangle-button{
+            max-width: 0!important;
+            margin: 0!important;
+            display: none;
+        }
+
+        span{
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: capitalize;
+            //padding-bottom: 3px;
+        }
+    }
+
+    #user-menu {
+        margin: 0;
+        padding: 0 16px;
+        height: $toolbarHeight;
+        text-transform: none;
+
+        .username {
+            margin: 0 12px 0 8px;
+            font-weight: bold;
+        }
+    }
+
+    #quick-panel-toggle {
+        width: $toolbarHeight;
+        height: $toolbarHeight;
+        margin: 0;
+        border-radius: 0;
+    }
+
+    .toolbar-separator {
+        height: $toolbarHeight;
+        width: 1px;
+        background: rgba(0, 0, 0, 0.12);
+    }
+}
+
+// RESPONSIVE
+@media only screen and (min-width: $layout-breakpoint-sm) {
+
+    .ms-navigation-folded {
+
+        #layout-vertical-navigation-fullwidth-toolbar-2 {
+
+            #toolbar {
+
+                .navigation-fold-toggle {
+
+                    md-icon {
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+        }
+    }
+}

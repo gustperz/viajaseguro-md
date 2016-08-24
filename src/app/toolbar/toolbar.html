@@ -1,0 +1,47 @@
+<div layout="row" layout-align="start center">
+    <div layout="row" layout-align="start center" flex>
+
+        <md-button class="md-icon-button navigation-toggle"
+                   ng-click="vm.toggleSidenav('navigation')"
+                   hide-gt-sm aria-label="Toggle navigation">
+            <md-icon md-font-icon="icon-menu" class="icon"></md-icon>
+        </md-button>
+
+        <md-button class="md-icon-button navigation-toggle navigation-fold-toggle"
+                   ng-click="vm.toggleMsNavigationFolded()"
+                   hide show-gt-sm aria-label="Toggle navigation fold">
+            <md-icon md-font-icon="icon-backburger" class="icon"></md-icon>
+        </md-button>
+
+        <div class="logo" layout="row" layout-align="start center">
+            <img src="assets/images/logo-positivo.png">
+        </div>
+
+        <!--<div class="toolbar-separator"></div>-->
+        <!--<ms-shortcuts></ms-shortcuts>-->
+
+    </div>
+
+    <div layout="row" layout-align="start center">
+        <md-progress-circular id="toolbar-progress" ng-if="$root.loadingProgress" class="md-accent"
+                              md-mode="indeterminate" md-diameter="32">
+        </md-progress-circular>
+
+        <!--<md-button id="quick-panel-toggle" class="md-icon-button" ng-click="vm.toggleSidenav('quick-panel')"-->
+                   <!--aria-label="Toggle quick panel" translate translate-attr-aria-label="TOOLBAR.TOGGLE_QUICK_PANEL">-->
+            <!--<md-icon md-font-icon="icon-format-list-bulleted" class="icon"></md-icon>-->
+        <!--</md-button>-->
+
+        <div id="toolbar-date" layout="row" layout-align="start center">
+            <md-datepicker ng-model="vm.fecha" md-date-filter="vm.noSelectFecha"/>
+            <span hide show-gt-sm>{{vm.fecha | amDateFormat:'dddd, DD [de] MMMM'}}</span>
+        </div>
+
+        <md-button id="user-menu" class="user-button" aria-label="User settings">
+            <div layout="row" layout-align="space-between center">
+                <md-icon md-font-icon="icon-logout" class="icon" hide-sm/>
+                <span class="username" hide-sm>Salir</span>
+            </div>
+        </md-button>
+    </div>
+</div>

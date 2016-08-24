@@ -1,0 +1,37 @@
+$primary-color: #D50000;
+
+.md-accent-bg{
+  background-color: $primary-color !important;
+}
+
+#splash-screen {
+  background-color: white !important;
+
+  .logo{
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .spinner-wrapper{
+    padding: 20px 20%;
+
+    ._md-bar {
+      background-color: $primary-color;
+    }
+  }
+}
+
+/**
+ *  Do not remove this comments bellow. It's the markers used by wiredep to inject
+ *  sass dependencies when defined in the bower.json of your dependencies
+ */
+// bower:scss
+// endbower
+
+/**
+ *  Do not remove this comments bellow. It's the markers used by gulp-inject to inject
+ *  all your sass files automatically
+ */
+// injector
+// endinjector
+
