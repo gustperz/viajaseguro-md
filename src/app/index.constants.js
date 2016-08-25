@@ -3,5 +3,6 @@
     'use strict';
 
     angular
-        .module('fuse');
+        .module('fuse')
+        .constant('api', 'http://dev.viajaseguro.co/api');
 })();

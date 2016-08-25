@@ -3,19 +3,19 @@
     'use strict';
 
     angular
-        .module('app.quick-panel')
-        .controller('QuickPanelController', QuickPanelController);
+        .module('app.centrales.despacho')
+        .controller('DespachoController', DespachoController);
 
     /** @ngInject */
-    function QuickPanelController()
+    function DespachoController()
     {
         var vm = this;
 
         // Data
 
+
         // Methods
 
         //////////
     }
-
 })();

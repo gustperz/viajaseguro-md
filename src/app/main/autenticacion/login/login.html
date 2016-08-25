@@ -1,0 +1,55 @@
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <span flex></span>
+    </div>
+</md-toolbar>
+<div id="login" layout="row" layout-align="start">
+    <div id="login-intro" flex hide show-gt-sm>
+        <div class="title">
+            ¡Bienvenido a Viaja seguro!
+        </div>
+        <div class="description">
+            Acá podrás administrar tu empresa de manera segura y eficaz.
+        </div>
+    </div>
+
+    <div id="login-form-wrapper" class="flex-scrollable md-whiteframe-8dp" ms-scroll>
+        <div id="login-form">
+            <div class="logo " hide-gt-sm>
+                <span><img src="/assets/images/icono.png" alt=""></span>
+            </div>
+
+            <div class="title">Inicia sesión con tu cuenta</div>
+
+            <form name="loginForm" novalidate>
+                <md-input-container class="md-block" md-no-float>
+                    <input id="email" type="text" name="email" ng-model="vm.usuario.name" placeholder="Nombre de usuario" required>
+                    <div ng-messages="loginForm.email.$error" role="alert" multiple>
+                        <div ng-message="required">
+                            <span>Este campo es requrido</span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block" md-no-float>
+                    <input id="password" type="password" name="password" ng-model="vm.usuario.pass" placeholder="Contrase&ntilde;a" required>
+                    <div ng-messages="loginForm.password.$error" role="alert">
+                        <div ng-message="required">
+                            <span>Este campo es requerido</span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <!--<div class="remember-forgot-password" layout="row" layout-sm="column"-->
+                <!--layout-align="space-between center">-->
+                <!--<a ui-sref="app.pages_auth_forgot-password" class="forgot-password md-accent-color">-->
+                <!--¿Se te olvidó tu contraseña?</a>-->
+                <!--</div>-->
+
+                <md-button id="btn-iniciar-sesion" ng-click="vm.iniciarSesion()" type="submit" class="md-raised md-accent submit-button" aria-label="INICIAR SESIÓN" ng-disabled="loginForm.$invalid || loginForm.$pristine">
+                    INICIAR SESIÓN
+                </md-button>
+            </form>
+        </div>
+    </div>
+</div>

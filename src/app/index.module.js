@@ -8,20 +8,19 @@
     angular
         .module('fuse', [
             'angularMoment',
-
             // Core
             'app.core',
-
+            //jwt
+            'angular-jwt',
+            //restangular
+            'restangular',
             // Navigation
             'app.navigation',
-
             // Toolbar
             'app.toolbar',
-
-            // Quick panel
-            'app.quick-panel',
-
-            // Sample
-            'app.sample'
+            // utenticacion
+            'app.autenticacion',
+            // centrales
+            'app.centrales'
         ]);
 })();

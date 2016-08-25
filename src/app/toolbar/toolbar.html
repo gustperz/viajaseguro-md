@@ -33,11 +33,15 @@
         <!--</md-button>-->
 
         <div id="toolbar-date" layout="row" layout-align="start center">
-            <md-datepicker ng-model="vm.fecha" md-date-filter="vm.noSelectFecha"/>
+            <md-datepicker ng-model="vm.fecha" md-date-filter="vm.noSelectFecha"
+                           md-min-date="vm.noSelectFecha"
+                           md-max-date="vm.noSelectFecha"
+                           md-open-on-click
+                           md-format="DD/MM/YYYY"/>
             <span hide show-gt-sm>{{vm.fecha | amDateFormat:'dddd, DD [de] MMMM'}}</span>
         </div>
 
-        <md-button id="user-menu" class="user-button" aria-label="User settings">
+        <md-button ng-click="vm.logout()" id="user-menu" class="user-button" aria-label="User settings">
             <div layout="row" layout-align="space-between center">
                 <md-icon md-font-icon="icon-logout" class="icon" hide-sm/>
                 <span class="username" hide-sm>Salir</span>

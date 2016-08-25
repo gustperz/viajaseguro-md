@@ -1,9 +1,15 @@
+/**
+ * Created by Jose Soto Acosta on 25/08/2016.
+ */
 (function ()
 {
     'use strict';
 
     angular
-        .module('app.sample', [])
+        .module('app.centrales', [
+            'app.centrales.conductores',
+            'app.centrales.despacho'
+        ])
         .config(config);
 
     /** @ngInject */
@@ -11,7 +17,7 @@
     {
         // State
         $stateProvider
-            .state('app.sample', {
+            .state('app.centrales', {
                 url    : '/sample',
                 views  : {
                     'content@app': {
@@ -22,19 +28,20 @@
             });
 
         // Navigation
-        msNavigationServiceProvider.saveItem('fuse', {
-            title    : 'Conductores',
+        msNavigationServiceProvider.saveItem('despacho', {
+            title    : 'Despacho de Coonductores',
             icon     : 'icon-tile-four',
-            state    : 'app.sample',
+            state    : 'app.central_despacho',
             /*stateParams: {
              'param1': 'page'
              },*/
             weight:1
         });
-        msNavigationServiceProvider.saveItem('fuse2', {
-            title    : 'Despacho de Coonductores',
+
+        msNavigationServiceProvider.saveItem('conductores', {
+            title    : 'Conductores',
             icon     : 'icon-tile-four',
-            state    : 'app.sample2',
+            state    : 'app.central_conductores',
             /*stateParams: {
              'param1': 'page'
              },*/

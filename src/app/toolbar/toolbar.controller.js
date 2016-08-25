@@ -7,7 +7,7 @@
         .controller('ToolbarController', ToolbarController);
 
     /** @ngInject */
-    function ToolbarController($mdSidenav, msNavigationService)
+    function ToolbarController($mdSidenav, msNavigationService, $state)
     {
         var vm = this;
 
@@ -34,8 +34,8 @@
 
         }
 
-        function noSelectFecha(date) {
-            return false;
+        function noSelectFecha() {
+            vm.noSelectFecha = new Date();
         }
 
 
@@ -54,7 +54,8 @@
          */
         function logout()
         {
-            // Do logout here..
+            sessionStorage.clear();
+            $state.go('app.autenticacion_login');
         }
 
         /**
