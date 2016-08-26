@@ -78,6 +78,12 @@ $toolbarHeight: 60px;
         }
     }
 
+    #toolbar-progress {
+        path {
+            stroke: white;
+        }
+    }
+
     #user-menu {
         margin: 0;
         padding: 0 16px;
