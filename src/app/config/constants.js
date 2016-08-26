@@ -4,5 +4,5 @@
 
     angular
         .module('fuse')
-        .constant('api', 'http://dev.viajaseguro.co/api');
+        .constant('api', 'http://dev.viajaseguro.co/api/');
 })();

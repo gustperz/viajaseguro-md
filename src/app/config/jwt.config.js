@@ -7,7 +7,10 @@
         .config(config);
 
     /** @ngInject */
-    function config(jwtInterceptorProvider, $httpProvider) {
+    function config(jwtInterceptorProvider, $httpProvider, jwtOptionsProvider, api) {
+
+        jwtOptionsProvider.config({ whiteListedDomains: [api] });
+
         /** @ngInject */
         jwtInterceptorProvider.tokenGetter = function (jwtHelper, $http, api) {
             var jwt = sessionStorage.getItem('jwt');

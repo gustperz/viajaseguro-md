@@ -7,19 +7,20 @@
      */
     angular
         .module('fuse', [
-            'angularMoment',
+            'angularMoment', 'angular-jwt', 'restangular',
+
             // Core
             'app.core',
-            //jwt
-            'angular-jwt',
-            //restangular
-            'restangular',
+            // Errors
+            'app.errors',
             // Navigation
             'app.navigation',
             // Toolbar
             'app.toolbar',
+            // Quick panel
+            'app.quick-panel',
             // utenticacion
-            'app.autenticacion',
+            'app.auth',
             // centrales
             'app.centrales'
         ]);

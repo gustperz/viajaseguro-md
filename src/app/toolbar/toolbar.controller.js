@@ -17,7 +17,6 @@
         // Methods
         vm.toggleSidenav = toggleSidenav;
         vm.logout = logout;
-        vm.noSelectFecha = noSelectFecha;
         vm.toggleMsNavigationFolded = toggleMsNavigationFolded;
 
         //////////
@@ -32,10 +31,6 @@
         function init()
         {
 
-        }
-
-        function noSelectFecha() {
-            vm.noSelectFecha = new Date();
         }
 
 
@@ -55,7 +50,7 @@
         function logout()
         {
             sessionStorage.clear();
-            $state.go('app.autenticacion_login');
+            $state.go('app.login');
         }
 
         /**

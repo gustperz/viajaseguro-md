@@ -9,7 +9,7 @@
         .config(config);
 
     /** @ngInject */
-    function config($stateProvider) {
+    function config($stateProvider, msNavigationServiceProvider) {
         // State
         $stateProvider
             .state('app.central_despacho', {
@@ -21,9 +21,19 @@
                     }
                 },
                 data: {
-                    onlyAccess: ['CENTRAL_EMPRESA']
+                    permissions: {
+                        only: ['CENTRAL_EMPRESA']
+                    }
                 }
             });
+
+        // Navigation
+        msNavigationServiceProvider.saveItem('despacho', {
+            title    : 'Despacho de Coonductores',
+            icon     : 'icon-tile-four',
+            state    : 'app.central_despacho',
+            weight:1
+        });
     }
 })();
 

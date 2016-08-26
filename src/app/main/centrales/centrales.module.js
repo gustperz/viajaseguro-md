@@ -13,11 +13,11 @@
         .config(config);
 
     /** @ngInject */
-    function config($stateProvider, msNavigationServiceProvider)
+    function config($stateProvider)
     {
         // State
         $stateProvider
-            .state('app.centrales', {
+            .state('app.sample', {
                 url    : '/sample',
                 views  : {
                     'content@app': {
@@ -26,26 +26,5 @@
                     }
                 }
             });
-
-        // Navigation
-        msNavigationServiceProvider.saveItem('despacho', {
-            title    : 'Despacho de Coonductores',
-            icon     : 'icon-tile-four',
-            state    : 'app.central_despacho',
-            /*stateParams: {
-             'param1': 'page'
-             },*/
-            weight:1
-        });
-
-        msNavigationServiceProvider.saveItem('conductores', {
-            title    : 'Conductores',
-            icon     : 'icon-tile-four',
-            state    : 'app.central_conductores',
-            /*stateParams: {
-             'param1': 'page'
-             },*/
-            weight:1
-        });
     }
 })();

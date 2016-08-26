@@ -7,22 +7,23 @@
 
     angular
         .module('app.core')
-        .factory('GetRequest', reposytory);
+        .factory('OneRequest', reposytory);
 
     /** @ngInject **/
     function reposytory(Restangular) {
         var service = {
-            to: sendRequest,
+            to: sendGet,
+            post: sendPost,
             base: Restangular
         }
         return service;
 
-        function sendRequest(route, params) {
+        function sendGet(route, params) {
             return Restangular.all(route).customGET('', params);
         }
 
-        function base() {
-            return Restangular;
+        function sendPost(route, data, headers) {
+            return Restangular.one(route).customPOST(data, '', {}, headers || {});
         }
     }
 })();
