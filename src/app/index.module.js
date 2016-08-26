@@ -22,6 +22,8 @@
             // utenticacion
             'app.auth',
             // centrales
-            'app.centrales'
+            'app.centrales',
+            // empresas
+            'app.empresas'
         ]);
 })();

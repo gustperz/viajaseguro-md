@@ -16,12 +16,14 @@
                 url: '/empresa/centrales',
                 views: {
                     'content@app': {
-                        templateUrl: 'app/main/empresas/centrales/centrales.html',
+                        templateUrl: 'app/main/empresas/gestion_centrales/centrales.html',
                         controller: 'EmpresaCentralesController as vm'
                     }
                 },
                 data: {
-                    onlyAccess: ['EMPRESA']
+                    permissions: {
+                        only: ['EMPRESA']
+                    }
                 }
             });
     }

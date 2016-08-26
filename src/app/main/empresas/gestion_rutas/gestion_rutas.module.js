@@ -16,12 +16,14 @@
                 url: '/empresa/rutas',
                 views: {
                     'content@app': {
-                        templateUrl: 'app/main/empresas/rutas/rutas.html',
+                        templateUrl: 'app/main/empresas/gestion_rutas/rutas.html',
                         controller: 'EmpresaRutasController as vm'
                     }
                 },
                 data: {
-                    onlyAccess: ['EMPRESA']
+                    permissions: {
+                        only: ['EMPRESA']
+                    }
                 }
             });
     }

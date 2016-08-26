@@ -16,12 +16,14 @@
                 url: '/empresa/conductores',
                 views: {
                     'content@app': {
-                        templateUrl: 'app/main/empresas/conductores/conductores.html',
+                        templateUrl: 'app/main/empresas/gestion_conductores/conductores.html',
                         controller: 'EmpresaConductoresController as vm'
                     }
                 },
                 data: {
-                    onlyAccess: ['EMPRESA']
+                    permissions: {
+                        only: ['EMPRESA']
+                    }
                 }
             });
     }

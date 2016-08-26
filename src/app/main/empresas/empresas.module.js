@@ -41,7 +41,7 @@
         });
 
         msNavigationServiceProvider.saveItem('vehiculos', {
-            title    : 'Conductores',
+            title    : 'Vehiculos',
             icon     : 'icon-tile-four',
             state    : 'app.empresa_vehiculos',
             /*stateParams: {

@@ -39,7 +39,7 @@
             if(rol == 'CENTRAL_EMPRESA'){
                 $state.go('app.central_despacho');
             }else if(rol == 'EMPRESA'){
-
+                $state.go('app.empresa_conductores')
             }else if(rol == 'SUPER_ADM'){
 
             }

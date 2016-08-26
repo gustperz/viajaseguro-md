@@ -16,12 +16,14 @@
                 url: '/empresa/vehiculos',
                 views: {
                     'content@app': {
-                        templateUrl: 'app/main/empresas/vehiculos/vehiculos.html',
+                        templateUrl: 'app/main/empresas/gestion_vehiculos/vehiculos.html',
                         controller: 'EmpresaVehiculosController as vm'
                     }
                 },
                 data: {
-                    onlyAccess: ['EMPRESA']
+                    permissions: {
+                        only: ['EMPRESA']
+                    }
                 }
             });
     }
