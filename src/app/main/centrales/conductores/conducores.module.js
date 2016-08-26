@@ -9,7 +9,7 @@
         .config(config);
 
     /** @ngInject */
-    function config($stateProvider) {
+    function config($stateProvider, msNavigationServiceProvider) {
         // State
         $stateProvider
             .state('app.central_conductores', {
@@ -21,9 +21,22 @@
                     }
                 },
                 data: {
-                    onlyAccess: ['CENTRAL_EMPRESA']
+                    permissions: {
+                        only: ['CENTRAL_EMPRESA']
+                    }
                 }
             });
+
+        // Navigation
+        msNavigationServiceProvider.saveItem('conductores', {
+            title    : 'Conductores',
+            icon     : 'icon-tile-four',
+            state    : 'app.central_conductores',
+            /*stateParams: {
+             'param1': 'page'
+             },*/
+            weight:1
+        });
     }
 })();
 

@@ -7,11 +7,18 @@
         .config(config);
 
     /** @ngInject */
-    function config(jwtInterceptorProvider, $httpProvider) {
+    function config($httpProvider, jwtOptionsProvider, api_domain) {
+
+        jwtOptionsProvider.config({
+            whiteListedDomains: [api_domain],
+            tokenGetter: tokenGetter
+        });
+
         /** @ngInject */
-        jwtInterceptorProvider.tokenGetter = function (jwtHelper, $http, api) {
+        function tokenGetter(options, jwtHelper, $http, api) {
             var jwt = sessionStorage.getItem('jwt');
-            if (jwt) {
+            // console.log(options.url);
+            if (jwt && options.url.indexOf(api) === 0) {
                 if (jwtHelper.isTokenExpired(jwt)) {
                     return $http({
                         url: api + '/new_token',
