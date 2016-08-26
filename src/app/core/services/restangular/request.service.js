@@ -19,7 +19,7 @@
         return service;
 
         function sendGet(route, params) {
-            return Restangular.all(route).customGET('', params);
+            return Restangular.all(route).customGET('', params || {});
         }
 
         function sendPost(route, data, headers) {
