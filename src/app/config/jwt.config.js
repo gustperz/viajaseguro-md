@@ -21,7 +21,7 @@
             if (jwt && options.url.indexOf(api) === 0) {
                 if (jwtHelper.isTokenExpired(jwt)) {
                     return $http({
-                        url: api + '/new_token',
+                        url: api + 'new_token',
                         skipAuthorization: true,
                         method: 'GET',
                         headers: {Authorization: 'Bearer ' + jwt},
