@@ -1,21 +1,65 @@
 <div id="forms" class="page-layout simple fullwidth doc-page" layout="column">
     <!-- HEADER -->
-    <div class="header md-accent-bg" layout="row" layout-align="space-between">
-        <div layout="column" layout-align="space-between">
-            <div class="breadcrumb" layout="row" layout-align="start center">
-                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
-                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
-                <span class="parent">CENTRAL</span>
-                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
-                <span class="parent">CONDUCTORES</span>
-            </div>
+    <div class="header" layout="row" layout-align="space-between center">
+        <!-- APP TITLE -->
+        <div class="logo" layout="row" layout-align="start center">
+            <span class="logo-icon">
+                <md-icon md-font-icon="icon-account-box" class="s24"></md-icon>
+            </span>
+            <span class="logo-text">Conductores de la central</span>
         </div>
+        <!-- / APP TITLE -->
+
+        <!-- SEARCH -->
+        <div class="search-input-wrapper" layout="row" layout-align="start center">
+            <label for="search">
+                <md-icon md-font-icon="icon-magnify"></md-icon>
+            </label>
+            <md-input-container md-no-float class="m-0">
+                <input id="search" placeholder="Search for anyone" type="text" ng-model="vm.search" translate
+                       translate-attr-placeholder="CONTACTS.SEARCH_FOR_ANYONE">
+            </md-input-container>
+        </div>
+        <!-- / SEARCH -->
     </div>
+
     <!-- / HEADER -->
 
     <!-- CONTENT -->
-    <div class="content" layout="column">
-
+    <div class="widget-group" layout="row" flex="100" layout-wrap>
+        <ms-widget flippable="true" layout="column" id="widget-conductores"
+                   flex-xs="100" flex-sm="33" flex-md="33" flex-lg="25" flex-xl="15"
+                   ng-repeat="conductor in vm.conductores">
+            <ms-widget-front class="padding-16 md-white-bg" layout="column" layout-align="center center">
+                <div class="media">
+                    <img src="http://{{conductor.imagen}}">
+                </div>
+                <span flex></span>
+                <div class="widget-conductores-nombre" layout="row" layout-fill>
+                    <span flex>{{conductor.nombres}} {{conductor.apellidos}}</span>
+                    <md-button class="md-icon-button" aria-label="More"
+                               ng-click="flipWidget()">
+                        <md-icon md-font-icon="icon-dots-vertical" class="icon"/>
+                    </md-button>
+                </div>
+                <!-- Front content -->
+            </ms-widget-front>
+            <ms-widget-back class="padding-16 md-white-bg" layout="column">
+                <div class="widget-conductores-nombre" layout="row" layout-fill>
+                    <span flex>{{conductor.nombres}} {{conductor.apellidos}}</span>
+                    <md-button class="md-icon-button" aria-label="More"
+                               ng-click="flipWidget()">
+                        <md-icon md-font-icon="icon-window-close" class="icon"/>
+                    </md-button>
+                </div>
+                <div id="widget-conductores-data">
+                    <span>Identificacion: {{conductor.identificacion}}<span>
+                    <span>Telefono: {{conductor.telefono}}<span>
+                    <span>Direccion: {{conductor.direccion}}<span>
+                </div>
+                <!-- Back content -->
+            </ms-widget-back>
+        </ms-widget>
     </div>
     <!-- / CONTENT -->
 </div>
