@@ -25,6 +25,10 @@
     }
   }
 
+  .widget-conductores-data {
+    margin-left: 10px !important;
+  }
+
   ms-widget-front{
     background-color: whitesmoke !important;
     padding: 16px 0 0 0;
@@ -35,5 +39,6 @@
     background-color: $primary-color !important;
     color: white;
     padding: 0;
+    padding-left: 10px;
   }
 }
