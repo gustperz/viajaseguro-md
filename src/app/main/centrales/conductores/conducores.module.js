@@ -28,7 +28,7 @@
             });
 
         // Navigation
-        msNavigationServiceProvider.saveItem('conductores', {
+        msNavigationServiceProvider.saveItem('central_conductores', {
             title    : 'Conductores',
             icon     : 'icon-tile-four',
             state    : 'app.central_conductores',
