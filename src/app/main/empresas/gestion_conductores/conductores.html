@@ -1,21 +1,90 @@
 <div id="forms" class="page-layout simple fullwidth doc-page" layout="column">
     <!-- HEADER -->
-    <div class="header md-accent-bg" layout="row" layout-align="space-between">
-        <div layout="column" layout-align="space-between">
-            <div class="breadcrumb" layout="row" layout-align="start center">
-                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
-                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
-                <span class="parent">EMPRESA</span>
-                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
-                <span class="parent">CONDUCTORES</span>
-            </div>
+    <div class="header" layout="row" layout-align="space-between">
+        <!-- APP TITLE -->
+        <div class="breadcrumb" layout="row" layout-align="start center">
+            <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+            <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+            <span class="parent">EMPRESA</span>
+            <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+            <span class="parent">CONDUCTORES</span>
         </div>
+        <!-- / APP TITLE -->
+        <!-- SEARCH -->
+        <div class="search-input-wrapper" layout="row" layout-align="start center">
+            <label for="search">
+                <md-icon md-font-icon="icon-magnify"></md-icon>
+            </label>
+            <md-input-container md-no-float class="m-0">
+                <input id="search" placeholder="Buscar conductor" type="text" ng-model=buscar>
+            </md-input-container>
+        </div>
+        <!-- / SEARCH -->
     </div>
     <!-- / HEADER -->
 
     <!-- CONTENT -->
-    <div class="content" layout="column">
+    <div class="content" layout="row" flex="100" layout-wrap>
+        <div flex="90">
+            <md-table-container>
+                <table md-table ng-model="vm.selected" md-progress="promise">
+                    <thead md-head md-order="vm.query.order" md-on-reorder="OneRequest">
+                    <tr md-row>
+                        <th md-column md-numeric md-order></th>
+                        <th md-column md-numeric>Identificación</th>
+                        <th md-column md-numeric>Nombres</th>
+                        <th md-column md-numeric>Apellidos</th>
+                        <th md-column md-numeric>Placa del vehiculo</th>
+                        <th md-column md-numeric>Codigo vial</th>
+                        <th md-column md-numeric>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody md-body>
+                    <tr md-row md-select="conductor" md-select-id="name" md-auto-select
+                        ng-repeat="conductor in vm.conductores | orderBy:['-doc_venc', 'nombres']"
+                        ng-class="{'cond_doc_venc': conductor.doc_venc}">
+                        <td md-cell style="padding-left: 0px"><b style="padding-right: 5px">{{$index+1}}</b><img ng-src="http://{{conductor.imagen}}" style="width: 50px; height: 50px; border-radius: 50%; border: none"></td>
+                        <td md-cell>{{conductor.identificacion}}</td>
+                        <td md-cell>{{conductor.nombres}}</td>
+                        <td md-cell>{{conductor.apellidos}}</td>
+                        <td md-cell>{{conductor.vehiculo.placa}}</td>
+                        <td md-cell>{{conductor.vehiculo.codigo_vial}}</td>
+                        <td md-cell>
+                            <md-button class="md-fab md-mini" aria-label="Ver">
+                                <md-icon md-font-icon="icon-eye" class="s24"></md-icon>
+                            </md-button>
+                            <md-button class="md-fab md-mini" aria-label="Eliminar" style="background-color: #D50000">
+                                <md-icon md-font-icon="icon-close" class="s24"></md-icon>
+                            </md-button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </md-table-container>
 
+            <md-table-pagination md-limit="vm.query.limit" md-limit-options="[5, 10, 15]" md-page="vm.query.page"
+                                 md-total="{{vm.conductores.length}}" md-on-paginate="OneRequest"
+                                 md-page-select></md-table-pagination>
+        </div>
+
+        <div id="boards" layout="column" flex>
+
+            <!-- ROL SELECCION -->
+            <div id="board-selector" layout="column" layout-align="start center" flex>
+                <!-- LISTA DE ROLES -->
+                <div class="board-list" layout="row" layout-align="center center" layout-wrap>
+                    <!-- ROLES -->
+                    <div class="board-list-item"
+                         layout="column" layout-align="center center">
+                        <md-icon md-font-icon="icon-file-document" class="icon s54"></md-icon>
+                        <div class="board-name">{{vm.n_cond_doc_venc}} con documentacion a vencer</div>
+                    </div>
+                    <!-- / ROLES -->
+                </div>
+                <!-- / LISTA DE ROLES -->
+            </div>
+            <!-- / ROL SELECCION -->
+        </div>
     </div>
     <!-- / CONTENT -->
 </div>

@@ -7,7 +7,7 @@
      */
     angular
         .module('fuse', [
-            'angularMoment', 'angular-jwt', 'restangular',
+            'angularMoment', 'angular-jwt', 'restangular', 'md.data.table',
 
             // Core
             'app.core',
