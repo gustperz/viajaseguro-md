@@ -15,22 +15,15 @@
         });
 
         /** @ngInject */
-        function tokenGetter(options, jwtHelper, $http, api) {
-            var jwt = sessionStorage.getItem('jwt');
-            // console.log(options.url);
+        function tokenGetter(options, jwtHelper, authService, api) {
+            var jwt = sessionStorage.getItem('jwt')
             if (jwt && options.url.indexOf(api) === 0) {
                 if (jwtHelper.isTokenExpired(jwt)) {
-                    return $http({
-                        url: api + 'new_token',
-                        skipAuthorization: true,
-                        method: 'GET',
-                        headers: {Authorization: 'Bearer ' + jwt},
-                    }).then(function (response) {
-                        sessionStorage.setItem('jwt', response.data.token);
-                        return response.data.token;
-                    }, function (response) {
-                        sessionStorage.removeItem('jwt');
-                    });
+                    authService.refreshToken().then(function (jwt) {
+                        return jwt;
+                    }, function () {
+                        return null;
+                    })
                 } else {
                     return jwt;
                 }

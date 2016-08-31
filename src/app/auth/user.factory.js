@@ -10,12 +10,13 @@
         .factory('authService', UserService);
 
     /** @ngInject **/
-    function UserService($q, PermRoleStore, jwtHelper) {
+    function UserService($q, PermRoleStore, jwtHelper, $http, api) {
         var currentUser = null;
 
         var service = {
             getCurrentUser: getCurrentUser,
             checkSession: checkSession,
+            refreshToken: refreshToken,
             hasPermission: hasPermission,
             storeUser: storeUser
         };
@@ -34,11 +35,27 @@
 
         function checkSession() {
             var jwt = sessionStorage.getItem('jwt');
-            if (!jwt || jwtHelper.isTokenExpired(jwt)) {
-                console.log('checkSession T_T');
-                return false;
-            }
+            if(!jwt) return false;
+            if(jwtHelper.isTokenExpired(jwt)) return 'expired';
             return true;
+        }
+
+        function refreshToken() {
+            var deferred = $q.defer();
+            var promisse = $http({
+                url: api + 'new_token',
+                skipAuthorization: true,
+                method: 'GET',
+                headers: {Authorization: 'Bearer ' + jwt},
+            });
+            promisse.then(function (response) {
+                sessionStorage.setItem('jwt', response.data.token);
+                deferred.resolve(response.data.token);
+            }, function () {
+                sessionStorage.removeItem('jwt');
+                deferred.reject();
+            });
+            return deferred.promise;
         }
 
         function hasPermission(roleDef) {
