@@ -8,6 +8,10 @@ $primary-color: #D50000;
   background-color: $primary-color !important;
 }
 
+.color-red {
+  background-color: $primary-color;
+}
+
 #splash-screen {
   background-color: white !important;
 
