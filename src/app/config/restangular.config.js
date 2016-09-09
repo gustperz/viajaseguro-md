@@ -10,6 +10,5 @@
     function routeConfig(RestangularProvider, api)
     {
         RestangularProvider.setBaseUrl(api);
-
     }
 })();

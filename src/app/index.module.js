@@ -21,6 +21,8 @@
             'app.quick-panel',
             // utenticacion
             'app.auth',
+            // super admin
+            'app.super_adm',
             // centrales
             'app.centrales',
             // empresas

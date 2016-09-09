@@ -27,7 +27,7 @@
 
         function getCurrentUser() {
             if(!currentUser && sessionStorage.getItem('jwt')){
-                return storeUser(sessionStorage.getItem('jwt'));
+                return storeUser(sessionStorage.getItem('jwt'), JSON.parse(sessionStorage.getItem('user')));
             } else {
                 return currentUser;
             }
@@ -82,9 +82,10 @@
             return deferred.promise;
         }
 
-        function storeUser(jwt) {
+        function storeUser(jwt, user) {
             sessionStorage.setItem('jwt', jwt);
-            currentUser = jwtHelper.decodeToken(jwt).usuario;
+            sessionStorage.setItem("user", JSON.stringify(user));
+            currentUser = JSON.parse(sessionStorage.getItem('user')); 
             return currentUser;
         }
     }

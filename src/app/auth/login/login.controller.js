@@ -6,7 +6,7 @@
         .controller('LoginController', LoginController);
 
     /** @ngInject */
-    function LoginController(OneRequest, $state, authService, Toast) {
+    function LoginController(OneRequest, $state, authService, Toast,$http) {
         var vm = this;
         vm.usuario = {};
 
@@ -22,10 +22,11 @@
 
         function iniciarSesion() {
             vm.mensajeError = '';
-            OneRequest.post('login', vm.usuario).then(success, error);
+
+            OneRequest.post('user/authentication', vm.usuario).then(success, error);
 
             function success(p) {
-                var usuario = authService.storeUser(p.token);
+                var usuario = authService.storeUser(p.data.token, p.data.user);
                 redirectRoles(usuario.rol);
             }
 
@@ -36,12 +37,12 @@
         }
 
         function redirectRoles(rol) {
-            if(rol == 'CENTRAL_EMPRESA'){
+            if (rol == 'CENTRAL_EMPRESA') {
                 $state.go('app.central_despacho');
-            }else if(rol == 'EMPRESA'){
+            } else if (rol == 'EMPRESA') {
                 $state.go('app.empresa_conductores')
-            }else if(rol == 'SUPER_ADM'){
-
+            } else if (rol == 'SUPER_ADM') {
+                $state.go('app.gestion_empresas')
             }
         }
     }
