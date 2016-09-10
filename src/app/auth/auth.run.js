@@ -11,6 +11,9 @@
 
     /* @ngInject */
     function permissionRun($rootScope, $state, PermRoleStore, authService) {
+
+        authService.getCurrentUser();
+
         // create roles for app
         var roles = ['CENTRAL_EMPRESA', 'EMPRESA', 'SUPER_ADM'];
         angular.forEach(roles, function (rol) {

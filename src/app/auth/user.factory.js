@@ -11,7 +11,8 @@
 
     /** @ngInject **/
     function UserService($q, PermRoleStore, jwtHelper, $http, api) {
-        var currentUser = null;
+        var currentUser = JSON.parse(sessionStorage.getItem('user'));
+        var jwt = sessionStorage.getItem('jwt');
 
         var service = {
             getCurrentUser: getCurrentUser,
@@ -26,11 +27,7 @@
         ///////////////
 
         function getCurrentUser() {
-            if(!currentUser && sessionStorage.getItem('jwt')){
-                return storeUser(sessionStorage.getItem('jwt'), sessionStorage.getItem('user'));
-            } else {
-                return currentUser;
-            }
+            return currentUser;
         }
 
         function checkSession() {
@@ -85,7 +82,7 @@
         function storeUser(jwt, user) {
             sessionStorage.setItem('jwt', jwt);
             sessionStorage.setItem("user", JSON.stringify(user));
-            currentUser = JSON.parse(sessionStorage.getItem('user')); 
+            currentUser = user;
             return currentUser;
         }
     }
