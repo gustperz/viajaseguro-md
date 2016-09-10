@@ -27,7 +27,7 @@
 
         function getCurrentUser() {
             if(!currentUser && sessionStorage.getItem('jwt')){
-                return storeUser(sessionStorage.getItem('jwt'), JSON.parse(sessionStorage.getItem('user')));
+                return storeUser(sessionStorage.getItem('jwt'), sessionStorage.getItem('user'));
             } else {
                 return currentUser;
             }
