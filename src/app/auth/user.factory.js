@@ -40,7 +40,7 @@
         function refreshToken() {
             var deferred = $q.defer();
             var promisse = $http({
-                url: api + 'new_token',
+                url: api + 'user/authentication/refresh',
                 skipAuthorization: true,
                 method: 'GET',
                 headers: {Authorization: 'Bearer ' + jwt},

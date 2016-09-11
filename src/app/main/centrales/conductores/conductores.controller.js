@@ -16,7 +16,7 @@
 
         //////////
 
-        OneRequest.to('empresas/' + authService.getCurrentUser().central.empresa.id + '/conductores/all')
+        OneRequest.to('empresas/' + authService.getCurrentUser().empresa.id + '/conductores')
             .then(function (data) {
                 vm.conductores = data;
             }, function (error) {
