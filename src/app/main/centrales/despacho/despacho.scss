@@ -1,0 +1,71 @@
+#panel-despacho {
+    border: 2px solid $primary-color;
+    border-radius: 15px;
+    margin: 7px;
+
+    #head {
+        height: 45px !important;
+        line-height: 15px;
+        section{
+            margin: 0 5px;
+            button {
+                background-color: whitesmoke;
+                margin: 0;
+                padding: 0 3px;
+                height: 25px !important;
+                line-height: 25px;
+                border-radius: 0;
+                border: 1px solid #e1e1e1;
+                border-right: 0;
+
+                span{
+                    text-transform: capitalize;
+                }
+            }
+            button:hover{
+                color: $primary-color;
+            }
+            button.first{
+                border-top-left-radius: 15px;
+                border-bottom-left-radius: 15px;
+            }
+            button.last{
+                min-width: 25px !important;
+                border-right: 1px solid #e1e1e1;
+                border-top-right-radius: 15px;
+                border-bottom-right-radius: 15px;
+            }
+            button.selected{
+                background-color: $primary-color;
+                border-color: $primary-color;
+                color: white;
+            }
+            button.selected:hover{
+                color: white;
+            }
+        }
+    }
+
+    md-divider{
+        height: 2px;
+        background-color: $primary-color;
+    }
+
+    #lista-conductores {
+        border: 1px solid $primary-color;
+        border-radius: 15px;
+        width: 240px;
+    }
+
+    #info-despacho {
+        border: 1px solid $primary-color;
+        border-radius: 15px;
+        margin-left: 10px;
+    }
+
+    #solicitudes {
+        border: 1px solid $primary-color;
+        border-radius: 15px;
+        margin-left: 10px;
+    }
+}

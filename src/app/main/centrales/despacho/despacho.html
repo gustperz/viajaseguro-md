@@ -1,21 +1,41 @@
-<div id="forms" class="page-layout simple fullwidth doc-page" layout="column">
-    <!-- HEADER -->
-    <div class="header md-accent-bg" layout="row" layout-align="space-between">
-        <div layout="column" layout-align="space-between">
-            <div class="breadcrumb" layout="row" layout-align="start center">
-                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
-                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
-                <span class="parent">CENTRAL</span>
-                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
-                <span class="parent">DESPACHO</span>
+<div class="page-layout carded fullwidth" layout="row">
+    <div class="center no-margin" layout="column" flex>
+        <div id="panel-despacho" class="content-card padding-top-0 padding-right-10 padding-bottom-10 padding-left-10" layout="column" flex>
+            <div layout="row" id="head">
+                <div id="origen" layout="row">
+                    <h3>Origen</h3>
+                    <section layout="row" layout-align="center center">
+                        <md-button class="first selected">Valledupar</md-button>
+                        <md-button class="last">+</md-button>
+                    </section>
+                </div>
+                <div id="destino" layout="row" class="margin-left-15">
+                    <h3>Destino</h3>
+                    <section layout="row" layout-align="center center">
+                        <md-button class="first">Apple</md-button>
+                        <md-button class="selected">San Juan del Cesar</md-button>
+                        <md-button class="">Sony</md-button>
+                        <md-button class="last">+</md-button>
+                    </section>
+                </div>
+            </div>
+            <md-divider class="margin-top-0 margin-bottom-10"></md-divider>
+            <div layout="row" flex>
+                <div id="lista-conductores">
+                    <h2>Conductores</h2>
+                </div>
+                <div layout="row" flex>
+                    <div id="info-despacho" flex>
+                        <h2>Conductores</h2>
+                    </div>
+                    <div id="solicitudes" flex="45">
+                        <h2>Conductores</h2>
+                    </div>
+                </div>
+            </div>
+            <div layout="row" flex hide layout-align="center center">
+                <h1>No se ha seleccionado ninguna ruta</h1>
             </div>
         </div>
     </div>
-    <!-- / HEADER -->
-
-    <!-- CONTENT -->
-    <div class="content" layout="column">
-
-    </div>
-    <!-- / CONTENT -->
 </div>
