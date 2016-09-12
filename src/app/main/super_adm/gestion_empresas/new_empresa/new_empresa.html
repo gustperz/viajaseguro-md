@@ -1,0 +1,38 @@
+<div id="forms" class="page-layout simple fullwidth doc-page" layout="column">
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between">
+        <div layout="column" layout-align="space-between">
+            <div class="breadcrumb" layout="row" layout-align="start center">
+                <md-button ui-sref="app.gestion_empresas">
+                    <md-icon md-font-icon="icon-arrow-left-bold"></md-icon>
+                    <span class="color-black text-normal">Regresar</span>
+                </md-button>
+                <md-icon md-font-icon="icon-dots-vertical"></md-icon>
+                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <span class="parent">ADMINISTRADOR</span>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+                <span class="parent">NUEVA EMPRESA</span>
+            </div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content" layout="column">
+        <md-content class="md-no-momentum">
+            <md-input-container class="md-icon-float md-block">
+                <!-- Use floating label instead of placeholder -->
+                <label>Nit</label>
+                <md-icon md-font-icon="icon-wallet-membership" class="name"></md-icon>
+                <input ng-model="user.name" type="text">
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <!-- Use floating placeholder instead of label -->
+                <md-icon md-font-icon="icon-store" class="email"></md-icon>
+                <input ng-model="user.email" type="email" placeholder="Nombre corto (requerido)" ng-required="true">
+            </md-input-container>
+        </md-content>
+    </div>
+</div>

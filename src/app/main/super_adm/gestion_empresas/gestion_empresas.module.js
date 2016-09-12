@@ -5,7 +5,9 @@
     'use strict';
 
     angular
-        .module('app.super_adm.gestion_empresas', [])
+        .module('app.super_adm.gestion_empresas', [
+            'app.super_adm.gestion_empresas.new_empresas'
+        ])
         .config(config);
 
     /** @ngInject */
@@ -24,7 +26,8 @@
                     permissions: {
                         only: ['SUPER_ADM']
                     }
-                }
+                },
+                bodyClass: 'file-manager'
             });
     }
 })();

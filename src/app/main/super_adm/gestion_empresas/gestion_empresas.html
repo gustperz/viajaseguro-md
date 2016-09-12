@@ -1,50 +1,104 @@
-<div id="forms" class="page-layout simple fullwidth doc-page" layout="column">
-    <!-- HEADER -->
-    <div class="header md-accent-bg" layout="row" layout-align="space-between">
-        <div layout="column" layout-align="space-between">
-            <div class="breadcrumb" layout="row" layout-align="start center">
-                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
-                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
-                <span class="parent">ADMINISTRADORA</span>
-                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
-                <span class="parent">EMPRESAS</span>
+<div id="file-manager" class="page-layout simple right-sidenav" layout="row">
+    <!-- CENTER -->
+    <div class="center" layout="column" flex>
+        <!-- HEADER -->
+        <div class="header">
+
+            <div class="header-content" layout="column" layout-align="space-between">
+                <!-- TOOLBAR -->
+                <div class="toolbar" layout="row" layout-align="space-between">
+                    <div class="white-fg" layout="column" layout-align="start start">
+                        <div class="h1" layout="row" layout-align="start center">
+                            <!--<md-icon md-font-icon="icon-store"></md-icon>-->
+                            <span>Empresas</span>
+                        </div>
+                    </div>
+
+                    <div class="right-side" layout="row">
+                        <div class="search" layout="row" layout-align="start center" flex>
+                            <md-icon md-font-icon="icon-magnify" class="icon search-icon"></md-icon>
+                            <input id="search" class="search-input" ng-model="filtro" type="text" placeholder="Buscar">
+                        </div>
+                    </div>
+                </div>
+                <!-- / TOOLBAR -->
             </div>
+
+            <!-- ADD NEW EMPRESA-->
+            <div id="file-uploader">
+
+                <md-button flow-btn class="add-file-button md-fab md-warn" aria-label="Nueva empresa">
+                    <md-icon md-font-icon="icon-plus"></md-icon>
+                </md-button>
+            </div>
+            <!-- / ADD NEW EMPRESA -->
         </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT -->
+        <md-content class="content" flex ms-scroll>
+            <table class="simple list-view">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th hide-xs>Nit</th>
+                    <th>Nombre</th>
+                    <th hide-xs>Direccion</th>
+                    <th hide-xs>Telefono</th>
+                    <th hide-xs>Estado</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr ng-repeat="empresa in vm.empresas | filter: filtro"
+                    ng-click="vm.selectedEmpresa(empresa)"
+                    ng-class="{'selected' : vm.selected === empresa}">
+                    <td class="file-icon">
+                        <img ng-src="http://localhost:1337/public/images/empresas/{{empresa.logo}}" >
+                    </td>
+                    <td class="name" hide-xs>empresa.nit</td>
+                    <td class="type">empresa.nombre_corto</td>
+                    <td class="owner" hide-xs>empresa.direccion</td>
+                    <td class="size" hide-xs>empresa.telefono</td>
+                    <td class="last-modified" hide-xs ng-if="empresa.activa == true"> activa</td>
+                    <td class="last-modified" hide-xs ng-if="empresa.activa != true"> inactiva</td>
+                </tr>
+
+                </tbody>
+            </table>
+        </md-content>
+        <!-- / CONTENT -->
     </div>
-    <!-- / HEADER -->
+    <!-- / CENTER -->
 
-    <!-- CONTENT -->
-    <div class="content" layout="column">
-        <md-content class="md-no-momentum">
-    <md-input-container class="md-icon-float md-block">
-      <!-- Use floating label instead of placeholder -->
-      <label>Name</label>
-      <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon>
-      <input ng-model="user.name" type="text">
-    </md-input-container>
+    <!-- SIDENAV -->
+    <md-sidenav class="sidenav details-sidenav md-sidenav-right" md-is-locked-open="$mdMedia('gt-md')"
+                md-component-id="details-sidenav" ms-scroll
+                ms-sidenav-helper>
+        <div class="header" layout="column" layout-align="space-between">
+            <div class="toolbar" layout="row" layout-align="end center">
+                <md-button class="md-icon-button" aria-label="Eliminar">
+                    <md-icon md-font-icon="icon-delete"></md-icon>
+                    <md-tooltip><span>Eliminar</span></md-tooltip>
+                </md-button>
 
-    <md-input-container md-no-float class="md-block">
-      <md-icon md-svg-src="img/icons/ic_phone_24px.svg"></md-icon>
-      <input ng-model="user.phone" type="text" placeholder="Phone Number">
-    </md-input-container>
+                <md-button class="md-icon-button" aria-label="Editar">
+                    <md-icon md-font-icon="icon-pencil"></md-icon>
+                    <md-tooltip><span>Editar</span></md-tooltip>
+                </md-button>
+            </div>
+            <hr>
+            <div class="image-content">
+                <h1 class="title-empresa">Empresa 1</h1><br>
+                <img alt="image" class="user-imagen" src="../assets/images/profile.jpg">
+            </div>
+            <hr>
+        </div>
 
-    <md-input-container class="md-block">
-      <!-- Use floating placeholder instead of label -->
-      <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon>
-      <input ng-model="user.email" type="email" placeholder="Email (required)" ng-required="true">
-    </md-input-container>
-
-    <md-input-container md-no-float class="md-block">
-      <input ng-model="user.address" type="text" placeholder="Address" >
-      <md-icon md-svg-src="img/icons/ic_place_24px.svg" style="display:inline-block;"></md-icon>
-    </md-input-container>
-
-    <md-input-container class="md-icon-float md-icon-right md-block">
-      <label>Donation Amount</label>
-      <md-icon md-svg-src="img/icons/ic_card_giftcard_24px.svg"></md-icon>
-      <input ng-model="user.donation" type="number" step="0.01">
-      <md-icon md-svg-src="img/icons/ic_euro_24px.svg"></md-icon>
-    </md-input-container>
-
-  </md-content>
+        <!--contenido-->
+        <md-content class="content" flex ms-scroll>
+            Aca toda la info pertinente de la empresa seleccionada
+        </md-content>
+    </md-sidenav>
+    <!-- / SIDENAV -->
 </div>
