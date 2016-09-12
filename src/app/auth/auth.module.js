@@ -5,7 +5,7 @@
     angular
         .module('app.auth', [
             'permission', 'permission.ui', 'angular-jwt', 'app.constansts',
-            'auth.login'
+            'app.auth.login'
         ])
         .config(config);
 
