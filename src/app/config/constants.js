@@ -3,7 +3,7 @@
     'use strict';
 
     angular
-        .module('fuse')
-        .constant('api_domain', 'http://localhost:1337')
+        .module('app.constansts', [])
+        .constant('api_domain', 'localhost')
         .constant('api', 'http://localhost:1337/');
 })();

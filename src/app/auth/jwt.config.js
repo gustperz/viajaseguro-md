@@ -3,7 +3,7 @@
     'use strict';
 
     angular
-        .module('fuse')
+        .module('app.auth')
         .config(config);
 
     /** @ngInject */
@@ -16,7 +16,7 @@
 
         /** @ngInject */
         function tokenGetter(options, jwtHelper, authService, api) {
-            var jwt = sessionStorage.getItem('jwt')
+            var jwt = sessionStorage.getItem('jwt');
             if (jwt && options.url.indexOf(api) === 0) {
                 if (jwtHelper.isTokenExpired(jwt)) {
                     authService.refreshToken().then(function (jwt) {
