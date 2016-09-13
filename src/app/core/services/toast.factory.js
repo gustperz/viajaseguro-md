@@ -21,7 +21,7 @@
                 '</md-toast>',
                 hideDelay: delay || 4000,
                 position: position || 'top right',
-                parent: parent || '#content'
+                parent: angular.element(document.body)
             });
         }
     }

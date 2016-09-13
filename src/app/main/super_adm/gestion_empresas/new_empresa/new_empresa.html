@@ -1,38 +1,105 @@
-<div id="forms" class="page-layout simple fullwidth doc-page" layout="column">
-    <!-- HEADER -->
-    <div class="header md-accent-bg" layout="row" layout-align="space-between">
-        <div layout="column" layout-align="space-between">
-            <div class="breadcrumb" layout="row" layout-align="start center">
-                <md-button ui-sref="app.gestion_empresas">
-                    <md-icon md-font-icon="icon-arrow-left-bold"></md-icon>
-                    <span class="color-black text-normal">Regresar</span>
+<md-dialog aria-label="{{vm.tipoModal}} empresa" flex="50" class="dialog-empresa">
+    <form ng-cloak name="empresaForm" novalidate>
+        <md-toolbar class="toolbar-empresa">
+            <div class="md-toolbar-tools">
+                <h2><b>{{vm.tipoModal}} empresa</b></h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="vm.cancel()">
+                    <md-icon md-font-icon="icon-close"
+                             aria-label="Cerrar modal"></md-icon>
                 </md-button>
-                <md-icon md-font-icon="icon-dots-vertical"></md-icon>
-                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
-                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
-                <span class="parent">ADMINISTRADOR</span>
-                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
-                <span class="parent">NUEVA EMPRESA</span>
             </div>
-        </div>
-    </div>
-    <!-- / HEADER -->
+        </md-toolbar>
 
-    <!-- CONTENT -->
-    <div class="content" layout="column">
-        <md-content class="md-no-momentum">
-            <md-input-container class="md-icon-float md-block">
-                <!-- Use floating label instead of placeholder -->
-                <label>Nit</label>
-                <md-icon md-font-icon="icon-wallet-membership" class="name"></md-icon>
-                <input ng-model="user.name" type="text">
-            </md-input-container>
+        <md-dialog-content class="content">
+            <form>
+                <div layout layout-sm="column">
+                    <md-input-container flex>
+                        <label>Nit</label>
+                        <input name="nit" ng-model="vm.empresa.nit" placeholder="Digita el nit de la empresa" required>
+                        <div ng-messages="empresaForm.nit.$error">
+                            <div ng-message="required">Este campo es obligatorio.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Nombre</label>
+                        <input name="nombre" ng-model="vm.empresa.nombre_corto"
+                               placeholder="Digita el nombre ej: Cootrasan" required>
+                        <div ng-messages="empresaForm.nombre.$error">
+                            <div ng-message="required">Este campo es obligatorio.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <div layout layout-sm="column">
+                    <md-input-container flex>
+                        <label>Dirección</label>
+                        <input name="direccion" ng-model="vm.empresa.direccion" placeholder="Digita la direccion"
+                               required>
+                        <div ng-messages="empresaForm.direccion.$error">
+                            <div ng-message="required">Este campo es obligatorio.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Telefono</label>
+                        <input name="telefono" ng-model="vm.empresa.telefono" placeholder="Digita el telefono" required>
+                        <div ng-messages="empresaForm.telefono.$error">
+                            <div ng-message="required">Este campo es obligatorio.</div>
+                        </div>
+                    </md-input-container>
+                </div>
 
-            <md-input-container class="md-block">
-                <!-- Use floating placeholder instead of label -->
-                <md-icon md-font-icon="icon-store" class="email"></md-icon>
-                <input ng-model="user.email" type="email" placeholder="Nombre corto (requerido)" ng-required="true">
-            </md-input-container>
-        </md-content>
-    </div>
-</div>
+                <div layout="row" layout-align="start" flex>
+                    <md-input-container flex="50">
+                        <label>Tipo de empresa</label>
+                        <md-select name="tipo" ng-model="vm.empresa.tipo" required>
+                            <md-option value="1">Especial</md-option>
+                            <md-option value="0">Intermunicipal</md-option>
+                        </md-select>
+                        <div class="errors" ng-messages="empresaForm.tipo.$error">
+                            <div ng-message="required">Este campo es obligatorio</div>
+                        </div>
+                    </md-input-container>
+                </div>
+
+                <fieldset class="datos-usuario-empresa" ng-if="vm.tipoModal != 'Modificar'">
+                    <legend>Datos de usuario</legend>
+                    <div layout layout-sm="column" class="content-datos-usuario">
+                        <md-input-container flex>
+                            <label>Nombre de usuario</label>
+                            <input name="username" ng-model="vm.empresa.user.username" placeholder="Digita la direccion"
+                                   required>
+                            <div ng-messages="empresaForm.username.$error">
+                                <div ng-message="required">Digita el nombre de usuario</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label>Contrase&ntilde;a</label>
+                            <input type="password" name="password" ng-model="vm.empresa.user.password"
+                                   placeholder="Digita el telefono" required>
+                            <div ng-messages="empresaForm.password.$error">
+                                <div ng-message="required">Este campo es obligatorio.</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                </fieldset>
+            </form>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button class="boton-guardar-dialog"
+                       ng-click="vm.guardarEmpresa()" ng-if="vm.tipoModal != 'Modificar'"
+                       ng-disabled="empresaForm.$invalid || empresaForm.$pristine">
+                Guardar
+            </md-button>
+            <md-button class="boton-guardar-dialog"
+                       ng-click="vm.modificarEmpresa()" ng-if="vm.tipoModal != 'Nueva'"
+                       ng-disabled="empresaForm.$invalid || empresaForm.$pristine">
+                Modificar
+            </md-button>
+            <md-button class="boton-cancel-dialog" ng-click="vm.cancel()">
+                Cancelar
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

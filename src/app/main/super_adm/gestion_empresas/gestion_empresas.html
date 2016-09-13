@@ -26,9 +26,10 @@
 
             <!-- ADD NEW EMPRESA-->
             <div id="file-uploader">
-
-                <md-button flow-btn class="add-file-button md-fab md-warn" aria-label="Nueva empresa">
+                <md-button flow-btn class="add-file-button md-fab md-warn" aria-label="Nueva empresa"
+                ng-click="vm.newModalEmpresa($event, 'Nueva')">
                     <md-icon md-font-icon="icon-plus"></md-icon>
+                    <md-tooltip><span>Nueva empresa</span></md-tooltip>
                 </md-button>
             </div>
             <!-- / ADD NEW EMPRESA -->
@@ -51,15 +52,15 @@
 
                 <tbody>
                 <tr ng-repeat="empresa in vm.empresas | filter: filtro"
-                    ng-click="vm.selectedEmpresa(empresa)"
+                    ng-click="vm.selectedEmpresa(empresa, $index)"
                     ng-class="{'selected' : vm.selected === empresa}">
-                    <td class="file-icon">
-                        <img ng-src="http://localhost:1337/public/images/empresas/{{empresa.logo}}" >
+                    <td>
+                        <img class="imagen-empresa"ng-src="http://localhost:1337/images/empresas/{{empresa.logo}}" >
                     </td>
-                    <td class="name" hide-xs>empresa.nit</td>
-                    <td class="type">empresa.nombre_corto</td>
-                    <td class="owner" hide-xs>empresa.direccion</td>
-                    <td class="size" hide-xs>empresa.telefono</td>
+                    <td class="name" hide-xs>{{empresa.nit}}</td>
+                    <td class="type">{{empresa.nombre_corto}}</td>
+                    <td class="owner" hide-xs>{{empresa.direccion}}</td>
+                    <td class="size" hide-xs>{{empresa.telefono}}</td>
                     <td class="last-modified" hide-xs ng-if="empresa.activa == true"> activa</td>
                     <td class="last-modified" hide-xs ng-if="empresa.activa != true"> inactiva</td>
                 </tr>
@@ -77,27 +78,27 @@
                 ms-sidenav-helper>
         <div class="header" layout="column" layout-align="space-between">
             <div class="toolbar" layout="row" layout-align="end center">
-                <md-button class="md-icon-button" aria-label="Eliminar">
+                <md-button ng-click="vm.deleteEmpresa($event)" class="md-icon-button" aria-label="Eliminar">
                     <md-icon md-font-icon="icon-delete"></md-icon>
                     <md-tooltip><span>Eliminar</span></md-tooltip>
                 </md-button>
 
-                <md-button class="md-icon-button" aria-label="Editar">
+                <md-button ng-click="vm.newModalEmpresa($event, 'Modificar')" class="md-icon-button" aria-label="Editar">
                     <md-icon md-font-icon="icon-pencil"></md-icon>
                     <md-tooltip><span>Editar</span></md-tooltip>
                 </md-button>
             </div>
             <hr>
             <div class="image-content">
-                <h1 class="title-empresa">Empresa 1</h1><br>
-                <img alt="image" class="user-imagen" src="../assets/images/profile.jpg">
+                <h1 class="title-empresa">{{vm.selected.nombre_corto}}</h1><br>
+                <img alt="{{vm.selected.nombre_corto}}" class="empresa-imagen" ng-src="http://localhost:1337/images/empresas/{{vm.selected.logo}}">
             </div>
             <hr>
         </div>
 
         <!--contenido-->
         <md-content class="content" flex ms-scroll>
-            Aca toda la info pertinente de la empresa seleccionada
+            <h3 style="text-align: center"><b>{{vm.selected.nombre_largo}}</b></h3>
         </md-content>
     </md-sidenav>
     <!-- / SIDENAV -->

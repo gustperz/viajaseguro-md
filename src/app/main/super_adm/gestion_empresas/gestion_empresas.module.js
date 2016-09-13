@@ -6,7 +6,7 @@
 
     angular
         .module('app.super_adm.gestion_empresas', [
-            'app.super_adm.gestion_empresas.new_empresas'
+            // 'app.super_adm.gestion_empresas.new_empresas'
         ])
         .config(config);
 

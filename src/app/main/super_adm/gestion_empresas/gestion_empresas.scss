@@ -28,9 +28,10 @@
           margin-bottom: -15px;
         }
         img {
-          border-radius: 50%;
+          border-radius: 50% !important;
           width: 150px;
           height: 150px;
+          border: none !important;
         }
       }
       .title {
@@ -179,12 +180,15 @@
         }
 
         td {
-          padding: 24px 8px;
+          padding: 5px 8px;
           border-bottom: none;
 
-          &.file-icon {
-            padding: 24px;
+          .imagen-empresa {
+            margin-left: 30px;
             text-align: center;
+            border-radius: 50% !important;
+            height: 60px !important;
+            width: 60px !important;
           }
 
           &.name {

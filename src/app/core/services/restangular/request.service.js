@@ -14,6 +14,8 @@
         var service = {
             to: sendGet,
             post: sendPost,
+            put: sendPut,
+            delete: sendDelete,
             base: Restangular
         }
         return service;
@@ -24,6 +26,14 @@
 
         function sendPost(route, data, headers) {
             return Restangular.one(route).customPOST(data, '', {}, headers || {});
+        }
+
+        function sendPut(route, data, headers) {
+            return Restangular.one(route).customPUT(data, '', {}, headers || {});
+        }
+
+        function sendDelete(route, params) {
+            return Restangular.one(route).customDELETE('', params || {});
         }
     }
 })();

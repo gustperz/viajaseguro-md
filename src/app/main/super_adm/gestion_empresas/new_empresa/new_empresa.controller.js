@@ -1,25 +1,56 @@
-/**
- * Created by Jose Soto Acosta on 11/09/2016.
- */
-(function ()
-{
-    'use strict';
+function NewEmpresaController($mdDialog, Toast, OneRequest, tipo, empresa) {
+    // variables
+    var vm = this;
+    vm.empresa = {};
+    vm.tipoModal = tipo;
 
-    angular
-        .module('app.super_adm.gestion_empresas.new_empresas')
-        .controller('NewEmpresaController', NewEmpresaController);
+    // funciones
+    vm.guardarEmpresa = guardarEmpresa;
+    vm.modificarEmpresa = modificarEmpresa;
+    vm.cancel = cancel;
 
-    /** @ngInject */
-    function NewEmpresaController()
-    {
-        var vm = this;
+    if (vm.tipoModal == 'Modificar')
+        vm.empresa = empresa;
 
-        // Data
+    function guardarEmpresa() {
+        OneRequest.post('empresas/', vm.empresa).then(success, error);
 
-        // Methods
+        function success(response) {
+            vm.empresa = {};
+            response.mensaje = "Empresa creada correctamente";
+            response.tipo = vm.tipoModal;
+            $mdDialog.hide(response);
+        }
 
-        //////////
+        function error(response) {
+            if (response.data.code == 'E_VALIDATION') {
+                Toast('Algunos campos son requeridos', 'bottom right');
+            } else {
+                Toast(response.data.data);
+            }
+        }
     }
-})();
 
+    function modificarEmpresa() {
+        OneRequest.put('empresas/' + empresa.id, vm.empresa).then(success, error);
 
+        function success(response) {
+            vm.empresa = {};
+            response.mensaje = "Empresa actualizada correctamente";
+            response.tipo = vm.tipoModal;
+            $mdDialog.hide(response);
+        }
+
+        function error(response) {
+            if (response.data.code == 'E_VALIDATION') {
+                Toast('Algunos campos son requeridos', 'bottom right');
+            } else {
+                Toast(response.data.data, 'bottom right');
+            }
+        }
+    }
+
+    function cancel() {
+        $mdDialog.cancel();
+    }
+}

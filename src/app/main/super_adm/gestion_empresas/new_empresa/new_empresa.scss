@@ -1,7 +1,29 @@
-.color-black {
-  color: rgba(0, 0, 0, 0.54);
+.boton-cancel-dialog {
+  background-color: $primary-color !important;
+  color: white;
 }
 
-.text-normal {
- text-transform: capitalize;
+.boton-guardar-dialog {
+  background-color: #00C853 !important;
+  color: white;
+}
+
+.toolbar-empresa {
+  background-color: $primary-color !important;
+}
+
+.datos-usuario-empresa {
+  legend{
+    text-align: center !important;
+  }
+  border: 2px solid $primary-color !important;
+  border-radius: 15px;
+}
+
+.content-datos-usuario{
+  margin: 10px 10px 10px 10px !important;
+}
+
+.dialog-empresa{
+  border-radius: 20px !important;
 }

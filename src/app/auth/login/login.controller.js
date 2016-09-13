@@ -6,7 +6,7 @@
         .controller('LoginController', LoginController);
 
     /** @ngInject */
-    function LoginController(OneRequest, $state, authService, Toast,$http) {
+    function LoginController(OneRequest, $state, authService, Toast) {
         var vm = this;
         vm.usuario = {};
 
