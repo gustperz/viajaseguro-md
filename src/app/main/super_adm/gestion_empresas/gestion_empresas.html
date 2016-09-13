@@ -47,6 +47,7 @@
                     <th hide-xs>Direccion</th>
                     <th hide-xs>Telefono</th>
                     <th hide-xs>Estado</th>
+                    <th hide-gt-md></th>
                 </tr>
                 </thead>
 
@@ -63,6 +64,11 @@
                     <td class="size" hide-xs>{{empresa.telefono}}</td>
                     <td class="last-modified" hide-xs ng-if="empresa.activa == true"> activa</td>
                     <td class="last-modified" hide-xs ng-if="empresa.activa != true"> inactiva</td>
+                    <td class="show-details" hide-gt-md>
+                        <md-button class="md-icon-button sidenav-toggle" ng-click="vm.abrirPanel(empresa, $index)" aria-label="Toggle details sidenav">
+                            <md-icon md-font-icon="icon-information-outline"></md-icon>
+                        </md-button>
+                    </td>
                 </tr>
 
                 </tbody>

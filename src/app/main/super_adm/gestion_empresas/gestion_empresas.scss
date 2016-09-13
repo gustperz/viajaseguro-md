@@ -256,6 +256,24 @@
         height: 160px;
         min-height: 160px;
         max-height: 160px;
+        padding: 24px 24px;
+        .image-content {
+          text-align: center !important;
+          .title-empresa {
+            margin-top: -8px;
+            margin-bottom: -15px;
+          }
+          img {
+            border-radius: 50% !important;
+            width: 90px;
+            height: 90px;
+            border: none !important;
+          }
+        }
+        .title {
+          font-size: 15px;
+          margin-bottom: 8px;
+        }
       }
     }
 
@@ -305,7 +323,32 @@
 @media screen and (max-width: $layout-breakpoint-sm) {
 
   #file-manager {
+    .sidenav {
 
+      .header {
+        height: 160px;
+        min-height: 160px;
+        max-height: 160px;
+        padding: 24px 24px;
+        .image-content {
+          text-align: center !important;
+          .title-empresa {
+            margin-top: -8px;
+            margin-bottom: -15px;
+          }
+          img {
+            border-radius: 50% !important;
+            width: 90px;
+            height: 90px;
+            border: none !important;
+          }
+        }
+        .title {
+          font-size: 15px;
+          margin-bottom: 8px;
+        }
+      }
+    }
     .center {
 
       .header {

@@ -9,7 +9,7 @@
         .controller('GestionEmpresasController', GestionEmpresasController);
 
     /** @ngInject */
-    function GestionEmpresasController(OneRequest, $mdDialog, Toast) {
+    function GestionEmpresasController(OneRequest, $mdDialog, Toast, $mdSidenav) {
         var vm = this;
 
         // Data
@@ -20,11 +20,23 @@
         vm.selectedEmpresa = selectedEmpresa;
         vm.newModalEmpresa = newModalEmpresa;
         vm.deleteEmpresa = deleteEmpresa;
+        vm.abrirPanel = abrirPanel;
 
         //////////
         function selectedEmpresa(empresa, $index) {
             vm.selected = empresa;
             vm.index = $index;
+        }
+
+        function abrirPanel(empresa, $index) {
+            vm.selected = empresa;
+            vm.index = $index;
+            toggleSidenav('details-sidenav');
+        }
+
+        function toggleSidenav(sidenavId)
+        {
+            $mdSidenav(sidenavId).toggle();
         }
 
         function newModalEmpresa(ev, tipo) {
