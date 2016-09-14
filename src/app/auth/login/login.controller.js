@@ -26,7 +26,7 @@
             OneRequest.post('user/authentication', vm.usuario).then(success, error);
 
             function success(p) {
-                var usuario = authService.storeUser(p.data.token, p.data.user);
+                var usuario = authService.storeUser(p.token, p.user);
                 redirectRoles(usuario.rol);
             }
 
