@@ -4,12 +4,16 @@
 }
 
 .boton-guardar-dialog {
-  background-color: #00C853 !important;
+  background-color: $green-color !important;
   color: white;
 }
 
 .toolbar-empresa {
   background-color: $primary-color !important;
+    color: white !important;
+    md-icon {
+        color: white !important;
+    }
 }
 
 .datos-usuario-empresa {

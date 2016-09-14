@@ -9,7 +9,7 @@
         .controller('GestionEmpresasController', GestionEmpresasController);
 
     /** @ngInject */
-    function GestionEmpresasController(OneRequest, $mdDialog, Toast, $mdSidenav) {
+    function GestionEmpresasController(Empresas, $mdDialog, Toast, $mdSidenav) {
         var vm = this;
 
         // Data
@@ -23,6 +23,11 @@
         vm.abrirPanel = abrirPanel;
 
         //////////
+
+        getEmpresas();
+
+        //////////
+
         function selectedEmpresa(empresa, $index) {
             vm.selected = empresa;
             vm.index = $index;
@@ -34,8 +39,7 @@
             toggleSidenav('details-sidenav');
         }
 
-        function toggleSidenav(sidenavId)
-        {
+        function toggleSidenav(sidenavId){
             $mdSidenav(sidenavId).toggle();
         }
 
@@ -54,11 +58,12 @@
                 fullscreen: false
             })
                 .then(function (response) {
-                    if (response.code == "OK" || response.code == "ok") {
-                        if (response.tipo == 'Nueva') {
-                            vm.empresas.push(response.data);
+                    console.log(response);
+                    if (response.metadata.code == "OK" || response.metadata.code == "ok") {
+                        if (response.metadata.tipo == 'Nueva') {
+                            vm.empresas.push(response);
                         }
-                        Toast(response.mensaje, 'bottom right')
+                        Toast(response.metadata.mensaje, 'bottom right')
                     }
                 }, function (reponse) {
 
@@ -76,12 +81,11 @@
                 .ok('Continuar!')
                 .cancel('Cancelar');
             $mdDialog.show(confirm).then(function() {
-                OneRequest.delete('empresas/'+vm.selected.id).then(success, error)
+                vm.selected.remove().then(success, error)
                 function success(response) {
                     vm.empresas.splice(vm.index, 1);
                     Toast('Empresa eliminada correctamente');
                 }
-
                 function error(response) {
                     console.log(response);
                 }
@@ -91,7 +95,7 @@
         }
 
         function getEmpresas() {
-            OneRequest.to('empresas/').then(success, error)
+            Empresas.getList({fields: 'nit, nombre_corto, direccion, telefono, activa'}).then(success, error)
             function success(response) {
                 vm.empresas = response;
                 vm.selected = vm.empresas[0];
@@ -102,8 +106,6 @@
             }
 
         }
-
-        getEmpresas();
     }
 })();
 

@@ -87,17 +87,17 @@
 
         <md-dialog-actions layout="row">
             <span flex></span>
-            <md-button class="boton-guardar-dialog"
+            <md-button class="boton-guardar-dialog brad-30"
                        ng-click="vm.guardarEmpresa()" ng-if="vm.tipoModal != 'Modificar'"
                        ng-disabled="empresaForm.$invalid || empresaForm.$pristine">
                 Guardar
             </md-button>
-            <md-button class="boton-guardar-dialog"
+            <md-button class="boton-guardar-dialog brad-30"
                        ng-click="vm.modificarEmpresa()" ng-if="vm.tipoModal != 'Nueva'"
                        ng-disabled="empresaForm.$invalid || empresaForm.$pristine">
                 Modificar
             </md-button>
-            <md-button class="boton-cancel-dialog" ng-click="vm.cancel()">
+            <md-button class="boton-cancel-dialog brad-30" ng-click="vm.cancel()">
                 Cancelar
             </md-button>
         </md-dialog-actions>

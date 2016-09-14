@@ -1,4 +1,4 @@
-function NewEmpresaController($mdDialog, Toast, OneRequest, tipo, empresa) {
+function NewEmpresaController($mdDialog, Toast, Empresas, tipo, empresa) {
     // variables
     var vm = this;
     vm.empresa = {};
@@ -9,43 +9,45 @@ function NewEmpresaController($mdDialog, Toast, OneRequest, tipo, empresa) {
     vm.modificarEmpresa = modificarEmpresa;
     vm.cancel = cancel;
 
-    if (vm.tipoModal == 'Modificar')
-        vm.empresa = empresa;
+    //////////
+
+    if (vm.tipoModal == 'Modificar') vm.empresa = empresa;
+
+    //////////
 
     function guardarEmpresa() {
-        OneRequest.post('empresas/', vm.empresa).then(success, error);
+        Empresas.create(vm.empresa).then(success, error);
 
         function success(response) {
-            vm.empresa = {};
-            response.mensaje = "Empresa creada correctamente";
-            response.tipo = vm.tipoModal;
+            response.metadata.mensaje = "Empresa creada correctamente";
+            response.metadata.tipo = vm.tipoModal;
             $mdDialog.hide(response);
         }
 
         function error(response) {
-            if (response.data.code == 'E_VALIDATION') {
+            if (response.metadata.code == 'E_VALIDATION') {
                 Toast('Algunos campos son requeridos', 'bottom right');
             } else {
-                Toast(response.data.data);
+                Toast(response.metadata.data);
             }
         }
     }
 
     function modificarEmpresa() {
-        OneRequest.put('empresas/' + empresa.id, vm.empresa).then(success, error);
+        vm.empresa.put().then(success, error);
 
         function success(response) {
             vm.empresa = {};
-            response.mensaje = "Empresa actualizada correctamente";
-            response.tipo = vm.tipoModal;
+            response.metadata.mensaje = "Empresa actualizada correctamente";
+            response.metadata.tipo = vm.tipoModal;
             $mdDialog.hide(response);
         }
 
         function error(response) {
-            if (response.data.code == 'E_VALIDATION') {
+            if (response.metadata.code == 'E_VALIDATION') {
                 Toast('Algunos campos son requeridos', 'bottom right');
             } else {
-                Toast(response.data.data, 'bottom right');
+                Toast(response.metadata.data, 'bottom right');
             }
         }
     }

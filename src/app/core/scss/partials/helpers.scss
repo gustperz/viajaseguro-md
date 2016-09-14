@@ -388,7 +388,7 @@ $border-style: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 // Border-radius helpers
-@for $i from 1 through 12 {
+@for $i from 1 through 50 {
 
     .brad-#{$i} {
         border-radius: #{$i + 'px'}
