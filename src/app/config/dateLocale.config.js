@@ -30,16 +30,16 @@
             'Ene','Feb','Mar','Abr','Mayo','Jun','Jul','Ago','Sept','Oct','Nov','Dic'
         ];
         $mdDateLocaleProvider.days = [
+            'Domingo',
             'Lunes',
             'Martes',
             'Miércoles',
             'Jueves',
             'Viernes',
-            'Sábado',
-            'Domingo'
+            'Sábado'
         ];
         $mdDateLocaleProvider.shortDays = [
-            'Lun','Mar','Mié','Jue','Vie','Sáb','Dom'
+            'Dom', 'Lun','Mar','Mié','Jue','Vie','Sáb'
         ];
     }
 })();
