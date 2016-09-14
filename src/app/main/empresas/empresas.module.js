@@ -15,24 +15,12 @@
         .config(config);
 
     /** @ngInject */
-    function config($stateProvider, msNavigationServiceProvider)
+    function config(msNavigationServiceProvider)
     {
-        // State
-        // $stateProvider
-        //     .state('app.centrales', {
-        //         url    : '/sample',
-        //         views  : {
-        //             'content@app': {
-        //                 templateUrl: 'app/main/sample/sample.html',
-        //                 controller : 'SampleController as vm'
-        //             }
-        //         }
-        //     });
-
         // Navigation
         msNavigationServiceProvider.saveItem('conductores', {
             title    : 'Conductores',
-            icon     : 'icon-tile-four',
+            icon     : 'seat-recline-normal',
             state    : 'app.empresa_conductores',
             /*stateParams: {
              'param1': 'page'
@@ -42,7 +30,7 @@
 
         msNavigationServiceProvider.saveItem('vehiculos', {
             title    : 'Vehiculos',
-            icon     : 'icon-tile-four',
+            icon     : 'icon-taxi',
             state    : 'app.empresa_vehiculos',
             /*stateParams: {
              'param1': 'page'
@@ -52,7 +40,7 @@
 
         msNavigationServiceProvider.saveItem('rutas', {
             title    : 'Rutas',
-            icon     : 'icon-tile-four',
+            icon     : 'icon-map',
             state    : 'app.empresa_rutas',
             /*stateParams: {
              'param1': 'page'
@@ -62,7 +50,7 @@
 
         msNavigationServiceProvider.saveItem('centrales', {
             title    : 'Centrales',
-            icon     : 'icon-tile-four',
+            icon     : 'icon-store',
             state    : 'app.empresa_centrales',
             /*stateParams: {
              'param1': 'page'

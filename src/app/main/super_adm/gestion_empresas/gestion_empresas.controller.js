@@ -84,6 +84,11 @@
                 vm.selected.remove().then(success, error)
                 function success(response) {
                     vm.empresas.splice(vm.index, 1);
+                    if (vm.empresas.length > 0) {
+                        vm.selected = vm.empresas[0];
+                    }else{
+                        vm.selected = null;
+                    }
                     Toast('Empresa eliminada correctamente');
                 }
                 function error(response) {
@@ -95,7 +100,8 @@
         }
 
         function getEmpresas() {
-            Empresas.getList({fields: 'nit, nombre_corto, direccion, telefono, activa'}).then(success, error)
+            var campos = 'nit, nombre_corto, direccion, telefono, activa, logo, nombre_largo, tipo';
+            Empresas.getList({fields: campos}).then(success, error)
             function success(response) {
                 vm.empresas = response;
                 vm.selected = vm.empresas[0];

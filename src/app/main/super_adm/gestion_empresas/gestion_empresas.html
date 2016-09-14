@@ -27,7 +27,7 @@
             <!-- ADD NEW EMPRESA-->
             <div id="file-uploader">
                 <md-button flow-btn class="add-file-button md-fab md-warn" aria-label="Nueva empresa"
-                ng-click="vm.newModalEmpresa($event, 'Nueva')">
+                           ng-click="vm.newModalEmpresa($event, 'Nueva')">
                     <md-icon md-font-icon="icon-plus"></md-icon>
                     <md-tooltip><span>Nueva empresa</span></md-tooltip>
                 </md-button>
@@ -56,7 +56,7 @@
                     ng-click="vm.selectedEmpresa(empresa, $index)"
                     ng-class="{'selected' : vm.selected === empresa}">
                     <td>
-                        <img class="imagen-empresa"ng-src="http://localhost:1337/images/empresas/{{empresa.logo}}" >
+                        <img class="imagen-empresa" ng-src="http://localhost:1337/images/empresas/{{empresa.logo}}">
                     </td>
                     <td class="name" hide-xs>{{empresa.nit}}</td>
                     <td class="type">{{empresa.nombre_corto}}</td>
@@ -65,7 +65,8 @@
                     <td class="last-modified" hide-xs ng-if="empresa.activa == true"> activa</td>
                     <td class="last-modified" hide-xs ng-if="empresa.activa != true"> inactiva</td>
                     <td class="show-details" hide-gt-md>
-                        <md-button class="md-icon-button sidenav-toggle" ng-click="vm.abrirPanel(empresa, $index)" aria-label="Toggle details sidenav">
+                        <md-button class="md-icon-button sidenav-toggle" ng-click="vm.abrirPanel(empresa, $index)"
+                                   aria-label="Detalles empresa">
                             <md-icon md-font-icon="icon-information-outline"></md-icon>
                         </md-button>
                     </td>
@@ -89,7 +90,8 @@
                     <md-tooltip><span>Eliminar</span></md-tooltip>
                 </md-button>
 
-                <md-button ng-click="vm.newModalEmpresa($event, 'Modificar')" class="md-icon-button" aria-label="Editar">
+                <md-button ng-click="vm.newModalEmpresa($event, 'Modificar')" class="md-icon-button"
+                           aria-label="Editar">
                     <md-icon md-font-icon="icon-pencil"></md-icon>
                     <md-tooltip><span>Editar</span></md-tooltip>
                 </md-button>
@@ -97,7 +99,8 @@
             <hr>
             <div class="image-content">
                 <h1 class="title-empresa">{{vm.selected.nombre_corto}}</h1><br>
-                <img alt="{{vm.selected.nombre_corto}}" class="empresa-imagen" ng-src="http://localhost:1337/images/empresas/{{vm.selected.logo}}">
+                <img alt="{{vm.selected.nombre_corto}}" class="empresa-imagen"
+                     ng-src="http://localhost:1337/images/empresas/{{vm.selected.logo}}">
             </div>
             <hr>
         </div>

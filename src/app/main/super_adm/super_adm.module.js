@@ -17,7 +17,7 @@
         // Navigation
         msNavigationServiceProvider.saveItem('empresas', {
             title    : 'Gestion Empresas',
-            icon     : 'icon-tile-four',
+            icon     : 'icon-store',
             state    : 'app.gestion_empresas',
             /*stateParams: {
              'param1': 'page'
