@@ -128,6 +128,12 @@
                 }
             }
 
+            #error-label{
+                text-align: center;
+                font-weight: 300;
+                color: red;
+            }
+
             #btn-iniciar-sesion{
                 background-color: $primary-color;
                 border-radius: 30px;

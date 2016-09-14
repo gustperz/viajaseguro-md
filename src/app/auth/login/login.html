@@ -16,6 +16,7 @@
 
             <div class="title">Inicia sesión con tu cuenta</div>
 
+
             <form name="loginForm" novalidate>
                 <md-input-container class="md-block" md-no-float>
                     <input id="email" type="text" name="email" ng-model="vm.usuario.username" placeholder="Nombre de usuario" required>
@@ -34,6 +35,8 @@
                         </div>
                     </div>
                 </md-input-container>
+
+                <div id="error-label" ng-show="vm.error">Usuario o contraseña incorrecta</div>
 
                 <!--<div class="remember-forgot-password" layout="row" layout-sm="column"-->
                 <!--layout-align="space-between center">-->
