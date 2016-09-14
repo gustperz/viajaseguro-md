@@ -9,7 +9,7 @@
         .controller('EmpresaConductoresController', EmpresaConductoresController);
 
     /** @ngInject */
-    function EmpresaConductoresController(OneRequest, authService) {
+    function EmpresaConductoresController(Conductores, authService) {
         var vm = this;
         vm.conductores = [];
         vm.conductoresInactivos = [];
@@ -25,7 +25,7 @@
 
         //////////
 
-        OneRequest.to('empresas/' + authService.getCurrentUser().empresa.id + '/conductores/all')
+        Conductores.getList({fields: 'identificacion, nombres, apellidos, activo'})
             .then(function (data) {
                 data.forEach(function (conductor) {
                     if (conductor.activo === true) {
@@ -38,6 +38,8 @@
             }, function (error) {
                 console.log(error);
             });
+
+        //////////
 
         function documentacionPorVencer(conductor) {
             const fecha_licencia = conductor.fecha_licencia ? new Date(conductor.fecha_licencia) : null;
@@ -70,7 +72,6 @@
             }
             return false;
         }
-        //////////
     }
 })();
 
