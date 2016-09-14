@@ -21,7 +21,6 @@
         //////////
 
         function iniciarSesion() {
-            vm.mensajeError = '';
 
             OneRequest.post('user/authentication', vm.usuario).then(success, error);
 
@@ -31,8 +30,11 @@
             }
 
             function error(error) {
-                var mensaje = error.status == 401 ? error.data.mensajeError : 'Ha ocurrido un error inesperado';
-                Toast(mensaje);
+                if(error.status == 401) {
+                    vm.error = true;
+                }else{
+                    Toast('Ha ocurrido un error inesperado');
+                }
             }
         }
 
