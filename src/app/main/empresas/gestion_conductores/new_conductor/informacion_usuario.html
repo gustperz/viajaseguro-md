@@ -1,0 +1,30 @@
+<div class="md-inline-form">
+    <p>Digita el usuario y contrase&ntilde;a de cceso del conductor!</p>
+
+    <div layout="column" layout-gt-xs="row" flex>
+        <md-input-container flex="100" flex-gt-xs="50">
+            <label>Nombre de usuario</label>
+            <input name="username" ng-model="vm.conductor.user.username" placeholder="Digita el nombre de usuario"
+                   required>
+            <div ng-messages="verticalStep3.username.$error"
+                 ng-show="verticalStep3.username.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>El nombre de usuario es requerido.</span>
+                </div>
+            </div>
+        </md-input-container>
+        <md-input-container flex="100" flex-gt-xs="50">
+            <label>Contrase&ntilde;a</label>
+            <input type="password" name="password" ng-model="vm.conductor.user.password"
+                   placeholder="Digita la contrase&ntilde;a" required>
+            <div ng-messages="verticalStep3.password.$error"
+                 ng-show="verticalStep3.password.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>El nombre es requerido.</span>
+                </div>
+            </div>
+        </md-input-container>
+    </div>
+</div>

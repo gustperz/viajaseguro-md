@@ -9,35 +9,57 @@
         .controller('EmpresaConductoresController', EmpresaConductoresController);
 
     /** @ngInject */
-    function EmpresaConductoresController(Conductores, authService) {
+    function EmpresaConductoresController(Conductores, $mdSidenav, $mdDialog) {
         var vm = this;
+        var campos = 'identificacion, nombres, apellidos, direccion,' +
+            ' telefono, activo, imagen, fecha_licencia, fecha_seguroac, vehiculo,' +
+            ' vehiculo.fecha_tecnomecanica, vehiculo.fecha_soat';
         vm.conductores = [];
         vm.conductoresInactivos = [];
-        vm.selected = [];
+        vm.selected = {};
         vm.n_cond_doc_venc = 0;
-        vm.query = {
-            order: 'name',
-            limit: 5,
-            page: 1
-        };
 
         // Methods
+        vm.selectedConductor = selectedConductor;
+        vm.abrirPanel = abrirPanel;
+        vm.toggleSidenav = toggleSidenav;
 
+        vm.newModalConductor = newModalConductor;
+        vm.deleteConductor = deleteConductor;
         //////////
+        getConductores();
+        /////////
+        function selectedConductor(conductor, $index) {
+            vm.selected = conductor;
+            vm.index = $index;
+        }
 
-        Conductores.getList({fields: 'identificacion, nombres, apellidos, activo'})
-            .then(function (data) {
-                data.forEach(function (conductor) {
-                    if (conductor.activo === true) {
-                        conductor.doc_venc = documentacionPorVencer(conductor);
-                        vm.conductores.push(conductor);
-                    } else {
-                        vm.conductoresInactivos.push(conductor);
-                    }
+        function abrirPanel(empresa, $index) {
+            vm.selected = empresa;
+            vm.index = $index;
+            toggleSidenav('details-sidenav');
+        }
+
+        function toggleSidenav(sidenavId) {
+            $mdSidenav(sidenavId).toggle();
+        }
+
+        function getConductores() {
+            Conductores.getList({fields: campos})
+                .then(function (data) {
+                    data.forEach(function (conductor) {
+                        if (conductor.activo === true) {
+                            conductor.doc_venc = documentacionPorVencer(conductor);
+                            vm.conductores.push(conductor);
+                        } else {
+                            vm.conductoresInactivos.push(conductor);
+                        }
+                    });
+                    vm.selected = vm.conductores[0];
+                }, function (error) {
+                    console.log(error);
                 });
-            }, function (error) {
-                console.log(error);
-            });
+        }
 
         //////////
 
@@ -71,6 +93,62 @@
                 return true;
             }
             return false;
+        }
+
+        function newModalConductor(ev, tipo) {
+            $mdDialog.show({
+                locals: {
+                    tipo: tipo,
+                    conductor: vm.selected
+                },
+                controller: NewConductorController,
+                controllerAs: 'vm',
+                templateUrl: 'app/main/empresas/gestion_conductores/new_conductor/new_conductor.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true,
+                fullscreen: false
+            })
+                .then(function (response) {
+                    console.log(response);
+                    if (response.metadata.code == "OK" || response.metadata.code == "ok") {
+                        if (response.metadata.tipo == 'Nuevo') {
+                            vm.conductores.push(response);
+                        }
+                        Toast(response.metadata.mensaje, 'bottom right')
+                    }
+                }, function (reponse) {
+
+                });
+        }
+
+        function deleteConductor(ev) {
+            var confirm = $mdDialog.confirm()
+                .title('Estas seguro que deseas eliminar este conductor?')
+                .textContent('Tendras que volver a digitar sus datos para crearlo.')
+                .ariaLabel('No lo creo')
+                .targetEvent(ev)
+                .clickOutsideToClose(true)
+                .parent(angular.element(document.body))
+                .ok('Continuar!')
+                .cancel('Cancelar');
+            $mdDialog.show(confirm).then(function() {
+                vm.selected.remove().then(success, error)
+                function success(response) {
+                    vm.conductores.splice(vm.index, 1);
+                    if (vm.conductores.length > 0) {
+                        vm.selected = vm.conductores[0];
+                    }else{
+                        vm.selected = null;
+                    }
+                    Toast('Conductor eliminada correctamente');
+                }
+                function error(response) {
+                    console.log(response);
+                }
+            }, function() {
+                console.log('Menos mal')
+            });
         }
     }
 })();
