@@ -1,21 +1,97 @@
-<div id="forms" class="page-layout simple fullwidth doc-page" layout="column">
-    <!-- HEADER -->
-    <div class="header md-accent-bg" layout="row" layout-align="space-between">
-        <div layout="column" layout-align="space-between">
-            <div class="breadcrumb" layout="row" layout-align="start center">
-                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
-                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
-                <span class="parent">EMPRESA</span>
-                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
-                <span class="parent">CENTRALES</span>
+<div id="gestion-centrales" class="page-layout simple fullwidth gestion-page" layout="row">
+    <div class="center scrollable" layout="column">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="header-content" layout="column" layout-align="space-between">
+                <div class="h1" layout="row" layout-align="start center">
+                    <!--<md-icon md-font-icon="icon-store"></md-icon>-->
+                    <span>Centrales</span>
+                </div>
             </div>
+            <md-button flow-btn class="add-file-button md-fab md-warn" aria-label="Nueva empresa"
+                       ng-click="vm.newModalEmpresa($event, 'Nueva')">
+                <md-icon md-font-icon="icon-plus"></md-icon>
+                <md-tooltip><span>Nueva empresa</span></md-tooltip>
+            </md-button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT -->
+        <md-content class="content" flex ms-scroll>
+            <table class="simple list-view">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Ciudad</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <!--<tr ng-repeat="empresa in vm.empresas | filter: filtro"-->
+                    <!--ng-click="vm.selectedEmpresa(empresa, $index)"-->
+                    <!--ng-class="{'selected' : vm.selected === empresa}">-->
+                    <!--<td class="name" hide-xs>{{empresa.nit}}</td>-->
+                    <!--<td class="type">{{empresa.nombre_corto}}</td>-->
+                <!--</tr>-->
+                <tr ng-click="vm.selectedEmpresa(empresa, $index)"
+                    ng-class="{'selected' : vm.selected === empresa}">
+                    <td class="id">1</td>
+                    <td class="name">Valledupar</td>
+                </tr>
+                <tr>
+                    <td class="id">2</td>
+                    <td class="name">Fonseca</td>
+                </tr>
+                <tr>
+                    <td class="id">3</td>
+                    <td class="name">San Juan del Cesar</td>
+                </tr>
+
+                </tbody>
+            </table>
+        </md-content>
+        <!-- / CONTENT -->
+    </div>
+    <div id="detalles" class="bordered mt-10 mr-10 mb-10 p-10" layout="row" flex>
+        <div id="info" layout="column" flex="20">
+            <h1>Valledupar -Cesar</h1>
+            <md-list>
+                <md-list-item class="md-2-line">
+                    <div class="md-list-item-text">
+                        <p>Direccion:</p>
+                        <h3>Carrera 8 # 19-301</h3>
+                    </div>
+                </md-list-item>
+                <md-list-item class="md-2-line">
+                    <div class="md-list-item-text">
+                        <p>Telefono:</p>
+                        <h3>590041283</h3>
+                    </div>
+                </md-list-item>
+                <md-list-item class="md-2-line">
+                    <div class="md-list-item-text">
+                        <p>Nombre de usuario:</p>
+                        <h3>transmovil_valledupar</h3>
+                    </div>
+                </md-list-item>
+                <br>
+                <md-divider></md-divider>
+                <md-subheader>Rutas</md-subheader>
+                <section id="rutas" class="content" flex ms-scroll>
+                    <md-list-item><h3>Valledupar</h3></md-list-item>
+                    <md-list-item><h3>Fonseca</h3></md-list-item>
+                    <md-list-item><h3>San Juan</h3></md-list-item>
+                </section>
+            </md-list>
+        </div>
+        <div id="form" layout="column" flex="20" hide>
+
+        </div>
+        <div id="mapa" flex>
+            <ng-map center="{{vm.simpleMap.center}}" zoom="{{vm.simpleMap.zoom}}">
+                <marker position="{{vm.my_position}}"></marker>
+            </ng-map>
         </div>
     </div>
-    <!-- / HEADER -->
-
-    <!-- CONTENT -->
-    <div class="content" layout="column">
-
-    </div>
-    <!-- / CONTENT -->
 </div>
+

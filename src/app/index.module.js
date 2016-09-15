@@ -7,7 +7,7 @@
      */
     angular
         .module('fuse', [
-            'angularMoment', 'restangular', 'md.data.table',
+            'angularMoment', 'restangular', 'ngMap',
 
             // Core
             'app.core',

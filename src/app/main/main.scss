@@ -1,0 +1,172 @@
+$radio: 15px;
+.gestion-page {
+    .center {
+        margin: 10px !important;
+        border: 2px solid #D50000 !important;
+        border-radius: $radio !important;
+        .header {
+            position: relative;
+            min-height: 60px !important;
+            max-height: 60px !important;
+            border-bottom: 2px solid #D50000 !important;
+            margin-left: 10px !important;
+            margin-right: 10px !important;
+            padding: 24px 0 24px 24px;
+            background-size: cover;
+            .header-content {
+                height: 100%;
+                .h1 {
+                    color: black;
+                    margin-left: 60px;
+                    md-icon {
+                        margin-right: 12px;
+                    }
+                }
+                .search {
+                    position: relative;
+                    padding-left: 24px;
+                    max-width: 480px;
+                    color: black;
+                    .search-icon {
+                        color: rgb(91, 91, 91) !important;
+                        margin: 0 -24px 0 0;
+                    }
+
+                    .search-input {
+                        width: 70px;
+                        margin: 0 0 0 27px;
+                        background: none;
+                        font-size: 16px;
+                        line-height: 40px;
+                        height: 36px;
+                        color: black;
+                        border-bottom: 2px solid black;
+                        transition: width 300ms ease;
+
+                        &:focus {
+                            border-color: $primary-color;
+                            width: 200px;
+                        }
+
+                        &:valid {
+                            border-color: $primary-color;
+                            width: 200px;
+                        }
+
+                        &:-webkit-autofill {
+                            -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+                        }
+
+                        &::-webkit-input-placeholder {
+                            color: rgb(91, 91, 91);
+                        }
+                    }
+                }
+            }
+
+            .add-file-button {
+                position: absolute;
+                background-color: $primary-color;
+                width: 50px;
+                height: 50px;
+                bottom: -32px;
+                left: 16px;
+            }
+        }
+
+        .content {
+            padding: 0 10px;
+            border-bottom-left-radius: $radio;
+            border-bottom-right-radius: $radio;
+            background: #FFFFFF;
+        }
+    }
+
+    .list-view {
+
+        tr {
+
+            th, td {
+
+            }
+        }
+
+        > thead {
+
+            tr {
+
+                th {
+                    color: $primary-color;
+
+                    &:first-child {
+                        border-bottom: none;
+                        width: 70px;
+                    }
+                }
+            }
+        }
+
+        > tbody {
+
+            tr {
+                cursor: pointer;
+                outline: none;
+
+                &.selected {
+                    background: rgba(0, 0, 0, 0.09);
+                    td:first-child {
+                        border-top-left-radius: 30px;
+                        border-bottom-left-radius: 30px;
+                    }
+                    td:last-child {
+                        border-top-right-radius: 30px;
+                        border-bottom-right-radius: 30px;
+                    }
+                }
+
+                td {
+                    padding: 5px 8px;
+                    border-bottom: none;
+                    height: 40px;
+
+                    .imagen {
+                        margin-left: 30px;
+                        text-align: center;
+                        border-radius: 50% !important;
+                        height: 60px !important;
+                        width: 60px !important;
+                    }
+                }
+            }
+        }
+    }
+
+    .file-icon {
+
+        .icon-folder {
+
+            &:before {
+                color: #FFB300;
+            }
+        }
+
+        .icon-document {
+
+            &:before {
+                color: #1565C0;
+            }
+        }
+
+        .icon-spreadsheet {
+
+            &:before {
+                color: #4CAF50;
+            }
+        }
+    }
+}
+
+.bordered {
+    border: 2px solid #D50000 !important;
+    border-radius: $radio !important;
+}

@@ -1,0 +1,47 @@
+#gestion-centrales {
+    .center{
+        background-color: white;
+        min-width: 250px !important;
+        .list-view {
+            font-weight: bold;
+
+            tr {
+                th:first-child{
+                    min-width: 70px;
+                }
+
+                .id {
+                    text-align: center !important;
+                }
+            }
+        }
+    }
+
+    #detalles {
+        background-color: white;
+        z-index: 1;
+        #info {
+            min-width: 230px;
+            h1{
+                padding-left: 16px;
+                margin-bottom: 0 !important;
+            }
+            md-list-item {
+                min-height: 50px !important;
+                height: 50px !important;
+            }
+            #rutas md-list-item{
+                min-height: 40px !important;
+                height: 40px !important;
+            }
+        }
+
+        #mapa {
+            height: 100%;
+            border: 1px $primary-color solid;
+            ng-map {
+                height: 100% !important;
+            }
+        }
+    }
+}
