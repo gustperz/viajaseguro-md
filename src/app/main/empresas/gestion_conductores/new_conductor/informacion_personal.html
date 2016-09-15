@@ -1,0 +1,30 @@
+<div class="md-inline-form">
+    <p>Digita la informacion personal del conductor!</p>
+
+    <div layout="column" layout-gt-xs="row" flex>
+        <md-input-container flex="100" flex-gt-xs="50">
+            <input type="text" name="identificacion" ng-model="vm.conductor.identificacion"
+                   placeholder="Identificacion"
+                   required>
+            <div ng-messages="verticalStep1.identificacion.$error"
+                 ng-show="verticalStep1.identificacion.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>La identificacion es requerida.</span>
+                </div>
+            </div>
+        </md-input-container>
+
+        <md-input-container flex="100" flex-gt-xs="50">
+            <input type="text" name="nombres" ng-model="vm.conductor.nombres"
+                   placeholder="Nombres">
+            <div ng-messages="verticalStep1.nombres.$error"
+                 ng-show="verticalStep1.nombres.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>El nombre es requerido.</span>
+                </div>
+            </div>
+        </md-input-container>
+    </div>
+</div>

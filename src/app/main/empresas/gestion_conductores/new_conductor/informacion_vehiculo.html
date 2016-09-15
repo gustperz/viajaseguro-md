@@ -1,0 +1,30 @@
+<div class="md-inline-form">
+    <p>Digita la informacion del vehiculo para el conductor!</p>
+
+    <div layout="column" layout-gt-xs="row" flex>
+        <md-input-container flex="100" flex-gt-xs="50">
+            <input type="text" name="placa" ng-model="vm.conductor.vehiculo.placa"
+                   placeholder="Placa"
+                   required>
+            <div ng-messages="verticalStep2.placa.$error"
+                 ng-show="verticalStep2.placa.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>La placa es requerida.</span>
+                </div>
+            </div>
+        </md-input-container>
+
+        <md-input-container flex="100" flex-gt-xs="50">
+            <input type="text" name="modelo" ng-model="vm.conductor.vehiculo.modelo"
+                   placeholder="Modelo">
+            <div ng-messages="verticalStep2.modelo.$error"
+                 ng-show="verticalStep2.modelo.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>El modelo es requerido.</span>
+                </div>
+            </div>
+        </md-input-container>
+    </div>
+</div>

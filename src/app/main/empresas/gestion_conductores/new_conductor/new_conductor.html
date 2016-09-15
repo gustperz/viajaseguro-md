@@ -1,0 +1,75 @@
+<md-dialog aria-label="{{vm.tipoModal}} empresa" flex="50" class="dialog-empresa">
+    <form ng-cloak name="empresaForm" novalidate>
+        <md-toolbar class="toolbar-empresa">
+            <div class="md-toolbar-tools">
+                <h2><b>{{vm.tipoModal}} conductor</b></h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="vm.cancel()">
+                    <md-icon md-font-icon="icon-close"
+                             aria-label="Cerrar modal"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content class="content">
+            <!--<form>-->
+            <!-- HORIZONTAL STEPPER -->
+            <form name="horizontalStepper" ms-horizontal-stepper ng-submit="vm.submitHorizontalStepper()"
+                  ng-model="vm.horizontalStepper" novalidate>
+                <ms-horizontal-stepper-step ng-form="horizontalStep1" step="1" step-title="'Personal Information'">
+                    <div ng-include="'app/main/empresas/gestion_conductores/new_conductor/informacion_personal.html'"></div>
+                </ms-horizontal-stepper-step>
+
+                <ms-horizontal-stepper-step ng-form="horizontalStep2" step="2" step-title="'Birthplace'" optional-step
+                                            hide-step="!vm.horizontalStepper.step1.lastname">
+                    <div ng-include="'app/main/empresas/gestion_conductores/new_conductor/informacion_vehiculo.html'"></div>
+                </ms-horizontal-stepper-step>
+            </form>
+            <!-- / HORIZONTAL STEPPER -->
+                <!-- VERTICAL STEPPER -->
+            <!--<form name="verticalStepper" ms-vertical-stepper ng-submit="vm.submitVerticalStepper()"-->
+                  <!--ng-model="vm.verticalStepper" novalidate>-->
+                <!--<ms-vertical-stepper-step ng-form="verticalStep1" step="1" step-title="'Personal Information'">-->
+                    <!--<div ng-include="'app/main/empresas/gestion_conductores/new_conductor/informacion_personal.html'"></div>-->
+                <!--</ms-vertical-stepper-step>-->
+
+                <!--<ms-vertical-stepper-step ng-form="verticalStep2" step="2" step-title="'Birthplace'" optional-step-->
+                                          <!--hide-step="!vm.verticalStepper.step1.lastname">-->
+                    <!--<div ng-include="'app/main/empresas/gestion_conductores/new_conductor/informacion_vehiculo.html'"></div>-->
+                <!--</ms-vertical-stepper-step>-->
+
+                <!--&lt;!&ndash;<ms-vertical-stepper-step ng-form="verticalStep3" step="3" step-title="'SSN'" optional-step&ndash;&gt;-->
+                                          <!--&lt;!&ndash;hide-step="!vm.verticalStepper.step2.birthplace">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div ng-include="'app/main/ui/forms/stepper-steps/vertical/step-3.html'"></div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</ms-vertical-stepper-step>&ndash;&gt;-->
+
+                <!--&lt;!&ndash;<ms-vertical-stepper-step ng-form="verticalStep4" step="4" step-title="'Address'" optional-step>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div ng-include="'app/main/ui/forms/stepper-steps/vertical/step-4.html'"></div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</ms-vertical-stepper-step>&ndash;&gt;-->
+
+                <!--&lt;!&ndash;<ms-vertical-stepper-step ng-form="verticalStep5" step="5" step-title="'Payment Method'">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div ng-include="'app/main/ui/forms/stepper-steps/vertical/step-5.html'"></div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</ms-vertical-stepper-step>&ndash;&gt;-->
+            <!--</form>-->
+                <!--&lt;!&ndash; / VERTICAL STEPPER &ndash;&gt;-->
+            <!--</form>-->
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <!--<span flex></span>-->
+            <!--<md-button class="boton-guardar-dialog brad-30"-->
+                       <!--ng-click="vm.guardarEmpresa()" ng-if="vm.tipoModal != 'Modificar'"-->
+                       <!--ng-disabled="empresaForm.$invalid || empresaForm.$pristine">-->
+                <!--Guardar-->
+            <!--</md-button>-->
+            <!--<md-button class="boton-guardar-dialog brad-30"-->
+                       <!--ng-click="vm.modificarEmpresa()" ng-if="vm.tipoModal != 'Nuevo'"-->
+                       <!--ng-disabled="empresaForm.$invalid || empresaForm.$pristine">-->
+                <!--Modificar-->
+            <!--</md-button>-->
+            <md-button class="boton-cancel-dialog brad-30" ng-click="vm.cancel()">
+                Cancelar
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

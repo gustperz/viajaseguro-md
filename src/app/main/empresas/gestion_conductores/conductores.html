@@ -1,92 +1,117 @@
-<div id="forms" class="page-layout simple fullwidth doc-page" layout="column">
-    <!-- HEADER -->
-    <div class="header" layout="row" layout-align="space-between">
-        <!-- APP TITLE -->
-        <div class="breadcrumb" layout="row" layout-align="start center">
-            <md-icon md-font-icon="icon-home" class="s16"></md-icon>
-            <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
-            <span class="parent">EMPRESA</span>
-            <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
-            <span class="parent">CONDUCTORES</span>
-        </div>
-        <!-- / APP TITLE -->
-        <!-- SEARCH -->
-        <div class="search-input-wrapper" layout="row" layout-align="start center">
-            <label for="search">
-                <md-icon md-font-icon="icon-magnify"></md-icon>
-            </label>
-            <md-input-container md-no-float class="m-0">
-                <input id="search" placeholder="Buscar conductor" type="text" ng-model=buscar>
-            </md-input-container>
-        </div>
-        <!-- / SEARCH -->
-    </div>
-    <!-- / HEADER -->
+<div id="file-manager" class="page-layout simple right-sidenav" layout="row">
+    <!-- CENTER -->
+    <div class="center" layout="column" flex>
+        <!-- HEADER -->
+        <div class="header">
 
-    <!-- CONTENT -->
-    <div class="content" layout="row" flex="100" layout-wrap>
-        <div flex="90">
-            <md-table-container>
-                <table md-table ng-model="vm.selected" md-progress="promise">
-                    <thead md-head md-order="vm.query.order" md-on-reorder="OneRequest">
-                    <tr md-row>
-                        <th md-column md-numeric md-order></th>
-                        <th md-column md-numeric>Identificación</th>
-                        <th md-column md-numeric>Nombres</th>
-                        <th md-column md-numeric>Apellidos</th>
-                        <th md-column md-numeric>Placa del vehiculo</th>
-                        <th md-column md-numeric>Codigo vial</th>
-                        <th md-column md-numeric>Acciones</th>
-                    </tr>
-                    </thead>
-                    <tbody md-body>
-                    <tr md-row md-select="conductor" md-select-id="name" md-auto-select
-                        ng-repeat="conductor in vm.conductores | filter: buscar| orderBy:['-doc_venc', 'nombres']"
-                        ng-class="{'cond_doc_venc': conductor.doc_venc}">
-                        <td md-cell style="padding-left: 0px"><b style="padding-right: 5px">{{$index+1}}</b><img
-                                ng-src="http://{{conductor.imagen}}"
-                                style="width: 50px; height: 50px; border-radius: 50%; border: none"></td>
-                        <td md-cell>{{conductor.identificacion}}</td>
-                        <td md-cell>{{conductor.nombres}}</td>
-                        <td md-cell>{{conductor.apellidos}}</td>
-                        <td md-cell>{{conductor.vehiculo.placa}}</td>
-                        <td md-cell>{{conductor.vehiculo.codigo_vial}}</td>
-                        <td md-cell>
-                            <md-button class="md-fab md-mini" aria-label="Ver">
-                                <md-icon md-font-icon="icon-eye" class="s24"></md-icon>
-                            </md-button>
-                            <md-button class="md-fab md-mini" aria-label="Eliminar" style="background-color: #D50000">
-                                <md-icon md-font-icon="icon-close" class="s24"></md-icon>
-                            </md-button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </md-table-container>
-
-            <md-table-pagination md-limit="vm.query.limit" md-limit-options="[5, 10, 15]" md-page="vm.query.page"
-                                 md-total="{{vm.conductores.length}}" md-on-paginate="OneRequest"
-                                 md-page-select></md-table-pagination>
-        </div>
-
-        <div id="boards" layout="column" flex>
-
-            <!-- ROL SELECCION -->
-            <div id="board-selector" layout="column" layout-align="start center" flex>
-                <!-- LISTA DE ROLES -->
-                <div class="board-list" layout="row" layout-align="center center" layout-wrap>
-                    <!-- ROLES -->
-                    <div class="board-list-item"
-                         layout="column" layout-align="center center">
-                        <md-icon md-font-icon="icon-file-document" class="icon s54"></md-icon>
-                        <div class="board-name">{{vm.n_cond_doc_venc}} con documentacion a vencer</div>
+            <div class="header-content" layout="column" layout-align="space-between">
+                <!-- TOOLBAR -->
+                <div class="toolbar" layout="row" layout-align="space-between">
+                    <div class="white-fg" layout="column" layout-align="start start">
+                        <div class="h1" layout="row" layout-align="start center">
+                            <!--<md-icon md-font-icon="icon-store"></md-icon>-->
+                            <span>Conductores</span>
+                        </div>
                     </div>
-                    <!-- / ROLES -->
+
+                    <div class="right-side" layout="row">
+                        <div class="search" layout="row" layout-align="start center" flex>
+                            <md-icon md-font-icon="icon-magnify" class="icon search-icon"></md-icon>
+                            <input id="search" class="search-input" ng-model="filtro" type="text" placeholder="Buscar">
+                        </div>
+                    </div>
                 </div>
-                <!-- / LISTA DE ROLES -->
+                <!-- / TOOLBAR -->
             </div>
-            <!-- / ROL SELECCION -->
+
+            <!-- ADD NEW EMPRESA-->
+            <div id="file-uploader">
+                <md-button flow-btn class="add-file-button md-fab md-warn" aria-label="Nueva empresa"
+                           ng-click="vm.newModalConductor($event, 'Nuevo')">
+                    <md-icon md-font-icon="icon-plus"></md-icon>
+                    <md-tooltip><span>Nuevo conductor</span></md-tooltip>
+                </md-button>
+            </div>
+            <!-- / ADD NEW EMPRESA -->
         </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT -->
+        <md-content class="content" flex ms-scroll>
+            <table class="simple list-view">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th hide-xs>Cedula</th>
+                    <th>Nombres</th>
+                    <th hide-xs>Direccion</th>
+                    <th hide-xs>Telefono</th>
+                    <th hide-gt-md></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr ng-repeat="conductor in vm.conductores | filter: filtro  | orderBy: ['-doc_venc', 'nombres']"
+                    ng-click="vm.selectedConductor(conductor, $index)"
+                    ng-class="{'selected' : vm.selected === conductor, 'cond_doc_venc': conductor.doc_venc}">
+                    <td>
+                        <img class="imagen-empresa"
+                             ng-src="http://localhost:1337/images/conductores/{{conductor.imagen}}">
+                    </td>
+                    <td class="name" hide-xs>{{conductor.identificacion}}</td>
+                    <td class="type">{{conductor.nombres}} {{conductor.apellidos}}</td>
+                    <td class="owner" hide-xs>{{conductor.direccion}}</td>
+                    <td class="size" hide-xs>{{conductor.telefono}}</td>
+                    <td class="show-details" hide-gt-md>
+                        <md-button class="md-icon-button sidenav-toggle" ng-click="vm.abrirPanel(conductor, $index)"
+                                   aria-label="Detalles conductor">
+                            <md-icon md-font-icon="icon-information-outline"></md-icon>
+                        </md-button>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </md-content>
+        <!-- / CONTENT -->
     </div>
-    <!-- / CONTENT -->
+    <!-- / CENTER -->
+
+    <!-- SIDENAV -->
+    <md-sidenav class="sidenav details-sidenav md-sidenav-right" md-is-locked-open="$mdMedia('gt-md')"
+                md-component-id="details-sidenav" ms-scroll
+                ms-sidenav-helper>
+        <div class="header" layout="column" layout-align="space-between">
+            <div class="toolbar" layout="row" layout-align="end center">
+                <md-button ng-click="vm.deleteConductor($event)" class="md-icon-button" aria-label="Eliminar">
+                    <md-icon md-font-icon="icon-delete"></md-icon>
+                    <md-tooltip><span>Eliminar</span></md-tooltip>
+                </md-button>
+
+                <md-button ng-click="vm.newModalConductor($event, 'Modificar')" class="md-icon-button"
+                           aria-label="Editar">
+                    <md-icon md-font-icon="icon-pencil"></md-icon>
+                    <md-tooltip><span>Editar</span></md-tooltip>
+                </md-button>
+            </div>
+            <hr>
+            <div class="image-content">
+                <h3 class="title-empresa"><b>{{vm.selected.nombres}} {{vm.selected.apellidos}}</b></h3><br>
+                <img alt="Conductor" class="empresa-imagen"
+                     ng-src="http://localhost:1337/images/conductores/{{vm.selected.imagen}}">
+            </div>
+            <hr>
+        </div>
+
+        <!--contenido-->
+        <md-content class="content" flex ms-scroll>
+
+            <div class="p_not_vec" ng-if="vm.selected.doc_venc === true">
+                <span>Este conductor tiene 1 o mas documentos proximos a vencer</span>
+                <md-icon md-font-icon="icon-alert-circle" class="red-600-fg md-font"></md-icon>
+            </div>
+            Datos del conductor
+        </md-content>
+    </md-sidenav>
+    <!-- / SIDENAV -->
 </div>

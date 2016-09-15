@@ -66,7 +66,7 @@
                     <div layout layout-sm="column" class="content-datos-usuario">
                         <md-input-container flex>
                             <label>Nombre de usuario</label>
-                            <input name="username" ng-model="vm.empresa.user.username" placeholder="Digita la direccion"
+                            <input name="username" ng-model="vm.empresa.user.username" placeholder="Digita el nombre de usuario"
                                    required>
                             <div ng-messages="empresaForm.username.$error">
                                 <div ng-message="required">Digita el nombre de usuario</div>
@@ -75,7 +75,7 @@
                         <md-input-container flex>
                             <label>Contrase&ntilde;a</label>
                             <input type="password" name="password" ng-model="vm.empresa.user.password"
-                                   placeholder="Digita el telefono" required>
+                                   placeholder="Digita la contrase&ntilde;a" required>
                             <div ng-messages="empresaForm.password.$error">
                                 <div ng-message="required">Este campo es obligatorio.</div>
                             </div>
