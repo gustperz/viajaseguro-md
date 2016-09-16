@@ -1,0 +1,20 @@
+<div class="md-inline-form">
+    <p>Digita la documentacion para el vehiculo!
+        <md-icon md-font-icon="icon-alert-circle" class="red-600-fg md-font"></md-icon>
+    </p>
+
+    <div layout="column" layout-gt-xs="row" flex class="menos-espaciado">
+        <md-input-container flex="100" flex-gt-xs="50">
+            <input type="text" name="soat" ng-model="vm.conductor.vehiculo.cedula_propietario"
+                   placeholder="Identificación del propietario"
+                   required>
+            <div ng-messages="verticalStep2.idpropietario.$error"
+                 ng-show="verticalStep2.idpropietario.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>Esta identificación es requerida.</span>
+                </div>
+            </div>
+        </md-input-container>
+    </div>
+</div>

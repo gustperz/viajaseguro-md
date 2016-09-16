@@ -1,23 +1,29 @@
 <div class="md-inline-form">
-    <p>Digita la informacion personal del conductor!</p>
+    <p>Digita la informacion personal del conductor!
+        <md-icon md-font-icon="icon-alert-circle" class="red-600-fg md-font"></md-icon>
+    </p>
 
-    <div layout="column" layout-gt-xs="row" flex>
+    <div layout="column" layout-gt-xs="row" flex class="menos-espaciado">
         <md-input-container flex="100" flex-gt-xs="50">
-            <input type="text" name="identificacion" ng-model="vm.conductor.identificacion"
-                   placeholder="Identificacion"
-                   required>
+            <md-icon md-font-icon="icon-credit-card"></md-icon>
+            <input type="number" name="identificacion" ng-model="vm.conductor.identificacion"
+                   placeholder="Identificación" min="1" required>
             <div ng-messages="verticalStep1.identificacion.$error"
                  ng-show="verticalStep1.identificacion.$touched"
                  role="alert">
                 <div ng-message="required">
-                    <span>La identificacion es requerida.</span>
+                    <span>La identificación es requerida.</span>
+                </div>
+                <div ng-message="min">
+                    <span>Este numero no es valido.</span>
                 </div>
             </div>
         </md-input-container>
 
         <md-input-container flex="100" flex-gt-xs="50">
+            <md-icon md-font-icon="icon-account-circle"></md-icon>
             <input type="text" name="nombres" ng-model="vm.conductor.nombres"
-                   placeholder="Nombres">
+                   placeholder="Nombres" required>
             <div ng-messages="verticalStep1.nombres.$error"
                  ng-show="verticalStep1.nombres.$touched"
                  role="alert">
@@ -26,5 +32,91 @@
                 </div>
             </div>
         </md-input-container>
+
+        <md-input-container flex="100" flex-gt-xs="50">
+            <md-icon md-font-icon="icon-account-circle"></md-icon>
+            <input type="text" name="apellidos" ng-model="vm.conductor.apellidos"
+                   placeholder="Apellidos" required>
+            <div ng-messages="verticalStep1.apellidos.$error"
+                 ng-show="verticalStep1.apellidos.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>Los apiellidos son requeridos.</span>
+                </div>
+            </div>
+        </md-input-container>
     </div>
+
+    <div layout="column" layout-gt-xs="row" flex class="menos-espaciado">
+        <md-input-container flex="100" flex-gt-xs="50">
+            <md-icon md-font-icon="icon-map-marker-radius"></md-icon>
+            <input type="text" name="direccion" ng-model="vm.conductor.direccion"
+                   placeholder="Dirección" required>
+            <div ng-messages="verticalStep1.nombres.$error"
+                 ng-show="verticalStep1.nombres.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>La dirección es requerida.</span>
+                </div>
+            </div>
+        </md-input-container>
+
+        <md-input-container flex="100" flex-gt-xs="50">
+            <md-icon md-font-icon="icon-phone"></md-icon>
+            <input type="number" name="telefono" ng-model="vm.conductor.telefono"
+                   placeholder="Telefono" min="1" required>
+            <div ng-messages="verticalStep1.telefono.$error"
+                 ng-show="verticalStep1.telefono.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>El telefono es requerido.</span>
+                </div>
+                <div ng-message="min">
+                    <span>Este numero no es valido.</span>
+                </div>
+            </div>
+        </md-input-container>
+
+        <md-input-container flex="100" flex-gt-xs="50">
+            <md-icon md-font-icon="icon-email"></md-icon>
+            <input type="email" name="email" ng-model="vm.conductor.email"
+                   placeholder="Correo electronico" ng-pattern="/^.+@.+\..+$/">
+            <div ng-messages="verticalStep1.email.$error"
+                 ng-show="verticalStep1.email.$touched"
+                 role="alert">
+                <div ng-message="pattern">
+                    <span>No es un correo valido.</span>
+                </div>
+            </div>
+        </md-input-container>
+    </div>
+
+    <div layout="column" layout-gt-xs="row" flex class="menos-espaciado" layout-align="start">
+        <md-input-container flex="100" flex-gt-xs="50">
+            <label>Tipo de licencia</label>
+            <md-select ng-model="vm.conductor.tipo_licencia">
+                <md-option ng-repeat="tipo in vm.tiposLicencia" value="{{tipo.nombre}}" title="{{tipo.detalle}}">
+                    {{tipo.nombre}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <md-input-container flex="100" flex-gt-xs="50">
+            <input type="text" name="nlicencia" ng-model="vm.conductor.nlicencia"
+                   placeholder="Numero de licencia" required>
+            <div ng-messages="verticalStep1.nlicencia.$error"
+                 ng-show="verticalStep1.nlicencia.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>El numero de licencia es requerido.</span>
+                </div>
+            </div>
+        </md-input-container>
+
+        <md-datepicker ng-model="myDate" name="dateField" flex="100"></md-datepicker>
+        <div ng-messages="verticalStep1.dateField.$error">
+            <div ng-message="valid">The entered value is not a date!</div>
+        </div>
+
+    </div>
+
 </div>

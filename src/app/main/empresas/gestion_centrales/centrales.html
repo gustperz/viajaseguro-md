@@ -28,10 +28,10 @@
 
                 <tbody>
                 <!--<tr ng-repeat="empresa in vm.empresas | filter: filtro"-->
-                    <!--ng-click="vm.selectedEmpresa(empresa, $index)"-->
-                    <!--ng-class="{'selected' : vm.selected === empresa}">-->
-                    <!--<td class="name" hide-xs>{{empresa.nit}}</td>-->
-                    <!--<td class="type">{{empresa.nombre_corto}}</td>-->
+                <!--ng-click="vm.selectedEmpresa(empresa, $index)"-->
+                <!--ng-class="{'selected' : vm.selected === empresa}">-->
+                <!--<td class="name" hide-xs>{{empresa.nit}}</td>-->
+                <!--<td class="type">{{empresa.nombre_corto}}</td>-->
                 <!--</tr>-->
                 <tr ng-click="vm.selectedEmpresa(empresa, $index)"
                     ng-class="{'selected' : vm.selected === empresa}">
@@ -53,6 +53,7 @@
         <!-- / CONTENT -->
     </div>
     <div id="detalles" class="bordered mt-10 mr-10 mb-10 p-10" layout="row" flex>
+
         <div id="info" layout="column" flex="20">
             <h1>Valledupar -Cesar</h1>
             <md-list>
@@ -77,10 +78,12 @@
                 <br>
                 <md-divider></md-divider>
                 <md-subheader>Rutas</md-subheader>
-                <section id="rutas" class="content" flex ms-scroll>
-                    <md-list-item><h3>Valledupar</h3></md-list-item>
-                    <md-list-item><h3>Fonseca</h3></md-list-item>
-                    <md-list-item><h3>San Juan</h3></md-list-item>
+                <section id="rutas">
+                    <md-content class="content" flex ms-scroll>
+                        <md-list-item><h3>Valledupar</h3></md-list-item>
+                        <md-list-item><h3>Fonseca</h3></md-list-item>
+                        <md-list-item><h3>San Juan</h3></md-list-item>
+                    </md-content>
                 </section>
             </md-list>
         </div>

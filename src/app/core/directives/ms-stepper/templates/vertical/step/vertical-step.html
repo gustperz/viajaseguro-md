@@ -27,20 +27,20 @@
     <md-button class="md-accent md-raised"
                ng-disabled="MsStepper.isFirstStep()"
                ng-click="MsStepper.gotoPreviousStep()">
-        Back
+        Volver
     </md-button>
 
     <md-button class="md-accent md-raised"
                ng-if="!MsStepper.isLastStep()"
                ng-disabled="!MsStepper.isStepValid(MsStepper.currentStepNumber)"
                ng-click="MsStepper.gotoNextStep()">
-        Next
+        Siguiente
     </md-button>
 
     <md-button type="submit" class="md-accent md-raised"
                ng-click="MsStepper.resetForm()"
                ng-if="MsStepper.isLastStep()"
                ng-disabled="!MsStepper.isFormValid()">
-        Submit
+        Guardar
     </md-button>
 </div>

@@ -9,7 +9,7 @@
         .controller('EmpresaConductoresController', EmpresaConductoresController);
 
     /** @ngInject */
-    function EmpresaConductoresController(Conductores, $mdSidenav, $mdDialog) {
+    function EmpresaConductoresController(Conductores, $mdSidenav, $mdDialog, $filter) {
         var vm = this;
         var campos = 'identificacion, nombres, apellidos, direccion,' +
             ' telefono, activo, imagen, fecha_licencia, fecha_seguroac, vehiculo,' +
@@ -96,6 +96,8 @@
         }
 
         function newModalConductor(ev, tipo) {
+            vm.selected.identificacion = parseInt(vm.selected.identificacion);
+            vm.selected.telefono = parseInt(vm.selected.telefono);
             $mdDialog.show({
                 locals: {
                     tipo: tipo,

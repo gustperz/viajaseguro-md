@@ -6,6 +6,16 @@ function NewConductorController($mdDialog, Toast, Conductores, tipo, conductor) 
     var vm = this;
     vm.conductor = {} || conductor;
     vm.tipoModal = tipo;
+    vm.tiposLicencia = [
+        {
+            nombre: 'A1',
+            detalle: 'Probando'
+        },
+        {
+            nombre: 'A2',
+            detalle: 'Probando'
+        }
+    ];
 
     // funciones
     vm.guardarConductor = guardarConductor;
