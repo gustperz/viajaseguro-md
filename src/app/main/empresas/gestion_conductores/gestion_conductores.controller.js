@@ -9,11 +9,13 @@
         .controller('EmpresaConductoresController', EmpresaConductoresController);
 
     /** @ngInject */
-    function EmpresaConductoresController(Conductores, $mdSidenav, $mdDialog, $filter) {
+    function EmpresaConductoresController(Conductores, $mdSidenav, $mdDialog) {
         var vm = this;
-        var campos = 'identificacion, nombres, apellidos, direccion,' +
-            ' telefono, activo, imagen, fecha_licencia, fecha_seguroac, vehiculo,' +
-            ' vehiculo.fecha_tecnomecanica, vehiculo.fecha_soat';
+        var campos = 'identificacion, nombres, apellidos, direccion, email, fecha_nacimiento,' +
+            ' telefono, activo, imagen, fecha_licencia, nlicencia, tipo_licencia, fecha_seguroac, vehiculo,' +
+            ' vehiculo.fecha_tecnomecanica, vehiculo.fecha_soat, vehiculo.codigo_vial, vehiculo.placa, vehiculo.modelo,' +
+            ' vehiculo.cupos, vehiculo.cedula_propietario, vehiculo.telefono_propietario, vehiculo.color,' +
+            ' vehiculo.nombre_propietario';
         vm.conductores = [];
         vm.conductoresInactivos = [];
         vm.selected = {};
@@ -98,6 +100,15 @@
         function newModalConductor(ev, tipo) {
             vm.selected.identificacion = parseInt(vm.selected.identificacion);
             vm.selected.telefono = parseInt(vm.selected.telefono);
+            vm.selected.nlicencia = parseInt(vm.selected.nlicencia);
+            vm.selected.fecha_licencia = new Date(vm.selected.fecha_licencia);
+            vm.selected.fecha_seguroac = new Date(vm.selected.fecha_seguroac);
+            vm.selected.fecha_nacimiento = new Date(vm.selected.fecha_nacimiento);
+            vm.selected.vehiculo.codigo_vial = String(vm.selected.vehiculo.codigo_vial);
+            vm.selected.vehiculo.cupos = parseInt(vm.selected.vehiculo.cupos);
+            vm.selected.vehiculo.cedula_propietario = parseInt(vm.selected.vehiculo.cedula_propietario);
+            vm.selected.vehiculo.telefono_propietario = parseInt(vm.selected.vehiculo.telefono_propietario);
+
             $mdDialog.show({
                 locals: {
                     tipo: tipo,

@@ -1,20 +1,28 @@
 <div class="md-inline-form">
-    <p>Digita la documentacion para el vehiculo!
+    <p>Digita la documentacion del vehiculo!
         <md-icon md-font-icon="icon-alert-circle" class="red-600-fg md-font"></md-icon>
     </p>
 
     <div layout="column" layout-gt-xs="row" flex class="menos-espaciado">
         <md-input-container flex="100" flex-gt-xs="50">
-            <input type="text" name="soat" ng-model="vm.conductor.vehiculo.cedula_propietario"
-                   placeholder="Identificación del propietario"
-                   required>
-            <div ng-messages="verticalStep2.idpropietario.$error"
-                 ng-show="verticalStep2.idpropietario.$touched"
+            <label>Tecnomecanica</label>
+            <md-switch ng-model="vm.conductor.vehiculo.tecnomecanica" aria-label="Tecnomecanica"></md-switch>
+            <md-icon md-font-icon="icon-calendar"></md-icon>
+            <input type="date" name="fecha_tecnomecanica" ng-model="vm.conductor.fecha_tecnomecanica"
+                   placeholder="Fecha de vencimiento" required>
+            <div ng-messages="verticalStep1.fecha_tecnomecanica.$error"
+                 ng-show="verticalStep1.fecha_tecnomecanica.$touched"
                  role="alert">
                 <div ng-message="required">
-                    <span>Esta identificación es requerida.</span>
+                    <span>Esta fecha es requerida.</span>
+                </div>
+                <div ng-message="valid">
+                    <span>No es una fecha valida.</span>
                 </div>
             </div>
+        </md-input-container>
+        <md-input-container flex="100" flex-gt-xs="50">
+
         </md-input-container>
     </div>
 </div>

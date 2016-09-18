@@ -9,11 +9,35 @@ function NewConductorController($mdDialog, Toast, Conductores, tipo, conductor) 
     vm.tiposLicencia = [
         {
             nombre: 'A1',
-            detalle: 'Probando'
+            detalle: 'Motocicletas con cilindrada hasta 125 c.c.'
         },
         {
             nombre: 'A2',
-            detalle: 'Probando'
+            detalle: 'Motocicletas , mototriciclos con cilindrada mayor a 125 c.c.'
+        },
+        {
+            nombre: 'B1',
+            detalle: 'Automóviles, motocarros, cuatrimotos, camperos, camionetas y microbuses de servicio particular.'
+        },
+        {
+            nombre: 'B2',
+            detalle: 'Camiones rígidos, busetas y buses de servicio particular.'
+        },
+        {
+            nombre: 'B3',
+            detalle: 'Vehículos articulados de servicio particular.'
+        },
+        {
+            nombre: 'C1',
+            detalle: 'Automóviles, motocarros, cuatrimotos, camperos, camionetas y microbuses de servicio de servicio público.'
+        },
+        {
+            nombre: 'C2',
+            detalle: 'Camiones rígidos, busetas y buses de servicio de servicio público.'
+        },
+        {
+            nombre: 'C3',
+            detalle: 'Vehículos articulados de servicio público.'
         }
     ];
 

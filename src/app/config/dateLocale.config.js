@@ -2,8 +2,7 @@
  * Created by tav0 on 25/08/16.
  */
 
-(function ()
-{
+(function () {
     'use strict';
 
     angular
@@ -12,6 +11,9 @@
 
     /** @ngInject */
     function config($mdDateLocaleProvider) {
+        $mdDateLocaleProvider.formatDate = function (date) {
+            return moment(date).format('YYYY-MM-DD');
+        };
         $mdDateLocaleProvider.months = [
             'Enero',
             'Febrero',
@@ -27,7 +29,7 @@
             'Diciembre',
         ];
         $mdDateLocaleProvider.shortMonths = [
-            'Ene','Feb','Mar','Abr','Mayo','Jun','Jul','Ago','Sept','Oct','Nov','Dic'
+            'Ene', 'Feb', 'Mar', 'Abr', 'Mayo', 'Jun', 'Jul', 'Ago', 'Sept', 'Oct', 'Nov', 'Dic'
         ];
         $mdDateLocaleProvider.days = [
             'Domingo',
@@ -39,7 +41,7 @@
             'Sábado'
         ];
         $mdDateLocaleProvider.shortDays = [
-            'Dom', 'Lun','Mar','Mié','Jue','Vie','Sáb'
+            'Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'
         ];
     }
 })();

@@ -91,17 +91,29 @@
         </md-input-container>
     </div>
 
-    <div layout="column" layout-gt-xs="row" flex class="menos-espaciado" layout-align="start">
+    <div layout="column" layout-gt-xs="row" flex class="menos-espaciado md-inline-form" layout-align="start">
         <md-input-container flex="100" flex-gt-xs="50">
+            <md-icon md-font-icon="icon-alphabetical"></md-icon>
             <label>Tipo de licencia</label>
-            <md-select ng-model="vm.conductor.tipo_licencia">
-                <md-option ng-repeat="tipo in vm.tiposLicencia" value="{{tipo.nombre}}" title="{{tipo.detalle}}">
-                    {{tipo.nombre}}
-                </md-option>
+            <md-select ng-model="vm.conductor.tipo_licencia" required name="tipo_licencia">
+                <md-content ms-scroll>
+                    <md-option ng-disabled="true">Tipo de licencia</md-option>
+                    <md-option ng-repeat="tipo in vm.tiposLicencia" ng-value="tipo.nombre" title="{{tipo.detalle}}">
+                        {{tipo.nombre}}
+                    </md-option>
+                </md-content>
             </md-select>
+            <div ng-messages="verticalStep1.tipo_licencia.$error"
+                 ng-show="verticalStep1.tipo_licencia.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>El tipo de licencia es requerido.</span>
+                </div>
+            </div>
         </md-input-container>
         <md-input-container flex="100" flex-gt-xs="50">
-            <input type="text" name="nlicencia" ng-model="vm.conductor.nlicencia"
+            <md-icon md-font-icon="icon-numeric"></md-icon>
+            <input type="number" name="nlicencia" ng-model="vm.conductor.nlicencia"
                    placeholder="Numero de licencia" required>
             <div ng-messages="verticalStep1.nlicencia.$error"
                  ng-show="verticalStep1.nlicencia.$touched"
@@ -112,11 +124,55 @@
             </div>
         </md-input-container>
 
-        <md-datepicker ng-model="myDate" name="dateField" flex="100"></md-datepicker>
-        <div ng-messages="verticalStep1.dateField.$error">
-            <div ng-message="valid">The entered value is not a date!</div>
-        </div>
+        <md-input-container flex="100" flex-gt-xs="50">
+            <md-icon md-font-icon="icon-calendar"></md-icon>
+            <input type="date" name="fecha_licencia" ng-model="vm.conductor.fecha_licencia"
+                   placeholder="Fecha de vencimiento de licencia" required>
+            <div ng-messages="verticalStep1.fecha_licencia.$error"
+                 ng-show="verticalStep1.fecha_licencia.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>Esta fecha es requerida.</span>
+                </div>
+                <div ng-message="valid">
+                    <span>No es una fecha valida.</span>
+                </div>
+            </div>
+        </md-input-container>
+    </div>
 
+    <div layout="column" layout-gt-xs="row" flex class="menos-espaciado md-inline-form" layout-align="start">
+        <md-input-container flex="100" flex-gt-xs="50">
+            <md-icon md-font-icon="icon-calendar"></md-icon>
+            <input type="date" name="fecha_nacimiento" ng-model="vm.conductor.fecha_nacimiento"
+                   placeholder="Fecha de nacimiento" required>
+            <div ng-messages="verticalStep1.fecha_nacimiento.$error"
+                 ng-show="verticalStep1.fecha_nacimiento.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>Esta fecha es requerida.</span>
+                </div>
+                <div ng-message="valid">
+                    <span>No es una fecha valida.</span>
+                </div>
+            </div>
+        </md-input-container>
+
+        <md-input-container flex="100" flex-gt-xs="50">
+            <md-icon md-font-icon="icon-calendar"></md-icon>
+            <input type="date" name="fecha_seguroac" ng-model="vm.conductor.fecha_seguroac"
+                   placeholder="Fecha del seguro AC/CA" required>
+            <div ng-messages="verticalStep1.fecha_seguroac.$error"
+                 ng-show="verticalStep1.fecha_seguroac.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>Esta fecha es requerida.</span>
+                </div>
+                <div ng-message="valid">
+                    <span>No es una fecha valida.</span>
+                </div>
+            </div>
+        </md-input-container>
     </div>
 
 </div>
