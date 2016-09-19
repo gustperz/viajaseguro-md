@@ -36,8 +36,8 @@
             vm.index = $index;
         }
 
-        function abrirPanel(empresa, $index) {
-            vm.selected = empresa;
+        function abrirPanel(conductor, $index) {
+            vm.selected = conductor;
             vm.index = $index;
             toggleSidenav('details-sidenav');
         }
