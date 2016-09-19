@@ -98,7 +98,8 @@
             <md-select ng-model="vm.conductor.tipo_licencia" required name="tipo_licencia">
                 <md-content ms-scroll>
                     <md-option ng-disabled="true">Tipo de licencia</md-option>
-                    <md-option ng-repeat="tipo in vm.tiposLicencia" ng-value="tipo.nombre" title="{{tipo.detalle}}">
+                    <md-option ng-value="tipo.nombre" ng-repeat="tipo in vm.tiposLicencia" title="{{tipo.detalle}}"
+                               ng-selected=" tipo.nombre === vm.conductor.tipo_licencia ? 'true' : 'false' ">
                         {{tipo.nombre}}
                     </md-option>
                 </md-content>

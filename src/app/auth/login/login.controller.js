@@ -33,7 +33,7 @@
                 if(error.status == 401) {
                     vm.error = true;
                 }else{
-                    Toast('Ha ocurrido un error inesperado');
+                    Toast('Ha ocurrido un error inesperado, intentalo nuevamente.');
                 }
             }
         }

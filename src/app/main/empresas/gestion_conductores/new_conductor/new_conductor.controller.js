@@ -43,7 +43,6 @@ function NewConductorController($mdDialog, Toast, Conductores, tipo, conductor) 
 
     // funciones
     vm.guardarConductor = guardarConductor;
-    vm.modificarConductor = modificarConductor;
     vm.cancel = cancel;
 
     //////////
@@ -53,38 +52,39 @@ function NewConductorController($mdDialog, Toast, Conductores, tipo, conductor) 
     //////////
 
     function guardarConductor() {
-        Conductores.create(vm.conductor).then(success, error);
+        if (vm.tipoModal == 'Modificar'){
+            delete vm.conductor.vehiculo;
+            vm.conductor.put().then(success, error);
 
-        function success(response) {
-            response.metadata.mensaje = "Conductor creado correctamente";
-            response.metadata.tipo = vm.tipoModal;
-            $mdDialog.hide(response);
-        }
-
-        function error(response) {
-            if (response.metadata.code == 'E_VALIDATION') {
-                Toast('Algunos campos son requeridos', 'bottom right');
-            } else {
-                Toast(response.metadata.data);
+            function success(response) {
+                vm.conductor = {};
+                response.data.mensaje = "Conductor actualizado correctamente";
+                response.data.tipo = vm.tipoModal;
+                $mdDialog.hide(response);
             }
-        }
-    }
 
-    function modificarConductor() {
-        vm.conductor.put().then(success, error);
+            function error(response) {
+                if (response.data.code == 'E_VALIDATION') {
+                    Toast('Algunos campos son requeridos', 'bottom right');
+                } else {
+                    Toast(response.data.data, 'bottom right');
+                }
+            }
+        }else{
+            Conductores.create(vm.conductor).then(success, error);
 
-        function success(response) {
-            vm.conductor = {};
-            response.metadata.mensaje = "Conductor actualizado correctamente";
-            response.metadata.tipo = vm.tipoModal;
-            $mdDialog.hide(response);
-        }
+            function success(response) {
+                response.data.mensaje = "Conductor creado correctamente";
+                response.data.tipo = vm.tipoModal;
+                $mdDialog.hide(response);
+            }
 
-        function error(response) {
-            if (response.metadata.code == 'E_VALIDATION') {
-                Toast('Algunos campos son requeridos', 'bottom right');
-            } else {
-                Toast(response.metadata.data, 'bottom right');
+            function error(response) {
+                if (response.data.code == 'E_VALIDATION') {
+                    Toast('Algunos campos son requeridos', 'bottom right');
+                } else {
+                    Toast(response.data.data);
+                }
             }
         }
     }

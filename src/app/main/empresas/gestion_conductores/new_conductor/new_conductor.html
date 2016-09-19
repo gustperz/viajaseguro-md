@@ -17,14 +17,17 @@
                 <div ng-include="'app/main/empresas/gestion_conductores/new_conductor/informacion_personal.html'"></div>
             </ms-vertical-stepper-step>
 
-            <ms-vertical-stepper-step ng-form="verticalStep2" step="2" step-title="'Informacion del vehiculo'"
-                                      hide-step="!vm.conductor">
-                <div ng-include="'app/main/empresas/gestion_conductores/new_conductor/informacion_vehiculo.html'"></div>
-            </ms-vertical-stepper-step>
+            <div ng-if="vm.tipoModal != 'Modificar'">
+                <ms-vertical-stepper-step ng-form="verticalStep2" step="2" step-title="'Informacion del vehiculo'"
+                                          hide-step="!vm.conductor">
+                    <div ng-include="'app/main/empresas/gestion_conductores/new_conductor/informacion_vehiculo.html'"></div>
+                </ms-vertical-stepper-step>
 
-            <ms-vertical-stepper-step ng-form="verticalStep3" step="3" step-title="'Documentacion del vehiculo'">
-                <div ng-include="'app/main/empresas/gestion_conductores/new_conductor/documentacion_vehiculo.html'"></div>
-            </ms-vertical-stepper-step>
+                <ms-vertical-stepper-step ng-form="verticalStep3" step="3" step-title="'Documentacion del vehiculo'"
+                                          hide-step="!vm.conductor.vehiculo">
+                    <div ng-include="'app/main/empresas/gestion_conductores/new_conductor/documentacion_vehiculo.html'"></div>
+                </ms-vertical-stepper-step>
+            </div>
         </form>
     </md-content>
 

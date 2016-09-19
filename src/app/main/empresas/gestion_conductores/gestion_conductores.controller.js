@@ -13,9 +13,9 @@
         var vm = this;
         var campos = 'identificacion, nombres, apellidos, direccion, email, fecha_nacimiento,' +
             ' telefono, activo, imagen, fecha_licencia, nlicencia, tipo_licencia, fecha_seguroac, vehiculo,' +
-            ' vehiculo.fecha_tecnomecanica, vehiculo.fecha_soat, vehiculo.codigo_vial, vehiculo.placa, vehiculo.modelo,' +
+            ' vehiculo.codigo_vial, vehiculo.placa, vehiculo.modelo, vehiculo.fecha_soat, vehiculo.fecha_tecnomecanica,' +
             ' vehiculo.cupos, vehiculo.cedula_propietario, vehiculo.telefono_propietario, vehiculo.color,' +
-            ' vehiculo.nombre_propietario';
+            ' vehiculo.nombre_propietario, vehiculo.soat, vehiculo.tecnomecanica';
         vm.conductores = [];
         vm.conductoresInactivos = [];
         vm.selected = {};
@@ -108,6 +108,8 @@
             vm.selected.vehiculo.cupos = parseInt(vm.selected.vehiculo.cupos);
             vm.selected.vehiculo.cedula_propietario = parseInt(vm.selected.vehiculo.cedula_propietario);
             vm.selected.vehiculo.telefono_propietario = parseInt(vm.selected.vehiculo.telefono_propietario);
+            vm.selected.vehiculo.fecha_soat = new Date(vm.selected.vehiculo.fecha_soat);
+            vm.selected.vehiculo.fecha_tecnomecanica = new Date(vm.selected.vehiculo.fecha_tecnomecanica);
 
             $mdDialog.show({
                 locals: {
@@ -124,11 +126,11 @@
             })
                 .then(function (response) {
                     console.log(response);
-                    if (response.metadata.code == "OK" || response.metadata.code == "ok") {
-                        if (response.metadata.tipo == 'Nuevo') {
+                    if (response.data.code == "OK" || response.data.code == "ok") {
+                        if (response.data.tipo == 'Nuevo') {
                             vm.conductores.push(response);
                         }
-                        Toast(response.metadata.mensaje, 'bottom right')
+                        Toast(response.data.mensaje, 'bottom right')
                     }
                 }, function (reponse) {
 
@@ -154,7 +156,7 @@
                     }else{
                         vm.selected = null;
                     }
-                    Toast('Conductor eliminada correctamente');
+                    Toast('Conductor eliminado correctamente');
                 }
                 function error(response) {
                     console.log(response);

@@ -12,6 +12,12 @@
   md-datepicker{
     margin-bottom: 10px !important;
   }
+
+  fieldset{
+    border: 2px solid #D50000 !important;
+    border-radius: 15px;
+    margin-bottom: 10px;
+  }
   //md-datepicker {
   //  padding-top: 5px;
   //  > button.md-datepicker-button.md-icon-button.md-button {
@@ -41,6 +47,13 @@
   .form-stepper-conductor {
     md-datepicker{
       margin-bottom: 10px !important;
+    }
+
+    fieldset{
+      border: 2px solid #D50000 !important;
+      border-radius: 15px;
+      margin-bottom: 10px;
+      padding: 5px !important;
     }
     //md-datepicker {
     //  padding-top: 5px;
