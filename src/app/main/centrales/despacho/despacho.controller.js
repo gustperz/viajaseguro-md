@@ -7,7 +7,7 @@
         .controller('DespachoController', DespachoController);
 
     /** @ngInject */
-    function DespachoController()
+    function DespachoController(Conductores)
     {
         var vm = this;
 

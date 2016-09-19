@@ -1,71 +1,126 @@
 #panel-despacho {
-    border: 2px solid $primary-color;
-    border-radius: 15px;
-    margin: 7px;
+  border: 2px solid $primary-color;
+  border-radius: 15px;
+  margin: 7px;
 
-    #head {
-        height: 45px !important;
-        line-height: 15px;
-        section{
-            margin: 0 5px;
-            button {
-                background-color: whitesmoke;
-                margin: 0;
-                padding: 0 3px;
-                height: 25px !important;
-                line-height: 25px;
-                border-radius: 0;
-                border: 1px solid #e1e1e1;
-                border-right: 0;
+  #head {
+    height: 45px !important;
+    line-height: 15px;
+    section {
+      margin: 0 5px;
+      button {
+        background-color: whitesmoke;
+        margin: 0;
+        padding: 0 3px;
+        height: 25px !important;
+        line-height: 25px;
+        border-radius: 0;
+        border: 1px solid #e1e1e1;
+        border-right: 0;
 
-                span{
-                    text-transform: capitalize;
-                }
-            }
-            button:hover{
-                color: $primary-color;
-            }
-            button.first{
-                border-top-left-radius: 15px;
-                border-bottom-left-radius: 15px;
-            }
-            button.last{
-                min-width: 25px !important;
-                border-right: 1px solid #e1e1e1;
-                border-top-right-radius: 15px;
-                border-bottom-right-radius: 15px;
-            }
-            button.selected{
-                background-color: $primary-color;
-                border-color: $primary-color;
-                color: white;
-            }
-            button.selected:hover{
-                color: white;
-            }
+        span {
+          text-transform: capitalize;
         }
-    }
-
-    md-divider{
-        height: 2px;
+      }
+      button:hover {
+        color: $primary-color;
+      }
+      button.first {
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+      }
+      button.last {
+        min-width: 25px !important;
+        border-right: 1px solid #e1e1e1;
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+      }
+      button.selected {
         background-color: $primary-color;
+        border-color: $primary-color;
+        color: white;
+      }
+      button.selected:hover {
+        color: white;
+      }
+    }
+  }
+
+  md-divider {
+    height: 2px;
+    background-color: $primary-color;
+  }
+
+  #lista-conductores {
+    border: 1px solid $primary-color;
+    border-radius: 15px;
+    .title-info-conductores {
+      margin-top: -20px;
+    }
+    .add-conductor-ruta {
+      background-color: #94c11e;
+      width: 35px;
+      height: 30px;
+      md-icon {
+        position: relative;
+        left: -1px;
+      }
+      //left: 10px;
+    }
+    h2 {
+      color: $primary-color;
+    }
+  }
+
+  #info-despacho {
+    border: 1px solid $primary-color;
+    border-radius: 15px;
+    margin-left: 10px;
+    background-color: gainsboro;
+    opacity: 10;
+    md-content {
+      background-color: gainsboro;
+    }
+    md-tabs {
+      margin-top: -15px !important;;
+      background-color: gainsboro;
+    }
+    .md-icon-tab {
+      color: white !important;
+      background-color: #94c11e !important;
+      border-radius: 50% !important;
     }
 
-    #lista-conductores {
-        border: 1px solid $primary-color;
-        border-radius: 15px;
-        width: 240px;
+    .form-viajero {
+      background-color: white !important;
+      border-radius: 15px;
+      border: 1px solid $primary-color;
+      md-icon{
+        color: #94c11e;
+      }
     }
+  }
 
-    #info-despacho {
-        border: 1px solid $primary-color;
-        border-radius: 15px;
-        margin-left: 10px;
+  #solicitudes {
+    .title-info-solicitudes {
+      margin-top: -20px;
     }
-
-    #solicitudes {
-        border: 1px solid $primary-color;
-        border-radius: 15px;
-        margin-left: 10px;
+    text-align: center !important;
+    border: 1px solid $primary-color;
+    border-radius: 15px;
+    margin-left: 10px;
+    .add-solicitud-ruta {
+      background-color: #94c11e;
+      width: 35px;
+      height: 30px;
+      md-icon {
+        position: relative;
+        left: -1px;
+      }
+      //left: 10px;
     }
+    h2 {
+      color: $primary-color;
+    }
+  }
 }

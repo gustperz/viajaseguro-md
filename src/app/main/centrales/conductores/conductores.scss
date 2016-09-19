@@ -12,16 +12,18 @@
     margin-top: 7px;
     height: 33px !important;
 
-    span{
+    span {
       font-size: 1.6rem;
       padding: 8px;
       line-height: 1.4;
     }
 
-    button{
+    button {
       height: 33px !important;
-      padding:0;
-      md-icon{ color: white}
+      padding: 0;
+      md-icon {
+        color: white
+      }
     }
   }
 
@@ -29,16 +31,67 @@
     margin-left: 10px !important;
   }
 
-  ms-widget-front{
+  ms-widget-front {
     background-color: whitesmoke !important;
     padding: 16px 0 0 0;
     color: white;
   }
 
-  ms-widget-back{
+  ms-widget-back {
     background-color: $primary-color !important;
     color: white;
     padding: 0;
     padding-left: 10px;
   }
+}
+
+// RESPONSIVE
+@media screen and (max-width: $layout-breakpoint-md) {
+  #widget-conductores {
+    height: 200px !important;
+
+    img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+    }
+
+    .widget-conductores-nombre {
+      background-color: $primary-color;
+      margin-top: 7px;
+      height: 33px !important;
+
+      span {
+        font-size: 1.6rem;
+        padding: 8px;
+        line-height: 1.4;
+      }
+
+      button {
+        height: 33px !important;
+        padding: 0;
+        md-icon {
+          color: white
+        }
+      }
+    }
+
+    .widget-conductores-data {
+      margin-left: 10px !important;
+    }
+
+    ms-widget-front {
+      background-color: whitesmoke !important;
+      padding: 16px 0 0 0;
+      color: white;
+    }
+
+    ms-widget-back {
+      background-color: $primary-color !important;
+      color: white;
+      padding: 0;
+      padding-left: 10px;
+    }
+  }
+
 }
