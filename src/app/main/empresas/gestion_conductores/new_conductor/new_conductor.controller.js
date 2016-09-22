@@ -4,7 +4,7 @@
 function NewConductorController($mdDialog, Toast, Conductores, tipo, conductor) {
 // variables
     var vm = this;
-    vm.conductor = {} || conductor;
+    vm.conductor = {};
     vm.tipoModal = tipo;
     vm.tiposLicencia = [
         {
@@ -43,6 +43,7 @@ function NewConductorController($mdDialog, Toast, Conductores, tipo, conductor) 
 
     // funciones
     vm.guardarConductor = guardarConductor;
+    vm.modificarConductor = modificarConductor;
     vm.cancel = cancel;
 
     //////////
@@ -52,39 +53,72 @@ function NewConductorController($mdDialog, Toast, Conductores, tipo, conductor) 
     //////////
 
     function guardarConductor() {
-        if (vm.tipoModal == 'Modificar'){
-            delete vm.conductor.vehiculo;
-            vm.conductor.put().then(success, error);
+        Conductores.create(vm.conductor).then(success, error);
 
-            function success(response) {
-                vm.conductor = {};
-                response.data.mensaje = "Conductor actualizado correctamente";
-                response.data.tipo = vm.tipoModal;
-                $mdDialog.hide(response);
+        function success(response) {
+            response.metadata.mensaje = "Conductor creado correctamente";
+            response.metadata.tipo = vm.tipoModal;
+            $mdDialog.hide(response);
+        }
+
+        function error(response) {
+            if (response.data.code == 'E_VALIDATION') {
+                angular.forEach(response.data, function (campo) {
+                    if (campo.identificacion) {
+                        angular.forEach(campo.identificacion, function (rules) {
+                            if (rules.rule == 'unique') {
+                                Toast('Ya se encuentra registrado este numero de identificación. verificalo nuevamente!');
+                            }
+                        });
+                    }
+                    if (campo.email) {
+                        angular.forEach(campo.email, function (rules) {
+                            if (rules.rule == 'unique') {
+                                Toast('Ya se encuentra registrado email, por favor, usa uno diferente!');
+                            }
+                        });
+                    }
+                    if (campo.placa) {
+                        angular.forEach(campo.placa, function (rules) {
+                            if (rules.rule == 'unique') {
+                                Toast('Este numero de placa ya se encuentra registrado, usa uno distinto!');
+                            }
+                        });
+                    }
+                });
             }
+        }
+    }
 
-            function error(response) {
-                if (response.data.code == 'E_VALIDATION') {
-                    Toast('Algunos campos son requeridos', 'bottom right');
-                } else {
-                    Toast(response.data.data, 'bottom right');
-                }
-            }
-        }else{
-            Conductores.create(vm.conductor).then(success, error);
+    function modificarConductor() {
+        delete vm.conductor.vehiculo;
+        vm.conductor.put().then(success, error);
 
-            function success(response) {
-                response.data.mensaje = "Conductor creado correctamente";
-                response.data.tipo = vm.tipoModal;
-                $mdDialog.hide(response);
-            }
+        function success(response) {
+            // vm.conductor = {};
+            response.metadata.mensaje = "Conductor actualizado correctamente";
+            response.metadata.tipo = vm.tipoModal;
+            $mdDialog.hide(response);
+        }
 
-            function error(response) {
-                if (response.data.code == 'E_VALIDATION') {
-                    Toast('Algunos campos son requeridos', 'bottom right');
-                } else {
-                    Toast(response.data.data);
-                }
+        function error(response) {
+            if (response.data.code == 'E_VALIDATION') {
+                angular.forEach(response.data, function (campo) {
+                    if (campo.identificacion) {
+                        angular.forEach(campo.identificacion, function (rules) {
+                            if (rules.rule == 'unique') {
+                                Toast('Ya se encuentra registrado este numero de identificación. verificalo nuevamente!');
+                            }
+                        });
+                    }
+                    if (campo.email) {
+                        angular.forEach(campo.email, function (rules) {
+                            if (rules.rule == 'unique') {
+                                Toast('Ya se encuentra registrado email, por favor, usa uno diferente!');
+                            }
+                        });
+                    }
+                });
             }
         }
     }

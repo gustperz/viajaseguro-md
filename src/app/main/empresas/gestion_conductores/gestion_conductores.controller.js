@@ -9,7 +9,7 @@
         .controller('EmpresaConductoresController', EmpresaConductoresController);
 
     /** @ngInject */
-    function EmpresaConductoresController(Conductores, $mdSidenav, $mdDialog) {
+    function EmpresaConductoresController(Conductores, $mdSidenav, $mdDialog, Toast) {
         var vm = this;
         var campos = 'identificacion, nombres, apellidos, direccion, email, fecha_nacimiento,' +
             ' telefono, activo, imagen, fecha_licencia, nlicencia, tipo_licencia, fecha_seguroac, vehiculo,' +
@@ -27,6 +27,7 @@
         vm.toggleSidenav = toggleSidenav;
 
         vm.newModalConductor = newModalConductor;
+        vm.editModalConductor = editModalConductor;
         vm.deleteConductor = deleteConductor;
         //////////
         getConductores();
@@ -98,19 +99,6 @@
         }
 
         function newModalConductor(ev, tipo) {
-            vm.selected.identificacion = parseInt(vm.selected.identificacion);
-            vm.selected.telefono = parseInt(vm.selected.telefono);
-            vm.selected.nlicencia = parseInt(vm.selected.nlicencia);
-            vm.selected.fecha_licencia = new Date(vm.selected.fecha_licencia);
-            vm.selected.fecha_seguroac = new Date(vm.selected.fecha_seguroac);
-            vm.selected.fecha_nacimiento = new Date(vm.selected.fecha_nacimiento);
-            vm.selected.vehiculo.codigo_vial = String(vm.selected.vehiculo.codigo_vial);
-            vm.selected.vehiculo.cupos = parseInt(vm.selected.vehiculo.cupos);
-            vm.selected.vehiculo.cedula_propietario = parseInt(vm.selected.vehiculo.cedula_propietario);
-            vm.selected.vehiculo.telefono_propietario = parseInt(vm.selected.vehiculo.telefono_propietario);
-            vm.selected.vehiculo.fecha_soat = new Date(vm.selected.vehiculo.fecha_soat);
-            vm.selected.vehiculo.fecha_tecnomecanica = new Date(vm.selected.vehiculo.fecha_tecnomecanica);
-
             $mdDialog.show({
                 locals: {
                     tipo: tipo,
@@ -125,12 +113,40 @@
                 fullscreen: false
             })
                 .then(function (response) {
+                    if (response.metadata.code == "OK" || response.metadata.code == "ok") {
+                        vm.conductores.push(response);
+                        Toast(response.metadata.mensaje, 'bottom right')
+                    }
+                }, function (reponse) {
+
+                });
+        }
+
+        function editModalConductor(ev, tipo) {
+            vm.selected.identificacion = parseInt(vm.selected.identificacion);
+            vm.selected.telefono = parseInt(vm.selected.telefono);
+            vm.selected.nlicencia = parseInt(vm.selected.nlicencia);
+            vm.selected.fecha_licencia = new Date(vm.selected.fecha_licencia);
+            vm.selected.fecha_seguroac = new Date(vm.selected.fecha_seguroac);
+            vm.selected.fecha_nacimiento = new Date(vm.selected.fecha_nacimiento);
+
+            $mdDialog.show({
+                locals: {
+                    tipo: tipo,
+                    conductor: vm.selected
+                },
+                controller: NewConductorController,
+                controllerAs: 'vm',
+                templateUrl: 'app/main/empresas/gestion_conductores/new_conductor/edit_conductor.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true,
+                fullscreen: false
+            })
+                .then(function (response) {
                     console.log(response);
-                    if (response.data.code == "OK" || response.data.code == "ok") {
-                        if (response.data.tipo == 'Nuevo') {
-                            vm.conductores.push(response);
-                        }
-                        Toast(response.data.mensaje, 'bottom right')
+                    if (response.metadata.code == "OK" || response.metadata.code == "ok") {
+                        Toast(response.metadata.mensaje, 'bottom right')
                     }
                 }, function (reponse) {
 
@@ -147,21 +163,22 @@
                 .parent(angular.element(document.body))
                 .ok('Continuar!')
                 .cancel('Cancelar');
-            $mdDialog.show(confirm).then(function() {
+            $mdDialog.show(confirm).then(function () {
                 vm.selected.remove().then(success, error)
                 function success(response) {
                     vm.conductores.splice(vm.index, 1);
                     if (vm.conductores.length > 0) {
                         vm.selected = vm.conductores[0];
-                    }else{
+                    } else {
                         vm.selected = null;
                     }
                     Toast('Conductor eliminado correctamente');
                 }
+
                 function error(response) {
                     console.log(response);
                 }
-            }, function() {
+            }, function () {
                 console.log('Menos mal')
             });
         }
