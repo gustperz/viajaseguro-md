@@ -66,15 +66,17 @@
                     <span>Rutas</span>
                     <ng-include src="'app/main/empresas/gestion_centrales/floating_form.tmpl.html'"></ng-include>
                 </md-subheader>
-                <section id="rutas" class="content" flex ms-scroll>
-                    <md-list-item ng-repeat="ruta in vm.central.rutas" class="md-2-line"
-                                  ng-click="vm.selectRuta(ruta)"
-                                  ng-class="{'selected' : vm.selectedRuta.id === ruta.id}">
-                        <div class="md-list-item-text" layout="column">
-                            <h3>{{ruta.nombre_ciudad}}</h3>
-                            <h4>{{ruta.trayecto}}</h4>
-                        </div>
-                    </md-list-item>
+                <section id="rutas">
+                    <md-content class="content" flex ms-scroll>
+                        <md-list-item ng-repeat="ruta in vm.central.rutas" class="md-2-line"
+                                      ng-click="vm.selectRuta(ruta)"
+                                      ng-class="{'selected' : vm.selectedRuta.id === ruta.id}">
+                            <div class="md-list-item-text" layout="column">
+                                <h3>{{ruta.nombre_ciudad}}</h3>
+                                <h4>{{ruta.trayecto}}</h4>
+                            </div>
+                        </md-list-item>
+                    </md-content>
                 </section>
             </md-list>
         </div>

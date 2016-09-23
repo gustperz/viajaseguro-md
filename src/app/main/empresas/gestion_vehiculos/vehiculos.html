@@ -1,21 +1,117 @@
-<div id="forms" class="page-layout simple fullwidth doc-page" layout="column">
-    <!-- HEADER -->
-    <div class="header md-accent-bg" layout="row" layout-align="space-between">
-        <div layout="column" layout-align="space-between">
-            <div class="breadcrumb" layout="row" layout-align="start center">
-                <md-icon md-font-icon="icon-home" class="s16"></md-icon>
-                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
-                <span class="parent">EMPRESA</span>
-                <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
-                <span class="parent">VEHICULOS</span>
+<div id="file-manager" class="page-layout simple right-sidenav" layout="row">
+    <!-- CENTER -->
+    <div class="center" layout="column" flex>
+        <!-- HEADER -->
+        <div class="header">
+
+            <div class="header-content" layout="column" layout-align="space-between">
+                <!-- TOOLBAR -->
+                <div class="toolbar" layout="row" layout-align="space-between">
+                    <div class="white-fg" layout="column" layout-align="start start">
+                        <div class="h1" layout="row" layout-align="start center">
+                            <!--<md-icon md-font-icon="icon-store"></md-icon>-->
+                            <span>Vehiculos</span>
+                        </div>
+                    </div>
+
+                    <div class="right-side" layout="row">
+                        <div class="search" layout="row" layout-align="start center" flex>
+                            <md-icon md-font-icon="icon-magnify" class="icon search-icon"></md-icon>
+                            <input id="search" class="search-input" ng-model="filtro" type="text" placeholder="Buscar">
+                        </div>
+                    </div>
+                </div>
+                <!-- / TOOLBAR -->
             </div>
+
+            <!-- ADD NEW VEHICULO-->
+            <!--<div id="file-uploader">-->
+                <!--<md-button flow-btn class="add-file-button md-fab md-warn" aria-label="Nueva empresa"-->
+                           <!--ng-click="vm.newModalConductor($event, 'Nuevo')">-->
+                    <!--<md-icon md-font-icon="icon-plus"></md-icon>-->
+                    <!--<md-tooltip><span>Nuevo conductor</span></md-tooltip>-->
+                <!--</md-button>-->
+            <!--</div>-->
+            <!-- / ADD NEW VEHICULO -->
         </div>
-    </div>
-    <!-- / HEADER -->
+        <!-- / HEADER -->
 
-    <!-- CONTENT -->
-    <div class="content" layout="column">
+        <!-- CONTENT -->
+        <md-content class="content" flex ms-scroll>
+            <table class="simple list-view">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th >Placa</th>
+                    <th hide-xs>Modelo</th>
+                    <th hide-xs>Color</th>
+                    <th hide-xs>Codigo vial</th>
+                    <th hide-gt-md></th>
+                </tr>
+                </thead>
 
+                <tbody>
+                <tr ng-repeat="vehiculo in vm.vehiculos | filter: filtro  | orderBy: ['-doc_venc', 'placa']"
+                    ng-click="vm.selectedVehiculo(vehiculo, $index)"
+                    ng-class="{'selected' : vm.selected === vehiculo, 'vehi_doc_venc': vehiculo.doc_venc}">
+                    <td>
+                        <img class="imagen-empresa"
+                             ng-src="http://localhost:1337/images/vehiculos/{{vehiculo.imagen}}">
+                    </td>
+                    <td class="name" >{{vehiculo.placa}}</td>
+                    <td class="type" hide-xs>{{vehiculo.modelo}}</td>
+                    <td class="owner" hide-xs>{{vehiculo.color}}</td>
+                    <td class="size" hide-xs>{{vehiculo.codigo_vial}}</td>
+                    <td class="show-details" hide-gt-md>
+                        <md-button class="md-icon-button sidenav-toggle" ng-click="vm.abrirPanel(conductor, $index)"
+                                   aria-label="Detalles conductor">
+                            <md-icon md-font-icon="icon-information-outline"></md-icon>
+                        </md-button>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </md-content>
+        <!-- / CONTENT -->
     </div>
-    <!-- / CONTENT -->
+    <!-- / CENTER -->
+
+    <!-- SIDENAV -->
+    <md-sidenav class="sidenav details-sidenav md-sidenav-right" md-is-locked-open="$mdMedia('gt-md')"
+                md-component-id="details-sidenav" ms-scroll
+                ms-sidenav-helper>
+        <div class="header" layout="column" layout-align="space-between">
+            <div class="toolbar" layout="row" layout-align="end center">
+                <md-button ng-click="vm.deleteVehiculo($event)" class="md-icon-button" aria-label="Eliminar">
+                    <md-icon md-font-icon="icon-delete"></md-icon>
+                    <md-tooltip><span>Eliminar</span></md-tooltip>
+                </md-button>
+
+                <!--<md-button ng-click="vm.newModalConductor($event, 'Modificar')" class="md-icon-button"-->
+                           <!--aria-label="Editar">-->
+                    <!--<md-icon md-font-icon="icon-pencil"></md-icon>-->
+                    <!--<md-tooltip><span>Editar</span></md-tooltip>-->
+                <!--</md-button>-->
+            </div>
+            <hr>
+            <div class="image-content">
+                <h3 class="title-empresa"><b>{{vm.selected.placa}}</b></h3><br>
+                <img alt="Conductor" class="empresa-imagen"
+                     ng-src="http://localhost:1337/images/vehiculos/{{vm.selected.imagen}}">
+            </div>
+            <hr>
+        </div>
+
+        <!--contenido-->
+        <md-content class="content" flex ms-scroll>
+
+            <div class="p_not_vec" ng-if="vm.selected.doc_venc === true">
+                <span>Este vehiculo tiene 1 o mas documentos proximos a vencer</span>
+                <md-icon md-font-icon="icon-alert-circle" class="red-600-fg md-font"></md-icon>
+            </div>
+            Datos del vehiculo
+        </md-content>
+    </md-sidenav>
+    <!-- / SIDENAV -->
 </div>

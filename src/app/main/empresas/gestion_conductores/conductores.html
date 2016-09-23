@@ -24,7 +24,7 @@
                 <!-- / TOOLBAR -->
             </div>
 
-            <!-- ADD NEW EMPRESA-->
+            <!-- ADD NEW CONDUCTOR-->
             <div id="file-uploader">
                 <md-button flow-btn class="add-file-button md-fab md-warn" aria-label="Nueva empresa"
                            ng-click="vm.newModalConductor($event, 'Nuevo')">
@@ -32,7 +32,7 @@
                     <md-tooltip><span>Nuevo conductor</span></md-tooltip>
                 </md-button>
             </div>
-            <!-- / ADD NEW EMPRESA -->
+            <!-- / ADD NEW CONDUCTOR -->
         </div>
         <!-- / HEADER -->
 
@@ -88,7 +88,7 @@
                     <md-tooltip><span>Eliminar</span></md-tooltip>
                 </md-button>
 
-                <md-button ng-click="vm.newModalConductor($event, 'Modificar')" class="md-icon-button"
+                <md-button ng-click="vm.editModalConductor($event, 'Modificar')" class="md-icon-button"
                            aria-label="Editar">
                     <md-icon md-font-icon="icon-pencil"></md-icon>
                     <md-tooltip><span>Editar</span></md-tooltip>

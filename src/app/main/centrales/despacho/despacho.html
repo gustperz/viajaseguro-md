@@ -1,6 +1,7 @@
 <div class="page-layout carded fullwidth" layout="row">
     <div class="center no-margin" layout="column" flex>
-        <div id="panel-despacho" class="content-card padding-top-0 padding-right-10 padding-bottom-10 padding-left-10" layout="column" flex>
+        <div id="panel-despacho" class="content-card padding-top-0 padding-right-10 padding-bottom-10 padding-left-10"
+             layout="column" flex>
             <div layout="row" id="head">
                 <div id="origen" layout="row">
                     <h3>Origen</h3>
@@ -12,25 +13,126 @@
                 <div id="destino" layout="row" class="margin-left-15">
                     <h3>Destino</h3>
                     <section layout="row" layout-align="center center">
-                        <md-button class="first">Apple</md-button>
+                        <md-button class="first">Rioacha</md-button>
                         <md-button class="selected">San Juan del Cesar</md-button>
-                        <md-button class="">Sony</md-button>
+                        <md-button class="">Fonseca</md-button>
                         <md-button class="last">+</md-button>
                     </section>
                 </div>
             </div>
             <md-divider class="margin-top-0 margin-bottom-10"></md-divider>
             <div layout="row" flex>
-                <div id="lista-conductores">
-                    <h2>Conductores</h2>
+                <div layout="row" id="lista-conductores" flex="20" layout-padding>
+                    <h2 class="title-info-conductores"><b>Conductores</b>
+                        <md-button class="add-conductor-ruta md-fab" aria-label="Nuevo conductor">
+                            <md-icon md-font-icon="icon-plus"></md-icon>
+                            <md-tooltip><span>Nueva conductor en la ruta</span></md-tooltip>
+                        </md-button>
+                    </h2>
+
                 </div>
-                <div layout="row" flex>
-                    <div id="info-despacho" flex>
-                        <h2>Conductores</h2>
-                    </div>
-                    <div id="solicitudes" flex="45">
-                        <h2>Conductores</h2>
-                    </div>
+                <div layout="row" id="info-despacho" flex="50" layout-padding>
+                    <md-content style="border-radius: 15px !important;" flex>
+                        <md-tabs md-dynamic-height md-center-tabs>
+                            <md-tab>
+                                <md-tab-label>
+                                    Viajeros
+                                    <md-icon md-font-icon="icon-plus" class="md-icon-tab"></md-icon>
+                                </md-tab-label>
+                                <md-tab-body>
+                                    <md-content layout-padding>
+                                        <form novalidate name="formViajero" class="form-viajero">
+                                            <div layout-gt-sm="row" class="menos-espaciado">
+                                                <md-input-container flex-gt-sm flex="30">
+                                                    <label>Cedula</label>
+                                                    <input required name="cedula" ng-model="user.cedula"/>
+                                                    <div ng-messages="formViajero.cedula.$error">
+                                                        <div ng-message="required">Este campo es requerido.</div>
+                                                    </div>
+                                                </md-input-container>
+                                                <div flex="1" hide-xs hide-sm>
+                                                    <!-- Spacer //-->
+                                                </div>
+                                                <md-input-container flex-gt-sm>
+                                                    <label>Nombre</label>
+                                                    <input name="nombre" ng-model="user.nombre" required/>
+                                                    <div ng-messages="formViajero.nombre.$error">
+                                                        <div ng-message="required">Este campo es requerido.</div>
+                                                    </div>
+                                                </md-input-container>
+                                                <md-input-container>
+                                                    <md-button ng-disabled="formViajero.$invalid" class="md-icon-button" aria-label="Guardar">
+                                                        <md-icon md-font-icon="icon-content-save"></md-icon>
+                                                        <md-tooltip>Guardar</md-tooltip>
+                                                    </md-button>
+                                                </md-input-container>
+                                            </div>
+                                            <div layout-gt-sm="row">
+                                                <md-input-container flex-gt-sm flex="30">
+                                                    <label>Telefono</label>
+                                                    <input type="number" required name="telefono"
+                                                           ng-model="user.telefono"/>
+                                                    <div ng-messages="formViajero.telefono.$error">
+                                                        <div ng-message="required">Este campo es requerido.</div>
+                                                    </div>
+                                                </md-input-container>
+                                                <div flex="1" hide-xs hide-sm>
+                                                    <!-- Spacer //-->
+                                                </div>
+                                                <md-input-container flex-gt-sm>
+                                                    <label>Dirección</label>
+                                                    <input name="direccion" ng-model="user.direccion" required/>
+                                                    <div ng-messages="formViajero.direccion.$error">
+                                                        <div ng-message="required">Este campo es requerido.</div>
+                                                    </div>
+                                                </md-input-container>
+                                                <md-input-container flex-gt-sm flex="20">
+                                                    <label>N. viajeros</label>
+                                                    <input name="n_pasajeros" ng-model="user.n_pasajeros" required
+                                                           type="number"/>
+                                                    <div ng-messages="formViajero.n_pasajeros.$error">
+                                                        <div ng-message="required">Este campo es requerido.</div>
+                                                    </div>
+                                                </md-input-container>
+                                                <md-input-container>
+                                                    <md-button class="md-icon-button" aria-label="Guardar">
+                                                        <md-icon md-font-icon="icon-delete"></md-icon>
+                                                        <md-tooltip>Borrar</md-tooltip>
+                                                    </md-button>
+                                                </md-input-container>
+                                            </div>
+                                        </form>
+                                    </md-content>
+                                </md-tab-body>
+                            </md-tab>
+                            <md-tab>
+                                <md-tab-label>
+                                    Giros
+                                    <md-icon class="md-icon-tab" md-font-icon="icon-plus"></md-icon>
+                                </md-tab-label>
+                                <md-tab-body>
+                                    Giros
+                                </md-tab-body>
+                            </md-tab>
+                            <md-tab>
+                                <md-tab-label>
+                                    Paquetes
+                                    <md-icon class="md-icon-tab" md-font-icon="icon-plus"></md-icon>
+                                </md-tab-label>
+                                <md-tab-body>
+                                    Paquetes
+                                </md-tab-body>
+                            </md-tab>
+                        </md-tabs>
+                    </md-content>
+                </div>
+                <div id="solicitudes" layout="row" flex="30" layout-padding>
+                    <h2 class="title-info-solicitudes"><b>Nuevas solicitudes</b>
+                        <md-button class="add-solicitud-ruta md-fab" aria-label="Nueva solicitud">
+                            <md-icon md-font-icon="icon-plus"></md-icon>
+                            <md-tooltip><span>Nueva solicitud</span></md-tooltip>
+                        </md-button>
+                    </h2>
                 </div>
             </div>
             <div layout="row" flex hide layout-align="center center">

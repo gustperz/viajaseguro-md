@@ -9,11 +9,13 @@
         .controller('EmpresaConductoresController', EmpresaConductoresController);
 
     /** @ngInject */
-    function EmpresaConductoresController(Conductores, $mdSidenav, $mdDialog) {
+    function EmpresaConductoresController(Conductores, $mdSidenav, $mdDialog, Toast) {
         var vm = this;
-        var campos = 'identificacion, nombres, apellidos, direccion,' +
-            ' telefono, activo, imagen, fecha_licencia, fecha_seguroac, vehiculo,' +
-            ' vehiculo.fecha_tecnomecanica, vehiculo.fecha_soat';
+        var campos = 'identificacion, nombres, apellidos, direccion, email, fecha_nacimiento,' +
+            ' telefono, activo, imagen, fecha_licencia, nlicencia, tipo_licencia, fecha_seguroac, vehiculo,' +
+            ' vehiculo.codigo_vial, vehiculo.placa, vehiculo.modelo, vehiculo.fecha_soat, vehiculo.fecha_tecnomecanica,' +
+            ' vehiculo.cupos, vehiculo.cedula_propietario, vehiculo.telefono_propietario, vehiculo.color,' +
+            ' vehiculo.nombre_propietario, vehiculo.soat, vehiculo.tecnomecanica';
         vm.conductores = [];
         vm.conductoresInactivos = [];
         vm.selected = {};
@@ -25,6 +27,7 @@
         vm.toggleSidenav = toggleSidenav;
 
         vm.newModalConductor = newModalConductor;
+        vm.editModalConductor = editModalConductor;
         vm.deleteConductor = deleteConductor;
         //////////
         getConductores();
@@ -34,8 +37,8 @@
             vm.index = $index;
         }
 
-        function abrirPanel(empresa, $index) {
-            vm.selected = empresa;
+        function abrirPanel(conductor, $index) {
+            vm.selected = conductor;
             vm.index = $index;
             toggleSidenav('details-sidenav');
         }
@@ -56,6 +59,7 @@
                         }
                     });
                     vm.selected = vm.conductores[0];
+                    if (vm.n_cond_doc_venc > 0) Toast('Existen uno o mas conductores con documentacion a vencer, verificalos en la lista')
                 }, function (error) {
                     console.log(error);
                 });
@@ -110,11 +114,40 @@
                 fullscreen: false
             })
                 .then(function (response) {
+                    if (response.metadata.code == "OK" || response.metadata.code == "ok") {
+                        vm.conductores.push(response);
+                        Toast(response.metadata.mensaje, 'bottom right')
+                    }
+                }, function (reponse) {
+
+                });
+        }
+
+        function editModalConductor(ev, tipo) {
+            delete vm.selected.vehiculo;
+            vm.selected.identificacion = parseInt(vm.selected.identificacion);
+            vm.selected.telefono = parseInt(vm.selected.telefono);
+            vm.selected.nlicencia = parseInt(vm.selected.nlicencia);
+            vm.selected.fecha_licencia = new Date(vm.selected.fecha_licencia);
+            vm.selected.fecha_seguroac = new Date(vm.selected.fecha_seguroac);
+            vm.selected.fecha_nacimiento = new Date(vm.selected.fecha_nacimiento);
+
+            $mdDialog.show({
+                locals: {
+                    tipo: tipo,
+                    conductor: vm.selected
+                },
+                controller: NewConductorController,
+                controllerAs: 'vm',
+                templateUrl: 'app/main/empresas/gestion_conductores/new_conductor/edit_conductor.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true,
+                fullscreen: false
+            })
+                .then(function (response) {
                     console.log(response);
                     if (response.metadata.code == "OK" || response.metadata.code == "ok") {
-                        if (response.metadata.tipo == 'Nuevo') {
-                            vm.conductores.push(response);
-                        }
                         Toast(response.metadata.mensaje, 'bottom right')
                     }
                 }, function (reponse) {
@@ -132,21 +165,23 @@
                 .parent(angular.element(document.body))
                 .ok('Continuar!')
                 .cancel('Cancelar');
-            $mdDialog.show(confirm).then(function() {
-                vm.selected.remove().then(success, error)
+            $mdDialog.show(confirm).then(function () {
+                // vm.selected.remove().then(success, error)
+                vm.conductores.splice(vm.index, 1);
                 function success(response) {
                     vm.conductores.splice(vm.index, 1);
                     if (vm.conductores.length > 0) {
                         vm.selected = vm.conductores[0];
-                    }else{
+                    } else {
                         vm.selected = null;
                     }
-                    Toast('Conductor eliminada correctamente');
+                    Toast('Conductor eliminado correctamente');
                 }
+
                 function error(response) {
                     console.log(response);
                 }
-            }, function() {
+            }, function () {
                 console.log('Menos mal')
             });
         }
