@@ -1,8 +1,18 @@
 function NewEmpresaController($mdDialog, Toast, Empresas, tipo, empresa) {
     // variables
     var vm = this;
-    vm.empresa = {};
+    vm.empresa = {} || empresa;
     vm.tipoModal = tipo;
+    vm.tipoEmpresas = [
+        {
+            id: 0,
+            nombre : 'Especial'
+        },
+        {
+            id: 1,
+            nombre: 'Intermunicipal'
+        }
+    ];
 
     // funciones
     vm.guardarEmpresa = guardarEmpresa;
@@ -25,10 +35,16 @@ function NewEmpresaController($mdDialog, Toast, Empresas, tipo, empresa) {
         }
 
         function error(response) {
-            if (response.metadata.code == 'E_VALIDATION') {
-                Toast('Algunos campos son requeridos', 'bottom right');
-            } else {
-                Toast(response.metadata.data);
+            if (response.data.code == 'E_VALIDATION') {
+                angular.forEach(response.data, function (campo) {
+                    if (campo.nit) {
+                        angular.forEach(campo.nit, function (rules) {
+                            if (rules.rule == 'unique') {
+                                Toast('Ya se encuentra una empresa registrada con el NIT:  <b> ' + rules.value + '</b>. verificalo nuevamente!');
+                            }
+                        });
+                    }
+                });
             }
         }
     }
@@ -44,10 +60,16 @@ function NewEmpresaController($mdDialog, Toast, Empresas, tipo, empresa) {
         }
 
         function error(response) {
-            if (response.metadata.code == 'E_VALIDATION') {
-                Toast('Algunos campos son requeridos', 'bottom right');
-            } else {
-                Toast(response.metadata.data, 'bottom right');
+            if (response.data.code == 'E_VALIDATION') {
+                angular.forEach(response.data, function (campo) {
+                    if (campo.nit) {
+                        angular.forEach(campo.nit, function (rules) {
+                            if (rules.rule == 'unique') {
+                                Toast('Ya se encuentra una empresa registrada con el NIT:  <b> ' + rules.value + '</b>. verificalo nuevamente!');
+                            }
+                        });
+                    }
+                });
             }
         }
     }

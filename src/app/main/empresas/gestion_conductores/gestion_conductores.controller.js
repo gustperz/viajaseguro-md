@@ -59,6 +59,7 @@
                         }
                     });
                     vm.selected = vm.conductores[0];
+                    if (vm.n_cond_doc_venc > 0) Toast('Existen uno o mas conductores con documentacion a vencer, verificalos en la lista')
                 }, function (error) {
                     console.log(error);
                 });
@@ -123,6 +124,7 @@
         }
 
         function editModalConductor(ev, tipo) {
+            delete vm.selected.vehiculo;
             vm.selected.identificacion = parseInt(vm.selected.identificacion);
             vm.selected.telefono = parseInt(vm.selected.telefono);
             vm.selected.nlicencia = parseInt(vm.selected.nlicencia);
@@ -164,7 +166,8 @@
                 .ok('Continuar!')
                 .cancel('Cancelar');
             $mdDialog.show(confirm).then(function () {
-                vm.selected.remove().then(success, error)
+                // vm.selected.remove().then(success, error)
+                vm.conductores.splice(vm.index, 1);
                 function success(response) {
                     vm.conductores.splice(vm.index, 1);
                     if (vm.conductores.length > 0) {

@@ -81,7 +81,7 @@ function NewConductorController($mdDialog, Toast, Conductores, tipo, conductor) 
                     if (campo.placa) {
                         angular.forEach(campo.placa, function (rules) {
                             if (rules.rule == 'unique') {
-                                Toast('Este numero de placa ya se encuentra registrado, usa uno distinto!');
+                                Toast('Este numero de placa de vehiculo ya se encuentra registrado, usa uno distinto!');
                             }
                         });
                     }
@@ -91,7 +91,6 @@ function NewConductorController($mdDialog, Toast, Conductores, tipo, conductor) 
     }
 
     function modificarConductor() {
-        delete vm.conductor.vehiculo;
         vm.conductor.put().then(success, error);
 
         function success(response) {
