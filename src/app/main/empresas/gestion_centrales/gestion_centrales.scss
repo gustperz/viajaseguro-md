@@ -2,6 +2,7 @@
     .center{
         background-color: white;
         min-width: 250px !important;
+        box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2), 0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12);
         .list-view {
             font-weight: bold;
 
@@ -20,19 +21,72 @@
     #detalles {
         background-color: white;
         z-index: 1;
+        box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2), 0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12);
+        h1{
+            text-align: center;
+        }
         #info {
             min-width: 230px;
-            h1{
-                padding-left: 16px;
-                margin-bottom: 0 !important;
-            }
+            margin-right: 5px !important;
             md-list-item {
                 min-height: 50px !important;
                 height: 50px !important;
+                h4{
+                    font-weight: 200;
+                    font-size: 12px;
+                }
             }
-            #rutas md-list-item{
-                min-height: 40px !important;
-                height: 40px !important;
+            #rutas {
+                md-list-item {
+                    min-height: 40px !important;
+                    height: 40px !important;
+                }
+                button {
+                    min-height: 41px !important;
+                    height: 41px !important;
+                    margin-top: 16px !important;
+                }
+                .selected{
+                    background-color: transparent;
+                    button {
+                        background-color: rgba(0, 0, 0, 0.09) !important;
+                    }
+                }
+            }
+            ._md-subheader-inner {
+                padding: 4px 16px !important;
+                ._md-subheader-content{
+                    display: table;
+                    span {
+                        display: table-cell;
+                        vertical-align: middle;
+                    }
+                    md-icon {
+                        color: $primary-color;
+                    }
+                }
+            }
+        }
+
+        #form {
+            min-width: 230px;
+            margin-right: 5px !important;
+            md-input-container, md-autocomplete{
+                max-height: 65px;
+                margin: 5px 0;
+            }
+            .md-icon-button{
+                margin: 0 !important;
+                padding: 8px 4px !important;
+                md-icon {
+                    color: $primary-color;
+                }
+
+            }
+            .md-icon-button:disabled{
+                md-icon {
+                    color: rgba(0,0,0,0.55);
+                }
             }
         }
 
@@ -43,5 +97,53 @@
                 height: 100% !important;
             }
         }
+
+        #no-select {
+            min-width: 230px;
+            font-size: 18px;
+            font-weight: 100;
+            color: rgba(0, 0, 0, 0.30);
+        }
+    }
+
+    .datos-usuario-empresa {
+        margin: 0 !important;
+        padding: 0 !important;
+        border-right: 0 !important;
+        border-bottom: 0 !important;
+        border-left: 0 !important;
+        border-radius: 5px !important;
+        margin: 5px !important;
+    }
+}
+
+.md-virtual-repeat-container.md-autocomplete-suggestions-container {
+    z-index: 101!important;
+}
+
+.floatingForm {
+    .md-input-focused, .md-input-has-value{
+        label{
+            margin-bottom: -8px !important;
+        }
+    }
+
+    #titulo {
+        height: 10px !important;
+        min-height: 10px !important;
+    }
+
+    #trayecto {
+        margin-bottom: -5px !important;
+        label{
+            padding-left: 25px !important;
+        }
+        .md-errors-spacer {
+            min-height: 0 !important;
+        }
+    }
+
+    #actions {
+        padding-top: 6px !important;
     }
 }
