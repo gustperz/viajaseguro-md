@@ -20,8 +20,9 @@
         }
         return service;
 
-        function sendGet(route, params) {
-            return Restangular.all(route).customGET('', params || {});
+        function sendGet(route, params, enableCache) {
+            enableCache || (enableCache = false);
+            return Restangular.all(route).withHttpConfig({ cache: enableCache }).customGET('', params || {});
         }
 
         function sendPost(route, data, headers) {
