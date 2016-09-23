@@ -10,24 +10,45 @@
 
 .toolbar-empresa {
   background-color: $primary-color !important;
+  color: white !important;
+  md-icon {
     color: white !important;
-    md-icon {
-        color: white !important;
-    }
+  }
 }
 
-.datos-usuario-empresa {
-  legend{
+.datos-modulos-empresa {
+  legend {
     text-align: center !important;
   }
   border: 2px solid $primary-color !important;
   border-radius: 15px;
 }
 
-.content-datos-usuario{
+.datos-usuario-empresa {
+  legend {
+    text-align: center !important;
+  }
+  border: 2px solid $primary-color !important;
+  border-radius: 15px;
+}
+
+.content-datos-modulo {
   margin: 10px 10px 10px 10px !important;
 }
 
-.dialog-empresa{
+.content-datos-usuario {
+  margin: 10px 10px 10px 10px !important;
+}
+
+.dialog-empresa {
   border-radius: 20px !important;
 }
+
+.checkboxdemoSelectAll .demo-legend {
+  color: $primary-color !important; }
+.checkboxdemoSelectAll .demo-fieldset {
+  border-style: solid;
+  border-width: 1px;
+  height: 100%; }
+.checkboxdemoSelectAll .demo-select-all-checkboxes {
+  padding-left: 30px; }

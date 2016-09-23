@@ -13,7 +13,7 @@
         var vm = this;
 
         // Data
-        vm.empresas = null;
+        vm.empresas = [];
 
         // Methods
         vm.getEmpresas = getEmpresas;
@@ -39,7 +39,7 @@
             toggleSidenav('details-sidenav');
         }
 
-        function toggleSidenav(sidenavId){
+        function toggleSidenav(sidenavId) {
             $mdSidenav(sidenavId).toggle();
         }
 
@@ -80,21 +80,22 @@
                 .parent(angular.element(document.body))
                 .ok('Continuar!')
                 .cancel('Cancelar');
-            $mdDialog.show(confirm).then(function() {
+            $mdDialog.show(confirm).then(function () {
                 vm.selected.remove().then(success, error)
                 function success(response) {
                     vm.empresas.splice(vm.index, 1);
                     if (vm.empresas.length > 0) {
                         vm.selected = vm.empresas[0];
-                    }else{
+                    } else {
                         vm.selected = null;
                     }
                     Toast('Empresa eliminada correctamente');
                 }
+
                 function error(response) {
                     console.log(response);
                 }
-            }, function() {
+            }, function () {
                 console.log('Menos mal')
             });
         }
@@ -112,6 +113,7 @@
             }
 
         }
+
     }
 })();
 

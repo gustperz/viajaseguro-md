@@ -1,0 +1,81 @@
+<div id="file-manager" class="page-layout simple right-sidenav" layout="row">
+    <!-- CENTER -->
+    <div class="center" layout="column" flex>
+        <!-- HEADER -->
+        <div class="header">
+
+            <div class="header-content" layout="column" layout-align="space-between">
+                <!-- TOOLBAR -->
+                <div class="toolbar" layout="row" layout-align="space-between">
+                    <div class="white-fg" layout="column" layout-align="start start">
+                        <div class="h1" layout="row" layout-align="start center">
+                            <!--<md-icon md-font-icon="icon-store"></md-icon>-->
+                            <span>Modulos</span>
+                        </div>
+                    </div>
+
+                    <div class="right-side" layout="row">
+                        <div class="search" layout="row" layout-align="start center" flex>
+                            <md-icon md-font-icon="icon-magnify" class="icon search-icon"></md-icon>
+                            <input id="search" class="search-input" ng-model="filtro" type="text" placeholder="Buscar">
+                        </div>
+                    </div>
+                </div>
+                <!-- / TOOLBAR -->
+            </div>
+
+            <!-- ADD NEW EMPRESA-->
+            <div id="file-uploader">
+                <md-button flow-btn class="add-file-button md-fab md-warn" aria-label="Nueva empresa"
+                           ng-click="vm.newModalModulo($event, 'Nuevo')">
+                    <md-icon md-font-icon="icon-plus"></md-icon>
+                    <md-tooltip><span>Nuevo modulo</span></md-tooltip>
+                </md-button>
+            </div>
+            <!-- / ADD NEW EMPRESA -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT -->
+        <md-content class="content" flex ms-scroll>
+            <table class="simple list-view">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th hide-xs>Codigo</th>
+                    <th>Nombre</th>
+                    <!--<th></th>-->
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr ng-repeat="modulo in vm.modulos | filter: filtro"
+                    ng-click="vm.selectedModulo(modulo, $index)"
+                    ng-class="{'selected' : vm.selected === modulo}">
+                    <td></td>
+                    <td class="name" hide-xs>{{modulo.id}}</td>
+                    <td class="type">{{modulo.nombre}}</td>
+
+                    <!--<td class="show-details" hide-gt-md>-->
+                        <!--<md-button class="md-icon-button" ng-click="vm.abrirPanel(empresa, $index)"-->
+                                   <!--aria-label="Modulo">-->
+                            <!--<md-icon md-font-icon="icon-save"></md-icon>-->
+                        <!--</md-button>-->
+                        <!--<md-button class="md-icon-button" ng-click="vm.abrirPanel(empresa, $index)"-->
+                                   <!--aria-label="Modulo">-->
+                            <!--<md-icon md-font-icon="icon-information-outline"></md-icon>-->
+                        <!--</md-button>-->
+                        <!--<md-button class="md-icon-button" ng-click="vm.abrirPanel(empresa, $index)"-->
+                                   <!--aria-label="Modulo">-->
+                            <!--<md-icon md-font-icon="icon-information-outline"></md-icon>-->
+                        <!--</md-button>-->
+                    <!--</td>-->
+                </tr>
+
+                </tbody>
+            </table>
+        </md-content>
+        <!-- / CONTENT -->
+    </div>
+    <!-- / CENTER -->
+</div>

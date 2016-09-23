@@ -51,6 +51,7 @@
                         vm.vehiculos.push(vehiculo);
                     });
                     vm.selected = vm.vehiculos[0];
+                    if(vm.n_vehi_doc_venc > 0) Toast('Uno o mas vehiculos tiene documentacion proxima a vencer, por favor, verificalos en la lista.')
                 }, function (error) {
                     console.log(error);
                 });

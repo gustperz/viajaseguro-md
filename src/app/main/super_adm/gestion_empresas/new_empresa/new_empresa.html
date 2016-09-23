@@ -64,6 +64,20 @@
                     </md-input-container>
                 </div>
 
+                <fieldset class="datos-modulos-empresa">
+                    <legend>Modulos contratados</legend>
+                    <div layout layout-sm="column" class="content-datos-modulo">
+                        <div layout="row" layout-wrap flex>
+                            <div flex ng-repeat="modulo in vm.modulos">
+                                <md-checkbox ng-checked="vm.exists(modulo.id, vm.selected)" ng-click="vm.toggle(modulo.id, vm.selected)">
+                                    {{ modulo.nombre }}
+                                </md-checkbox>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+
                 <fieldset class="datos-usuario-empresa" ng-if="vm.tipoModal != 'Modificar'">
                     <legend>Datos de usuario</legend>
                     <div layout layout-sm="column" class="content-datos-usuario">
