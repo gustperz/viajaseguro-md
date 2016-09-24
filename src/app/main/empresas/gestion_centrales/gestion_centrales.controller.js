@@ -19,9 +19,11 @@
         vm.selectCentral = selectCentral;
         vm.geocode = geocode;
         vm.save = save;
+        vm.cancel = cancel;
         vm.saveNewRuta = saveNewRuta;
         vm.cancelNewRuta = cancelNewRuta;
         vm.selectRuta = selectRuta;
+        vm.showCrearCentral = showCrearCentral;
 
         //////////
 
@@ -46,11 +48,14 @@
         function loadCiudades(departamento) {
             OneRequest.to('/ciudades', {'departamento': departamento}, true).then(function (ciudades) {
                 vm.ciudades = ciudades;
-            })
+            });
         }
 
         function selectCentral(central) {
             vm.central = central;
+            vm.destino_ruta = '';
+            vm.selectedRuta = undefined;
+            vm.simpleMap = {};
             central.get({populate: 'user,ciudad,rutas'}).then(function (central) {
                 vm.simpleMap = {
                     center: {
@@ -64,13 +69,38 @@
             });
         }
 
+        function showCrearCentral() {
+            vm.central = {};
+            vm.crearCentral = true;
+            vm.selectedCiudad = '';
+            vm.selectedCentral = '';
+            vm.searchText = '';
+            vm.searchTextD = '';
+            vm.destino_ruta = '';
+            vm.selectedRuta = undefined;
+            vm.simpleMap = {};
+        }
+
         function save() {
             vm.central.ciudad = vm.selectedCiudad.codigo;
             Centrales.create(vm.central).then(function (central) {
                 selectCentral(central);
                 loadCentrales();
+                vm.selectedCiudad = '';
+                vm.selectedCentral = '';
+                vm.searchText = '';
+                vm.searchTextD = '';
                 vm.crearCentral = false;
             })
+        }
+
+        function cancel() {
+            vm.central = undefined;
+            vm.crearCentral = false;
+            vm.selectedCiudad = '';
+            vm.selectedCentral = '';
+            vm.searchText = '';
+            vm.searchTextD = '';
         }
 
         function saveNewRuta() {
@@ -102,13 +132,22 @@
 
         function selectRuta(ruta) {
             vm.selectedRuta = ruta;
-            var idx = vm.centrales.findIndex(function(central) {return central.ciudad.codigo === ruta.destino;});
-            if( idx != -1 ){
-                vm.destino_ruta = vm.centrales[idx].ciudad.nombre +' '+ vm.centrales[idx].direccion;
+
+            vm.origen_ruta = vm.central.direccion+', '+vm.central.ciudad.nombre+', '+getdepartamento(vm.central.ciudad.departamento);
+
+            var central = vm.centrales.find(function(central) {return central.ciudad.codigo === ruta.destino;});
+            if( central ){
+                vm.destino_ruta = central.direccion+', '+central.ciudad.nombre+', '+getdepartamento(central.ciudad.departamento);
             } else {
-                vm.destino_ruta = ruta.nombre_ciudad;
+                OneRequest.to('/ciudades', {'codigo': ruta.destino}, true).then(function (ciudades) {
+                    vm.destino_ruta = ciudades[0].nombre+', '+getdepartamento(ciudades[0].departamento);
+                });
             }
             vm.simpleMap.zoom = 10;
+        }
+
+        function getdepartamento(id) {
+            return vm.departamentos.find(function(departamento) {return departamento.id === id;}).nombre;
         }
 
         function geocode() {
@@ -155,7 +194,7 @@
             var lowercaseQuery = angular.lowercase(query);
 
             return function(item) {
-                return (angular.lowercase(item.nombre).indexOf(lowercaseQuery) === 0);
+                return (angular.lowercase(item.nombre).indexOf(lowercaseQuery) != -1);
             };
 
         }

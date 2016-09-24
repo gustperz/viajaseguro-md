@@ -37,14 +37,14 @@
                 }
             }
             #rutas {
+                min-height: 100% !important;
                 md-list-item {
                     min-height: 40px !important;
                     height: 40px !important;
                 }
-                button {
+                .md-button {
                     min-height: 41px !important;
                     height: 41px !important;
-                    margin-top: 16px !important;
                 }
                 .selected{
                     background-color: transparent;
@@ -90,7 +90,7 @@
             }
         }
 
-        #mapa {
+        #mapa, #mapa-directions {
             height: 100%;
             border: 1px $primary-color solid;
             ng-map {
@@ -115,6 +115,17 @@
         border-radius: 5px !important;
         margin: 5px !important;
     }
+}
+
+.map-control-1 {
+    text-align: center;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255) !important;
+    padding: 8px;
+    border-radius: 2px;
+    box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+    min-width: 27px;
+    margin: 10px;
 }
 
 .md-virtual-repeat-container.md-autocomplete-suggestions-container {

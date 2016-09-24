@@ -9,7 +9,6 @@
         .module('app.empresas', [
             'app.empresas.gestion_conductores',
             'app.empresas.gestion_vehiculos',
-            'app.empresas.gestion_rutas',
             'app.empresas.gestion_centrales'
         ])
         .config(config);

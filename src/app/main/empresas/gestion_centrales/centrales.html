@@ -9,7 +9,7 @@
                 </div>
             </div>
             <md-button flow-btn class="add-file-button md-fab md-warn" aria-label="Nueva central"
-                       ng-click="vm.crearCentral = true">
+                       ng-click="vm.showCrearCentral()">
                 <md-icon md-font-icon="icon-plus"></md-icon>
                 <md-tooltip><span>Nueva central</span></md-tooltip>
             </md-button>
@@ -39,9 +39,9 @@
         <!-- / CONTENT -->
     </div>
     <div id="detalles" class="bordered mt-10 mr-10 mb-10 p-10" layout="row" flex>
-        <div id="info" layout="column" flex="20" ng-hide="vm.crearCentral || !vm.central">
+        <div id="info" layout="column" flex="20" ng-hide="!vm.central.id">
             <h1>{{vm.central.ciudad.nombre}}</h1>
-            <md-list>
+            <md-list flex>
                 <md-list-item class="md-2-line">
                     <div class="md-list-item-text">
                         <p>Direccion:</p>
@@ -62,25 +62,23 @@
                 </md-list-item>
                 <br>
                 <md-divider></md-divider>
-                <md-subheader>
-                    <span>Rutas</span>
-                    <ng-include src="'app/main/empresas/gestion_centrales/floating_form.tmpl.html'"></ng-include>
-                </md-subheader>
-                <section id="rutas">
-                    <md-content class="content" flex ms-scroll>
-                        <md-list-item ng-repeat="ruta in vm.central.rutas" class="md-2-line"
-                                      ng-click="vm.selectRuta(ruta)"
-                                      ng-class="{'selected' : vm.selectedRuta.id === ruta.id}">
-                            <div class="md-list-item-text" layout="column">
-                                <h3>{{ruta.nombre_ciudad}}</h3>
-                                <h4>{{ruta.trayecto}}</h4>
-                            </div>
-                        </md-list-item>
-                    </md-content>
-                </section>
+                <md-content id="rutas" class="content" flex ms-scroll>
+                    <md-subheader>
+                        <span>Rutas</span>
+                        <ng-include src="'app/main/empresas/gestion_centrales/floating_form.tmpl.html'"></ng-include>
+                    </md-subheader>
+                    <md-list-item ng-repeat="ruta in vm.central.rutas" class="md-2-line"
+                                  ng-click="vm.selectRuta(ruta)"
+                                  ng-class="{'selected' : vm.selectedRuta.id === ruta.id}">
+                        <div class="md-list-item-text" layout="column">
+                            <h3>{{ruta.nombre_ciudad}}</h3>
+                            <h4>{{ruta.trayecto}}</h4>
+                        </div>
+                    </md-list-item>
+                </md-content>
             </md-list>
         </div>
-        <form id="form" layout="column" layout-align="start" flex="20" name="newCentralForm" ng-show="vm.crearCentral">
+        <form id="form" layout="column" layout-align="start" flex="20" name="newCentralForm" ng-show="!vm.central.id && vm.crearCentral">
             <h1>Nueva Central</h1>
             <md-autocomplete flex required
                              md-input-name="departamentos"
@@ -122,7 +120,7 @@
                     <div ng-message="md-require-match">Por favor, seleccione una ciudad existente.</div>
                 </div>
             </md-autocomplete>
-            <div layout="row" flex>
+            <div layout="row">
                 <md-input-container flex>
                     <label>Direccion</label>
                     <input name="nombre" ng-model="vm.central.direccion" ng-enter="vm.geocode()" required>
@@ -167,21 +165,32 @@
                 </md-button>
             </div>
         </form>
-        <div id="no-select" class="align-vertical text-center" ng-hide="vm.crearCentral || vm.central" flex="20">
+        <div id="no-select" class="align-vertical text-center" ng-hide="vm.central" flex="20">
             Seleccione una central
         </div>
         <div id="mapa" flex>
             <ng-map center="[{{vm.simpleMap.center.lat}}, {{vm.simpleMap.center.lng}}]" zoom="{{vm.simpleMap.zoom}}">
-                <marker position="{{vm.my_position}}"></marker>
+                <marker ng-if="!vm.destino_ruta"
+                        position="{{vm.my_position}}">
+                </marker>
                 <directions
-                        draggable="true"
-                        panel="directions-panel"
+                        ng-if="vm.destino_ruta"
                         travel-mode="DRIVING"
-                        origin="Toronto"
-                        destination="Montreal">
+                        origin="{{vm.origen_ruta}}, Colombia"
+                        destination="{{vm.destino_ruta}}, Colombia">
                 </directions>
+                <custom-control ng-if="vm.destino_ruta" id="ruta" position="TOP_RIGHT" index="1">
+                    <div class="map-control-1">
+                        Oringen: {{vm.origen_ruta}} | Destino: {{vm.destino_ruta}}
+                    </div>
+                </custom-control>
             </ng-map>
         </div>
+        <!--<div id="mapa-directions" flex ng-show="vm.showMapaDirections">-->
+            <!--<ng-map center="[{{vm.simpleMap.center.lat}}, {{vm.simpleMap.center.lng}}]" zoom="{{vm.simpleMap.zoom}}">-->
+                <!---->
+            <!--</ng-map>-->
+        <!--</div>-->
     </div>
 </div>
 
