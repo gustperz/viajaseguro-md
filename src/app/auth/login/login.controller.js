@@ -6,7 +6,7 @@
         .controller('LoginController', LoginController);
 
     /** @ngInject */
-    function LoginController(OneRequest, $state, authService, Toast) {
+    function LoginController(OneRequest, $state, authService, Toast, $mdDialog, $scope) {
         var vm = this;
         vm.usuario = {};
 
@@ -26,16 +26,42 @@
 
             function success(p) {
                 var usuario = authService.storeUser(p.token, p.user);
-                redirectRoles(usuario.rol);
+                if(usuario.rol == 'CENTRAL_EMPRESA'){
+                   if(usuario.empresa.activa != true){
+                       noActiva('EL ADMINISTRADOR DEL SISTEMA HA CANCELADO SU SUSCRIPCION, POR FAVOR \n  ' +
+                           ' COMUNICATE LO MAS PRONTO PARA SU REACTIVACION')
+                       sessionStorage.clear();
+                   }else{
+                       redirectRoles(usuario.rol);
+                   }
+                }else{
+                    redirectRoles(usuario.rol);
+                }
+
             }
 
             function error(error) {
-                if(error.status == 401) {
+                if (error.status == 401) {
                     vm.error = true;
-                }else{
+                    noActiva('EL ADMINISTRADOR DEL SISTEMA HA CANCELADO SU SUSCRIPCION, POR FAVOR \n  ' +
+                    ' COMUNICATE LO MAS PRONTO PARA SU REACTIVACION')
+                } else {
                     Toast('Ha ocurrido un error inesperado, intentalo nuevamente.');
                 }
             }
+        }
+
+        function noActiva(mensaje) {
+            alert = $mdDialog.alert()
+                .title('ATENCION !')
+                .textContent(mensaje)
+                .ok('Cerrar');
+
+            $mdDialog
+                .show( alert )
+                .finally(function() {
+                    alert = undefined;
+                });
         }
 
         function redirectRoles(rol) {
