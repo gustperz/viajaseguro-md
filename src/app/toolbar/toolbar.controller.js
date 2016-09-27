@@ -17,6 +17,7 @@
         // Methods
         vm.toggleSidenav = toggleSidenav;
         vm.logout = logout;
+        vm.irPerfil = irPerfil;
         vm.toggleMsNavigationFolded = toggleMsNavigationFolded;
 
         //////////
@@ -33,6 +34,9 @@
 
         }
 
+        function irPerfil() {
+            $state.go('app.empresa_perfil')
+        }
 
         /**
          * Toggle sidenav

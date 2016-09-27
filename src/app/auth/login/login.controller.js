@@ -6,7 +6,7 @@
         .controller('LoginController', LoginController);
 
     /** @ngInject */
-    function LoginController(OneRequest, $state, authService, Toast, $mdDialog, $scope) {
+    function LoginController(OneRequest, $state, authService, Toast, $mdDialog) {
         var vm = this;
         vm.usuario = {};
 
@@ -41,13 +41,18 @@
             }
 
             function error(error) {
-                if (error.status == 401) {
-                    vm.error = true;
-                    noActiva('EL ADMINISTRADOR DEL SISTEMA HA CANCELADO SU SUSCRIPCION, POR FAVOR \n  ' +
-                    ' COMUNICATE LO MAS PRONTO PARA SU REACTIVACION')
-                } else {
+                if(error.status == 401){
+                    if(error.data.code == 'E_UNAUTHORIZED'){
+                        noActiva('EL ADMINISTRADOR DEL SISTEMA HA CANCELADO SU SUSCRIPCION, POR FAVOR \n  ' +
+                            ' COMUNICATE LO MAS PRONTO PARA SU REACTIVACION')
+                    }
+                    if (error.data.code == 'E_USER_NOT_FOUND') {
+                        vm.error = true;
+                    }
+                }else{
                     Toast('Ha ocurrido un error inesperado, intentalo nuevamente.');
                 }
+
             }
         }
 

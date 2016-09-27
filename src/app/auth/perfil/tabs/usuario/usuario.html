@@ -1,0 +1,36 @@
+<div layout="row" layout-wrap class="tab-usuario">
+
+    <div class="about" layout="column" flex="100" flex-gt-sm="50" flex-gt-md="65">
+        <div class="profile-box info-box general md-whiteframe-1dp" layout="column">
+            <header class="md-accent-bg">
+                <div class="title">Actualizar contrase&ntilde;a</div>
+            </header>
+            <form name="infoPassword" novalidate>
+                <div class="content" layout="row" layout-wrap flex>
+
+                    <div class="" flex>
+                        <md-input-container>
+                            <label for="npassword">Nueva contrase&ntilde;a</label>
+                            <input id="npassword" type="text" name="npassword" ng-model="vm.user.password"
+                                   aria-label="npassword" required>
+                        </md-input-container>
+                    </div>
+
+                    <div class="" flex>
+                        <md-input-container>
+                            <label for="cpassword">Confirmar contrase&ntilde;a</label>
+                            <input id="cpassword" type="text" name="cpassword" ng-model="vm.confirmPassword"
+                                   aria-label="cpassword" required>
+                        </md-input-container>
+                    </div>
+                </div>
+                <div style="margin-top: -30px; text-align: center">
+                    <md-button ng-click="vm.updateContrasena()" ng-disabled="infoPassword.$invalid"
+                               class="boton-guardar-dialog brad-30">
+                        Modificar
+                    </md-button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
