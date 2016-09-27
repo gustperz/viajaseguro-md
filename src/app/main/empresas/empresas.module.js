@@ -19,7 +19,7 @@
         // Navigation
         msNavigationServiceProvider.saveItem('conductores', {
             title    : 'Conductores',
-            icon     : 'seat-recline-normal',
+            icon     : 'icon-account-location',
             state    : 'app.empresa_conductores',
             /*stateParams: {
              'param1': 'page'

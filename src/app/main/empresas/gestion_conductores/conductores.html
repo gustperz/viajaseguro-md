@@ -12,7 +12,10 @@
                             <!--<md-icon md-font-icon="icon-store"></md-icon>-->
                             <span>Conductores</span>
 
-                            <md-button ng-click="vm.alternarConductoresI()" style="background-color: black !important; width: 30px; height: 30px" class="md-fab md-hue-2" aria-label="Profile">
+                            <md-button ng-click="vm.alternarConductoresI()"
+                                       style="background-color: black !important; width: 30px; height: 30px"
+                                       class="md-fab md-hue-2" aria-label="Profile"
+                                        ng-if="vm.conductoresInactivos.length > 0">
                                 <md-icon style="font-size: 20px; margin-left: -3px" md-font-icon="icon-people"></md-icon>
                                 <md-tooltip ng-if="vm.alternarConductores == true"><b>Conductores inactivos</b></md-tooltip>
                                 <md-tooltip ng-if="vm.alternarConductores == false"><b>Conductores activos</b></md-tooltip>

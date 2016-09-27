@@ -9,7 +9,7 @@
         .controller('PerfilController', PerfilController);
 
     /** @ngInject */
-    function PerfilController(Empresas, authService, Toast, OneRequest) {
+    function PerfilController(Empresas, authService, Toast, OneRequest, api, $http) {
         // variables
         var vm = this;
         vm.empresaIgeneral = {};
@@ -22,6 +22,8 @@
         vm.modificarPjuridica = modificarPjuridica;
         vm.modificarResolucion = modificarResolucion;
         vm.updateContrasena = updateContrasena;
+        vm.guardarLogo = guardarLogo;
+        vm.guardarFirmaDigital = guardarFirmaDigital;
 
         vm.usuario = authService.getCurrentUser();
 
@@ -105,5 +107,55 @@
                 console.log('Algun error')
             }
         }
+
+        function guardarFirmaDigital() {
+            if (vm.firmaDigital) {
+                console.log(saveFirma())
+                // if(saveFirma().$$state.status != 0){
+                //     Toast('Error al subir la firma');
+                // }else{
+                //     Toast('Firma guardada correctamente');
+                // }
+            }else{
+                console.log('Firma no se creo');
+            }
+        }
+
+        function guardarLogo() {
+            if (vm.logo) {
+                if(saveLogo().$$state.status != 0){
+                    Toast('Error al subir el logo');
+                }else{
+                    Toast('Logo guardado correctamente, podra visualizarlo en su proximo inicio de sesion');
+                }
+            }else{
+                console.log('vm.logo no se creo');
+            }
+        }
+
+        function saveLogo() {
+            var data = new FormData();
+            data.append('logo', vm.logo);
+
+            return $http.post(
+                api + 'empresas/' + vm.usuario.empresa.id + '/logo', data,
+                {
+                    transformRequest: angular.identity, headers: {'Content-Type': undefined}
+                }
+            );
+        }
+
+        function saveFirma() {
+            var data = new FormData();
+            data.append('firmaDigital', vm.firmaDigital);
+
+            return $http.post(
+                api + 'empresas/' + vm.usuario.empresa.id + '/firma', data,
+                {
+                    transformRequest: angular.identity, headers: {'Content-Type': undefined}
+                }
+            );
+        }
+
     }
 })();
