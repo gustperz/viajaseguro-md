@@ -1,0 +1,44 @@
+<md-menu-item>
+    <md-autocomplete flex
+                     md-input-name="departamentos"
+                     md-selected-item="ff.selectedDepartamento"
+                     md-search-text="ff.searchTextD"
+                     md-items="departamento in ff.querySearch(ff.searchTextD, ff.departamentos)"
+                     md-selected-item-change="ff.loadCiudades(departamento.id)"
+                     md-item-text="departamento.nombre"
+                     md-require-match
+                     md-floating-label="Departamento">
+        <md-item-template>
+            <span md-highlight-text="ff.searchTextD" md-highlight-flags="i">{{departamento.nombre}}</span>
+        </md-item-template>
+        <md-not-found>
+            No hay coincidencias para {{ff.searchTextD}}
+        </md-not-found>
+        <div ng-messages="newCentralForm.departamentos.$error" ng-if="newCentralForm.departamentos.$touched">
+            <div ng-message="required">Este campo es obligatorio..</div>
+            <div ng-message="md-require-match">Por favor, seleccione un departamento existente.</div>
+        </div>
+    </md-autocomplete>
+</md-menu-item>
+<md-menu-item>
+    <md-autocomplete flex
+                     ng-disabled="!ff.selectedDepartamento"
+                     md-input-name="ciudad"
+                     md-selected-item="ff.selectedCiudad"
+                     md-search-text="ff.searchText"
+                     md-items="ciudad in ff.querySearch(ff.searchText, ff.ciudades)"
+                     md-item-text="ciudad.nombre"
+                     md-require-match
+                     md-floating-label="Ciudad">
+        <md-item-template>
+            <span md-highlight-text="ff.searchText" md-highlight-flags="i">{{ciudad.nombre}}</span>
+        </md-item-template>
+        <md-not-found>
+            No hay coincidencias para {{ff.searchText}}
+        </md-not-found>
+        <div ng-messages="newCentralForm.ciudad.$error" ng-if="newCentralForm.ciudad.$touched">
+            <div ng-message="required">Este campo es obligatorio..</div>
+            <div ng-message="md-require-match">Por favor, seleccione una ciudad existente.</div>
+        </div>
+    </md-autocomplete>
+</md-menu-item>

@@ -1,0 +1,83 @@
+<div id="origen" layout="row">
+    <h3>Origen</h3>
+    <section layout="row" layout-align="center center">
+        <md-button ng-repeat="ciudad in vmrutas.ciudades_origen track by ciudad.codigo"
+                   aria-label="origen-{{ruta.destino}}"
+                   ng-click="vmrutas.selectOrigen(ciudad)"
+                   ng-class="{'selected': ciudad.codigo == vm.despacho.origen.codigo, 'first': $first}">
+            {{ciudad.nombre}}
+        </md-button>
+        <md-menu ng-controller="FloatingFormController as ff">
+            <md-button class="last" aria-label="add-ruta" ng-click="$mdOpenMenu($event)">+</md-button>
+            <md-menu-content width="4" class="floatingForm">
+                <form name="formNewRuta">
+                    <md-menu-item id="titulo">
+                        <h4>Selecciona la ciudad de origen</h4>
+                    </md-menu-item>
+                    <ng-include src="'app/main/centrales/despacho/includes/floating_form_autocompletes.tmpl.html'">
+                    </ng-include>
+                    <md-menu-item>
+                        <div layout="row" id="actions" layout-align="center">
+                            <md-button class="boton-guardar-dialog brad-30"
+                                       ng-disabled="!ff.selectedCiudad"
+                                       md-prevent-menu-close="md-prevent-menu-close"
+                                       ng-click="vmrutas.addOrigen(ff.selectedCiudad)">
+                                Guardar
+                            </md-button>
+                            <md-button class="boton-cancel-dialog brad-30"
+                                       md-prevent-menu-close="md-prevent-menu-close"
+                                       ng-click="ff.cancel()">
+                                Cancelar
+                            </md-button>
+                        </div>
+                    </md-menu-item>
+                </form>
+            </md-menu-content>
+        </md-menu>
+    </section>
+</div>
+<div id="destino" layout="row" class="margin-left-15">
+    <h3>Destino</h3>
+    <section layout="row" layout-align="center center">
+        <md-button ng-repeat="ruta in vmrutas.ciudades_origen[vm.despacho.origen.codigo].rutas track by ruta.destino"
+                   aria-label="destino-{{ruta.destino}}"
+                   ng-click="vmrutas.selectDestino(ruta)"
+                   ng-class="{'selected': ruta.destino == vm.despacho.destino.codigo, 'first': $first}">
+            {{ruta.nombre_ciudad}}
+        </md-button>
+        <md-menu ng-controller="FloatingFormController as ff">
+            <md-button class="last" aria-label="add-ruta" ng-click="$mdOpenMenu($event)"
+                       ng-class="{'first': vmrutas.ciudades_origen[vm.despacho.origen.codigo].rutas.length == 0}">+</md-button>
+            <md-menu-content width="4" class="floatingForm">
+                <form name="formNewRuta">
+                    <md-menu-item id="titulo">
+                        <h4>Selecciona la ciudad de destino</h4>
+                    </md-menu-item>
+                    <ng-include src="'app/main/centrales/despacho/includes/floating_form_autocompletes.tmpl.html'">
+                    </ng-include>
+                    <md-menu-item>
+                        <md-input-container flex id="trayecto">
+                            <label>Trayecto</label>
+                            <input name="trayecto" ng-model="ff.trayecto_ruta">
+                        </md-input-container>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <div layout="row" id="actions" layout-align="center">
+                            <md-button class="boton-guardar-dialog brad-30" aria-label="add-destino"
+                                       ng-disabled="!ff.selectedCiudad"
+                                       md-prevent-menu-close="md-prevent-menu-close"
+                                       ng-click="vmrutas.addDestino(ff.selectedCiudad, ff.trayecto_ruta)">
+                                Guardar
+                            </md-button>
+                            <md-button class="boton-cancel-dialog brad-30" aria-label="cancelar-add"
+                                       md-prevent-menu-close="md-prevent-menu-close"
+                                       ng-click="ff.cancel()">
+                                Cancelar
+                            </md-button>
+                        </div>
+                    </md-menu-item>
+                </form>
+            </md-menu-content>
+        </md-menu>
+    </section>
+</div>

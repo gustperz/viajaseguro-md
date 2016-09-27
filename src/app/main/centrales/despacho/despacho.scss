@@ -13,6 +13,7 @@
         margin: 0;
         padding: 0 3px;
         height: 25px !important;
+        min-height: 25px !important;
         line-height: 25px;
         border-radius: 0;
         border: 1px solid #e1e1e1;
@@ -52,24 +53,7 @@
   }
 
   #lista-conductores {
-    border: 1px solid $primary-color;
-    border-radius: 15px;
-    .title-info-conductores {
-      margin-top: -20px;
-    }
-    .add-conductor-ruta {
-      background-color: #94c11e;
-      width: 35px;
-      height: 30px;
-      md-icon {
-        position: relative;
-        left: -1px;
-      }
-      //left: 10px;
-    }
-    h2 {
-      color: $primary-color;
-    }
+    min-width: 200px !important;
   }
 
   #info-despacho {
@@ -102,25 +86,25 @@
   }
 
   #solicitudes {
-    .title-info-solicitudes {
-      margin-top: -20px;
-    }
-    text-align: center !important;
-    border: 1px solid $primary-color;
-    border-radius: 15px;
-    margin-left: 10px;
-    .add-solicitud-ruta {
+  }
+
+  .title-info {
+    margin-top: -5px !important;
+    color: $primary-color;
+
+    .button-add {
       background-color: #94c11e;
-      width: 35px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
+      min-height: 28px;
+      margin: 0 !important;
+      padding-left: 3px;
+      line-height: 27px;
       md-icon {
         position: relative;
         left: -1px;
       }
       //left: 10px;
-    }
-    h2 {
-      color: $primary-color;
     }
   }
 }
