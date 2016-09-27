@@ -20,6 +20,8 @@
                                 <md-tooltip ng-if="vm.alternarConductores == true"><b>Conductores inactivos</b></md-tooltip>
                                 <md-tooltip ng-if="vm.alternarConductores == false"><b>Conductores activos</b></md-tooltip>
                             </md-button>
+                            <span class="md-subhead" ng-if="vm.alternarConductores == false">Inactivos</span>
+                            <span class="md-subhead" ng-if="vm.alternarConductores == true">Activos</span>
                         </div>
                     </div>
 

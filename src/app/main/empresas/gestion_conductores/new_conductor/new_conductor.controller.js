@@ -1,11 +1,12 @@
 /**
  * Created by Jose Soto Acosta on 14/09/2016.
  */
-function NewConductorController($mdDialog, Toast, Conductores, tipo, conductor) {
+function NewConductorController($mdDialog, Toast, Conductores, tipo, conductor, Centrales) {
 // variables
     var vm = this;
     vm.conductor = {};
     vm.tipoModal = tipo;
+    vm.centrales = [];
     vm.tiposLicencia = [
         {
             nombre: 'A1',
@@ -122,6 +123,12 @@ function NewConductorController($mdDialog, Toast, Conductores, tipo, conductor) 
         }
     }
 
+    loadCentrales();
+    function loadCentrales() {
+        Centrales.getList({fields: 'id, ciudad, direccion', populate: 'ciudad'}).then(function (centrales) {
+            vm.centrales = centrales;
+        })
+    }
     function cancel() {
         $mdDialog.cancel();
     }

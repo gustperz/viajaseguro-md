@@ -31,7 +31,7 @@
                    <!--aria-label="Toggle quick panel" translate translate-attr-aria-label="TOOLBAR.TOGGLE_QUICK_PANEL">-->
             <!--<md-icon md-font-icon="icon-format-list-bulleted" class="icon"></md-icon>-->
         <!--</md-button>-->
-        <md-button ng-click="vm.irPerfil()" id="user-menu" class="user-button" aria-label="User settings">
+        <md-button ng-if="vm.usuario.rol == 'EMPRESA'" ng-click="vm.irPerfil()" id="user-menu" class="user-button" aria-label="User settings">
             <div layout="row" layout-align="space-between center">
                 <md-icon md-font-icon="icon-account-circle" class="icon"/>
                 <span class="username">Mi perfil</span>
