@@ -99,7 +99,7 @@
                 codigo: ruta.destino,
                 nombre: ruta.nombre_ciudad
             };
-            console.log(Despacho)
+            Despacho.loadConductores(ruta);
         }
     }
 })();
