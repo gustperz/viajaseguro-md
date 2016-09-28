@@ -40,6 +40,11 @@
         "locale/es.js"
       ]
     },
+    "sails.io.js":{
+      "main":[
+        "dist/sails.io.js"
+      ]
+    },
     "perfect-scrollbar": {
       "main": [
         "css/perfect-scrollbar.css",

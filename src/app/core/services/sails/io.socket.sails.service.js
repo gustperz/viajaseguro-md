@@ -31,7 +31,7 @@
         function suscribe(usuario) {
             io.socket.request({
                 method: 'get',
-                url: '/socket/' + usuario + '/join',
+                url: '/socket/join/central/'+usuario ,
                 headers: {
                     'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
                 }
