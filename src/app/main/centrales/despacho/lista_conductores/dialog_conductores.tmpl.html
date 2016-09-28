@@ -1,0 +1,28 @@
+<md-dialog aria-label="add-conductor" flex="50" class="dialog-empresa">
+    <md-toolbar class="toolbar-empresa">
+        <div class="md-toolbar-tools">
+            <h2><b>Seleccionar Conductores</b></h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="vm.cancel()">
+                <md-icon md-font-icon="icon-close" aria-label="Cerrar modal"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-content class="content" ms-scroll flex layout-padding>
+        <md-list-item ng-repeat="conductor in vm.conductores" ng-click="goToPerson(conductor.name, $event)" class="noright">
+            <img alt="{{ conductor.identificacion }}" ng-src="{{ conductor.imagen }}" class="md-avatar" />
+            <p>{{conductor.vehiculo.codigo_vial}} - {{ conductor.nombres }} {{ conductor.apellidos }}</p>
+            <md-checkbox class="md-secondary" ng-model="conductor.selected"></md-checkbox>
+        </md-list-item>
+    </md-content>
+    <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-button class="boton-guardar-dialog brad-30"
+                   ng-click="vm.selectConductores()">
+            Colocar en turno
+        </md-button>
+        <md-button class="boton-cancel-dialog brad-30" ng-click="vm.cancel()">
+            Cancelar
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

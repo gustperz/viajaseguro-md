@@ -10,8 +10,17 @@
         .factory('Rutas', factory);
 
     /* @ngInject */
-    function factory(RepositoriesFactory) {
+    function factory(AbstractRepository) {
+        function Repository() {
+            AbstractRepository.call(this, 'rutas');
+        }
 
-        return new RepositoriesFactory.new('rutas');
+        AbstractRepository.extend(Repository);
+
+        Repository.prototype.get = function (id) {
+            return this.restangular.restangularizeElement(null, {id:id}, this.route);
+        }
+
+        return new Repository();
     }
 })();

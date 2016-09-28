@@ -4,7 +4,7 @@
              layout="column" flex>
             <!--HEADER-->
             <div layout="row" id="head" ng-controller="RutasDespachoController as vmrutas"
-                 ng-include="'app/main/centrales/despacho/includes/rutas.html'">
+                 ng-include="'app/main/centrales/despacho/rutas/rutas.html'">
             </div>
             <md-divider class="margin-top-0 margin-bottom-10"></md-divider>
 
@@ -12,12 +12,13 @@
             <div layout="row" flex ng-show="vm.despacho.destino">
                 <!--CONDUCTORES-->
                 <div layout="row" id="lista-conductores" flex="20" layout="column" class="bordered p-10"
-                     ng-include="'app/main/centrales/despacho/includes/lista_conductores.html'">
+                     ng-controller="ListaConductoresController as vmconductores"
+                     ng-include="'app/main/centrales/despacho/lista_conductores/lista_conductores.tmpl.html'">
                 </div>
 
                 <!--DESPACHO-->
                 <div layout="row" id="info-despacho" flex="50" layout="column" class="bordered p-10"
-                     ng-include="'app/main/centrales/despacho/includes/central.html'">
+                     ng-include="'app/main/centrales/despacho/includes/asignaciones.html'">
                 </div>
 
                 <!--SOLICITUDES-->
