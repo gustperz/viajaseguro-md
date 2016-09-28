@@ -3,4 +3,22 @@
         <md-icon md-font-icon="icon-plus"></md-icon>
         <md-tooltip><span>Nueva conductor en la ruta</span></md-tooltip>
     </md-button>
+    <div class="dnd-conductores">
+        <div ng-show="vmconductores.turnos.length">
+            <ul dnd-list="vmconductores.turnos" style="border: none">
+                <li style="border-radius: 15px" ng-repeat="turno in vmconductores.turnos"
+                    dnd-draggable="turno"
+                    dnd-moved="vmconductores.turnos.splice($index, 1)"
+                    dnd-effect-allowed="move"
+                    dnd-selected="vmconductores.selectedConductor = turno.conductor"
+                    dnd-dragend="vmconductores.updateTurnos()"
+                    class=" grey lighten-3  collection-item">
+                    <strong style="font-size: 12.3px"><span class="title">{{turno.conductor.nombres}} {{turno.conductor.apellidos}}</span></strong>
+                </li>
+            </ul>
+        </div>
+        <div ng-hide="vmconductores.turnos.length">
+            <span>La ruta seleccionada no posee conductores en turno</span>
+        </div>
+    </div>
 </h2>
