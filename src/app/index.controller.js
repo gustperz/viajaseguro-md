@@ -7,7 +7,7 @@
         .controller('IndexController', IndexController);
 
     /** @ngInject */
-    function IndexController(fuseTheming)
+    function IndexController(fuseTheming, NotifitationFactory)
     {
         var vm = this;
 
@@ -15,5 +15,7 @@
         vm.themes = fuseTheming.themes;
 
         //////////
+        // permiso de notificaciones
+        NotifitationFactory.requestPermission();
     }
 })();

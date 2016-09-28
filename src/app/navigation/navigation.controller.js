@@ -19,7 +19,7 @@
         }else{
             vm.userNombre = usuario.username;
             vm.userRol = usuario.rol;
-            vm.userImagen = '../assets/images/profile.jpg';
+            vm.userImagen = usuario.empresa.logo;
         }
     
         // Data

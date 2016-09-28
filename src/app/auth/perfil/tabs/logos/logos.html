@@ -1,0 +1,139 @@
+<div layout="row" layout-wrap>
+
+    <div class="about" layout="column" flex="100" flex-gt-sm="50" flex-gt-md="65">
+        <div class="profile-box info-box general md-whiteframe-1dp" layout="column">
+            <header class="md-accent-bg">
+                <div class="title">Logo empresarial</div>
+            </header>
+            <form name="formLogo" novalidate>
+                <div class="content center" layout="row" layout-wrap flex>
+                    <div id="image">
+                        <img id="imagenlogo"
+                             ng-src="http://localhost:1337/images/empresas/{{vm.empresa.logo}}"
+                             style="border: none !important; border-radius: 50%; width: 150px; height: 150px;background-color:grey !important;">
+                    </div>
+                    <div class="text-center">
+                        <div style="border: none">
+                            <input id="fileslogo" uploader-model="vm.logo" type="file" required>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center">
+                    <md-button ng-click="vm.guardarLogo()"
+                               ng-disabled="formLogo.$invalid"
+                               class="boton-guardar-dialog brad-30">
+                        Guardar
+                    </md-button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="about-sidebar" layout="column" flex="100" flex-gt-sm="50" flex-gt-md="35">
+        <div class="profile-box friends md-whiteframe-1dp" layout="column">
+            <header class="md-accent-bg" layout="row" layout-align=
+                    "space-between center">
+                <div class="title">Imagen de firma digital</div>
+
+            </header>
+            <form name="formFirma" novalidate>
+                <div class="content center" layout="row" layout-wrap>
+                    <div id="imageFir">
+                        <img id="imagenFirma"
+                             ng-src="http://localhost:1337/images/empresas/firma/{{vm.empresa.firma_digital}}"
+                             style="border: none !important; border-radius: 50%; width: 150px; height: 150px;background-color:grey !important;">
+                    </div>
+                    <div class="text-center">
+                        <div style="border: none">
+                            <input id="filesfirma" uploader-model="vm.firmaDigital" type="file" required>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center">
+                    <md-button ng-click="vm.guardarFirmaDigital()"
+                               ng-disabled="formFirma.$invalid"
+                               class="boton-guardar-dialog brad-30">
+                        Guardar
+                    </md-button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        function archivo(evt) {
+            var files = evt.target.files;
+
+            //Obtenemos la imagen
+            for (var i = 0, f; f = files[i]; i++) {
+                //Solo imágenes.
+                if (!f.type.match('image.*')) {
+                    continue;
+                }
+
+                var reader = new FileReader();
+
+                reader.onload = (function (theFile) {
+                    return function (e) {
+                        // se crea la imagen
+                        document.getElementById("image").innerHTML = ['<img class="center" style="border: none !important; border-radius: 50%; width: 150px; height: 150px;background-color:grey !important;" src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
+                    };
+                })(f);
+                reader.readAsDataURL(f);
+            }
+        }
+
+        function archivov(evt) {
+            var files = evt.target.files;
+
+            //Obtenemos la imagen
+            for (var i = 0, f; f = files[i]; i++) {
+                //Solo imágenes.
+                if (!f.type.match('image.*')) {
+                    continue;
+                }
+
+                var reader = new FileReader();
+
+                reader.onload = (function (theFile) {
+                    return function (e) {
+                        // se crea la imagen
+                        document.getElementById("imageFir").innerHTML = ['<img class="center" style="border: none !important; border-radius: 50%; width: 150px; height: 150px;background-color:grey !important;" src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
+                    };
+                })(f);
+                reader.readAsDataURL(f);
+            }
+        }
+
+        document.getElementById('fileslogo').addEventListener('change', archivo, false);
+        $('#fileslogo').change(function () {
+            //obtenemos un array con los datos del archivo
+            var file = $("#fileslogo")[0].files[0];
+            //obtenemos el nombre del archivo
+            var fileName = file.name;
+            //obtenemos la extensión del archivo
+            fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
+            //obtenemos el tamaño del archivo
+            var fileSize = file.size;
+            //obtenemos el tipo de archivo image/png ejemplo
+            var fileType = file.type;
+        });
+
+        document.getElementById('filesfirma').addEventListener('change', archivov, false);
+        $('#filesfirma').change(function () {
+            //obtenemos un array con los datos del archivo
+            var file = $("#filesfirma")[0].files[0];
+            //obtenemos el nombre del archivo
+            var fileName = file.name;
+            //obtenemos la extensión del archivo
+            fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
+            //obtenemos el tamaño del archivo
+            var fileSize = file.size;
+            //obtenemos el tipo de archivo image/png ejemplo
+            var fileType = file.type;
+        });
+    });
+</script>

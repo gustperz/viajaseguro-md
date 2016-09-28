@@ -11,6 +11,17 @@
                         <div class="h1" layout="row" layout-align="start center">
                             <!--<md-icon md-font-icon="icon-store"></md-icon>-->
                             <span>Conductores</span>
+
+                            <md-button ng-click="vm.alternarConductoresI()"
+                                       style="background-color: black !important; width: 30px; height: 30px"
+                                       class="md-fab md-hue-2" aria-label="Profile"
+                                        ng-if="vm.conductoresInactivos.length > 0">
+                                <md-icon style="font-size: 20px; margin-left: -3px" md-font-icon="icon-people"></md-icon>
+                                <md-tooltip ng-if="vm.alternarConductores == true"><b>Conductores inactivos</b></md-tooltip>
+                                <md-tooltip ng-if="vm.alternarConductores == false"><b>Conductores activos</b></md-tooltip>
+                            </md-button>
+                            <span class="md-subhead" ng-if="vm.alternarConductores == false">Inactivos</span>
+                            <span class="md-subhead" ng-if="vm.alternarConductores == true">Activos</span>
                         </div>
                     </div>
 
@@ -38,7 +49,8 @@
 
         <!-- CONTENT -->
         <md-content class="content" flex ms-scroll>
-            <table class="simple list-view">
+            <!--conductores activos-->
+            <table class="simple list-view" ng-if="vm.alternarConductores == true">
                 <thead>
                 <tr>
                     <th></th>
@@ -52,6 +64,41 @@
 
                 <tbody>
                 <tr ng-repeat="conductor in vm.conductores | filter: filtro  | orderBy: ['-doc_venc', 'nombres']"
+                    ng-click="vm.selectedConductor(conductor, $index)"
+                    ng-class="{'selected' : vm.selected === conductor, 'cond_doc_venc': conductor.doc_venc}">
+                    <td>
+                        <img class="imagen-empresa"
+                             ng-src="http://localhost:1337/images/conductores/{{conductor.imagen}}">
+                    </td>
+                    <td class="name" hide-xs>{{conductor.identificacion}}</td>
+                    <td class="type">{{conductor.nombres}} {{conductor.apellidos}}</td>
+                    <td class="owner" hide-xs>{{conductor.direccion}}</td>
+                    <td class="size" hide-xs>{{conductor.telefono}}</td>
+                    <td class="show-details" hide-gt-md>
+                        <md-button class="md-icon-button sidenav-toggle" ng-click="vm.abrirPanel(conductor, $index)"
+                                   aria-label="Detalles conductor">
+                            <md-icon md-font-icon="icon-information-outline"></md-icon>
+                        </md-button>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+
+            <table class="simple list-view" ng-if="vm.alternarConductores == false">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th hide-xs>Cedula</th>
+                    <th>Nombres</th>
+                    <th hide-xs>Direccion</th>
+                    <th hide-xs>Telefono</th>
+                    <th hide-gt-md></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr ng-repeat="conductor in vm.conductoresInactivos | filter: filtro  | orderBy: ['-doc_venc', 'nombres']"
                     ng-click="vm.selectedConductor(conductor, $index)"
                     ng-class="{'selected' : vm.selected === conductor, 'cond_doc_venc': conductor.doc_venc}">
                     <td>

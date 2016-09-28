@@ -1,0 +1,61 @@
+<div id="profile" class="page-layout simple tabbed">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="column" layout-align="center center" layout-gt-sm="row"
+         layout-align-gt-sm="space-between end" flex>
+        <div class="user-info" layout="column" layout-align="center center" layout-gt-sm="row"
+             layout-align-gt-sm="start center">
+            <img class="profile-image avatar huge" ng-src="http://localhost:1337/images/empresas/{{vm.usuario.empresa.logo}}">
+
+            <div class="name">{{vm.empresaIgeneral.nombre_corto}}</div>
+        </div>
+
+        <div class="actions" layout="row" layout-align="end center">
+            <md-button ng-click="vm.fueraDeServicio()" class="md-raised" aria-label="Follow">
+                Soporte
+            </md-button>
+
+        </div>
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content" flex>
+
+        <md-tabs md-dynamic-height>
+            <md-tab>
+                <md-tab-label>
+                    <span>Informacion personal</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <md-content class="about-tab content" ms-scroll
+                                ng-include="'app/auth/perfil/tabs/about/about.html'">
+                    </md-content>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>
+                    <span>Actualizacion de contrase&ntilde;a</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <md-content class="about-tab content" ms-scroll
+                                ng-include="'app/auth/perfil/tabs/usuario/usuario.html'">
+                    </md-content>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>
+                    <span>Logos</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <md-content class="about-tab content" ms-scroll
+                                ng-include="'app/auth/perfil/tabs/logos/logos.html'">
+                    </md-content>
+                </md-tab-body>
+            </md-tab>
+        </md-tabs>
+
+    </div>
+    <!-- / CONTENT -->
+
+</div>

@@ -13,6 +13,7 @@
     function EmpresaCentralesController(Rutas, Centrales, OneRequest, GeoCoder, NavigatorGeolocation, $mdMenu){
         var vm = this;
         vm.centrales = [];
+        vm.departamentos = [];
 
         vm.querySearch = querySearch;
         vm.loadCiudades = loadCiudades;

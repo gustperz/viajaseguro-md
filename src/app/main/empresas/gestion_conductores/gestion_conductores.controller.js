@@ -20,6 +20,7 @@
         vm.conductoresInactivos = [];
         vm.selected = {};
         vm.n_cond_doc_venc = 0;
+        vm.alternarConductores = true;
 
         // Methods
         vm.selectedConductor = selectedConductor;
@@ -55,6 +56,7 @@
                             conductor.doc_venc = documentacionPorVencer(conductor);
                             vm.conductores.push(conductor);
                         } else {
+                            conductor.doc_venc = documentacionPorVencer(conductor);
                             vm.conductoresInactivos.push(conductor);
                         }
                     });
@@ -66,6 +68,14 @@
         }
 
         //////////
+
+        vm.alternarConductoresI = function () {
+            if (vm.alternarConductores == true) {
+                vm.alternarConductores = false;
+            } else {
+                vm.alternarConductores = true;
+            }
+        };
 
         function documentacionPorVencer(conductor) {
             const fecha_licencia = conductor.fecha_licencia ? new Date(conductor.fecha_licencia) : null;

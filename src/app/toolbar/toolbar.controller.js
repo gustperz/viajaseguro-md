@@ -7,9 +7,10 @@
         .controller('ToolbarController', ToolbarController);
 
     /** @ngInject */
-    function ToolbarController($mdSidenav, msNavigationService, $state)
+    function ToolbarController($mdSidenav, msNavigationService, $state, authService)
     {
         var vm = this;
+        vm.usuario = authService.getCurrentUser();
 
         vm.bodyEl = angular.element('body');
         vm.fecha = new Date();
@@ -17,6 +18,7 @@
         // Methods
         vm.toggleSidenav = toggleSidenav;
         vm.logout = logout;
+        vm.irPerfil = irPerfil;
         vm.toggleMsNavigationFolded = toggleMsNavigationFolded;
 
         //////////
@@ -33,6 +35,9 @@
 
         }
 
+        function irPerfil() {
+            $state.go('app.empresa_perfil')
+        }
 
         /**
          * Toggle sidenav

@@ -1,0 +1,121 @@
+<div layout="row" layout-wrap>
+
+    <div class="about" layout="column" flex="100" flex-gt-sm="50" flex-gt-md="65">
+        <div class="profile-box info-box general md-whiteframe-1dp" layout="column">
+            <header class="md-accent-bg">
+                <div class="title">Información general</div>
+            </header>
+            <form name="infoGeneral" novalidate>
+                <div class="content" layout="row" layout-wrap flex>
+
+                    <div class="info-line">
+                        <md-input-container>
+                            <label for="nit">Nit</label>
+                            <input id="nit" type="text" name="nit" ng-model="vm.empresaIgeneral.nit" aria-label="nit">
+                        </md-input-container>
+                    </div>
+
+                    <div class="info-line">
+                        <md-input-container>
+                            <label for="n_corto">Nombre corto</label>
+                            <input id="n_corto" type="text" name="n_corto" ng-model="vm.empresaIgeneral.nombre_corto"
+                                   aria-label="nombre_corto">
+                        </md-input-container>
+                    </div>
+
+                    <div class="info-line">
+                        <md-input-container>
+                            <label for="n_largo">Nombre largo</label>
+                            <input id="n_largo" type="text" name="n_largo" ng-model="vm.empresaIgeneral.nombre_largo"
+                                   aria-label="n_largo">
+                        </md-input-container>
+                    </div>
+
+                    <div class="info-line">
+                        <md-input-container>
+                            <label for="direccion">Dirección</label>
+                            <input id="direccion" type="text" name="direccion" ng-model="vm.empresaIgeneral.direccion"
+                                   aria-label="direccion">
+                        </md-input-container>
+                    </div>
+
+                    <div class="info-line">
+                        <md-input-container>
+                            <label for="telefono">Telefono</label>
+                            <input id="telefono" type="text" name="telefono" ng-model="vm.empresaIgeneral.telefono"
+                                   aria-label="telefono">
+                        </md-input-container>
+                    </div>
+                    <br>
+                </div>
+                <div style="margin-top: -30px; text-align: center">
+                    <md-button ng-click="vm.modificarInfoGeneral()"
+                               class="boton-guardar-dialog brad-30">
+                        Modificar
+                    </md-button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="about-sidebar" layout="column" flex="100" flex-gt-sm="50" flex-gt-md="35">
+        <div class="profile-box friends md-whiteframe-1dp" layout="column">
+            <header class="md-accent-bg" layout="row" layout-align=
+                    "space-between center">
+                <div class="title">Persona juridica</div>
+
+            </header>
+            <form name="infoPjuridica" novalidate>
+                <div class="content" layout="row" layout-wrap>
+                    <div class="info-line">
+                        <md-input-container>
+                            <label for="pjuridica">Identificación</label>
+                            <input id="pjuridica" type="text" name="pjuridica" ng-model="vm.empresaPjuridica.pjuridica"
+                                   aria-label="pjuridica">
+                        </md-input-container>
+                    </div>
+                </div>
+                <div style="margin-top: -45px; text-align: center">
+                    <md-button ng-click="vm.modificarPjuridica()"
+                               class="boton-guardar-dialog brad-30">
+                        Modificar
+                    </md-button>
+                </div>
+            </form>
+
+        </div>
+
+        <div class="profile-box friends md-whiteframe-1dp" layout="column">
+            <header class="md-accent-bg" layout="row" layout-align="space-between center">
+                <div class="title">Resolución</div>
+            </header>
+            <form name="infoResolucion" novalidate>
+                <div class="content" layout="row">
+
+                    <div class="info-line">
+                        <md-input-container>
+                            <label for="n_resolucion">Numero de resolución</label>
+                            <input id="n_resolucion" type="text" name="n_resolucon"
+                                   ng-model="vm.empresaResoculicon.nresolucon" aria-label="n_resolucion">
+                        </md-input-container>
+                    </div>
+
+                    <div class="info-line">
+                        <label>Fecha resolución</label>
+                        <md-datepicker ng-model="vm.empresaResoculicon.fecha_resolucion"
+                                       md-placeholder="Fecha resolución">
+                        </md-datepicker>
+                    </div>
+                </div>
+
+                <div style="margin-top: -45px; text-align: center">
+                    <md-button ng-click="vm.modificarResolucion()"
+                               class="boton-guardar-dialog brad-30">
+                        Modificar
+                    </md-button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

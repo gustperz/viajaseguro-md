@@ -174,6 +174,27 @@
                 </div>
             </div>
         </md-input-container>
+
+        <md-input-container flex="100" flex-gt-xs="50">
+            <md-icon md-font-icon="icon-alphabetical"></md-icon>
+            <label>Asignar a central</label>
+            <md-select ng-model="vm.conductor.central" required name="central">
+                <md-content ms-scroll>
+                    <md-option ng-disabled="true">Central a asignar</md-option>
+                    <md-option ng-repeat="central in vm.centrales" ng-value="central.id"  title="{{central.ciudad.nombre}}"
+                               ng-selected="central.id === vm.conductor.central ? 'true' : 'false' ">
+                        {{central.ciudad.nombre}}
+                    </md-option>
+                </md-content>
+            </md-select>
+            <div ng-messages="verticalStep1.central.$error"
+                 ng-show="verticalStep1.central.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>La central es requerida.</span>
+                </div>
+            </div>
+        </md-input-container>
     </div>
 
 </div>

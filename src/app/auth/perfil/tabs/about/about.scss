@@ -1,0 +1,43 @@
+#profile {
+
+    .about-tab {
+        max-width: 1200px;
+
+        .about {
+            padding: 8px;
+
+            .general {
+
+            }
+        }
+
+        .about-sidebar {
+            padding: 8px 8px 8px 32px;
+
+            .friends {
+
+                .content {
+
+                    .friend {
+                        padding: 4px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// RESPONSIVE
+@media screen and (max-width: $layout-breakpoint-sm) {
+
+    #profile {
+
+        .about-tab {
+
+            .about-sidebar {
+                padding: 8px
+            }
+        }
+    }
+
+}
