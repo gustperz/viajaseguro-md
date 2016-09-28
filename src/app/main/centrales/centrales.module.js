@@ -15,16 +15,6 @@
     /** @ngInject */
     function config($stateProvider)
     {
-        // State
-        $stateProvider
-            .state('app.sample', {
-                url    : '/sample',
-                views  : {
-                    'content@app': {
-                        templateUrl: 'app/main/sample/sample.html',
-                        controller : 'SampleController as vm'
-                    }
-                }
-            });
+
     }
 })();
