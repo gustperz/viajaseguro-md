@@ -12,11 +12,13 @@
         var vmsolicitudes = this;
         vmsolicitudes.solicitud = {};
         vmsolicitudes.solicitudes = JSON.parse(sessionStorage.getItem('solicitudes')) || [];
+        vmsolicitudes.solicitudesConductores = JSON.parse(sessionStorage.getItem('solicitudesConductores')) || [];
 
         // metodos
         vmsolicitudes.cancelNesSolicitud = cancelNewSolicitud;
         vmsolicitudes.saveNewSolicitud = saveNewSolicitud;
         vmsolicitudes.rejectSolicitud = rejectSolicitud;
+        vmsolicitudes.assignSolicitudConductor = assignSolicitudConductor;
 
         $sails.on('newSolicitud', function (response) {
             vmsolicitudes.solicitudes.push(SocketcSailsService.newSolicitud(response));
@@ -58,6 +60,14 @@
             }
         }
 
+        function assignSolicitudConductor($index, conductor) {
+            var solicitud = vmsolicitudes.solicitudes[$index];
+            solicitud.conductor = conductor;
+            vmsolicitudes.solicitudes.splice($index, 1);
+            sessionStorage.setItem('solicitudes', JSON.stringify(vmsolicitudes.solicitudes));
+            vmsolicitudes.solicitudesConductores.push(solicitud);
+            sessionStorage.setItem('solicitudesConductores', JSON.stringify(vmsolicitudes.solicitudesConductores));
+        }
     }
 })();
 //
