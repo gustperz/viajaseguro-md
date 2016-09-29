@@ -8,8 +8,7 @@
         .module('app.centrales.despacho')
         .controller('ListaSolicitudesController', controller);
 
-    function controller(SocketcSailsService, authService, $sails, $mdMenu) {
-        SocketcSailsService.suscribe(authService.getCurrentUser().central.id);
+    function controller(SocketcSailsService, $sails, $mdMenu) {
         var vmsolicitudes = this;
         vmsolicitudes.solicitud = {};
         vmsolicitudes.solicitudes = JSON.parse(sessionStorage.getItem('solicitudes')) || [];
