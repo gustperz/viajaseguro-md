@@ -11,7 +11,8 @@
                 'ngMessages',
                 'ngSanitize',
                 'ngMaterial',
-                'ui.router'
+                'ui.router',
+                'ngSails'
                 
             ]);
 })();

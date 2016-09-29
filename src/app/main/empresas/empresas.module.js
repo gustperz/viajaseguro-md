@@ -37,16 +37,6 @@
             weight:1
         });
 
-        msNavigationServiceProvider.saveItem('rutas', {
-            title    : 'Rutas',
-            icon     : 'icon-map',
-            state    : 'app.empresa_rutas',
-            /*stateParams: {
-             'param1': 'page'
-             },*/
-            weight:1
-        });
-
         msNavigationServiceProvider.saveItem('centrales', {
             title    : 'Centrales',
             icon     : 'icon-store',

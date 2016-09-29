@@ -1,4 +1,4 @@
-<div id="origen" layout="row">
+<div id="origen" layout="row" style="margin-top: 10px">
     <h3>Origen</h3>
     <section layout="row" layout-align="center center">
         <md-button ng-repeat="ciudad in vmrutas.ciudades_origen track by ciudad.codigo"
@@ -36,7 +36,7 @@
         </md-menu>
     </section>
 </div>
-<div id="destino" layout="row" class="margin-left-15">
+<div id="destino" layout="row" class="margin-left-15"style="margin-top: 10px">
     <h3>Destino</h3>
     <section layout="row" layout-align="center center">
         <md-button ng-repeat="ruta in vmrutas.ciudades_origen[vm.despacho.origen.codigo].rutas track by ruta.destino"

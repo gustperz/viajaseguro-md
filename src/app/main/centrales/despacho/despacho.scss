@@ -55,6 +55,15 @@
   #lista-conductores {
     min-width: 200px !important;
   }
+  .md-menu-solicitudes {
+    .icon {
+      margin-top: -10px;
+      margin-left: -12px;
+    }
+  }
+  .md-lista-solicitudes {
+    height: 30px !important;
+  }
 
   #info-despacho {
     border: 1px solid $primary-color;
@@ -79,32 +88,102 @@
       background-color: white !important;
       border-radius: 15px;
       border: 1px solid $primary-color;
-      md-icon{
+      md-icon {
         color: #94c11e;
       }
     }
   }
 
   #solicitudes {
+    .content-lista {
+      overflow: hidden;
+      margin-left: -23px !important;
+      margin-right: -23px !important;
+      .todo-list-pane {
+        background: white;
+        &.single-scroll {
+
+          .todo-list-pane {
+            overflow: hidden;
+          }
+        }
+
+        .todo-items {
+          overflow-x: hidden;
+        }
+      }
+
+    }
+
+    .todo-item {
+      border: 1px solid $primary-color;
+      margin-bottom: 5px !important;
+      border-radius: 15px !important;
+      position: relative;
+      padding: 6px;
+      text-transform: none;
+      cursor: pointer;
+
+      &.todo-item-placeholder {
+        border-radius: 15px !important;
+        background: rgba(0, 0, 0, 0.12);
+        * {
+          border-radius: 15px !important;
+          opacity: 0;
+        }
+      }
+
+
+      .info {
+        margin: 0 16px 0 8px;
+
+        .title {
+          font-size: 15px;
+          font-weight: 500;
+        }
+
+        .notes {
+          margin-top: 4px;
+        }
+      }
+    }
+
+    .todo-item-ghost {
+      opacity: 1 !important;
+      background: #FFFFFF;
+      box-shadow: $whiteframe-shadow-14dp;
+      border: none;
+
+      .md-ripple-container {
+        display: none;
+      }
+    }
+
+    .content-floating-solicitudes{
+      border-radius: 15px !important;
+      border: 1px solid $primary-color !important;
+    }
+
   }
 
   .title-info {
     margin-top: -5px !important;
     color: $primary-color;
+  }
 
-    .button-add {
-      background-color: #94c11e;
-      width: 28px;
-      height: 28px;
-      min-height: 28px;
-      margin: 0 !important;
-      padding-left: 3px;
-      line-height: 27px;
-      md-icon {
-        position: relative;
-        left: -1px;
-      }
-      //left: 10px;
+  .button-add {
+    background-color: #94c11e;
+    width: 28px;
+    height: 28px;
+    min-height: 28px;
+    margin: 0 !important;
+    padding-left: 3px;
+    line-height: 27px;
+    md-icon {
+      position: relative;
+      left: -1px;
     }
+    //left: 10px;
   }
 }
+
