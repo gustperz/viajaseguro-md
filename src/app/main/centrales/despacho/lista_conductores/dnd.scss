@@ -34,7 +34,7 @@
  */
 .dnd-conductores ul[dnd-list] .dndPlaceholder {
     display: block;
-    background-color: #ddd;
+    background-color: $primary-color;
     min-height: 42px;
 }
 
@@ -46,7 +46,8 @@
  * browsers we can use event.offsetY for this.
  */
 .dnd-conductores ul[dnd-list] li {
-    background-color: #fff;
+    text-align: center;
+    background-color: #EDEDED;
     /*border: 1px solid #ddd;*/
     display: block;
     /*padding: 10px 15px;*/
@@ -63,6 +64,6 @@
  * Show selected elements in green
  */
 .dnd-conductores ul[dnd-list] li.selected {
-    background-color: #dff0d8;
+    background-color: #EDEDED;
     color: #3c763d;
 }

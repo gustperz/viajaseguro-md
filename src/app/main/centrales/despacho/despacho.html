@@ -17,13 +17,14 @@
             <!--CONTENT-->
             <div layout="row" class="content-todo" flex ng-show="vm.despacho.destino">
                 <!--CONDUCTORES-->
-                <div layout="row" id="lista-conductores" flex="20" layout="column" class="bordered p-10"
-                     ng-controller="ListaConductoresController as vmconductores"
-                     ng-include="'app/main/centrales/despacho/lista_conductores/lista_conductores.tmpl.html'">
+                <div layout="row" id="lista-conductores" flex="25" layout="column" class="bordered p-10">
+                    <div class="content" flex ms-scroll ng-controller="ListaConductoresController as vmconductores"
+                         ng-include="'app/main/centrales/despacho/lista_conductores/lista_conductores.tmpl.html'">
+                    </div>
                 </div>
 
                 <!--DESPACHO-->
-                <div layout="row" id="info-despacho" flex="50" layout="column" class="bordered p-10"
+                <div layout="row" id="info-despacho" flex="45" layout="column" class="bordered p-10"
                      ng-include="'app/main/centrales/despacho/includes/asignaciones.html'">
                 </div>
 

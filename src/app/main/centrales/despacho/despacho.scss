@@ -52,8 +52,34 @@
     background-color: $primary-color;
   }
 
+  #lista-conductores{
+    .dnd-conductores{
+      margin-left: -50px !important;
+    }
+  }
+
+
   #lista-conductores {
     min-width: 200px !important;
+    .image-dnd-list{
+      text-align: center;
+      margin-top: -30px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: none !important;
+    }
+    .text-turno{
+      position: inherit;
+      margin-top: 10px;
+      margin-left: -60px;
+      font-size: 15px;
+    }
+    .button-quitar-turno{
+      margin-top: -10px !important;
+      margin-right: -60px;
+      float: right !important;
+    }
   }
   .md-menu-solicitudes {
     .icon {

@@ -13,7 +13,20 @@
                     dnd-selected="vmconductores.selectedConductor = turno.conductor"
                     dnd-dragend="vmconductores.updateTurnos()"
                     class=" grey lighten-3  collection-item">
-                    <strong style="font-size: 12.3px"><span class="title">{{turno.conductor.nombres}} {{turno.conductor.apellidos}}</span></strong>
+                    <div layout="row" class="text-turno">
+                        <div flex>
+                            <b>{{turno.pos}}</b>
+                        </div>
+                        <div flex class="button-quitar-turno">
+                            <md-button class="md-icon-button" aria-label="quitar-conductor">
+                                <md-icon md-font-icon="icon-close" class="icon"></md-icon>
+                                <md-tooltip>Quitar</md-tooltip>
+                            </md-button>
+                        </div>
+                    </div>
+                    <img class="image-dnd-list" ng-src="http://localhost:1337/images/conductores/{{turno.conductor.imagen}}" alt="">
+                    <br>
+                    <strong style="font-size: 12.3px"><span class="title">{{turno.conductor.codigo_vial}} - {{turno.conductor.nombres}} {{turno.conductor.apellidos}}</span></strong>
                 </li>
             </ul>
         </div>
