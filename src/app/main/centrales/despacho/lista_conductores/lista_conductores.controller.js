@@ -13,8 +13,12 @@
     /** @ngInject */
     function controller(Despacho, Rutas, $mdDialog){
         var vm = this;
+        var ruta = {};
+
+        vm.turnos = [];
 
         vm.addConductor = addConductor;
+        vm.updateTurnos = updateTurnos;
 
         //////////
 
@@ -22,9 +26,11 @@
 
         //////////
 
-        function loadConductores(ruta) {
-            var ruta = Despacho._ruta = Rutas.get(ruta.id);
-            vm.turnos = ruta.getList('turnos');
+        function loadConductores(_ruta) {
+            ruta = Despacho._ruta = Rutas.get(_ruta.id);
+            ruta.getList('turnos').then(function (turnos) {
+                vm.turnos = turnos.plain();
+            });
         }
 
         function addConductor(event) {
@@ -35,8 +41,23 @@
                 targetEvent: event,
                 clickOutsideToClose:true,
             }).then(function (conductores) {
-                console.log(conductores);
+                conductores.forEach(function (conductor) {
+                    vm.turnos.push({
+                        pos: vm.turnos.length + 1,
+                        conductor: conductor
+                    });
+                })
+                updateTurnos();
             }, function () {});
+        }
+        
+        function updateTurnos() {
+            console.log(vm.turnos)
+            var turnos = vm.turnos.map(function (turno, index) {
+                turno.pos = index + 1;
+                return { pos: turno.pos, conductor: turno.conductor.id };
+            })
+            ruta.post('turnos', {turnos: turnos})
         }
     }
 })();
