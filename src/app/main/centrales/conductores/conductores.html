@@ -31,7 +31,7 @@
                    ng-repeat="conductor in vm.conductores | filter: buscar">
             <ms-widget-front class="padding-16 md-white-bg" layout="column" layout-align="center center">
                 <div class="media">
-                    <img ng-src="http://localhost:1337/images/conductores/{{conductor.imagen}}">
+                    <img ng-src="http://api.viajaseguro.co/images/conductores/{{conductor.imagen}}">
                 </div>
                 <span flex></span>
                 <div class="widget-conductores-nombre" layout="row" layout-fill>
