@@ -52,43 +52,29 @@
     background-color: $primary-color;
   }
 
-  #lista-conductores{
-    .dnd-conductores{
-      margin-left: -50px !important;
-    }
-  }
-
-
   #lista-conductores {
-    min-width: 200px !important;
+    min-width: 245px !important;
     .image-dnd-list{
       text-align: center;
       margin-top: -30px;
-      width: 120px;
-      height: 120px;
+      margin-bottom: 5px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
       border: none !important;
     }
     .text-turno{
-      position: inherit;
-      margin-top: 10px;
-      margin-left: -60px;
-      font-size: 15px;
+      font-size: 16px;
+      margin: 0 6px;
+      padding: 8px;
     }
     .button-quitar-turno{
-      margin-top: -10px !important;
-      margin-right: -60px;
-      float: right !important;
+      margin-right: 3px;
     }
-  }
-  .md-menu-solicitudes {
-    .icon {
-      margin-top: -10px;
-      margin-left: -12px;
+    .title{
+      font-size: 1.4rem !important;
+      font-weight: bold;
     }
-  }
-  .md-lista-solicitudes {
-    height: 30px !important;
   }
 
   #info-despacho {
@@ -190,10 +176,22 @@
       border: 1px solid $primary-color !important;
     }
 
+    .md-menu-solicitudes {
+      .icon {
+        margin-top: -10px;
+        margin-left: -12px;
+      }
+    }
+
+    .md-lista-solicitudes {
+      height: 30px !important;
+    }
+
   }
 
   .title-info {
     margin-top: -5px !important;
+    margin-bottom: 5px;
     color: $primary-color;
   }
 
