@@ -41,25 +41,19 @@
             ruta = Despacho._ruta = Rutas.get(_ruta.id);
             ruta.getList('turnos').then(function (turnos) {
                 vm.turnos = turnos;
-                // ****************************************************************
-                // ****************************************************************
-                // ****************************************************************
-                // ****************************************************************
-                // ****************************************************************
-                // **************************CAMBIAR*******************************
-                // ****************************************************************
-                // ****************************************************************
-                // ****************************************************************
-                // ****************************************************************
-                // ****************************************************************
-                vm.selectedConductor = turnos[0];
+                vm.selectedConductor = turnos.find(function (turno) {
+                    return turno.pos === 1;
+                });
             });
         }
 
         function loadConductoresLocalStorage(ruta) {
             var turnos = sessionStorage.getItem('turnosruta'+ruta.destino);
             vm.turnos = turnos ? JSON.parse(turnos) : [];
-            vm.selectedConductor = vm.turnos[0];
+            vm.selectedConductor = vm.turnos.find(function (turno) {
+                return turno.pos === 1;
+            });
+            console.log(vm.selectedConductor)
         }
 
         function addConductor(event) {
