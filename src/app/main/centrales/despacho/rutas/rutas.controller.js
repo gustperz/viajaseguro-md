@@ -76,7 +76,8 @@
             vm.ciudades_origen[Despacho.origen.codigo].rutas.push({
                 nombre_ciudad: ciudad.nombre,
                 destino: ciudad.codigo,
-                trayecto: trayecto
+                trayecto: trayecto,
+                no_central: true
             });
             sessionStorage.setItem('ciudades_origen', JSON.stringify(vm.ciudades_origen));
             Despacho.destino = {

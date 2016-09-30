@@ -11,15 +11,17 @@
                 dnd-draggable="turno" layout="column"
                 dnd-moved="vmconductores.turnos.splice($index, 1)"
                 dnd-effect-allowed="move"
-                dnd-selected="vmconductores.selectedConductor = turno.conductor"
+                dnd-selected="vmconductores.selectConductort(turno.conductor)"
                 dnd-dragend="vmconductores.updateTurnos()" dnd-auto-scroll="true"
-                class=" grey lighten-3  collection-item">
+                class=" grey lighten-3  collection-item"
+                ng-class="{'selected': vmconductores.selectedConductor.id == turno.conductor.id}">
                 <div layout="row">
                     <div class="text-turno">
                         <b>{{turno.pos}}</b>
                     </div>
                     <span flex></span>
-                    <md-button class="md-icon-button button-quitar-turno" aria-label="quitar-conductor">
+                    <md-button class="md-icon-button button-quitar-turno" aria-label="quitar-conductor"
+                               ng-click="vmconductores.removerConductor($index)">
                         <md-icon md-font-icon="icon-close" class="icon"></md-icon>
                         <md-tooltip>Quitar</md-tooltip>
                     </md-button>

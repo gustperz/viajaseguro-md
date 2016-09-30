@@ -42,7 +42,7 @@
  */
 .dnd-conductores ul[dnd-list] .dndPlaceholder {
     display: block;
-    background-color: $primary-color;
+    background-color: #ddd;
     min-height: 42px;
 }
 
@@ -72,6 +72,6 @@
  * Show selected elements in green
  */
 .dnd-conductores ul[dnd-list] li.selected {
-    background-color: #EDEDED;
-    color: #3c763d;
+    background-color: $primary-color;
+    * {color: white !important;}
 }
