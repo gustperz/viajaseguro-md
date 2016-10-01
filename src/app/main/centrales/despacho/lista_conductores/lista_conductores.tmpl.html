@@ -11,7 +11,7 @@
                 dnd-draggable="turno" layout="column"
                 dnd-moved="vmconductores.turnos.splice($index, 1)"
                 dnd-effect-allowed="move"
-                dnd-selected="vmconductores.selectConductort(turno.conductor)"
+                dnd-selected="vmconductores.selectConductor(turno.conductor)"
                 dnd-dragend="vmconductores.updateTurnos()" dnd-auto-scroll="true"
                 class=" grey lighten-3  collection-item"
                 ng-class="{'selected': vmconductores.selectedConductor.id == turno.conductor.id}">
