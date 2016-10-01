@@ -41,19 +41,21 @@
             ruta = Despacho._ruta = Rutas.get(_ruta.id);
             ruta.getList('turnos').then(function (turnos) {
                 vm.turnos = turnos;
-                vm.selectedConductor = turnos.find(function (turno) {
-                    return turno.pos === 1;
-                });
+                selectConductorPos1()
             });
         }
 
         function loadConductoresLocalStorage(ruta) {
             var turnos = sessionStorage.getItem('turnosruta'+ruta.destino);
             vm.turnos = turnos ? JSON.parse(turnos) : [];
-            vm.selectedConductor = vm.turnos.find(function (turno) {
+            selectConductorPos1();
+        }
+
+        function selectConductorPos1() {
+            var turno1 = vm.turnos.find(function (turno) {
                 return turno.pos === 1;
             });
-            console.log(vm.selectedConductor)
+            vm.selectedConductor = turno1 ? turno1.conductor : undefined;
         }
 
         function addConductor(event) {
@@ -64,6 +66,7 @@
                 targetEvent: event,
                 clickOutsideToClose:true,
             }).then(function (conductores) {
+                console.log(conductores)
                 if(ruta.no_central) return addConductoresLocalStorage(conductores);
 
                 var turnos = vm.turnos.map(function (turno, index) {
