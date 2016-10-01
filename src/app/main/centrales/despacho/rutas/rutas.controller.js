@@ -73,17 +73,16 @@
         }
 
         function addDestino(ciudad, trayecto) {
-            vm.ciudades_origen[Despacho.origen.codigo].rutas.push({
+            var ruta = {
                 nombre_ciudad: ciudad.nombre,
                 destino: ciudad.codigo,
                 trayecto: trayecto,
                 no_central: true
-            });
-            sessionStorage.setItem('ciudades_origen', JSON.stringify(vm.ciudades_origen));
-            Despacho.destino = {
-                codigo: ciudad.codigo,
-                nombre: ciudad.nombre
             };
+            vm.ciudades_origen[Despacho.origen.codigo].rutas.push(ruta);
+            sessionStorage.setItem('ciudades_origen', JSON.stringify(vm.ciudades_origen));
+            Despacho.destino = { codigo: ciudad.codigo, nombre: ciudad.nombre };
+            selectDestino(ruta);
             $mdMenu.hide();
         }
 
