@@ -56,7 +56,7 @@
                     ng-class="{'selected' : vm.selected === vehiculo, 'vehi_doc_venc': vehiculo.doc_venc}">
                     <td>
                         <img class="imagen-empresa"
-                             ng-src="http://localhost:1337/images/vehiculos/{{vehiculo.imagen}}">
+                             ng-src="http://api.viajaseguro.co/images/vehiculos/{{vehiculo.imagen}}">
                     </td>
                     <td class="name" >{{vehiculo.placa}}</td>
                     <td class="type" hide-xs>{{vehiculo.modelo}}</td>
@@ -98,7 +98,7 @@
             <div class="image-content">
                 <h3 class="title-empresa"><b>{{vm.selected.placa}}</b></h3><br>
                 <img alt="Conductor" class="empresa-imagen"
-                     ng-src="http://localhost:1337/images/vehiculos/{{vm.selected.imagen}}">
+                     ng-src="http://api.viajaseguro.co/images/vehiculos/{{vm.selected.imagen}}">
             </div>
             <hr>
         </div>

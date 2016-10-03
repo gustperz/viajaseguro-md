@@ -56,7 +56,7 @@
                     ng-click="vm.selectedEmpresa(empresa, $index)"
                     ng-class="{'selected' : vm.selected === empresa}">
                     <td>
-                        <img class="imagen-empresa" ng-src="http://localhost:1337/images/empresas/{{empresa.logo}}">
+                        <img class="imagen-empresa" ng-src="http://api.viajaseguro.co/images/empresas/{{empresa.logo}}">
                     </td>
                     <td class="name" hide-xs>{{empresa.nit}}</td>
                     <td class="type">{{empresa.nombre_corto}}</td>
@@ -100,7 +100,7 @@
             <div class="image-content">
                 <h1 class="title-empresa">{{vm.selected.nombre_corto}}</h1><br>
                 <img alt="{{vm.selected.nombre_corto}}" class="empresa-imagen"
-                     ng-src="http://localhost:1337/images/empresas/{{vm.selected.logo}}">
+                     ng-src="http://api.viajaseguro.co/images/empresas/{{vm.selected.logo}}">
             </div>
             <hr>
         </div>

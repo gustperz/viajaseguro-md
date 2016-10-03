@@ -1,5 +1,5 @@
 <div class="user-data" layout="column" layout-align="center center">
-    <img ng-if="vm.userRol != 'SUPER_ADM'" alt="image" class="user-imagen" ng-src="http://localhost:1337/images/empresas/{{vm.userImagen}}">
+    <img ng-if="vm.userRol != 'SUPER_ADM'" alt="image" class="user-imagen" ng-src="http://api.viajaseguro.co/images/empresas/{{vm.userImagen}}">
     <img ng-if="vm.userRol == 'SUPER_ADM'" alt="image" class="user-imagen" ng-src="{{vm.userImagen}}">
     <div id="user-data-name">{{vm.userNombre}}</div>
     <div id="user-data-rol">{{vm.userRol}}</div>

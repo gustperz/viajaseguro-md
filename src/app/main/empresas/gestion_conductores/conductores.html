@@ -68,7 +68,7 @@
                     ng-class="{'selected' : vm.selected === conductor, 'cond_doc_venc': conductor.doc_venc}">
                     <td>
                         <img class="imagen-empresa"
-                             ng-src="http://localhost:1337/images/conductores/{{conductor.imagen}}">
+                             ng-src="http://api.viajaseguro.co/images/conductores/{{conductor.imagen}}">
                     </td>
                     <td class="name" hide-xs>{{conductor.identificacion}}</td>
                     <td class="type">{{conductor.nombres}} {{conductor.apellidos}}</td>
@@ -103,7 +103,7 @@
                     ng-class="{'selected' : vm.selected === conductor, 'cond_doc_venc': conductor.doc_venc}">
                     <td>
                         <img class="imagen-empresa"
-                             ng-src="http://localhost:1337/images/conductores/{{conductor.imagen}}">
+                             ng-src="http://api.viajaseguro.co/images/conductores/{{conductor.imagen}}">
                     </td>
                     <td class="name" hide-xs>{{conductor.identificacion}}</td>
                     <td class="type">{{conductor.nombres}} {{conductor.apellidos}}</td>
@@ -145,7 +145,7 @@
             <div class="image-content">
                 <h3 class="title-empresa"><b>{{vm.selected.nombres}} {{vm.selected.apellidos}}</b></h3><br>
                 <img alt="Conductor" class="empresa-imagen"
-                     ng-src="http://localhost:1337/images/conductores/{{vm.selected.imagen}}">
+                     ng-src="http://api.viajaseguro.co/images/conductores/{{vm.selected.imagen}}">
             </div>
             <hr>
         </div>
