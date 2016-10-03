@@ -7,10 +7,9 @@
         .controller('DespachoController', DespachoController);
 
     /** @ngInject */
-    function DespachoController(Despacho, authService, SocketcSailsService){
+    function DespachoController(Despacho){
         var vm = this;
         vm.despacho = Despacho;
-        SocketcSailsService.suscribe(authService.getCurrentUser().central.id);
 
         //////////
     }

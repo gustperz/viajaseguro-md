@@ -108,9 +108,6 @@
 
   #solicitudes {
     .content-lista {
-      overflow: hidden;
-      margin-left: -23px !important;
-      margin-right: -23px !important;
       .todo-list-pane {
         background: white;
         &.single-scroll {
@@ -125,52 +122,32 @@
         }
       }
 
-    }
-
-    .todo-item {
-      border: 1px solid $primary-color;
-      margin-bottom: 5px !important;
-      border-radius: 15px !important;
-      position: relative;
-      padding: 6px;
-      text-transform: none;
-      cursor: pointer;
-
-      &.todo-item-placeholder {
+      .todo-item {
+        border: 1px solid $primary-color;
+        margin-bottom: 5px !important;
         border-radius: 15px !important;
-        background: rgba(0, 0, 0, 0.12);
-        * {
-          border-radius: 15px !important;
-          opacity: 0;
-        }
-      }
+        position: relative;
+        padding: 6px;
+        text-transform: none;
+        cursor: pointer;
 
+        .info {
+          margin: 0 16px 0 8px;
 
-      .info {
-        margin: 0 16px 0 8px;
+          .title {
+            font-size: 15px;
+            font-weight: 500;
+          }
 
-        .title {
-          font-size: 15px;
-          font-weight: 500;
-        }
-
-        .notes {
-          margin-top: 4px;
+          .notes {
+            margin-top: 4px;
+          }
         }
       }
     }
 
-    .todo-item-ghost {
-      opacity: 1 !important;
-      background: #FFFFFF;
-      box-shadow: $whiteframe-shadow-14dp;
-      border: none;
 
-      .md-ripple-container {
-        display: none;
-      }
-    }
-
+    //################################################3333
     .content-floating-solicitudes{
       border-radius: 15px !important;
       border: 1px solid $primary-color !important;

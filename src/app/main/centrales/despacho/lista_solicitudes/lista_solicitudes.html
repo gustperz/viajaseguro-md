@@ -4,53 +4,49 @@
         <md-tooltip><span>Nueva solicitud</span></md-tooltip>
     </md-button>
 </h2>
-<div class="content-lista" layout="row" flex>
-    <md-content class="todo-list-pane" flex>
-        <div class="todo-items">
-            <div class="todo-item" md-ink-ripple layout="row" layout-align="start center"
-                 ng-repeat="solicitud in vmsolicitudes.solicitudes track by $index"
-                 ng-if="vm.despacho.destino.codigo == solicitud.codigo_ruta">
-                <div layout="row" layout-align="start center" flex>
-                    <div class="info" flex>
-                        <div class="title">
-                            {{solicitud.cliente.nombre}}
-                        </div>
-                        <div ng-if="solicitud.pasajeros">
-                            <div class="notes">
-                                {{solicitud.pasajeros.length}} pasajeros en {{solicitud.cliente.direccion}}
-                            </div>
-                        </div>
+<md-content class="content-lista" ms-scroll>
+    <div class="todo-item" md-ink-ripple layout="row" layout-align="start center"
+         ng-repeat="solicitud in vmsolicitudes.solicitudes track by $index"
+         ng-if="vm.despacho.destino.codigo == solicitud.codigo_ruta">
+        <div layout="row" layout-align="start center" flex>
+            <div class="info" flex>
+                <div class="title">
+                    {{solicitud.cliente.nombre}}
+                </div>
+                <div ng-if="solicitud.pasajeros">
+                    <div class="notes">
+                        {{solicitud.pasajeros.length}} pasajeros en {{solicitud.cliente.direccion}}
                     </div>
                 </div>
-
-                <md-menu class="md-menu-solicitudes">
-                    <md-button class="md-icon-button" aria-label="add-solicitud"
-                               ng-click="$mdOpenMenu($event)">
-                        <md-icon md-font-icon="icon-eye" class="icon"></md-icon>
-                    </md-button>
-                    <md-menu-content width="6" style="height: 70px" ms-scroll>
-                        <div layout="row">
-                            <div flex>
-                                <div class="title" layout-padding ng-repeat="pasajero in solicitud.pasajeros">
-                                    <span>{{pasajero.nombre}} - {{pasajero.cedula}}</span>
-                                </div>
-                            </div>
-                            <div flex style="margin-top: 10px">
-                                <md-button class="md-icon-button" aria-label="asignar-solicitud"
-                                           ng-click="vmsolicitudes.assignSolicitudConductor($index, vm.despacho.conductor.id)">
-                                    <md-icon md-font-icon="icon-arrow-left-bold" class="icon"></md-icon>
-                                    <md-tooltip>Asignar</md-tooltip>
-                                </md-button>
-                                <md-button class="md-icon-button" aria-label="asignar-solicitud"
-                                           ng-click="vmsolicitudes.rejectSolicitud($index)">
-                                    <md-icon md-font-icon="icon-close" class="icon"></md-icon>
-                                    <md-tooltip>Rechazar</md-tooltip>
-                                </md-button>
-                            </div>
-                        </div>
-                    </md-menu-content>
-                </md-menu>
             </div>
         </div>
-    </md-content>
-</div>
+
+        <md-menu class="md-menu-solicitudes">
+            <md-button class="md-icon-button" aria-label="add-solicitud"
+                       ng-click="$mdOpenMenu($event)">
+                <md-icon md-font-icon="icon-eye" class="icon"></md-icon>
+            </md-button>
+            <md-menu-content width="6" style="height: 70px" ms-scroll>
+                <div layout="row">
+                    <div flex>
+                        <div class="title" layout-padding ng-repeat="pasajero in solicitud.pasajeros">
+                            <span>{{pasajero.nombre}} - {{pasajero.cedula}}</span>
+                        </div>
+                    </div>
+                    <div flex style="margin-top: 10px">
+                        <md-button class="md-icon-button" aria-label="asignar-solicitud"
+                                   ng-click="vmsolicitudes.assignSolicitudConductor($index, vm.despacho.conductor.id)">
+                            <md-icon md-font-icon="icon-arrow-left-bold" class="icon"></md-icon>
+                            <md-tooltip>Asignar</md-tooltip>
+                        </md-button>
+                        <md-button class="md-icon-button" aria-label="asignar-solicitud"
+                                   ng-click="vmsolicitudes.rejectSolicitud(solicitud)">
+                            <md-icon md-font-icon="icon-close" class="icon"></md-icon>
+                            <md-tooltip>Rechazar</md-tooltip>
+                        </md-button>
+                    </div>
+                </div>
+            </md-menu-content>
+        </md-menu>
+    </div>
+</md-content>
