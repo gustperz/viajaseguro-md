@@ -6,13 +6,15 @@
 
     angular
         .module('app.centrales.despacho')
-        .service('Solitudes', SocketcSailsService);
+        .service('Solicitudes', SocketcSailsService);
 
     /* @ngInject */
     function SocketcSailsService($sails, Notify) {
         var solicitudes = undefined;
+        var solicitudes_asiganadas = {};
         return {
             'getList': getList,
+            'getAsignadas': getAsignadas,
             'create': create
         };
 
@@ -26,9 +28,15 @@
                     }
                 }, function (response) {
                     if (response.code == 'OK'){
-                        solicitudes = response.data.map(function (solicitud, index) {
-                            solicitud.index = index;
-                            return make(solicitud);
+                        solicitudes = [];
+                        response.data.forEach(function (solicitud) {
+                            if(solicitud.conductor){
+                                solicitudes_asiganadas[solicitud.conductor] || (solicitudes_asiganadas[solicitud.conductor] = []);
+                                solicitudes_asiganadas[solicitud.conductor].push(make(solicitud));
+                            } else {
+                                solicitud.index = solicitudes.length;
+                                solicitudes.push(make(solicitud));
+                            }
                         });
                         cb(solicitudes)
                     }
@@ -43,6 +51,10 @@
                     solicitudes.push(make(solicitud));
                 });
             }
+        }
+        
+        function getAsignadas() {
+            return solicitudes_asiganadas;
         }
 
         function create(solicitud) {
@@ -62,12 +74,12 @@
         function make(data) {
             function Solicitud(data) {
                 angular.extend(this, data);
-                this.index = undefined;
             }
 
             Solicitud.prototype = {
                 reject: rejectSolicitud,
                 update: updateEstado,
+                assignTo: assignTo,
             }
 
             function rejectSolicitud(motivo) {
@@ -90,7 +102,7 @@
 
             function updateEstado(estado) {
                 $sails.request({
-                    method: 'post',
+                    method: 'put',
                     url: '/solicitudes/'+this.id+'/estado',
                     data: {estado: estado},
                     headers: {
@@ -99,6 +111,26 @@
                 }, function (response) {
                     if (response.code == 'OK'){
                         console.log('ok')
+                    }else{
+                        console.log('fallo')
+                    }
+                });
+            }
+
+            function assignTo(conductor) {
+                var index = this.index;
+                $sails.request({
+                    method: 'put',
+                    url: '/solicitudes/'+this.id+'/estado',
+                    data: {estado: 'a', conductor: conductor},
+                    headers: {
+                        'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
+                    }
+                }, function (response) {
+                    if (response.code == 'OK'){
+                        solicitudes[index].conductor = conductor;
+                        solicitudes_asiganadas[conductor].push(solicitudes[index]);
+                        solicitudes.splice(index, 1);
                     }else{
                         console.log('fallo')
                     }

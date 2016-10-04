@@ -29,7 +29,7 @@
         //////////
 
         function selectConductor(conductor) {
-            vm.selectedConductor = conductor
+            vm.selectedConductor = conductor;
         }
 
         function loadConductores(_ruta) {
@@ -41,7 +41,7 @@
             ruta = Despacho._ruta = Rutas.get(_ruta.id);
             ruta.getList('turnos').then(function (turnos) {
                 vm.turnos = turnos;
-                selectConductorPos1()
+                selectConductorPos1();
             });
         }
 
@@ -56,6 +56,7 @@
                 return turno.pos === 1;
             });
             vm.selectedConductor = turno1 ? turno1.conductor : undefined;
+            Despacho.conductor = vm.selectedConductor;
         }
 
         function addConductor(event) {

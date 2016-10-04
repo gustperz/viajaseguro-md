@@ -8,7 +8,7 @@
         .module('app.centrales.despacho')
         .controller('ListaSolicitudesController', controller);
 
-    function controller(Solitudes, $mdMenu, Despacho) {
+    function controller(Solicitudes, $mdMenu, Despacho) {
         var vm = this;
         vm.solicitud = {};
 
@@ -20,8 +20,9 @@
 
         //////////
 
-        Solitudes.getList(function (solicitudes) {
+        Solicitudes.getList(function (solicitudes) {
             vm.solicitudes = solicitudes;
+            console.log(solicitudes)
         });
 
         //////////
@@ -33,7 +34,7 @@
 
         function saveNewSolicitud() {
             vm.solicitud.pasajeros = [vm.solicitud.cliente];
-            Solitudes.create(vm.solicitud);
+            Solicitudes.create(vm.solicitud);
             $mdMenu.hide();
         }
 
@@ -41,13 +42,8 @@
             solicitud.reject();
         }
 
-        function assignSolicitudConductor($index, conductor) {
-            var solicitud = vm.solicitudes[$index];
-            solicitud.conductor = conductor;
-            vm.solicitudes.splice($index, 1);
-            sessionStorage.setItem('solicitudes', JSON.stringify(vm.solicitudes));
-            vm.solicitudesConductores.push(solicitud);
-            sessionStorage.setItem('solicitudesConductores', JSON.stringify(vm.solicitudesConductores));
+        function assignSolicitudConductor(solicitud, conductor) {
+            solicitud.assignTo(conductor);
         }
     }
 })();
