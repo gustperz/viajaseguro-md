@@ -30,6 +30,7 @@
 
         function selectConductor(conductor) {
             vm.selectedConductor = conductor;
+            Despacho.conductor = vm.selectedConductor;
         }
 
         function loadConductores(_ruta) {

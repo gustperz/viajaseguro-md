@@ -22,7 +22,6 @@
 
         Solicitudes.getList(function (solicitudes) {
             vm.solicitudes = solicitudes;
-            console.log(solicitudes)
         });
 
         //////////
