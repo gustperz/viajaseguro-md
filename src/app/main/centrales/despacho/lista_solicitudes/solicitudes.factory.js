@@ -30,7 +30,7 @@
                     if (response.code == 'OK'){
                         solicitudes = [];
                         response.data.forEach(function (solicitud) {
-                            if(solicitud.conductor){
+                            if(solicitud.conductor && solicitud.estado != 'p'){
                                 solicitudes_asiganadas[solicitud.conductor] || (solicitudes_asiganadas[solicitud.conductor] = []);
                                 solicitudes_asiganadas[solicitud.conductor].push(make(solicitud));
                             } else {
@@ -66,8 +66,12 @@
                     'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
                 }
             }, function (response) {
-                console.log(response)
-                solicitudes.push(make(response.data));
+                if (solicitud.conductor) {
+                    solicitudes_asiganadas[solicitud.conductor] || (solicitudes_asiganadas[solicitud.conductor] = []);
+                    solicitudes_asiganadas[solicitud.conductor].push(make(solicitud));
+                } else {
+                    solicitudes.push(make(response.data));
+                }
             });
         }
         
@@ -78,7 +82,7 @@
 
             Solicitud.prototype = {
                 reject: rejectSolicitud,
-                update: updateEstado,
+                setAsPendiente: setPendiente,
                 assignTo: assignTo,
             }
 
@@ -100,17 +104,26 @@
                 });
             }
 
-            function updateEstado(estado) {
+            function setPendiente() {
+                var conductor = this.conductor;
+                var id = this.id;
+                this.estado = 'p';
                 $sails.request({
                     method: 'put',
                     url: '/solicitudes/'+this.id+'/estado',
-                    data: {estado: estado},
+                    data: {estado: 'p'},
                     headers: {
                         'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
                     }
                 }, function (response) {
                     if (response.code == 'OK'){
-                        console.log('ok')
+                        var index = solicitudes_asiganadas[conductor].findIndex(function (solicitud) {
+                            return solicitud.id == id;
+                        });
+                        solicitudes_asiganadas[conductor][index].index = solicitudes.length;
+                        solicitudes.push(solicitudes_asiganadas[conductor][index]);
+                        solicitudes_asiganadas[conductor].splice(index, 1);
+                        console.log(solicitudes)
                     }else{
                         console.log('fallo')
                     }

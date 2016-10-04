@@ -42,6 +42,7 @@
         }
 
         function assignSolicitudConductor(solicitud, conductor) {
+            Despacho.cupos_disponibles = Despacho.cupos_disponibles - solicitud.pasajeros.length;
             solicitud.assignTo(conductor);
         }
     }

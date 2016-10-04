@@ -1,8 +1,9 @@
 <md-menu class="md-menu-solicitudes">
-    <md-button class="md-icon-button" aria-label="add-solicitud"
+    <md-button class="button-add md-fab" aria-label="Nueva solicitud"
                ng-controller="ListaSolicitudesController as vmsolicitudes"
                ng-click="$mdOpenMenu($event)">
         <md-icon md-font-icon="icon-plus" class="icon"></md-icon>
+        <md-tooltip><span>Nueva solicitud</span></md-tooltip>
     </md-button>
     <md-menu-content width="6" class="floatingForm">
         <form name="formNewRuta">

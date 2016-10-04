@@ -81,89 +81,127 @@
     border: 1px solid $primary-color;
     border-radius: 15px;
     margin-left: 10px;
-    background-color: gainsboro;
-    opacity: 10;
+    background-color: #ededed;
     md-content {
-      background-color: gainsboro;
-    }
-    md-tabs {
-      margin-top: -15px !important;;
-      background-color: gainsboro;
-    }
-    .md-icon-tab {
-      color: white !important;
-      background-color: #94c11e !important;
-      border-radius: 50% !important;
+      background-color: transparent;
     }
 
+    md-pagination-wrapper, md-tabs-canvas {
+      height: 29px !important;
+    }
+    md-tab-item {
+      padding: 0px 20px 5px 20px !important;
+
+      .md-icon-tab {
+        color: white !important;
+        background-color: #94c11e !important;
+        border-radius: 50% !important;
+      }
+    }
     .form-viajero {
       background-color: white !important;
       border-radius: 15px;
       border: 1px solid $primary-color;
+      md-input-container{
+        margin: 0 !important;
+        .md-errors-spacer{
+          min-height: 0 !important;
+        }
+      }
+      .md-icon-button {
+        margin: 0 !important;
+      }
+      .md-icon-button:disabled{
+        md-icon {
+          color: #b9c1b1;
+        }
+      }
       md-icon {
         color: #94c11e;
+      }
+      #delete md-icon {
+        color: #f00000;
       }
     }
   }
 
   #solicitudes {
-    .content-lista {
-      .todo-list-pane {
-        background: white;
-        &.single-scroll {
-
-          .todo-list-pane {
-            overflow: hidden;
-          }
-        }
-
-        .todo-items {
-          overflow-x: hidden;
-        }
-      }
-
-      .todo-item {
-        border: 1px solid $primary-color;
-        margin-bottom: 5px !important;
-        border-radius: 15px !important;
-        position: relative;
-        padding: 6px;
-        text-transform: none;
-        cursor: pointer;
-
-        .info {
-          margin: 0 16px 0 8px;
-
-          .title {
-            font-size: 15px;
-            font-weight: 500;
-          }
-
-          .notes {
-            margin-top: 4px;
-          }
-        }
-      }
-    }
-
-
     //################################################3333
     .content-floating-solicitudes{
       border-radius: 15px !important;
       border: 1px solid $primary-color !important;
     }
 
-    .md-menu-solicitudes {
-      .icon {
-        margin-top: -10px;
-        margin-left: -12px;
-      }
-    }
-
     .md-lista-solicitudes {
       height: 30px !important;
     }
 
+  }
+
+  .content-lista {
+    .todo-list-pane {
+      background: white;
+      &.single-scroll {
+
+        .todo-list-pane {
+          overflow: hidden;
+        }
+      }
+
+      .todo-items {
+        overflow-x: hidden;
+      }
+    }
+
+    .todo-item {
+      border: 1px solid $primary-color;
+      margin-bottom: 5px !important;
+      border-radius: 15px !important;
+      background-color: white;
+      position: relative;
+      padding: 6px;
+      text-transform: none;
+      cursor: pointer;
+
+      &:hover{
+        border-width: 3px;
+      }
+
+      .info {
+        margin: 0 16px 0 8px;
+
+        .title {
+          font-size: 15px;
+          font-weight: 500;
+        }
+
+        .notes {
+          margin-top: 4px;
+        }
+      }
+    }
+
+    .md-menu-solicitudes {
+      md-fab-speed-dial {
+        top: 0 !important;
+        bottom: 0px !important;
+        right: 0 !important;
+        max-height: 100% !important;
+        border-bottom-right-radius: 15px;
+        border-top-right-radius: 15px;
+        opacity: 0.85;
+        &.md-is-open{
+          background-color: rgb(255, 255, 251);
+        }
+
+        md-icon {
+          font-size: 30px !important;
+        }
+      }
+      .icon {
+
+      }
+    }
   }
 
   .title-info {

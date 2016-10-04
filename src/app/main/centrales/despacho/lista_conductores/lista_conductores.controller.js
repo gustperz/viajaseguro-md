@@ -32,8 +32,13 @@
             vm.selectedConductor = Despacho.conductor = conductor;
             if(conductor) {
                 Despacho.conductor.cupos = 4;
-                var nSolicitudes = Solicitudes.getAsignadas()[Despacho.conductor.id] ? Solicitudes.getAsignadas()[Despacho.conductor.id].length : 0;
-                Despacho.cupos_disponibles = 4 - nSolicitudes;
+                var solicitudes = Solicitudes.getAsignadas();
+                solicitudes[Despacho.conductor.id] || (solicitudes[Despacho.conductor.id] = []);
+                var nPasajeros = 0;
+                angular.forEach(solicitudes[Despacho.conductor.id], function (solicitud) {
+                    nPasajeros += solicitud.pasajeros.length;
+                });
+                Despacho.cupos_disponibles = 4 - nPasajeros;
             }
         }
 
