@@ -11,7 +11,7 @@
         .controller('ListaConductoresController', controller);
 
     /** @ngInject */
-    function controller(Despacho, Rutas, $mdDialog){
+    function controller(Despacho, Rutas, $mdDialog, Solicitudes){
         var vm = this;
         var ruta = {};
 
@@ -29,8 +29,12 @@
         //////////
 
         function selectConductor(conductor) {
-            vm.selectedConductor = conductor;
-            Despacho.conductor = vm.selectedConductor;
+            vm.selectedConductor = Despacho.conductor = conductor;
+            if(conductor) {
+                Despacho.conductor.cupos = 4;
+                var nSolicitudes = Solicitudes.getAsignadas()[Despacho.conductor.id] ? Solicitudes.getAsignadas()[Despacho.conductor.id].length : 0;
+                Despacho.cupos_disponibles = 4 - nSolicitudes;
+            }
         }
 
         function loadConductores(_ruta) {
@@ -57,7 +61,7 @@
                 return turno.pos === 1;
             });
             vm.selectedConductor = turno1 ? turno1.conductor : undefined;
-            Despacho.conductor = vm.selectedConductor;
+            selectConductor(vm.selectedConductor);
         }
 
         function addConductor(event) {
