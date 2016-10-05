@@ -11,7 +11,7 @@
         .controller('ListaConductoresController', controller);
 
     /** @ngInject */
-    function controller(Despacho, Rutas, $mdDialog, Solicitudes){
+    function controller(Despacho, Rutas, $mdDialog, SolicitudesData){
         var vm = this;
         var ruta = {};
 
@@ -32,7 +32,7 @@
             vm.selectedConductor = Despacho.conductor = conductor;
             if(conductor) {
                 Despacho.conductor.cupos = 4;
-                var solicitudes = Solicitudes.getAsignadas();
+                var solicitudes = SolicitudesData.solicitudes_asiganadas;
                 solicitudes[Despacho.conductor.id] || (solicitudes[Despacho.conductor.id] = []);
                 var nPasajeros = 0;
                 angular.forEach(solicitudes[Despacho.conductor.id], function (solicitud) {

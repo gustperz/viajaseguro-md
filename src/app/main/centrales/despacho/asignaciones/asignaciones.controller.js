@@ -7,7 +7,7 @@
         .controller('AsignacionesController', controller);
 
     /** @ngInject */
-    function controller(Despacho, Solicitudes){
+    function controller(Despacho, SolicitudesData, Solicitudes){
         var vm = this;
 
         vm.solicitud = {
@@ -29,29 +29,31 @@
 
         //////////
 
-        vm.solicitudes = Solicitudes.getAsignadas();
+        vm.solicitudes = SolicitudesData;
 
         //////////
         
         function saveSolicitud() {
             var solicitud = vm.solicitud;
             solicitud.conductor = Despacho.conductor.id;
-            solicitud.cofigo_ruta = Despacho.destino.codigo;
+            solicitud.codigo_ruta = Despacho.destino.codigo;
             solicitud.tipo = 'Pasajeros';
             solicitud.estado = 'a';
 
             if(solicitud.direccion){
                 solicitud.cliente = solicitud.pasajeros[0].identificacion;
-                vm.solicitudes[Despacho.conductor.id].push(solicitud);
+                // vm.solicitudes[Despacho.conductor.id].push(solicitud);
                 Solicitudes.create(vm.solicitud);
             } else {
                 angular.forEach(solicitud.pasajeros, function (pasajero) {
                     solicitud.pasajeros = [pasajero];
                     solicitud.cliente = pasajero;
-                    vm.solicitudes[Despacho.conductor.id].push(solicitud);
+                    // vm.solicitudes[Despacho.conductor.id].push(solicitud);
                     Solicitudes.create(vm.solicitud);
                 });
             }
+            Despacho.cupos_disponibles = Despacho.cupos_disponibles - solicitud.pasajeros.length;
+            clear();
         }
 
         function addPasajero() {

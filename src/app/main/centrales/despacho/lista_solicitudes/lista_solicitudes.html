@@ -3,7 +3,7 @@
 </h2>
 <md-content class="content-lista" ms-scroll>
     <div class="todo-item" md-ink-ripple layout="row" layout-align="start center"
-         ng-repeat="solicitud in vmsolicitudes.solicitudes track by $index"
+         ng-repeat="solicitud in vmsolicitudes.solicitudes.solicitudes track by $index"
          ng-if="vm.despacho.destino.codigo == solicitud.codigo_ruta">
         <div class="info" layout="column" layout-align="start" flex>
             <div class="title">
@@ -60,5 +60,4 @@
             </md-menu-content>
         </div>
     </div>
-    {{vmsolicitudes.solicitudes}}
 </md-content>

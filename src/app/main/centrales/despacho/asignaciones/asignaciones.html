@@ -48,7 +48,7 @@
                 </md-content>
                 <md-content class="content-lista" ms-scroll>
                     <div class="todo-item" md-ink-ripple layout="row" layout-align="start center"
-                         ng-repeat="solicitud in vmasignaciones.solicitudes[vm.despacho.conductor.id] track by $index">
+                         ng-repeat="solicitud in vmasignaciones.solicitudes.solicitudes_asiganadas[vm.despacho.conductor.id] track by $index">
                         <div class="info" layout="column" layout-align="start" flex>
                             <div class="title">
                                 {{solicitud.pasajeros[0].nombre}} - {{solicitud.pasajeros[0].identificacion}}
