@@ -11,6 +11,12 @@
 
     /* @ngInject */
     function factory() {
-        return {};
+        return {
+            origen: undefined,
+            destino: undefined,
+            conductor: undefined,
+            sa: {},
+            sp: []
+        };
     }
 })();

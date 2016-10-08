@@ -3,7 +3,7 @@
 </h2>
 <md-content class="content-lista" ms-scroll>
     <div class="todo-item" md-ink-ripple layout="row" layout-align="start center"
-         ng-repeat="solicitud in vmsolicitudes.solicitudes.solicitudes track by $index"
+         ng-repeat="solicitud in vm.despacho.sp track by $index"
          ng-if="vm.despacho.destino.codigo == solicitud.codigo_ruta">
         <div class="info" layout="column" layout-align="start" flex>
             <div class="title">
@@ -22,9 +22,12 @@
                                class="md-scale md-fab-top-right md-hover-full"
                                ng-mouseenter="demo.isOpen=true" ng-mouseleave="demo.isOpen=false">
                 <md-fab-trigger>
+                    &nbsp;
+                </md-fab-trigger>
+                <md-fab-actions>
                     <md-menu class="md-menu-solicitudes">
                         <md-button class="md-icon-button" aria-label="add-solicitud"
-                                   ng-click="$mdOpenMenu($event)" ng-disabled="!solicitud.direccion">
+                                   ng-click="$mdOpenMenu($event)" ng-show="solicitud.telefono">
                             <md-icon md-font-icon="icon-eye" class="icon"></md-icon>
                             <md-tooltip>Detalles</md-tooltip>
                         </md-button>
@@ -42,9 +45,6 @@
                             </div>
                         </md-menu-content>
                     </md-menu>
-                </md-fab-trigger>
-
-                <md-fab-actions>
                     <md-button class="md-icon-button" aria-label="asignar-solicitud"
                                ng-click="vmsolicitudes.rejectSolicitud(solicitud)">
                         <md-icon md-font-icon="icon-close" class="icon"></md-icon>

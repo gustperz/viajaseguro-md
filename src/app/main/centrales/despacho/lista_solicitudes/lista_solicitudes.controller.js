@@ -8,7 +8,7 @@
         .module('app.centrales.despacho')
         .controller('ListaSolicitudesController', controller);
 
-    function controller(Solicitudes, SolicitudesData, $mdMenu, Despacho) {
+    function controller(SolicitudesRepository, $mdMenu, Despacho) {
         var vm = this;
         vm.solicitud = {};
 
@@ -20,9 +20,7 @@
 
         //////////
 
-        Solicitudes.load()
-        vm.solicitudes = SolicitudesData ;
-        console.log(SolicitudesData.solicitudes);
+        SolicitudesRepository.load()
 
         //////////
 
@@ -33,7 +31,7 @@
 
         function saveNewSolicitud() {
             vm.solicitud.pasajeros = [vm.solicitud.cliente];
-            Solicitudes.create(vm.solicitud);
+            SolicitudesRepository.create(vm.solicitud);
             $mdMenu.hide();
         }
 

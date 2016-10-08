@@ -24,13 +24,13 @@
 
                 <!--DESPACHO-->
                 <div layout="row" id="info-despacho" flex="45" layout="column" class="bordered p-10"
-                     ng-controller="AsignacionesController as vmasignaciones"
+                     ng-controller="AsignacionesController as vmasignaciones" ng-show="vm.despacho.conductor"
                      ng-include="'app/main/centrales/despacho/asignaciones/asignaciones.html'">
                 </div>
 
                 <!--SOLICITUDES-->
                 <div id="solicitudes" flex="35" layout="column" ms-scroll class="bordered p-10 ml-10"
-                     ng-controller="ListaSolicitudesController as vmsolicitudes"
+                     ng-controller="ListaSolicitudesController as vmsolicitudes" ng-show="vm.despacho.conductor"
                      ng-include="'app/main/centrales/despacho/lista_solicitudes/lista_solicitudes.html'">
                 </div>
             </div>

@@ -11,7 +11,7 @@
         .controller('ListaConductoresController', controller);
 
     /** @ngInject */
-    function controller(Despacho, Rutas, $mdDialog, SolicitudesData){
+    function controller(Despacho, Rutas, $mdDialog){
         var vm = this;
         var ruta = {};
 
@@ -25,17 +25,21 @@
         //////////
 
         Despacho.loadConductores = loadConductores;
+        Despacho.getTurnos = getTurnos;
 
         //////////
+
+        function getTurnos() {
+            return vm.turnos;
+        }
 
         function selectConductor(conductor) {
             vm.selectedConductor = Despacho.conductor = conductor;
             if(conductor) {
-                Despacho.conductor.cupos = 4;
-                var solicitudes = SolicitudesData.solicitudes_asiganadas;
-                solicitudes[Despacho.conductor.id] || (solicitudes[Despacho.conductor.id] = []);
+                var conductor = Despacho.conductor.id;
                 var nPasajeros = 0;
-                angular.forEach(solicitudes[Despacho.conductor.id], function (solicitud) {
+                !(conductor in Despacho.sa) || (Despacho.sa[conductor] = []);
+                angular.forEach(Despacho.sa[conductor], function (solicitud) {
                     nPasajeros += solicitud.pasajeros.length;
                 });
                 Despacho.cupos_disponibles = 4 - nPasajeros;

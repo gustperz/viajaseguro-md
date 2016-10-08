@@ -48,7 +48,7 @@
                 </md-content>
                 <md-content class="content-lista" ms-scroll>
                     <div class="todo-item" md-ink-ripple layout="row" layout-align="start center"
-                         ng-repeat="solicitud in vmasignaciones.solicitudes.solicitudes_asiganadas[vm.despacho.conductor.id] track by $index">
+                         ng-repeat="solicitud in vm.despacho.sa[vm.despacho.conductor.id] track by $index">
                         <div class="info" layout="column" layout-align="start" flex>
                             <div class="title">
                                 {{solicitud.pasajeros[0].nombre}} - {{solicitud.pasajeros[0].identificacion}}
@@ -65,9 +65,12 @@
                                                class="md-scale md-fab-top-right md-hover-full"
                                                ng-mouseenter="demo.isOpen=true" ng-mouseleave="demo.isOpen=false">
                                 <md-fab-trigger>
+                                    &nbsp;
+                                </md-fab-trigger>
+                                <md-fab-actions>
                                     <md-menu class="md-menu-solicitudes">
                                         <md-button class="md-icon-button" aria-label="add-solicitud"
-                                                   ng-click="$mdOpenMenu($event)" ng-disabled="!solicitud.direccion">
+                                                   ng-click="$mdOpenMenu($event)" ng-show="solicitud.telefono">
                                             <md-icon md-font-icon="icon-eye" class="icon"></md-icon>
                                             <md-tooltip>Detalles</md-tooltip>
                                         </md-button>
@@ -85,11 +88,8 @@
                                             </div>
                                         </md-menu-content>
                                     </md-menu>
-                                </md-fab-trigger>
-
-                                <md-fab-actions>
                                     <md-button class="md-icon-button" aria-label="asignar-solicitud"
-                                               ng-click="vmasignaciones.pasarSolicitudaPendiente(solicitud)">
+                                               ng-click="vmasignaciones.pasarSolicitudaPendiente(solicitud, $event)">
                                         <md-icon md-font-icon="icon-arrow-right" class="icon"></md-icon>
                                         <md-tooltip>Pasar a Pendientes</md-tooltip>
                                     </md-button>
@@ -98,11 +98,26 @@
                                         <md-icon md-font-icon="icon-close" class="icon"></md-icon>
                                         <md-tooltip>Eliminar</md-tooltip>
                                     </md-button>
-                                    <md-button class="md-icon-button" aria-label="add-solicitud"
-                                               ng-click="vmasignaciones.reasignarSolicitud(solicitud)">
-                                        <md-icon md-font-icon="icon-twitter-retweet" class="icon"></md-icon>
-                                        <md-tooltip>Asignar a otro conductor</md-tooltip>
-                                    </md-button>
+                                    <md-menu class="md-menu-solicitudes">
+                                        <md-button class="md-icon-button" aria-label="add-solicitud"
+                                                   ng-click="$mdOpenMenu($event)">
+                                            <md-icon md-font-icon="icon-twitter-retweet" class="icon"></md-icon>
+                                            <md-tooltip>Asignar a otro conductor</md-tooltip>
+                                        </md-button>
+                                        <md-menu-content width="6" class="list-conductores" ms-scroll>
+                                            <md-list class="md-dense" ng-cloak>
+                                                <md-list-item ng-repeat="turno in vm.despacho.getTurnos()" class="md-2-line"
+                                                              ng-if="turno.conductor.id != vm.despacho.conductor.id"
+                                                              ng-click="vmasignaciones.reasignarSolicitud(solicitud, turno.conductor.id)">
+                                                    <img ng-src="http://api.viajaseguro.co/images/conductores/{{turno.conductor.imagen}}" class="md-avatar" alt=""/>
+                                                    <div class="md-list-item-text">
+                                                        <h3>{{turno.conductor.nombres}} {{turno.conductor.apellidos}}</h3>
+                                                    </div>
+                                                    <md-divider ng-if="!$last"></md-divider>
+                                                </md-list-item>
+                                            </md-list>
+                                        </md-menu-content>
+                                    </md-menu>
                                 </md-fab-actions>
                             </md-fab-speed-dial>
                         </div>

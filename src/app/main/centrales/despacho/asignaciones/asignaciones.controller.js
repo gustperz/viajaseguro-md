@@ -7,7 +7,7 @@
         .controller('AsignacionesController', controller);
 
     /** @ngInject */
-    function controller(Despacho, SolicitudesData, Solicitudes){
+    function controller(Despacho, SolicitudesRepository, $scope){
         var vm = this;
 
         vm.solicitud = {
@@ -29,7 +29,7 @@
 
         //////////
 
-        vm.solicitudes = SolicitudesData;
+        SolicitudesRepository.load()
 
         //////////
         
@@ -42,14 +42,12 @@
 
             if(solicitud.direccion){
                 solicitud.cliente = solicitud.pasajeros[0].identificacion;
-                // vm.solicitudes[Despacho.conductor.id].push(solicitud);
-                Solicitudes.create(vm.solicitud);
+                SolicitudesRepository.create(vm.solicitud);
             } else {
                 angular.forEach(solicitud.pasajeros, function (pasajero) {
                     solicitud.pasajeros = [pasajero];
                     solicitud.cliente = pasajero;
-                    // vm.solicitudes[Despacho.conductor.id].push(solicitud);
-                    Solicitudes.create(vm.solicitud);
+                    SolicitudesRepository.create(vm.solicitud);
                 });
             }
             Despacho.cupos_disponibles = Despacho.cupos_disponibles - solicitud.pasajeros.length;
@@ -80,15 +78,17 @@
 
         function pasarSolicitudaPendiente(solicitud){
             Despacho.cupos_disponibles = Despacho.cupos_disponibles + solicitud.pasajeros.length;
-            solicitud.setAsPendiente('p');
+            solicitud.setAsPendiente();
         }
 
-        function rejectSolicitud(){
-
+        function rejectSolicitud(solicitud){
+            Despacho.cupos_disponibles = Despacho.cupos_disponibles + solicitud.pasajeros.length;
+            solicitud.reject();
         }
 
-        function reasignarSolicitud(){
-
+        function reasignarSolicitud(solicitud, conductor) {
+            Despacho.cupos_disponibles = Despacho.cupos_disponibles + solicitud.pasajeros.length;
+            solicitud.assignTo(conductor);
         }
 
     }

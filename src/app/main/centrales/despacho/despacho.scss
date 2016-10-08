@@ -226,3 +226,21 @@
   }
 }
 
+.list-conductores {
+  &, md-list {
+    padding: 0 !important;
+  }
+  max-height: 301px !important;
+
+  .ps-scrollbar-y-rail {
+    top: 0!important;
+  }
+}
+
+#search-conductor {
+  margin: 0 !important;
+  .md-errors-spacer{
+    min-height: 0 !important;
+  }
+}
+
