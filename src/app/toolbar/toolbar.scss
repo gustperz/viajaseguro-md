@@ -11,6 +11,26 @@ $toolbarHeight: 60px;
         color: white;
     }
 
+    #language-menu {
+        height: $toolbarHeight;
+
+        .language-button {
+            min-width: $toolbarHeight;
+            height: $toolbarHeight;
+            margin: 0;
+            padding: 0 16px;
+            border-radius: 0;
+
+            .iso {
+                margin-left: 5px;
+                text-transform: capitalize;
+            }
+
+            .flag {
+                margin-right: 8px;
+            }
+        }
+    }
     .navigation-toggle {
         width: $toolbarHeight;
         min-width: $toolbarHeight;
@@ -52,7 +72,7 @@ $toolbarHeight: 60px;
         }
     }
 
-    #toolbar-date{
+    .toolbar-date{
         .md-datepicker-button{
             padding: 8px 0;
             width: 30px;
@@ -73,8 +93,32 @@ $toolbarHeight: 60px;
         span{
             font-size: 14px;
             font-weight: bold;
-            text-transform: capitalize;
+            text-transform: capitalize !important;
             //padding-bottom: 3px;
+        }
+    }
+
+    .toolbar-logout{
+      margin: 0;
+      padding: 0 16px;
+      height: $toolbarHeight;
+      text-transform: none;
+        span{
+            margin: 0 12px 0 8px;
+            font-weight: bold;
+        }
+    }
+
+    .toolbar-perfil{
+        margin: 0;
+        padding: 0 16px;
+        height: $toolbarHeight !important;
+        text-transform: capitalize !important;
+        md-button{
+            span{
+                margin: 0 12px 0 8px;
+                font-weight: bold;
+            }
         }
     }
 

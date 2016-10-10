@@ -1,53 +1,128 @@
-<div layout="row" layout-align="start center">
-    <div layout="row" layout-align="start center" flex>
-
-        <md-button class="md-icon-button navigation-toggle"
-                   ng-click="vm.toggleSidenav('navigation')"
-                   hide-gt-sm aria-label="Toggle navigation">
-            <md-icon md-font-icon="icon-menu" class="icon"></md-icon>
-        </md-button>
-
-        <md-button class="md-icon-button navigation-toggle navigation-fold-toggle"
-                   ng-click="vm.toggleMsNavigationFolded()"
-                   hide show-gt-sm aria-label="Toggle navigation fold">
-            <md-icon md-font-icon="icon-backburger" class="icon"></md-icon>
-        </md-button>
-
-        <div class="logo" layout="row" layout-align="start center">
-            <img src="assets/images/logo-positivo.png">
-        </div>
-
-        <!--<div class="toolbar-separator"></div>-->
-        <!--<ms-shortcuts></ms-shortcuts>-->
-
-    </div>
-
+<md-toolbar id="toolbar">
     <div layout="row" layout-align="start center">
-        <md-progress-circular id="toolbar-progress" ng-if="$root.loadingProgress" class="md-accent"
-                              md-mode="indeterminate" md-diameter="32">
-        </md-progress-circular>
+        <div layout="row" layout-align="start center" flex>
+            <md-button class="md-icon-button navigation-toggle"
+                       ng-click="vm.toggleSidenav('navigation')"
+                       hide-gt-sm aria-label="Toggle navigation">
+                <md-icon md-font-icon="icon-menu" class="icon"></md-icon>
+            </md-button>
+
+            <md-button class="md-icon-button navigation-toggle navigation-fold-toggle"
+                       ng-click="vm.toggleMsNavigationFolded()"
+                       hide show-gt-sm aria-label="Toggle navigation fold">
+                <md-icon md-font-icon="icon-backburger" class="icon"></md-icon>
+            </md-button>
+
+            <div class="logo" layout="row" layout-align="start center">
+                <img src="assets/images/logo-positivo.png">
+            </div>
+        </div>
+        <div layout="row"  layout-align="start center">
+            <div layout-align="start center">
+                <md-progress-circular id="toolbar-progress" ng-if="$root.loadingProgress" class="md-accent"
+                                      md-mode="indeterminate" md-diameter="32">
+                </md-progress-circular>
+            </div>
+
+            <div layout-align="start center">
+                <md-button class="toolbar-perfil" ng-if="vm.usuario.rol == 'EMPRESA'" ng-click="vm.irPerfil()" aria-label="User settings">
+                    <div layout="row" layout-align="space-between center">
+                        <md-icon md-font-icon="icon-account-circle" class="icon"/>
+                        <span class="username">Mi perfil</span>
+                    </div>
+                </md-button>
+            </div>
+            <div class="toolbar-date" layout-align="start center">
+                <md-datepicker ng-model="vm.fecha" md-min-date="vm.fecha" md-max-date="vm.fecha"/>
+                <span hide show-gt-sm>{{vm.fecha | amDateFormat:'dddd, DD [de] MMMM'}}</span>
+            </div>
+            <div  layout-align="start center">
+                <md-button class="toolbar-logout" ng-click="vm.logout()" aria-label="User settings">
+                    <div layout="row" layout-align="space-between center">
+                        <md-icon md-font-icon="icon-logout" class="icon"/>
+                        <span class="username">Salir</span>
+                    </div>
+                </md-button>
+            </div>
+        </div>
+    </div>
+</md-toolbar>
+<!--<div layout="row" layout-align="start center">-->
+    <!--<div layout="row" layout-align="start center" flex>-->
+
+        <!--<md-button class="md-icon-button navigation-toggle"-->
+                   <!--ng-click="vm.toggleSidenav('navigation')"-->
+                   <!--hide-gt-sm aria-label="Toggle navigation">-->
+            <!--<md-icon md-font-icon="icon-menu" class="icon"></md-icon>-->
+        <!--</md-button>-->
+
+        <!--<md-button class="md-icon-button navigation-toggle navigation-fold-toggle"-->
+                   <!--ng-click="vm.toggleMsNavigationFolded()"-->
+                   <!--hide show-gt-sm aria-label="Toggle navigation fold">-->
+            <!--<md-icon md-font-icon="icon-backburger" class="icon"></md-icon>-->
+        <!--</md-button>-->
+
+        <!--<div class="logo" layout="row" layout-align="start center">-->
+            <!--<img src="assets/images/logo-positivo.png">-->
+        <!--</div>-->
+
+        <!--&lt;!&ndash;<div class="toolbar-separator"></div>&ndash;&gt;-->
+        <!--&lt;!&ndash;<ms-shortcuts></ms-shortcuts>&ndash;&gt;-->
+
+    <!--</div>-->
+
+    <!--<div layout="row" layout-align="start center">-->
+        <!--<md-progress-circular id="toolbar-progress" ng-if="$root.loadingProgress" class="md-accent"-->
+                              <!--md-mode="indeterminate" md-diameter="32">-->
+        <!--</md-progress-circular>-->
 
         <!--<md-button id="quick-panel-toggle" class="md-icon-button" ng-click="vm.toggleSidenav('quick-panel')"-->
                    <!--aria-label="Toggle quick panel" translate translate-attr-aria-label="TOOLBAR.TOGGLE_QUICK_PANEL">-->
             <!--<md-icon md-font-icon="icon-format-list-bulleted" class="icon"></md-icon>-->
         <!--</md-button>-->
-        <md-button ng-if="vm.usuario.rol == 'EMPRESA'" ng-click="vm.irPerfil()" id="user-menu" class="user-button" aria-label="User settings">
-            <div layout="row" layout-align="space-between center">
-                <md-icon md-font-icon="icon-account-circle" class="icon"/>
-                <span class="username">Mi perfil</span>
-            </div>
-        </md-button>
 
-        <div id="toolbar-date" layout="row" layout-align="start center">
-            <md-datepicker ng-model="vm.fecha" md-min-date="vm.fecha" md-max-date="vm.fecha"/>
-            <span hide show-gt-sm>{{vm.fecha | amDateFormat:'dddd, DD [de] MMMM'}}</span>
-        </div>
+        <!--<md-button class="language-button" ng-if="vm.usuario.rol == 'EMPRESA'" ng-click="vm.irPerfil()"-->
+                   <!--aria-label="Language" md-menu-origin md-menu-align-target>-->
+            <!--<div layout="row" layout-align="center center">-->
+                <!--<md-icon md-font-icon="icon-account-circle" class="icon"/>-->
+                <!--<span class="iso">Mi perfil</span>-->
+            <!--</div>-->
+        <!--</md-button>-->
 
-        <md-button ng-click="vm.logout()" id="user-menu" class="user-button" aria-label="User settings">
-            <div layout="row" layout-align="space-between center">
-                <md-icon md-font-icon="icon-logout" class="icon"/>
-                <span class="username">Salir</span>
-            </div>
-        </md-button>
-    </div>
-</div>
+        <!--<md-button class="language-button"-->
+                   <!--aria-label="Language" md-menu-origin md-menu-align-target>-->
+            <!--<div id="toolbar-date" layout="row" layout-align="start center">-->
+                <!--<md-datepicker ng-model="vm.fecha" md-min-date="vm.fecha" md-max-date="vm.fecha"/>-->
+                <!--<span class="iso" hide show-gt-sm>{{vm.fecha | amDateFormat:'dddd, DD [de] MMMM'}}</span>-->
+            <!--</div>-->
+        <!--</md-button>-->
+
+        <!--<md-button class="language-button" ng-click="vm.logout()"-->
+                   <!--aria-label="Language" md-menu-origin md-menu-align-target>-->
+            <!--<div layout="row" layout-align="center center">-->
+                <!--<md-icon md-font-icon="icon-logout" class="icon"/>-->
+                <!--<span class="iso">Salir</span>-->
+            <!--</div>-->
+        <!--</md-button>-->
+
+
+        <!--<md-button ng-if="vm.usuario.rol == 'EMPRESA'" ng-click="vm.irPerfil()" id="toolbar-perfil" class="toolbar-perfil" aria-label="User settings">-->
+            <!--<div layout="row" layout-align="space-between center">-->
+                <!--<md-icon md-font-icon="icon-account-circle" class="icon"/>-->
+                <!--<span class="username">Mi perfil</span>-->
+            <!--</div>-->
+        <!--</md-button>-->
+
+        <!--<div id="toolbar-date" layout="row" layout-align="start center">-->
+            <!--<md-datepicker ng-model="vm.fecha" md-min-date="vm.fecha" md-max-date="vm.fecha"/>-->
+            <!--<span hide show-gt-sm>{{vm.fecha | amDateFormat:'dddd, DD [de] MMMM'}}</span>-->
+        <!--</div>-->
+
+        <!--<md-button ng-click="vm.logout()" id="toolbar-logout" class="toolbar-logout" aria-label="User settings">-->
+            <!--<div layout="row" layout-align="space-between center">-->
+                <!--<md-icon md-font-icon="icon-logout" class="icon"/>-->
+                <!--<span class="username">Salir</span>-->
+            <!--</div>-->
+        <!--</md-button>-->
+    <!--</div>-->
+<!--</div>-->

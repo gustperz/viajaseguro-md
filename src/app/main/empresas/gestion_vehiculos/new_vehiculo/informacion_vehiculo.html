@@ -1,0 +1,132 @@
+<div class="md-inline-form">
+    <p>Digita la informacion del vehiculo para el conductor!
+        <md-icon md-font-icon="icon-alert-circle" class="red-600-fg md-font"></md-icon>
+    </p>
+
+    <div layout="column" layout-gt-xs="row" flex class="menos-espaciado">
+        <md-input-container flex="100" flex-gt-xs="50" >
+            <md-icon md-font-icon="icon-credit-card"></md-icon>
+            <input type="number" name="idpropietario" ng-model="vm.vehiculo.cedula_propietario"
+                   placeholder="Identificación del propietario"
+                   required min="1">
+            <div ng-messages="verticalStep1.idpropietario.$error"
+                 ng-show="verticalStep1.idpropietario.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>Esta identificación es requerida.</span>
+                </div>
+                <div ng-message="min">
+                    <span>No es una identificacion valida.</span>
+                </div>
+            </div>
+        </md-input-container>
+
+        <md-input-container flex="100" flex-gt-xs="50">
+            <md-icon md-font-icon="icon-account-circle"></md-icon>
+            <input type="text" name="npropietario" ng-model="vm.vehiculo.nombre_propietario"
+                   placeholder="Nombre del propietario" required>
+            <div ng-messages="verticalStep1.npropietario.$error"
+                 ng-show="verticalStep1.npropietario.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>Este nombre es requerido.</span>
+                </div>
+            </div>
+        </md-input-container>
+
+        <md-input-container flex="100" flex-gt-xs="50">
+            <md-icon md-font-icon="icon-phone"></md-icon>
+            <input type="number" name="tpropietario" ng-model="vm.vehiculo.telefono_propietario"
+                   placeholder="Telefono del propietario" required min="1">
+            <div ng-messages="verticalStep1.tpropietario.$error"
+                 ng-show="verticalStep1.tpropietario.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>Este telefono es requerido.</span>
+                </div>
+                <div ng-message="min">
+                    <span>No es un numero valido.</span>
+                </div>
+            </div>
+        </md-input-container>
+    </div>
+
+    <div layout="column" layout-gt-xs="row" flex class="menos-espaciado">
+        <md-input-container flex="100" flex-gt-xs="50">
+            <md-icon md-font-icon="icon-credit-card"></md-icon>
+            <input type="text" name="placa" ng-model="vm.vehiculo.placa"
+                   placeholder="Placa del vehiculo"
+                   required>
+            <div ng-messages="verticalStep1.placa.$error"
+                 ng-show="verticalStep1.placa.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>La placa es requerida.</span>
+                </div>
+            </div>
+        </md-input-container>
+
+        <md-input-container flex="100" flex-gt-xs="50">
+            <md-icon md-font-icon="icon-taxi"></md-icon>
+            <input type="text" name="modelo" ng-model="vm.vehiculo.modelo"
+                   placeholder="Modelo del vehiculo" required>
+            <div ng-messages="verticalStep1.modelo.$error"
+                 ng-show="verticalStep1.modelo.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>El modelo del vehiculo es requerido.</span>
+                </div>
+            </div>
+        </md-input-container>
+
+        <md-input-container flex="100" flex-gt-xs="50">
+            <md-icon md-font-icon="icon-invert-colors"></md-icon>
+            <input type="text" name="color" ng-model="vm.vehiculo.color"
+                   placeholder="Color del vehiculo" required>
+            <div ng-messages="verticalStep1.color.$error"
+                 ng-show="verticalStep1.color.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>El modelo del vehiculo es requerido.</span>
+                </div>
+            </div>
+        </md-input-container>
+    </div>
+
+    <div layout="column" layout-gt-xs="row" flex class="menos-espaciado">
+        <md-input-container flex="100" flex-gt-xs="50">
+            <md-icon md-font-icon="icon-sofa"></md-icon>
+            <input type="number" name="cupos" ng-model="vm.vehiculo.cupos"
+                   placeholder="Cupos del vehiculo" min="1" required>
+            <div ng-messages="verticalStep1.cupos.$error"
+                 ng-show="verticalStep1.cupos.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>Esta cantidad es requerida requerido.</span>
+                </div>
+                <div ng-message="min">
+                    <span>El cupo maximo debe ser de por lo menos 1.</span>
+                </div>
+            </div>
+        </md-input-container>
+
+        <md-input-container flex="100" flex-gt-xs="50">
+            <md-icon md-font-icon="icon-road"></md-icon>
+            <input type="text" name="cvial" ng-model="vm.vehiculo.codigo_vial"
+                   placeholder="Codigo vial" min="0" max="999" required>
+            <div ng-messages="verticalStep1.cvial.$error"
+                 ng-show="verticalStep1.cvial.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>Esta cantidad es requerida requerido.</span>
+                </div>
+                <div ng-message="min">
+                    <span>El codigo vial se represanta en 001 en adelante.</span>
+                </div>
+                <div ng-message="max">
+                    <span>Supero el maximo de cupos para el codigo vial.</span>
+                </div>
+            </div>
+        </md-input-container>
+    </div>
+</div>

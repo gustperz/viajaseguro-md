@@ -160,22 +160,6 @@
         </md-input-container>
 
         <md-input-container flex="100" flex-gt-xs="50">
-            <md-icon md-font-icon="icon-calendar"></md-icon>
-            <input type="date" name="fecha_seguroac" ng-model="vm.conductor.fecha_seguroac"
-                   placeholder="Fecha del seguro AC/CA" required>
-            <div ng-messages="verticalStep1.fecha_seguroac.$error"
-                 ng-show="verticalStep1.fecha_seguroac.$touched"
-                 role="alert">
-                <div ng-message="required">
-                    <span>Esta fecha es requerida.</span>
-                </div>
-                <div ng-message="valid">
-                    <span>No es una fecha valida.</span>
-                </div>
-            </div>
-        </md-input-container>
-
-        <md-input-container flex="100" flex-gt-xs="50">
             <md-icon md-font-icon="icon-alphabetical"></md-icon>
             <label>Asignar a central</label>
             <md-select ng-model="vm.conductor.central" required name="central">
