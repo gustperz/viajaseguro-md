@@ -127,7 +127,7 @@ function NewConductorController($mdDialog, Toast, Conductores, tipo, conductor, 
     function loadCentrales() {
         Centrales.getList({fields: 'id, ciudad, direccion', populate: 'ciudad'}).then(function (centrales) {
             vm.centrales = centrales;
-        })
+        });
     }
     function cancel() {
         $mdDialog.cancel();

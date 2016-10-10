@@ -106,7 +106,6 @@
         }
 
         function editModalVehiculo(ev, tipo) {
-            delete vm.selected.vehiculo;
 
             $mdDialog.show({
                 locals: {
