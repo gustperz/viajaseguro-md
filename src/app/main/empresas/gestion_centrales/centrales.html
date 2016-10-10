@@ -31,7 +31,7 @@
                     ng-click="vm.selectCentral(central)"
                     ng-class="{'selected' : vm.central.id === central.id}">
                     <td class="name" hide-xs>{{central.id}}</td>
-                    <td class="type">{{central.ciudad.nombre}}</td>
+                    <td class="type">{{central.ciudad}}</td>
                 </tr>
                 </tbody>
             </table>
@@ -39,8 +39,8 @@
         <!-- / CONTENT -->
     </div>
     <div id="detalles" class="bordered mt-10 mr-10 mb-10 p-10" layout="row" flex>
-        <div id="info" layout="column" flex="20" ng-hide="!vm.central.id">
-            <h1>{{vm.central.ciudad.nombre}}</h1>
+        <div id="info" layout="column" flex="60" ng-hide="!vm.central.id">
+            <h1>{{vm.central.ciudad}}</h1>
             <md-list flex>
                 <md-list-item class="md-2-line">
                     <div class="md-list-item-text">
@@ -78,64 +78,32 @@
                 </md-content>
             </md-list>
         </div>
-        <form id="form" layout="column" layout-align="start" flex="20" name="newCentralForm" ng-show="!vm.central.id && vm.crearCentral">
+        <form id="form" layout="column" layout-align="start" flex="60" name="newCentralForm" ng-show="!vm.central.id && vm.crearCentral">
             <h1>Nueva Central</h1>
-            <md-autocomplete flex required
-                             md-input-name="departamentos"
-                             md-selected-item="vm.selectedDepartamento"
-                             md-search-text="vm.searchTextD"
-                             md-items="departamento in vm.querySearch(vm.searchTextD, vm.departamentos)"
-                             md-selected-item-change="vm.loadCiudades(departamento.id)"
-                             md-item-text="departamento.nombre"
-                             md-require-match
-                             md-floating-label="Departamento">
-                <md-item-template>
-                    <span md-highlight-text="vm.searchTextD" md-highlight-flags="i">{{departamento.nombre}}</span>
-                </md-item-template>
-                <md-not-found>
-                    No hay coincidencias para {{vm.searchTextD}}
-                </md-not-found>
-                <div ng-messages="newCentralForm.departamentos.$error" ng-if="newCentralForm.departamentos.$touched">
-                    <div ng-message="required">Este campo es obligatorio..</div>
-                    <div ng-message="md-require-match">Por favor, seleccione un departamento existente.</div>
+            <md-input-container flex>
+                <label>Ciudad</label>
+                <input name="ciudad"
+                       required places-auto-complete size=80
+                       ng-model="vm.ciudad_place"
+                       component-restrictions="{country:'co'}"
+                       types="['(regions)']"
+                       on-place-changed="vm.placeChanged()"
+                       placeholder="Introduce una ubicación">
+                <div ng-messages="newCentralForm.ciudad.$error">
+                    <div ng-message="required">Este campo es obligatorio.</div>
                 </div>
-            </md-autocomplete>
-            <md-autocomplete flex required
-                             ng-disabled="!vm.selectedDepartamento"
-                             md-input-name="ciudad"
-                             md-selected-item="vm.selectedCiudad"
-                             md-search-text="vm.searchText"
-                             md-items="ciudad in vm.querySearch(vm.searchText, vm.ciudades)"
-                             md-item-text="ciudad.nombre"
-                             md-require-match
-                             md-floating-label="Ciudad">
-                <md-item-template>
-                    <span md-highlight-text="vm.searchText" md-highlight-flags="i">{{ciudad.nombre}}</span>
-                </md-item-template>
-                <md-not-found>
-                    No hay coincidencias para {{vm.searchText}}
-                </md-not-found>
-                <div ng-messages="newCentralForm.ciudad.$error" ng-if="newCentralForm.ciudad.$touched">
-                    <div ng-message="required">Este campo es obligatorio..</div>
-                    <div ng-message="md-require-match">Por favor, seleccione una ciudad existente.</div>
+            </md-input-container>
+            <md-input-container flex>
+                <label>Direccion</label>
+                <input name="direccion" ng-model="vm.central.direccion" ng-model-options='{ debounce: 600 }' ng-change="vm.geocode()" required>
+                <div ng-messages="newCentralForm.direccion.$error">
+                    <div ng-message="required">Este campo es obligatorio.</div>
                 </div>
-            </md-autocomplete>
-            <div layout="row">
-                <md-input-container flex>
-                    <label>Direccion</label>
-                    <input name="nombre" ng-model="vm.central.direccion" ng-enter="vm.geocode()" required>
-                    <div ng-messages="newCentralForm.nombre.$error">
-                        <div ng-message="required">Este campo es obligatorio.</div>
-                    </div>
-                </md-input-container>
-                <md-button class="md-icon-button" ng-click="vm.geocode()" ng-disabled="!vm.selectedCiudad" aria-label="geocode">
-                    <md-icon md-font-icon="icon-map-marker-radius" class="icon"></md-icon>
-                </md-button>
-            </div>
+            </md-input-container>
             <md-input-container flex>
                 <label>Telfono</label>
-                <input name="nombre" ng-model="vm.central.telefono" required>
-                <div ng-messages="newCentralForm.nombre.$error">
+                <input name="telefono" ng-model="vm.central.telefono" required>
+                <div ng-messages="newCentralForm.telefono.$error">
                     <div ng-message="required">Este campo es obligatorio.</div>
                 </div>
             </md-input-container>
@@ -165,7 +133,7 @@
                 </md-button>
             </div>
         </form>
-        <div id="no-select" class="align-vertical text-center" ng-hide="vm.central" flex="20">
+        <div id="no-select" class="align-vertical text-center" ng-hide="vm.central" flex="60">
             Seleccione una central
         </div>
         <div id="mapa" flex>
@@ -186,11 +154,6 @@
                 </custom-control>
             </ng-map>
         </div>
-        <!--<div id="mapa-directions" flex ng-show="vm.showMapaDirections">-->
-            <!--<ng-map center="[{{vm.simpleMap.center.lat}}, {{vm.simpleMap.center.lng}}]" zoom="{{vm.simpleMap.zoom}}">-->
-                <!---->
-            <!--</ng-map>-->
-        <!--</div>-->
     </div>
 </div>
 

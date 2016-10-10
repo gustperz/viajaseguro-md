@@ -12,11 +12,11 @@
     /** @ngInject */
     function EmpresaCentralesController(Rutas, Centrales, OneRequest, GeoCoder, NavigatorGeolocation, $mdMenu){
         var vm = this;
+        var ciudad_place = undefined;
         vm.centrales = [];
         vm.departamentos = [];
 
-        vm.querySearch = querySearch;
-        vm.loadCiudades = loadCiudades;
+        vm.placeChanged = placeChanged;
         vm.selectCentral = selectCentral;
         vm.geocode = geocode;
         vm.save = save;
@@ -30,26 +30,13 @@
 
         loadCentrales();
         currentPos();
-        loadDepartamentos();
 
         //////////
 
         function loadCentrales() {
-            Centrales.getList({fields: 'id, ciudad, direccion', populate: 'ciudad'}).then(function (centrales) {
+            Centrales.getList({fields: 'id, ciudad, direccion'}).then(function (centrales) {
                 vm.centrales = centrales;
             })
-        }
-
-        function loadDepartamentos() {
-            OneRequest.to('/departamentos', null, true).then(function (departamentos) {
-                vm.departamentos = departamentos;
-            })
-        }
-
-        function loadCiudades(departamento) {
-            OneRequest.to('/ciudades', {'departamento': departamento}, true).then(function (ciudades) {
-                vm.ciudades = ciudades;
-            });
         }
 
         function selectCentral(central) {
@@ -57,7 +44,7 @@
             vm.destino_ruta = '';
             vm.selectedRuta = undefined;
             vm.simpleMap = {};
-            central.get({populate: 'user,ciudad,rutas'}).then(function (central) {
+            central.get({populate: 'user,rutas'}).then(function (central) {
                 vm.simpleMap = {
                     center: {
                         lat: central.pos_lat,
@@ -73,24 +60,54 @@
         function showCrearCentral() {
             vm.central = {};
             vm.crearCentral = true;
-            vm.selectedCiudad = '';
-            vm.selectedCentral = '';
-            vm.searchText = '';
-            vm.searchTextD = '';
+            vm.ciudad_place = '';
             vm.destino_ruta = '';
             vm.selectedRuta = undefined;
             vm.simpleMap = {};
         }
 
+        function placeChanged() {
+            var place = this.getPlace();
+
+            vm.central.ciudad_place_id = place.place_id;
+            vm.central.ciudad = place.name;
+            vm.central.departamento = place.address_components.find(function (component) {
+                return component.types[0] === 'administrative_area_level_1';
+            }).long_name;
+
+            ciudad_place = place;
+            geocode();
+        }
+
+        function geocode() {
+            if (!ciudad_place) return;
+            var direccion = vm.central.direccion+', '+ciudad_place.formatted_address;
+            GeoCoder.geocode({address: direccion}).then(function(result) {
+                var firstAddress = result[0],
+                    lat = firstAddress.geometry.location.lat(),
+                    lng = firstAddress.geometry.location.lng();
+
+                console.log(vm.central, firstAddress)
+                vm.central.pos_lat = lat;
+                vm.central.pos_lng = lng;
+                vm.central.place_id = firstAddress.place_id;
+                vm.central.address_components_raw = firstAddress.address_components;
+
+                vm.simpleMap = {
+                    center: {
+                        lat: lat,
+                        lng: lng
+                    },
+                    zoom: 16
+                };
+                vm.my_position =  [lat, lng].toString();
+            });
+        }
+
         function save() {
-            vm.central.ciudad = vm.selectedCiudad.codigo;
             Centrales.create(vm.central).then(function (central) {
                 selectCentral(central);
                 loadCentrales();
-                vm.selectedCiudad = '';
-                vm.selectedCentral = '';
-                vm.searchText = '';
-                vm.searchTextD = '';
                 vm.crearCentral = false;
             })
         }
@@ -98,10 +115,6 @@
         function cancel() {
             vm.central = undefined;
             vm.crearCentral = false;
-            vm.selectedCiudad = '';
-            vm.selectedCentral = '';
-            vm.searchText = '';
-            vm.searchTextD = '';
         }
 
         function saveNewRuta() {
@@ -147,31 +160,6 @@
             vm.simpleMap.zoom = 10;
         }
 
-        function getdepartamento(id) {
-            return vm.departamentos.find(function(departamento) {return departamento.id === id;}).nombre;
-        }
-
-        function geocode() {
-            if (!vm.selectedCiudad || !vm.selectedDepartamento || !vm.central.direccion) return;
-            var direccion = vm.central.direccion+', '+vm.selectedCiudad.nombre+', '+vm.selectedDepartamento.nombre;
-            GeoCoder.geocode({address: direccion}).then(function(result) {
-                var firstAddress = result[0],
-                    lat = firstAddress.geometry.location.lat(),
-                    lng = firstAddress.geometry.location.lng();
-
-                vm.central.pos_lat = lat;
-                vm.central.pos_lng = lng;
-                vm.simpleMap = {
-                    center: {
-                        lat: lat,
-                        lng: lng
-                    },
-                    zoom: 16
-                };
-                vm.my_position =  [lat, lng].toString();
-            });
-        }
-
         function currentPos() {
             NavigatorGeolocation.getCurrentPosition()
                 .then(function(position) {
@@ -184,20 +172,6 @@
                         zoom: 8
                     };
                 });
-        }
-
-        function querySearch (query, collection) {
-            var results = query ? collection.filter( createFilterFor(query) ) : collection;
-            return results;
-        }
-
-        function createFilterFor(query) {
-            var lowercaseQuery = angular.lowercase(query);
-
-            return function(item) {
-                return (angular.lowercase(item.nombre).indexOf(lowercaseQuery) != -1);
-            };
-
         }
     }
 })();

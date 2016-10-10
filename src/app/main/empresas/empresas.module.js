@@ -17,6 +17,16 @@
     function config(msNavigationServiceProvider)
     {
         // Navigation
+        msNavigationServiceProvider.saveItem('centrales', {
+            title    : 'Centrales',
+            icon     : 'icon-store',
+            state    : 'app.empresa_centrales',
+            /*stateParams: {
+             'param1': 'page'
+             },*/
+            weight:1
+        });
+
         msNavigationServiceProvider.saveItem('conductores', {
             title    : 'Conductores',
             icon     : 'icon-account-location',
@@ -31,16 +41,6 @@
             title    : 'Vehiculos',
             icon     : 'icon-taxi',
             state    : 'app.empresa_vehiculos',
-            /*stateParams: {
-             'param1': 'page'
-             },*/
-            weight:1
-        });
-
-        msNavigationServiceProvider.saveItem('centrales', {
-            title    : 'Centrales',
-            icon     : 'icon-store',
-            state    : 'app.empresa_centrales',
             /*stateParams: {
              'param1': 'page'
              },*/
