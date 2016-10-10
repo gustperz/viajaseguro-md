@@ -39,9 +39,9 @@
         <!-- / CONTENT -->
     </div>
     <div id="detalles" class="bordered mt-10 mr-10 mb-10 p-10" layout="row" flex>
-        <div id="info" layout="column" flex="60" ng-hide="!vm.central.id">
+        <div id="info" layout="column" flex="45" ng-hide="!vm.central.id">
             <h1>{{vm.central.ciudad}}</h1>
-            <md-list flex>
+            <md-list>
                 <md-list-item class="md-2-line">
                     <div class="md-list-item-text">
                         <p>Direccion:</p>
@@ -62,23 +62,28 @@
                 </md-list-item>
                 <br>
                 <md-divider></md-divider>
-                <md-content id="rutas" class="content" flex ms-scroll>
+            </md-list>
+            <md-content id="rutas" class="content" flex ms-scroll>
+                <md-list flex>
                     <md-subheader>
                         <span>Rutas</span>
-                        <ng-include src="'app/main/empresas/gestion_centrales/floating_form.tmpl.html'"></ng-include>
+                        <ng-include src="'app/main/empresas/gestion_centrales/floating_form.tmpl.html'" ng-controller="NuevaRutaCentralController as vmf"></ng-include>
                     </md-subheader>
                     <md-list-item ng-repeat="ruta in vm.central.rutas" class="md-2-line"
                                   ng-click="vm.selectRuta(ruta)"
                                   ng-class="{'selected' : vm.selectedRuta.id === ruta.id}">
                         <div class="md-list-item-text" layout="column">
-                            <h3>{{ruta.nombre_ciudad}}</h3>
+                            <h3>{{ruta.origen.ciudad}} - {{ruta.destino.ciudad}}</h3>
                             <h4>{{ruta.trayecto}}</h4>
                         </div>
+                        <md-button class="md-secondary md-icon-button" ng-click="vm.deleteRoute(ruta, $index)" aria-label="delete">
+                            <md-icon md-font-icon="icon-close"></md-icon>
+                        </md-button>
                     </md-list-item>
-                </md-content>
-            </md-list>
+                </md-list>
+            </md-content>
         </div>
-        <form id="form" layout="column" layout-align="start" flex="60" name="newCentralForm" ng-show="!vm.central.id && vm.crearCentral">
+        <form id="form" layout="column" layout-align="start" flex="45" name="newCentralForm" ng-show="!vm.central.id && vm.crearCentral">
             <h1>Nueva Central</h1>
             <md-input-container flex>
                 <label>Ciudad</label>
@@ -133,7 +138,7 @@
                 </md-button>
             </div>
         </form>
-        <div id="no-select" class="align-vertical text-center" ng-hide="vm.central" flex="60">
+        <div id="no-select" class="align-vertical text-center" ng-hide="vm.central" flex="45">
             Seleccione una central
         </div>
         <div id="mapa" flex>

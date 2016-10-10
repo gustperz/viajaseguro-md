@@ -10,7 +10,7 @@
         .controller('EmpresaCentralesController', EmpresaCentralesController);
 
     /** @ngInject */
-    function EmpresaCentralesController(Rutas, Centrales, OneRequest, GeoCoder, NavigatorGeolocation, $mdMenu){
+    function EmpresaCentralesController(Centrales, Rutas, GeoCoder, NavigatorGeolocation){
         var vm = this;
         var ciudad_place = undefined;
         vm.centrales = [];
@@ -21,9 +21,8 @@
         vm.geocode = geocode;
         vm.save = save;
         vm.cancel = cancel;
-        vm.saveNewRuta = saveNewRuta;
-        vm.cancelNewRuta = cancelNewRuta;
         vm.selectRuta = selectRuta;
+        vm.deleteRoute = deleteRoute;
         vm.showCrearCentral = showCrearCentral;
 
         //////////
@@ -37,6 +36,20 @@
             Centrales.getList({fields: 'id, ciudad, direccion'}).then(function (centrales) {
                 vm.centrales = centrales;
             })
+        }
+
+        function currentPos() {
+            NavigatorGeolocation.getCurrentPosition()
+                .then(function(position) {
+                    var lat = position.coords.latitude, lng = position.coords.longitude;
+                    vm.simpleMap= {
+                        center: {
+                            lat: lat,
+                            lng: lng
+                        },
+                        zoom: 8
+                    };
+                });
         }
 
         function selectCentral(central) {
@@ -117,61 +130,19 @@
             vm.crearCentral = false;
         }
 
-        function saveNewRuta() {
-            Rutas.create({
-                nombre_ciudad: vm.selectedCiudad.nombre,
-                trayecto: vm.trayecto_ruta,
-                origen: vm.central.id,
-                destino: vm.selectedCiudad.codigo
-            }).then(function (ruta) {
-                vm.selectedCiudad = '';
-                vm.selectedCentral = '';
-                vm.searchText = '';
-                vm.searchTextD = '';
-                vm.trayecto_ruta = '';
-                vm.central.rutas.push(ruta.plain());
-                selectRuta(ruta.plain());
-                $mdMenu.hide()
-            })
-        }
-
-        function cancelNewRuta() {
-            vm.selectedCiudad = '';
-            vm.selectedCentral = '';
-            vm.searchText = '';
-            vm.searchTextD = '';
-            vm.trayecto_ruta = '';
-            $mdMenu.hide()
-        }
-
         function selectRuta(ruta) {
             vm.selectedRuta = ruta;
 
-            vm.origen_ruta = vm.central.direccion+', '+vm.central.ciudad.nombre+', '+getdepartamento(vm.central.ciudad.departamento);
+            vm.origen_ruta = ruta.origen.ciudad+', '+ruta.origen.departamento
+            vm.destino_ruta = ruta.destino.ciudad+', '+ruta.destino.departamento;
 
-            var central = vm.centrales.find(function(central) {return central.ciudad.codigo === ruta.destino;});
-            if( central ){
-                vm.destino_ruta = central.direccion+', '+central.ciudad.nombre+', '+getdepartamento(central.ciudad.departamento);
-            } else {
-                OneRequest.to('/ciudades', {'codigo': ruta.destino}, true).then(function (ciudades) {
-                    vm.destino_ruta = ciudades[0].nombre+', '+getdepartamento(ciudades[0].departamento);
-                });
-            }
             vm.simpleMap.zoom = 10;
         }
 
-        function currentPos() {
-            NavigatorGeolocation.getCurrentPosition()
-                .then(function(position) {
-                    var lat = position.coords.latitude, lng = position.coords.longitude;
-                    vm.simpleMap= {
-                        center: {
-                            lat: lat,
-                            lng: lng
-                        },
-                        zoom: 8
-                    };
-                });
+        function deleteRoute(ruta, incex) {
+            Rutas.remove(ruta).then(function () {
+                vm.central.rutas.splice(incex, 1);
+            });
         }
     }
 })();

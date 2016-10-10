@@ -133,6 +133,10 @@
 }
 
 .floatingForm {
+    md-menu-item {
+        margin: 8px 0 !important;
+    }
+
     .md-input-focused, .md-input-has-value{
         label{
             margin-bottom: -8px !important;
@@ -144,7 +148,8 @@
         min-height: 10px !important;
     }
 
-    #trayecto {
+    md-input-container {
+        width: 500px;
         margin-bottom: -5px !important;
         label{
             padding-left: 25px !important;

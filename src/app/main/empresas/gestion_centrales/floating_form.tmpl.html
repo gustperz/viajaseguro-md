@@ -6,69 +6,55 @@
     <md-menu-content width="4" class="floatingForm">
         <form name="formNewRuta">
             <md-menu-item id="titulo">
-                <h4>Selecciona la ciudad de destino de la nueva ruta</h4>
+                <h4>Crear nueva ruta</h4>
             </md-menu-item>
             <md-menu-item>
-                <md-autocomplete flex
-                                 md-input-name="departamentos"
-                                 md-selected-item="vm.selectedDepartamento"
-                                 md-search-text="vm.searchTextD"
-                                 md-items="departamento in vm.querySearch(vm.searchTextD, vm.departamentos)"
-                                 md-selected-item-change="vm.loadCiudades(departamento.id)"
-                                 md-item-text="departamento.nombre"
-                                 md-require-match
-                                 md-floating-label="Departamento">
-                    <md-item-template>
-                        <span md-highlight-text="vm.searchTextD" md-highlight-flags="i">{{departamento.nombre}}</span>
-                    </md-item-template>
-                    <md-not-found>
-                        No hay coincidencias para {{vm.searchTextD}}
-                    </md-not-found>
-                    <div ng-messages="newCentralForm.departamentos.$error" ng-if="newCentralForm.departamentos.$touched">
-                        <div ng-message="required">Este campo es obligatorio..</div>
-                        <div ng-message="md-require-match">Por favor, seleccione un departamento existente.</div>
+                <md-input-container flex>
+                    <label>Origen</label>
+                    <input name="origen"
+                           required places-auto-complete size=80
+                           ng-model="vmf.origen_place"
+                           component-restrictions="{country:'co'}"
+                           types="['(regions)']"
+                           on-place-changed="vmf.OrigenChanged()"
+                           placeholder="Introduce una ubicación">
+                    <div ng-messages="newCentralForm.origen.$error">
+                        <div ng-message="required">Este campo es obligatorio.</div>
                     </div>
-                </md-autocomplete>
+                </md-input-container>
             </md-menu-item>
             <md-menu-item>
-                <md-autocomplete flex
-                                 ng-disabled="!vm.selectedDepartamento"
-                                 md-input-name="ciudad"
-                                 md-selected-item="vm.selectedCiudad"
-                                 md-search-text="vm.searchText"
-                                 md-items="ciudad in vm.querySearch(vm.searchText, vm.ciudades)"
-                                 md-item-text="ciudad.nombre"
-                                 md-require-match
-                                 md-floating-label="Ciudad">
-                    <md-item-template>
-                        <span md-highlight-text="vm.searchText" md-highlight-flags="i">{{ciudad.nombre}}</span>
-                    </md-item-template>
-                    <md-not-found>
-                        No hay coincidencias para {{vm.searchText}}
-                    </md-not-found>
-                    <div ng-messages="newCentralForm.ciudad.$error" ng-if="newCentralForm.ciudad.$touched">
-                        <div ng-message="required">Este campo es obligatorio..</div>
-                        <div ng-message="md-require-match">Por favor, seleccione una ciudad existente.</div>
+                <md-input-container flex>
+                    <label>Destino</label>
+                    <input name="destino"
+                           required places-auto-complete size=80
+                           ng-model="vmf.destino_place"
+                           component-restrictions="{country:'co'}"
+                           types="['(regions)']"
+                           on-place-changed="vmf.DestinoChanged()"
+                           placeholder="Introduce una ubicación">
+                    <div ng-messages="newCentralForm.destino.$error">
+                        <div ng-message="required">Este campo es obligatorio.</div>
                     </div>
-                </md-autocomplete>
+                </md-input-container>
             </md-menu-item>
             <md-menu-item>
                 <md-input-container flex id="trayecto">
                     <label>Trayecto</label>
-                    <input name="trayecto" ng-model="vm.trayecto_ruta">
+                    <input name="trayecto" ng-model="vmf.trayecto_ruta" placeholder="Pueblos intermedios">
                 </md-input-container>
             </md-menu-item>
             <md-menu-item>
                 <div layout="row" id="actions" layout-align="center">
                     <md-button class="boton-guardar-dialog brad-30"
-                               ng-disabled="!vm.selectedCiudad || !vm.trayecto_ruta"
+                               ng-disabled="!vmf.destino || !vmf.origen"
                                md-prevent-menu-close="md-prevent-menu-close"
-                               ng-click="vm.saveNewRuta()">
+                               ng-click="vmf.saveNewRuta(vm.central)">
                         Guardar
                     </md-button>
                     <md-button class="boton-cancel-dialog brad-30"
                                md-prevent-menu-close="md-prevent-menu-close"
-                               ng-click="vm.cancelNewRuta()">
+                               ng-click="vmf.cancelNewRuta()">
                         Cancelar
                     </md-button>
                 </div>
