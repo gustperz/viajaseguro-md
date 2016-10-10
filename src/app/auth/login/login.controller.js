@@ -73,7 +73,7 @@
             if (rol == 'CENTRAL_EMPRESA') {
                 $state.go('app.central_despacho');
             } else if (rol == 'EMPRESA') {
-                $state.go('app.empresa_conductores')
+                $state.go('app.empresa_centrales')
             } else if (rol == 'SUPER_ADM') {
                 $state.go('app.gestion_empresas')
             }

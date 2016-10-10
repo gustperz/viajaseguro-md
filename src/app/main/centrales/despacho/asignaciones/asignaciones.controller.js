@@ -7,7 +7,7 @@
         .controller('AsignacionesController', controller);
 
     /** @ngInject */
-    function controller(Despacho, SolicitudesRepository, $scope){
+    function controller(Despacho, SolicitudesRepository){
         var vm = this;
 
         vm.solicitud = {

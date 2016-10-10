@@ -11,7 +11,7 @@
         .controller('ListaConductoresController', controller);
 
     /** @ngInject */
-    function controller(Despacho, Rutas, $mdDialog){
+    function controller(Despacho, Rutas, $mdDialog, SolicitudesRepository){
         var vm = this;
         var ruta = {};
 
@@ -38,7 +38,7 @@
             if(conductor) {
                 var conductor = Despacho.conductor.id;
                 var nPasajeros = 0;
-                !(conductor in Despacho.sa) || (Despacho.sa[conductor] = []);
+                !(conductor in Despacho.sa) || SolicitudesRepository.load();
                 angular.forEach(Despacho.sa[conductor], function (solicitud) {
                     nPasajeros += solicitud.pasajeros.length;
                 });

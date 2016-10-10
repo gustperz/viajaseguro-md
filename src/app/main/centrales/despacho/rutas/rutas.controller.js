@@ -38,7 +38,7 @@
             } else {
                 Centrales.get(authService.getCurrentUser().central.id, {fields: 'ciudad', populate: 'ciudad,rutas'})
                     .then(function (central) {
-                        angular.forEach(central.rutas, function (ruta) {
+                        angular.forEach(central.rutas, function (ruta, index) {
                             if (vm.ciudades_origen[ruta.origen.ciudad_place_id]){
                                 vm.ciudades_origen[ruta.origen.ciudad_place_id].rutas.push({
                                     nombre_ciudad: ruta.destino.ciudad,
@@ -54,6 +54,13 @@
                                         destino: ruta.destino.ciudad_place_id,
                                         id: ruta.id
                                     }]
+                                };
+                            }
+
+                            if(index === 0){
+                                Despacho.origen = {
+                                    codigo: ruta.origen.ciudad_place_id,
+                                    nombre: ruta.origen.ciudad
                                 };
                             }
                         });

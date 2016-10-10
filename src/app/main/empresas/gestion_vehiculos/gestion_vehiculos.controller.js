@@ -87,7 +87,7 @@
                     tipo: tipo,
                     vehiculo: vm.selected
                 },
-                controller: NewConductorController,
+                controller: NewVehiculoController,
                 controllerAs: 'vm',
                 templateUrl: 'app/main/empresas/gestion_vehiculos/new_vehiculo/new_vehiculo.html',
                 parent: angular.element(document.body),
@@ -113,7 +113,7 @@
                     tipo: tipo,
                     vehiculo: vm.selected
                 },
-                controller: NewConductorController,
+                controller: NewVehiculoController,
                 controllerAs: 'vm',
                 templateUrl: 'app/main/empresas/gestion_vehiculos/new_vehiculo/edit_vehiculo.html',
                 parent: angular.element(document.body),
