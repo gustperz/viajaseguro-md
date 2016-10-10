@@ -1,7 +1,7 @@
 /**
  * Created by Jose Soto Acosta on 14/09/2016.
  */
-function NewConductorController($mdDialog, Toast, Vehiculos, tipo, vehiculo) {
+function NewVehiculoController($mdDialog, Toast, Vehiculos, tipo, vehiculo) {
 // variables
     var vm = this;
     vm.vehiculo = {};
