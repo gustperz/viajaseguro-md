@@ -56,15 +56,8 @@
                                     }]
                                 };
                             }
-
-                            if(index === 0){
-                                Despacho.origen = {
-                                    codigo: ruta.origen.ciudad_place_id,
-                                    nombre: ruta.origen.ciudad
-                                };
-                            }
                         });
-                        console.log(vm.ciudades_origen)
+                        selectOrigen(vm.ciudades_origen[central.rutas[0].origen.ciudad_place_id]);
                     });
             }
         }
@@ -109,7 +102,11 @@
                 codigo: ciudad.codigo,
                 nombre: ciudad.nombre
             };
-            Despacho.destino = undefined;
+            if(ciudad.rutas.length === 1){
+                selectDestino(ciudad.rutas[0]);
+            }else {
+                Despacho.destino = undefined;
+            }
         }
 
         function selectDestino(ruta) {
