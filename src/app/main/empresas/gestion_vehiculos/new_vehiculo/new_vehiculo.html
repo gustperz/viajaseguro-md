@@ -1,0 +1,32 @@
+<md-dialog aria-label="{{vm.tipoModal}} conductor" flex="80" class="dialog-empresa">
+    <md-toolbar class="toolbar-empresa">
+        <div class="md-toolbar-tools">
+            <h2><b>{{vm.tipoModal}} vehiculo</b></h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="vm.cancel()">
+                <md-icon md-font-icon="icon-close"
+                         aria-label="Cerrar modal"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-content class="content form-stepper-conductor" flex ms-scroll>
+        <form name="verticalStepper" ms-vertical-stepper ng-submit="vm.guardarVehiculo()"
+              ng-model="vm.conductor" novalidate>
+            <ms-vertical-stepper-step ng-form="verticalStep1" step="1" step-title="'Informacion del vehiculo'">
+                <div ng-include="'app/main/empresas/gestion_vehiculos/new_vehiculo/informacion_vehiculo.html'"></div>
+            </ms-vertical-stepper-step>
+
+            <ms-vertical-stepper-step ng-form="verticalStep2" step="2" step-title="'Documentacion del vehiculo'"
+                                      hide-step="!vm.vehiculo">
+                <div ng-include="'app/main/empresas/gestion_vehiculos/new_vehiculos/documentacion_vehiculo.html'"></div>
+            </ms-vertical-stepper-step>
+        </form>
+    </md-content>
+
+    <md-dialog-actions layout="row">
+        <md-button class="boton-cancel-dialog brad-30" ng-click="vm.cancel()">
+            Cancelar
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

@@ -128,7 +128,7 @@
     <md-sidenav class="sidenav details-sidenav md-sidenav-right" md-is-locked-open="$mdMedia('gt-md')"
                 md-component-id="details-sidenav" ms-scroll
                 ms-sidenav-helper>
-        <div class="header" layout="column" layout-align="space-between">
+        <div class="header" layout="column" layout-align="space-between" ng-if="vm.selected !== null">
             <div class="toolbar" layout="row" layout-align="end center">
                 <md-button ng-click="vm.deleteConductor($event)" class="md-icon-button" aria-label="Eliminar">
                     <md-icon md-font-icon="icon-delete"></md-icon>
@@ -149,9 +149,12 @@
             </div>
             <hr>
         </div>
+        <div ng-if="vm.selected == null" class="center">
+            No se ha seleccionado ningun conductor
+        </div>
 
         <!--contenido-->
-        <md-content class="content" flex ms-scroll>
+        <md-content class="content" flex ms-scroll ng-if="vm.selected != null" >
 
             <div class="p_not_vec" ng-if="vm.selected.doc_venc === true">
                 <span>Este conductor tiene 1 o mas documentos proximos a vencer</span>

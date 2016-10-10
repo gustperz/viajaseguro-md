@@ -23,6 +23,8 @@
         vm.selectedVehiculo = selectedVehiculo;
         vm.abrirPanel = abrirPanel;
         vm.toggleSidenav = toggleSidenav;
+        vm.newModalVehiculo = newModalVehiculo;
+        vm.editModalVehiculo = editModalVehiculo;
         vm.deleteVehiculo = deleteVehiculo;
 
         //////////
@@ -50,7 +52,11 @@
                         vehiculo.doc_venc = documentacionPorVencer(vehiculo);
                         vm.vehiculos.push(vehiculo);
                     });
-                    vm.selected = vm.vehiculos[0];
+                    if(vm.vehiculos.length > 0){
+                        vm.selected = vm.vehiculos[0];
+                    }else{
+                        vm.selected = null;
+                    }
                     if(vm.n_vehi_doc_venc > 0) Toast('Uno o mas vehiculos tiene documentacion proxima a vencer, por favor, verificalos en la lista.')
                 }, function (error) {
                     console.log(error);
@@ -73,6 +79,56 @@
                 return true;
             }
             return false;
+        }
+
+        function newModalVehiculo(ev, tipo) {
+            $mdDialog.show({
+                locals: {
+                    tipo: tipo,
+                    vehiculo: vm.selected
+                },
+                controller: NewConductorController,
+                controllerAs: 'vm',
+                templateUrl: 'app/main/empresas/gestion_vehiculos/new_vehiculo/new_vehiculo.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true,
+                fullscreen: false
+            })
+                .then(function (response) {
+                    if (response.metadata.code == "OK" || response.metadata.code == "ok") {
+                        vm.conductores.push(response);
+                        Toast(response.metadata.mensaje, 'bottom right')
+                    }
+                }, function (reponse) {
+
+                });
+        }
+
+        function editModalVehiculo(ev, tipo) {
+            delete vm.selected.vehiculo;
+
+            $mdDialog.show({
+                locals: {
+                    tipo: tipo,
+                    vehiculo: vm.selected
+                },
+                controller: NewConductorController,
+                controllerAs: 'vm',
+                templateUrl: 'app/main/empresas/gestion_vehiculos/new_vehiculo/edit_vehiculo.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true,
+                fullscreen: false
+            })
+                .then(function (response) {
+                    console.log(response);
+                    if (response.metadata.code == "OK" || response.metadata.code == "ok") {
+                        Toast(response.metadata.mensaje, 'bottom right')
+                    }
+                }, function (reponse) {
+
+                });
         }
 
         function deleteVehiculo(ev) {

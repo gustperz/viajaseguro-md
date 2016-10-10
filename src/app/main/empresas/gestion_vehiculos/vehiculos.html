@@ -25,13 +25,13 @@
             </div>
 
             <!-- ADD NEW VEHICULO-->
-            <!--<div id="file-uploader">-->
-                <!--<md-button flow-btn class="add-file-button md-fab md-warn" aria-label="Nueva empresa"-->
-                           <!--ng-click="vm.newModalConductor($event, 'Nuevo')">-->
-                    <!--<md-icon md-font-icon="icon-plus"></md-icon>-->
-                    <!--<md-tooltip><span>Nuevo conductor</span></md-tooltip>-->
-                <!--</md-button>-->
-            <!--</div>-->
+            <div id="file-uploader">
+                <md-button flow-btn class="add-file-button md-fab md-warn" aria-label="Nueva empresa"
+                           ng-click="vm.newModalVehiculo($event, 'Nuevo')">
+                    <md-icon md-font-icon="icon-plus"></md-icon>
+                    <md-tooltip><span>Nuevo conductor</span></md-tooltip>
+                </md-button>
+            </div>
             <!-- / ADD NEW VEHICULO -->
         </div>
         <!-- / HEADER -->
@@ -81,30 +81,34 @@
     <md-sidenav class="sidenav details-sidenav md-sidenav-right" md-is-locked-open="$mdMedia('gt-md')"
                 md-component-id="details-sidenav" ms-scroll
                 ms-sidenav-helper>
-        <div class="header" layout="column" layout-align="space-between">
+        <div class="header" layout="column" layout-align="space-between" ng-if="vm.selected != null">
             <div class="toolbar" layout="row" layout-align="end center">
                 <md-button ng-click="vm.deleteVehiculo($event)" class="md-icon-button" aria-label="Eliminar">
                     <md-icon md-font-icon="icon-delete"></md-icon>
                     <md-tooltip><span>Eliminar</span></md-tooltip>
                 </md-button>
 
-                <!--<md-button ng-click="vm.newModalConductor($event, 'Modificar')" class="md-icon-button"-->
-                           <!--aria-label="Editar">-->
-                    <!--<md-icon md-font-icon="icon-pencil"></md-icon>-->
-                    <!--<md-tooltip><span>Editar</span></md-tooltip>-->
-                <!--</md-button>-->
+                <md-button ng-click="vm.editModalConductor($event, 'Modificar')" class="md-icon-button"
+                           aria-label="Editar">
+                    <md-icon md-font-icon="icon-pencil"></md-icon>
+                    <md-tooltip><span>Editar</span></md-tooltip>
+                </md-button>
             </div>
             <hr>
             <div class="image-content">
                 <h3 class="title-empresa"><b>{{vm.selected.placa}}</b></h3><br>
-                <img alt="Conductor" class="empresa-imagen"
+                <img alt="Vehiculo" class="empresa-imagen"
                      ng-src="http://api.viajaseguro.co/images/vehiculos/{{vm.selected.imagen}}">
             </div>
             <hr>
         </div>
 
+        <div ng-if="vm.selected == null" class="center">
+            No se ha seleccionado ningun vehiculo
+        </div>
+
         <!--contenido-->
-        <md-content class="content" flex ms-scroll>
+        <md-content class="content" flex ms-scroll ng-if="vm.selected != null">
 
             <div class="p_not_vec" ng-if="vm.selected.doc_venc === true">
                 <span>Este vehiculo tiene 1 o mas documentos proximos a vencer</span>

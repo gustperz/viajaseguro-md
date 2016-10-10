@@ -60,7 +60,11 @@
                             vm.conductoresInactivos.push(conductor);
                         }
                     });
-                    vm.selected = vm.conductores[0];
+                    if(vm.conductores.length > 0){
+                        vm.selected = vm.conductores[0];
+                    }else{
+                        vm.selected = null;
+                    }
                     if (vm.n_cond_doc_venc > 0) Toast('Existen uno o mas conductores con documentacion a vencer, verificalos en la lista')
                 }, function (error) {
                     console.log(error);
@@ -176,7 +180,7 @@
                 .ok('Continuar!')
                 .cancel('Cancelar');
             $mdDialog.show(confirm).then(function () {
-                // vm.selected.remove().then(success, error)
+                vm.selected.remove().then(success, error)
                 vm.conductores.splice(vm.index, 1);
                 function success(response) {
                     vm.conductores.splice(vm.index, 1);

@@ -7,14 +7,14 @@
         <fieldset>
             <legend>Tecnomecanica</legend>
             <md-input-container flex="100" flex-gt-xs="50">
-                <md-switch ng-model="vm.conductor.vehiculo.tecnomecanica" aria-label="Tecnomecanica"></md-switch>
+                <md-switch ng-model="vm.vehiculo.tecnomecanica" aria-label="Tecnomecanica"></md-switch>
             </md-input-container>
             <md-input-container>
                 <md-icon md-font-icon="icon-calendar"></md-icon>
-                <input type="date" name="fecha_tecnomecanica" ng-model="vm.conductor.vehiculo.fecha_tecnomecanica"
+                <input type="date" name="fecha_tecnomecanica" ng-model="vm.vehiculo.fecha_tecnomecanica"
                        placeholder="Fecha de vencimiento" required>
-                <div ng-messages="verticalStep1.fecha_tecnomecanica.$error"
-                     ng-show="verticalStep1.fecha_tecnomecanica.$touched"
+                <div ng-messages="verticalStep2.fecha_tecnomecanica.$error"
+                     ng-show="verticalStep2.fecha_tecnomecanica.$touched"
                      role="alert">
                     <div ng-message="required">
                         <span>Esta fecha es requerida.</span>
@@ -28,14 +28,14 @@
         <fieldset>
             <legend>Soat</legend>
             <md-input-container flex="100" flex-gt-xs="50">
-                <md-switch ng-model="vm.conductor.vehiculo.soat" aria-label="Tecnomecanica"></md-switch>
+                <md-switch ng-model="vm.vehiculo.soat" aria-label="Tecnomecanica"></md-switch>
             </md-input-container>
             <md-input-container>
                 <md-icon md-font-icon="icon-calendar"></md-icon>
-                <input type="date" name="fecha_soat" ng-model="vm.conductor.vehiculo.fecha_soat"
+                <input type="date" name="fecha_soat" ng-model="vm.vehiculo.fecha_soat"
                        placeholder="Fecha de vencimiento" required>
-                <div ng-messages="verticalStep1.fecha_soat.$error"
-                     ng-show="verticalStep1.fecha_soat.$touched"
+                <div ng-messages="verticalStep2.fecha_soat.$error"
+                     ng-show="verticalStep2.fecha_soat.$touched"
                      role="alert">
                     <div ng-message="required">
                         <span>Esta fecha es requerida.</span>
@@ -46,15 +46,14 @@
                 </div>
             </md-input-container>
         </fieldset>
-
         <fieldset>
             <legend>Seguro Actual y contra actual</legend>
             <md-input-container flex="100" flex-gt-xs="50">
                 <md-icon md-font-icon="icon-calendar"></md-icon>
-                <input type="date" name="fecha_seguroac" ng-model="vm.conductor.vehiculo.fecha_seguroac"
+                <input type="date" name="fecha_seguroac" ng-model="vm.vehiculo.fecha_seguroac"
                        placeholder="Fecha del seguro AC/CA" required>
-                <div ng-messages="verticalStep1.fecha_seguroac.$error"
-                     ng-show="verticalStep1.fecha_seguroac.$touched"
+                <div ng-messages="verticalStep2.fecha_seguroac.$error"
+                     ng-show="verticalStep2.fecha_seguroac.$touched"
                      role="alert">
                     <div ng-message="required">
                         <span>Esta fecha es requerida.</span>
