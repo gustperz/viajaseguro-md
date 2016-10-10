@@ -38,15 +38,26 @@
             } else {
                 Centrales.get(authService.getCurrentUser().central.id, {fields: 'ciudad', populate: 'ciudad,rutas'})
                     .then(function (central) {
-                        vm.ciudades_origen[central.ciudad.codigo] = {
-                            nombre: central.ciudad.nombre,
-                            codigo: central.ciudad.codigo,
-                            rutas: central.rutas
-                        }
-                        Despacho.origen = {
-                            codigo: central.ciudad.codigo,
-                            nombre:central.ciudad.nombre
-                        };
+                        angular.forEach(central.rutas, function (ruta) {
+                            if (vm.ciudades_origen[ruta.origen.ciudad_place_id]){
+                                vm.ciudades_origen[ruta.origen.ciudad_place_id].rutas.push({
+                                    nombre_ciudad: ruta.destino.ciudad,
+                                    destino: ruta.destino.ciudad_place_id,
+                                    id: ruta.id
+                                });
+                            }else{
+                                vm.ciudades_origen[ruta.origen.ciudad_place_id] = {
+                                    nombre: ruta.origen.ciudad,
+                                    codigo: ruta.origen.ciudad_place_id,
+                                    rutas: [{
+                                        nombre_ciudad: ruta.destino.ciudad,
+                                        destino: ruta.destino.ciudad_place_id,
+                                        id: ruta.id
+                                    }]
+                                };
+                            }
+                        });
+                        console.log(vm.ciudades_origen)
                     });
             }
         }

@@ -1,8 +1,8 @@
 <div id="origen" layout="row" >
     <h3>Origen</h3>
     <section layout="row" layout-align="center center">
-        <md-button ng-repeat="ciudad in vmrutas.ciudades_origen track by ciudad.codigo"
-                   aria-label="origen-{{ruta.destino}}"
+        <md-button ng-repeat="ciudad in vmrutas.ciudades_origen track by $index"
+                   aria-label="origen-{{ciudad.codigo}}"
                    ng-click="vmrutas.selectOrigen(ciudad)"
                    ng-class="{'selected': ciudad.codigo == vm.despacho.origen.codigo, 'first': $first}">
             {{ciudad.nombre}}
@@ -39,8 +39,8 @@
 <div id="destino" layout="row" class="margin-left-15">
     <h3>Destino</h3>
     <section layout="row" layout-align="center center">
-        <md-button ng-repeat="ruta in vmrutas.ciudades_origen[vm.despacho.origen.codigo].rutas track by ruta.destino"
-                   aria-label="destino-{{ruta.destino}}"
+        <md-button ng-repeat="ruta in vmrutas.ciudades_origen[vm.despacho.origen.codigo].rutas track by $index"
+                   aria-label="destino-{{ruta.codigo}}"
                    ng-click="vmrutas.selectDestino(ruta)"
                    ng-class="{'selected': ruta.destino == vm.despacho.destino.codigo, 'first': $first}">
             {{ruta.nombre_ciudad}}
