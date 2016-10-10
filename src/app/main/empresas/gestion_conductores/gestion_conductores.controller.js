@@ -12,7 +12,7 @@
     function EmpresaConductoresController(Conductores, $mdSidenav, $mdDialog, Toast) {
         var vm = this;
         var campos = 'identificacion, nombres, apellidos, direccion, email, fecha_nacimiento,' +
-            ' telefono, activo, imagen, fecha_licencia, nlicencia, tipo_licencia, fecha_seguroac, vehiculo,' +
+            ' telefono, activo, imagen, fecha_licencia, nlicencia, tipo_licencia, vehiculo,' +
             ' vehiculo.codigo_vial, vehiculo.placa, vehiculo.modelo, vehiculo.fecha_soat, vehiculo.fecha_tecnomecanica,' +
             ' vehiculo.cupos, vehiculo.cedula_propietario, vehiculo.telefono_propietario, vehiculo.color,' +
             ' vehiculo.nombre_propietario, vehiculo.soat, vehiculo.tecnomecanica';
@@ -83,7 +83,7 @@
 
         function documentacionPorVencer(conductor) {
             const fecha_licencia = conductor.fecha_licencia ? new Date(conductor.fecha_licencia) : null;
-            const fecha_seguroac = conductor.fecha_seguroac ? new Date(conductor.fecha_seguroac) : null;
+            // const fecha_seguroac = conductor.fecha_seguroac ? new Date(conductor.fecha_seguroac) : null;
             const fecha_soat = conductor.vehiculo.fecha_soat ? new Date(conductor.vehiculo.fecha_soat) : null;
             const fecha_tecnomecanica = conductor.vehiculo.fecha_tecnomecanica ? new Date(conductor.vehiculo.fecha_tecnomecanica) : null;
             var diferencia = Math.floor((fecha_licencia - new Date()) / (1000 * 60 * 60 * 24))

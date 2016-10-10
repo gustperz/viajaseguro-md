@@ -4,7 +4,7 @@
 function NewConductorController($mdDialog, Toast, Vehiculos, tipo, vehiculo) {
 // variables
     var vm = this;
-    vm.vehiculo = vehiculo || {};
+    vm.vehiculo = {};
     vm.tipoModal = tipo;
 
     // funciones
