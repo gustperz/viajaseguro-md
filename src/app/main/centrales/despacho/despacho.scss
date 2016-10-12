@@ -89,6 +89,11 @@
     md-pagination-wrapper, md-tabs-canvas {
       height: 29px !important;
     }
+
+    md-tabs-content-wrapper {
+      top: 29px !important;
+    }
+
     md-tab-item {
       padding: 0px 20px 5px 20px !important;
 
@@ -99,6 +104,7 @@
       }
     }
     .form-viajero {
+      margin-right: 1px!important;
       background-color: white !important;
       border-radius: 15px;
       border: 1px solid $primary-color;
@@ -156,6 +162,7 @@
     .todo-item {
       border: 1px solid $primary-color;
       margin-bottom: 5px !important;
+      margin-right: 1px !important;
       border-radius: 15px !important;
       background-color: white;
       position: relative;

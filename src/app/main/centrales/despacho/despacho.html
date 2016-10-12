@@ -23,9 +23,17 @@
                 </div>
 
                 <!--DESPACHO-->
-                <div layout="row" id="info-despacho" flex="45" layout="column" class="bordered p-10"
-                     ng-controller="AsignacionesController as vmasignaciones" ng-show="vm.despacho.conductor"
-                     ng-include="'app/main/centrales/despacho/asignaciones/asignaciones.html'">
+                <div flex="45" id="info-despacho" layout="column" class="bordered p-10" ng-show="vm.despacho.conductor">
+                    <div layout="column" ng-controller="AsignacionesController as vmasignaciones" flex
+                         ng-include="'app/main/centrales/despacho/asignaciones/asignaciones.html'">
+                    </div>
+                    <div layout="row">
+                        <span flex></span>
+                        <md-button class="boton-guardar-dialog brad-30" ng-click="vm.despachar()">
+                            Despachar conductor
+                        </md-button>
+                        <span flex></span>
+                    </div>
                 </div>
 
                 <!--SOLICITUDES-->
