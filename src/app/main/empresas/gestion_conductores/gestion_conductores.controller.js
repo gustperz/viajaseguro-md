@@ -11,7 +11,7 @@
     /** @ngInject */
     function EmpresaConductoresController(Conductores, $mdSidenav, $mdDialog, Toast) {
         var vm = this;
-        var campos = 'identificacion, nombres, apellidos, direccion, email, fecha_nacimiento,' +
+        var campos = 'identificacion, nombres, apellidos, direccion, email, fecha_nacimiento, central,' +
             ' telefono, activo, imagen, fecha_licencia, nlicencia, tipo_licencia, vehiculo.fecha_seguroac, vehiculo,' +
             ' vehiculo.codigo_vial, vehiculo.placa, vehiculo.modelo, vehiculo.fecha_soat, vehiculo.fecha_tecnomecanica,' +
             ' vehiculo.cupos, vehiculo.cedula_propietario, vehiculo.telefono_propietario, vehiculo.color,' +
@@ -82,35 +82,20 @@
         };
 
         function documentacionPorVencer(conductor) {
-            const fecha_licencia = conductor.fecha_licencia ? new Date(conductor.fecha_licencia) : null;
-            const fecha_seguroac = conductor.fecha_seguroac ? new Date(conductor.fecha_seguroac) : null;
-            const fecha_soat = conductor.vehiculo.fecha_soat ? new Date(conductor.vehiculo.fecha_soat) : null;
-            const fecha_tecnomecanica = conductor.vehiculo.fecha_tecnomecanica ? new Date(conductor.vehiculo.fecha_tecnomecanica) : null;
-            var diferencia = Math.floor((fecha_licencia - new Date()) / (1000 * 60 * 60 * 24))
-            if (diferencia <= 30) {
-                conductor.pv_licencia = true;
-                vm.n_cond_doc_venc++;
-                return true;
+            var doc_vencida = false
+            conductor.pv_licencia = check(conductor.fecha_licencia) && vm.n_cond_doc_venc++;
+            conductor.pv_seguroac = check(conductor.fecha_seguroac) && vm.n_cond_doc_venc++;
+            conductor.pv_soat = check(conductor.vehiculo.fecha_soat) && vm.n_cond_doc_venc++;
+            conductor.pv_tecnomecanica = check(conductor.vehiculo.fecha_tecnomecanica) && vm.n_cond_doc_venc++;
+
+            return doc_vencida;
+
+            function check(fecha) {
+                if (moment(fecha, "YYYY-MM-DD").diff(moment(), 'days') <= 30) {
+                    doc_vencida = true;
+                    return doc_vencida;
+                }
             }
-            diferencia = Math.floor((fecha_seguroac - new Date()) / (1000 * 60 * 60 * 24))
-            if (diferencia <= 30) {
-                conductor.pv_seguroac = true;
-                vm.n_cond_doc_venc++;
-                return true;
-            }
-            diferencia = Math.floor((fecha_soat - new Date()) / (1000 * 60 * 60 * 24))
-            if (diferencia <= 30) {
-                conductor.pv_soat = true;
-                vm.n_cond_doc_venc++;
-                return true;
-            }
-            diferencia = Math.floor((fecha_tecnomecanica - new Date()) / (1000 * 60 * 60 * 24))
-            if (diferencia <= 30) {
-                conductor.pv_tecnomecanica = true;
-                vm.n_cond_doc_venc++;
-                return true;
-            }
-            return false;
         }
 
         function newModalConductor(ev, tipo) {
