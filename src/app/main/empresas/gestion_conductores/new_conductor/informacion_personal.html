@@ -166,7 +166,7 @@
                 <md-content ms-scroll>
                     <md-option ng-disabled="true">Central a asignar</md-option>
                     <md-option ng-repeat="central in vm.centrales" ng-value="central.id"  title="{{central.ciudad}}"
-                               ng-selected="central.id === vm.conductor.central || true">
+                               ng-selected="central.id === vm.conductor.central ? 'true' : 'false'">
                         {{central.ciudad}}
                     </md-option>
                 </md-content>

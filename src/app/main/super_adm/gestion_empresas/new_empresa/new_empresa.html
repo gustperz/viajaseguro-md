@@ -14,13 +14,13 @@
         <md-content class="content" ms-scroll flex layout-padding>
             <form>
                 <div layout layout-sm="column">
-                    <md-input-container flex>
-                        <label>Nit</label>
-                        <input name="nit" ng-model="vm.empresa.nit" placeholder="Digita el nit de la empresa" required>
-                        <div ng-messages="empresaForm.nit.$error">
-                            <div ng-message="required">Este campo es obligatorio.</div>
-                        </div>
-                    </md-input-container>
+                    <!--<md-input-container flex>-->
+                        <!--<label>Nit</label>-->
+                        <!--<input name="nit" ng-model="vm.empresa.nit" placeholder="Digita el nit de la empresa" required>-->
+                        <!--<div ng-messages="empresaForm.nit.$error">-->
+                            <!--<div ng-message="required">Este campo es obligatorio.</div>-->
+                        <!--</div>-->
+                    <!--</md-input-container>-->
                     <md-input-container flex>
                         <label>Nombre</label>
                         <input name="nombre" ng-model="vm.empresa.nombre_corto"
@@ -30,23 +30,23 @@
                         </div>
                     </md-input-container>
                 </div>
-                <div layout layout-sm="column">
-                    <md-input-container flex>
-                        <label>Dirección</label>
-                        <input name="direccion" ng-model="vm.empresa.direccion" placeholder="Digita la direccion"
-                               required>
-                        <div ng-messages="empresaForm.direccion.$error">
-                            <div ng-message="required">Este campo es obligatorio.</div>
-                        </div>
-                    </md-input-container>
-                    <md-input-container flex>
-                        <label>Telefono</label>
-                        <input name="telefono" ng-model="vm.empresa.telefono" placeholder="Digita el telefono" required>
-                        <div ng-messages="empresaForm.telefono.$error">
-                            <div ng-message="required">Este campo es obligatorio.</div>
-                        </div>
-                    </md-input-container>
-                </div>
+                <!--<div layout layout-sm="column">-->
+                    <!--<md-input-container flex>-->
+                        <!--<label>Dirección</label>-->
+                        <!--<input name="direccion" ng-model="vm.empresa.direccion" placeholder="Digita la direccion"-->
+                               <!--required>-->
+                        <!--<div ng-messages="empresaForm.direccion.$error">-->
+                            <!--<div ng-message="required">Este campo es obligatorio.</div>-->
+                        <!--</div>-->
+                    <!--</md-input-container>-->
+                    <!--<md-input-container flex>-->
+                        <!--<label>Telefono</label>-->
+                        <!--<input name="telefono" ng-model="vm.empresa.telefono" placeholder="Digita el telefono" required>-->
+                        <!--<div ng-messages="empresaForm.telefono.$error">-->
+                            <!--<div ng-message="required">Este campo es obligatorio.</div>-->
+                        <!--</div>-->
+                    <!--</md-input-container>-->
+                <!--</div>-->
 
                 <div layout="row" layout-align="start" flex>
                     <md-input-container flex="50">
@@ -64,18 +64,18 @@
                     </md-input-container>
                 </div>
 
-                <fieldset class="datos-modulos-empresa">
-                    <legend>Modulos contratados</legend>
-                    <div layout layout-sm="column" class="content-datos-modulo">
-                        <div layout="row" layout-wrap flex>
-                            <div flex ng-repeat="modulo in vm.modulos">
-                                <md-checkbox ng-checked="vm.exists(modulo.id, vm.selected)" ng-click="vm.toggle(modulo.id, vm.selected)">
-                                    {{ modulo.nombre }}
-                                </md-checkbox>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
+                <!--<fieldset class="datos-modulos-empresa">-->
+                    <!--<legend>Modulos contratados</legend>-->
+                    <!--<div layout layout-sm="column" class="content-datos-modulo">-->
+                        <!--<div layout="row" layout-wrap flex>-->
+                            <!--<div flex ng-repeat="modulo in vm.modulos">-->
+                                <!--<md-checkbox ng-checked="vm.exists(modulo.id, vm.selected)" ng-click="vm.toggle(modulo.id, vm.selected)">-->
+                                    <!--{{ modulo.nombre }}-->
+                                <!--</md-checkbox>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</fieldset>-->
 
 
                 <fieldset class="datos-usuario-empresa" ng-if="vm.tipoModal != 'Modificar'">

@@ -8,7 +8,7 @@ function NewEmpresaController($mdDialog, Toast, Empresas, tipo, empresa, Modulos
     vm.tipoEmpresas = [
         {
             id: 0,
-            nombre : 'Especial'
+            nombre: 'Especial'
         },
         {
             id: 1,
@@ -41,38 +41,39 @@ function NewEmpresaController($mdDialog, Toast, Empresas, tipo, empresa, Modulos
     }
 
     function guardarEmpresa() {
-        if(vm.listaModulosContratados.length <= 0){
-            Toast('No ha seleccionado ningun modulo de contrato')
-        }else{
-            vm.empresa.modulos_contratados_empresa = vm.listaModulosContratados;
-            Empresas.create(vm.empresa).then(success, error);
+        // if(vm.listaModulosContratados.length <= 0){
+        //     Toast('No ha seleccionado ningun modulo de contrato')
+        // }else{
+        // vm.empresa.modulos_contratados_empresa = vm.listaModulosContratados;
+        Empresas.create(vm.empresa).then(success, error);
 
-            function success(response) {
-                response.metadata.mensaje = "Empresa creada correctamente";
-                response.metadata.tipo = vm.tipoModal;
-                $mdDialog.hide(response);
-            }
+        function success(response) {
+            response.metadata.mensaje = "Empresa creada correctamente";
+            response.metadata.tipo = vm.tipoModal;
+            $mdDialog.hide(response);
+        }
 
-            function error(response) {
-                if (response.data.code == 'E_VALIDATION') {
-                    angular.forEach(response.data, function (campo) {
-                        if (campo.nit) {
-                            angular.forEach(campo.nit, function (rules) {
-                                if (rules.rule == 'unique') {
-                                    Toast('Ya se encuentra una empresa registrada con el NIT:  <b> ' + rules.value + '</b>. verificalo nuevamente!');
-                                }
-                            });
-                        }
-                    });
-                }
+        function error(response) {
+            if (response.data.code == 'E_VALIDATION') {
+                angular.forEach(response.data, function (campo) {
+                    if (campo.nit) {
+                        angular.forEach(campo.nit, function (rules) {
+                            if (rules.rule == 'unique') {
+                                Toast('Ya se encuentra una empresa registrada con el NIT:  <b> ' + rules.value + '</b>. verificalo nuevamente!');
+                            }
+                        });
+                    }
+                });
             }
         }
+
+        // }
     }
 
     function modificarEmpresa() {
-        if(vm.listaModulosContratados <= 0){
+        if (vm.listaModulosContratados <= 0) {
             Toast('No ha seleccionado ningun modulo de contrato')
-        }else{
+        } else {
             vm.empresa.put().then(success, error);
 
             function success(response) {

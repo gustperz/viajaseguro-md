@@ -19,8 +19,10 @@
         vm.getEmpresas = getEmpresas;
         vm.selectedEmpresa = selectedEmpresa;
         vm.newModalEmpresa = newModalEmpresa;
+        vm.updateEstado = updateEstado;
         vm.deleteEmpresa = deleteEmpresa;
         vm.abrirPanel = abrirPanel;
+
 
         //////////
 
@@ -68,6 +70,16 @@
                 }, function (reponse) {
 
                 });
+        }
+
+        function updateEstado() {
+            vm.selected.put(vm.selected).then(success, error);
+            function success(response) {
+                console.log(response);
+            }
+            function error(response) {
+
+            }
         }
 
         function deleteEmpresa(ev) {
