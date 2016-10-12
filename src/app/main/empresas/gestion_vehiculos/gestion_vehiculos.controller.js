@@ -11,10 +11,12 @@
     /** @ngInject */
     function EmpresaVehiculosController(Vehiculos, $mdSidenav, $mdDialog, Toast) {
         var vm = this;
-        var campos = 'placa, modelo, color, codigo_vial, fecha_soat, fecha_tecnomecanica, soat, tecnomecanica,' +
-            ' tarjeta_propiedad, cupos, cedula_propietario, nombre_propietario, telefono_propietario, imagen';
+        var campos = 'placa, modelo, color, codigo_vial, fecha_soat, ' +
+            'fecha_tecnomecanica, soat, tecnomecanica, fecha_seguroac, ' +
+            ' tarjeta_propiedad, cupos, cedula_propietario,' +
+            ' nombre_propietario, telefono_propietario, imagen';
         vm.vehiculos = [];
-        vm.selected = {};
+        vm.selected = null;
         vm.n_vehi_doc_venc = 0;
 
         // Data
@@ -97,7 +99,7 @@
             })
                 .then(function (response) {
                     if (response.metadata.code == "OK" || response.metadata.code == "ok") {
-                        vm.conductores.push(response);
+                        vm.vehiculos.push(response);
                         Toast(response.metadata.mensaje, 'bottom right')
                     }
                 }, function (reponse) {
@@ -106,6 +108,11 @@
         }
 
         function editModalVehiculo(ev, tipo) {
+            vm.selected.cedula_propietario = parseInt(vm.selected.cedula_propietario);
+            vm.selected.telefono_propietario = parseInt(vm.selected.telefono_propietario);
+            vm.selected.fecha_soat = new Date(vm.selected.fecha_soat);
+            vm.selected.fecha_tecnomecanica = new Date(vm.selected.fecha_tecnomecanica);
+            vm.selected.fecha_seguroac = new Date(vm.selected.fecha_seguroac);
 
             $mdDialog.show({
                 locals: {
@@ -121,7 +128,6 @@
                 fullscreen: false
             })
                 .then(function (response) {
-                    console.log(response);
                     if (response.metadata.code == "OK" || response.metadata.code == "ok") {
                         Toast(response.metadata.mensaje, 'bottom right')
                     }

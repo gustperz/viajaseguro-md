@@ -30,7 +30,7 @@
         // Navigation
         msNavigationServiceProvider.saveItem('central_conductores', {
             title    : 'Conductores',
-            icon     : 'icon-tile-four',
+            icon     : 'icon-people',
             state    : 'app.central_conductores',
             /*stateParams: {
              'param1': 'page'

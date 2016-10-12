@@ -67,7 +67,7 @@
                     ng-click="vm.selectedConductor(conductor, $index)"
                     ng-class="{'selected' : vm.selected === conductor, 'cond_doc_venc': conductor.doc_venc}">
                     <td>
-                        <img class="imagen-empresa"
+                        <img class="imagen-empresa" ng-if="conductor.imagen !== null"
                              ng-src="http://api.viajaseguro.co/images/conductores/{{conductor.imagen}}">
                     </td>
                     <td class="name" hide-xs>{{conductor.identificacion}}</td>
@@ -102,7 +102,7 @@
                     ng-click="vm.selectedConductor(conductor, $index)"
                     ng-class="{'selected' : vm.selected === conductor, 'cond_doc_venc': conductor.doc_venc}">
                     <td>
-                        <img class="imagen-empresa"
+                        <img class="imagen-empresa" ng-if="conductor.imagen !== null"
                              ng-src="http://api.viajaseguro.co/images/conductores/{{conductor.imagen}}">
                     </td>
                     <td class="name" hide-xs>{{conductor.identificacion}}</td>
@@ -127,8 +127,8 @@
     <!-- SIDENAV -->
     <md-sidenav class="sidenav details-sidenav md-sidenav-right" md-is-locked-open="$mdMedia('gt-md')"
                 md-component-id="details-sidenav" ms-scroll
-                ms-sidenav-helper>
-        <div class="header" layout="column" layout-align="space-between" ng-if="vm.selected !== null">
+                ms-sidenav-helper ng-if="vm.selected !== null">
+        <div class="header" layout="column" layout-align="space-between" >
             <div class="toolbar" layout="row" layout-align="end center">
                 <md-button ng-click="vm.deleteConductor($event)" class="md-icon-button" aria-label="Eliminar">
                     <md-icon md-font-icon="icon-delete"></md-icon>
@@ -144,7 +144,7 @@
             <hr>
             <div class="image-content">
                 <h3 class="title-empresa"><b>{{vm.selected.nombres}} {{vm.selected.apellidos}}</b></h3><br>
-                <img alt="Conductor" class="empresa-imagen"
+                <img alt="Conductor" class="empresa-imagen" ng-if="vm.selected.imagen !== null"
                      ng-src="http://api.viajaseguro.co/images/conductores/{{vm.selected.imagen}}">
             </div>
             <hr>

@@ -18,7 +18,7 @@
             ' vehiculo.nombre_propietario, vehiculo.soat, vehiculo.tecnomecanica';
         vm.conductores = [];
         vm.conductoresInactivos = [];
-        vm.selected = {};
+        vm.selected = null;
         vm.n_cond_doc_venc = 0;
         vm.alternarConductores = true;
 
@@ -145,7 +145,6 @@
                 fullscreen: false
             })
                 .then(function (response) {
-                    console.log(response);
                     if (response.metadata.code == "OK" || response.metadata.code == "ok") {
                         Toast(response.metadata.mensaje, 'bottom right')
                     }

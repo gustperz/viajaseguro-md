@@ -14,7 +14,7 @@
     <md-content class="content form-stepper-conductor" flex ms-scroll>
         <form name="verticalStepper" ms-vertical-stepper ng-submit="vm.modificarVehiculo()"
               ng-model="vm.conductor" novalidate>
-            <ms-vertical-stepper-step ng-form="verticalStep1" step="1" step-title="'Informacion personal'">
+            <ms-vertical-stepper-step ng-form="verticalStep1" step="1" step-title="'Informacion del vehiculo'">
                 <div ng-include="'app/main/empresas/gestion_vehiculos/new_vehiculo/informacion_vehiculo.html'"></div>
                 <div ng-include="'app/main/empresas/gestion_vehiculos/new_vehiculo/documentacion_vehiculo.html'"></div>
             </ms-vertical-stepper-step>

@@ -10,7 +10,7 @@
         var vm = this;
         vm.conductores = [];
         var campos = 'identificacion, nombres, apellidos, direccion, email, fecha_nacimiento,' +
-            ' telefono, activo, imagen, fecha_licencia, nlicencia, tipo_licencia';
+            ' telefono, activo, imagen';
 
         // Methods
 
