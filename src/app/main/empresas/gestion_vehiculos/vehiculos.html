@@ -118,7 +118,30 @@
                 <span>Este vehiculo tiene 1 o mas documentos proximos a vencer</span>
                 <md-icon md-font-icon="icon-alert-circle" class="red-600-fg md-font"></md-icon>
             </div>
-            Datos del vehiculo
+            <md-list class="md-dense" flex>
+                <md-subheader class="md-no-sticky">Documentación del vehiculo</md-subheader>
+                <md-divider ></md-divider>
+                <md-list-item class="md-2-line">
+                    <div class="md-list-item-text">
+                        <h3>Vencimineto del soat</h3>
+                        <p>{{vm.selected.fecha_soat | date}}</p>
+                    </div>
+                </md-list-item>
+                <md-divider ></md-divider>
+                <md-list-item class="md-2-line">
+                    <div class="md-list-item-text">
+                        <h3>Vencimineto de la tecnomecanica</h3>
+                        <p>{{vm.selected.fecha_tecnomecanica | date}}</p>
+                    </div>
+                </md-list-item>
+                <md-divider ></md-divider>
+                <md-list-item class="md-2-line">
+                    <div class="md-list-item-text">
+                        <h3>Vencimineto seguro AC/CA</h3>
+                        <p>{{vm.selected.fecha_seguroac | date}}</p>
+                    </div>
+                </md-list-item>
+            </md-list>
         </md-content>
     </md-sidenav>
     <!-- / SIDENAV -->

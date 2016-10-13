@@ -83,7 +83,7 @@
                 ms-sidenav-helper ng-if="vm.selected !== null">
         <div class="header" layout="column" layout-align="space-between">
             <div class="toolbar" layout="row" layout-align="end center">
-                <md-switch ng-change="vm.updateEstado()" ng-model="vm.selected.activa" aria-label="Activa">
+                <md-switch class="md-warn" ng-change="vm.updateEstado()" ng-model="vm.selected.activa" aria-label="Activa">
                     <span ng-if="vm.selected.activa === true ">Desactivar</span>
                     <span ng-if="vm.selected.activa === false ">Activar</span>
                 </md-switch>
