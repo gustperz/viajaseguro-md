@@ -95,6 +95,47 @@
 
     <div layout="column" layout-gt-xs="row" flex class="menos-espaciado">
         <md-input-container flex="100" flex-gt-xs="50">
+            <md-icon md-font-icon="icon-taxi"></md-icon>
+            <input type="text" name="clase" ng-model="vm.conductor.vehiculo.clase"
+                   placeholder="Clase del vehiculo Ej: Automovil" required>
+            <div ng-messages="verticalStep1.clase.$error"
+                 ng-show="verticalStep1.clase.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>La clase de vehiculo es requerido.</span>
+                </div>
+            </div>
+        </md-input-container>
+
+        <md-input-container flex="100" flex-gt-xs="50">
+            <md-icon md-font-icon="icon-taxi"></md-icon>
+            <input type="text" name="marca" ng-model="vm.conductor.vehiculo.marca"
+                   placeholder="Marca del vehiculo Ej: Nissan" required>
+            <div ng-messages="verticalStep1.marca.$error"
+                 ng-show="verticalStep1.marca.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>La marca del vehiculo es requerido.</span>
+                </div>
+            </div>
+        </md-input-container>
+
+        <md-input-container flex="100" flex-gt-xs="50">
+            <md-icon md-font-icon="icon-numeric"></md-icon>
+            <input type="text" name="ntarjoperacion" ng-model="vm.coductor.vehiculo.ntarjoperacion"
+                   placeholder="N° tarjeta de operacion" required>
+            <div ng-messages="verticalStep1.ntarjoperacion.$error"
+                 ng-show="verticalStep1.ntarjoperacion.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>Esta cantidad es requerida requerido.</span>
+                </div>
+            </div>
+        </md-input-container>
+    </div>
+
+    <div layout="column" layout-gt-xs="row" flex class="menos-espaciado">
+        <md-input-container flex="100" flex-gt-xs="50">
             <md-icon md-font-icon="icon-sofa"></md-icon>
             <input type="number" name="cupos" ng-model="vm.conductor.vehiculo.cupos"
                    placeholder="Cupos del vehiculo" min="1" required>

@@ -58,6 +58,7 @@
                     <th>Nombres</th>
                     <th hide-xs>Direccion</th>
                     <th hide-xs>Telefono</th>
+                    <th hide-xs>Estado</th>
                     <th hide-gt-md></th>
                 </tr>
                 </thead>
@@ -67,6 +68,8 @@
                     ng-click="vm.selectedConductor(conductor, $index)"
                     ng-class="{'selected' : vm.selected === conductor, 'cond_doc_venc': conductor.doc_venc}">
                     <td>
+                        <img class="imagen-empresa" ng-if="conductor.imagen === null"
+                             ng-src="assets/images/profile.jpg">
                         <img class="imagen-empresa" ng-if="conductor.imagen !== null"
                              ng-src="http://api.viajaseguro.co/images/conductores/{{conductor.imagen}}">
                     </td>
@@ -74,6 +77,10 @@
                     <td class="type">{{conductor.nombres}} {{conductor.apellidos}}</td>
                     <td class="owner" hide-xs>{{conductor.direccion}}</td>
                     <td class="size" hide-xs>{{conductor.telefono}}</td>
+                    <td class="size" hide-xs>
+                        <span ng-if="conductor.activo === true">Activo</span>
+                        <span ng-if="conductor.activo !== true">Inactivo</span>
+                    </td>
                     <td class="show-details" hide-gt-md>
                         <md-button class="md-icon-button sidenav-toggle" ng-click="vm.abrirPanel(conductor, $index)"
                                    aria-label="Detalles conductor">
@@ -84,7 +91,7 @@
 
                 </tbody>
             </table>
-
+            <!--conductores inactivos-->
             <table class="simple list-view" ng-if="vm.alternarConductores == false">
                 <thead>
                 <tr>
@@ -93,6 +100,7 @@
                     <th>Nombres</th>
                     <th hide-xs>Direccion</th>
                     <th hide-xs>Telefono</th>
+                    <th hide-xs>Estado</th>
                     <th hide-gt-md></th>
                 </tr>
                 </thead>
@@ -102,6 +110,8 @@
                     ng-click="vm.selectedConductor(conductor, $index)"
                     ng-class="{'selected' : vm.selected === conductor, 'cond_doc_venc': conductor.doc_venc}">
                     <td>
+                        <img class="imagen-empresa" ng-if="conductor.imagen === null"
+                             ng-src="assets/images/profile.jpg">
                         <img class="imagen-empresa" ng-if="conductor.imagen !== null"
                              ng-src="http://api.viajaseguro.co/images/conductores/{{conductor.imagen}}">
                     </td>
@@ -109,6 +119,10 @@
                     <td class="type">{{conductor.nombres}} {{conductor.apellidos}}</td>
                     <td class="owner" hide-xs>{{conductor.direccion}}</td>
                     <td class="size" hide-xs>{{conductor.telefono}}</td>
+                    <td class="size" hide-xs>
+                        <span ng-if="conductor.activo === true">Activo</span>
+                        <span ng-if="conductor.activo !== true">Inactivo</span>
+                    </td>
                     <td class="show-details" hide-gt-md>
                         <md-button class="md-icon-button sidenav-toggle" ng-click="vm.abrirPanel(conductor, $index)"
                                    aria-label="Detalles conductor">
@@ -130,6 +144,10 @@
                 ms-sidenav-helper ng-if="vm.selected !== null">
         <div class="header" layout="column" layout-align="space-between" >
             <div class="toolbar" layout="row" layout-align="end center">
+                <md-switch class="md-warn" ng-change="vm.updateEstado()" ng-model="vm.selected.activo" aria-label="Activa">
+                    <span ng-if="vm.selected.activo === true ">Desactivar</span>
+                    <span ng-if="vm.selected.activo === false ">Activar</span>
+                </md-switch>
                 <md-button ng-click="vm.deleteConductor($event)" class="md-icon-button" aria-label="Eliminar">
                     <md-icon md-font-icon="icon-delete"></md-icon>
                     <md-tooltip><span>Eliminar</span></md-tooltip>
@@ -144,23 +162,71 @@
             <hr>
             <div class="image-content">
                 <h3 class="title-empresa"><b>{{vm.selected.nombres}} {{vm.selected.apellidos}}</b></h3><br>
+                <img alt="Conductor" class="empresa-imagen" ng-if="vm.selected.imagen === null"
+                     ng-src="assets/images/profile.jpg">
                 <img alt="Conductor" class="empresa-imagen" ng-if="vm.selected.imagen !== null"
                      ng-src="http://api.viajaseguro.co/images/conductores/{{vm.selected.imagen}}">
             </div>
             <hr>
         </div>
+        <br>
         <div ng-if="vm.selected == null" class="center">
             No se ha seleccionado ningun conductor
         </div>
-
         <!--contenido-->
         <md-content class="content" flex ms-scroll ng-if="vm.selected != null" >
-
             <div class="p_not_vec" ng-if="vm.selected.doc_venc === true">
                 <span>Este conductor tiene 1 o mas documentos proximos a vencer</span>
                 <md-icon md-font-icon="icon-alert-circle" class="red-600-fg md-font"></md-icon>
             </div>
-            Datos del conductor
+            <md-list class="md-dense" flex>
+                <md-subheader class="md-no-sticky">Datos de licencia</md-subheader>
+
+                <md-divider ></md-divider>
+                <md-list-item class="md-2-line">
+                    <div class="md-list-item-text">
+                        <h3>Tipo de licencia</h3>
+                        <p>{{vm.selected.tipo_licencia}}</p>
+                    </div>
+                </md-list-item>
+                <md-divider ></md-divider>
+                <md-list-item class="md-2-line">
+                    <div class="md-list-item-text">
+                        <h3>Numero de licencia</h3>
+                        <p>{{vm.selected.nlicencia}}</p>
+                    </div>
+                </md-list-item>
+                <md-divider ></md-divider>
+                <md-list-item class="md-2-line">
+                    <div class="md-list-item-text">
+                        <h3>Fecha de vencimineto de licencia</h3>
+                        <p>{{vm.selected.fecha_licencia | date}}</p>
+                    </div>
+                </md-list-item>
+
+                <md-subheader class="md-no-sticky">Datos de vehiculo</md-subheader>
+                <md-divider ></md-divider>
+                <md-list-item class="md-2-line">
+                    <div class="md-list-item-text">
+                        <h3>Vencimineto del soat</h3>
+                        <p>{{vm.selected.vehiculo.fecha_soat | date}}</p>
+                    </div>
+                </md-list-item>
+                <md-divider ></md-divider>
+                <md-list-item class="md-2-line">
+                    <div class="md-list-item-text">
+                        <h3>Vencimineto de la tecnomecanica</h3>
+                        <p>{{vm.selected.vehiculo.fecha_tecnomecanica | date}}</p>
+                    </div>
+                </md-list-item>
+                <md-divider ></md-divider>
+                <md-list-item class="md-2-line">
+                    <div class="md-list-item-text">
+                        <h3>Vencimineto seguro AC/CA</h3>
+                        <p>{{vm.selected.vehiculo.fecha_seguroac | date}}</p>
+                    </div>
+                </md-list-item>
+            </md-list>
         </md-content>
     </md-sidenav>
     <!-- / SIDENAV -->

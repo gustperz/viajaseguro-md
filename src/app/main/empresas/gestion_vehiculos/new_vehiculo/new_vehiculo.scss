@@ -1,3 +1,19 @@
+input{
+  text-transform: capitalize !important;
+}
+
+input[type="email"]{
+  text-transform: none !important;
+}
+
+input[type="password"]{
+  text-transform: none !important;
+}
+
+#placa{
+  text-transform: uppercase !important;
+}
+
 .menos-espaciado {
   margin-bottom: -25px !important;
 }

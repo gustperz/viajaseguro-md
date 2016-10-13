@@ -12,10 +12,8 @@
     function EmpresaConductoresController(Conductores, $mdSidenav, $mdDialog, Toast) {
         var vm = this;
         var campos = 'identificacion, nombres, apellidos, direccion, email, fecha_nacimiento, central,' +
-            ' telefono, activo, imagen, fecha_licencia, nlicencia, tipo_licencia, vehiculo.fecha_seguroac, vehiculo,' +
-            ' vehiculo.codigo_vial, vehiculo.placa, vehiculo.modelo, vehiculo.fecha_soat, vehiculo.fecha_tecnomecanica,' +
-            ' vehiculo.cupos, vehiculo.cedula_propietario, vehiculo.telefono_propietario, vehiculo.color,' +
-            ' vehiculo.nombre_propietario, vehiculo.soat, vehiculo.tecnomecanica';
+            ' telefono, activo, imagen, fecha_licencia, nlicencia, tipo_licencia, vehiculo, vehiculo.fecha_seguroac, ' +
+            'vehiculo.fecha_soat, vehiculo.fecha_tecnomecanica';
         vm.conductores = [];
         vm.conductoresInactivos = [];
         vm.selected = null;
@@ -29,6 +27,7 @@
 
         vm.newModalConductor = newModalConductor;
         vm.editModalConductor = editModalConductor;
+        vm.updateEstado = updateEstado;
         vm.deleteConductor = deleteConductor;
         //////////
         getConductores();
@@ -49,6 +48,8 @@
         }
 
         function getConductores() {
+            vm.conductores = [];
+            vm.conductoresInactivos = [];
             Conductores.getList({fields: campos})
                 .then(function (data) {
                     data.forEach(function (conductor) {
@@ -151,6 +152,19 @@
                 }, function (reponse) {
 
                 });
+        }
+
+        function updateEstado() {
+            delete vm.selected.vehiculo;
+            vm.selected.put(vm.selected).then(success, error);
+            function success(response) {
+                getConductores();
+                if(vm.alternarConductores == false|| vm.conductoresInactivos.length <= 0)
+                    vm.alternarConductores = true;
+            }
+            function error(response) {
+
+            }
         }
 
         function deleteConductor(ev) {

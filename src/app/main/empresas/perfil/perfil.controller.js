@@ -42,14 +42,14 @@
                 if(vm.empresa.intermunicipal && vm.empresa.especial && vm.empresa.nit_intermunicipal != vm.empresa.nit_espcial) {
                     vm.empresaIgeneral.nit = false;
                 }
-                console.log(vm.empresaIgeneral)
-                console.log(vm.empresa)
                 vm.empresaIgeneral.nombre_corto = response.nombre_corto;
                 vm.empresaIgeneral.nombre_largo = response.nombre_largo;
                 vm.empresaIgeneral.direccion = response.direccion;
                 vm.empresaIgeneral.telefono = response.telefono;
+                vm.empresaIgeneral.fax = response.fax;
                 // persona juridica
                 vm.empresaPjuridica.pjuridica = response.pjuridica;
+                vm.empresaPjuridica.nombre_pjuridica = response.nombre_pjuridica;
                 // resolucion
                 vm.empresaResoculicon.nresolucon = response.nresolucon;
                 vm.empresaResoculicon.fecha_resolucion = new Date(response.fecha_resolucion);
@@ -115,12 +115,11 @@
 
         function guardarFirmaDigital() {
             if (vm.firmaDigital) {
-                console.log(saveFirma())
-                // if(saveFirma().$$state.status != 0){
-                //     Toast('Error al subir la firma');
-                // }else{
-                //     Toast('Firma guardada correctamente');
-                // }
+                if(saveFirma().$$state.status != 0){
+                    Toast('Error al subir la firma');
+                }else{
+                    Toast('Firma guardada correctamente');
+                }
             }else{
                 console.log('Firma no se creo');
             }
