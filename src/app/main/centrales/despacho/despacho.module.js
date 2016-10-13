@@ -30,7 +30,7 @@
         // Navigation
         msNavigationServiceProvider.saveItem('despacho', {
             title    : 'Despacho de Coonductores',
-            icon     : 'icon-tile-four',
+            icon     : 'icon-account-switch',
             state    : 'app.central_despacho',
             weight:1
         });

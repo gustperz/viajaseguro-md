@@ -7,8 +7,8 @@
 
     angular
         .module('app.centrales', [
-            'app.centrales.conductores',
-            'app.centrales.despacho'
+            'app.centrales.despacho',
+            'app.centrales.conductores'
         ])
         .config(config);
 

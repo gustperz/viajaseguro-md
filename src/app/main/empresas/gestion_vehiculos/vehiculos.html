@@ -55,7 +55,7 @@
                     ng-click="vm.selectedVehiculo(vehiculo, $index)"
                     ng-class="{'selected' : vm.selected === vehiculo, 'vehi_doc_venc': vehiculo.doc_venc}">
                     <td>
-                        <img class="imagen-empresa"
+                        <img class="imagen-empresa" ng-if="vehiculo.imagen !== null"
                              ng-src="http://api.viajaseguro.co/images/vehiculos/{{vehiculo.imagen}}">
                     </td>
                     <td class="name" >{{vehiculo.placa}}</td>
@@ -80,15 +80,15 @@
     <!-- SIDENAV -->
     <md-sidenav class="sidenav details-sidenav md-sidenav-right" md-is-locked-open="$mdMedia('gt-md')"
                 md-component-id="details-sidenav" ms-scroll
-                ms-sidenav-helper>
-        <div class="header" layout="column" layout-align="space-between" ng-if="vm.selected != null">
+                ms-sidenav-helper ng-if="vm.selected !== null">
+        <div class="header" layout="column" layout-align="space-between" >
             <div class="toolbar" layout="row" layout-align="end center">
                 <md-button ng-click="vm.deleteVehiculo($event)" class="md-icon-button" aria-label="Eliminar">
                     <md-icon md-font-icon="icon-delete"></md-icon>
                     <md-tooltip><span>Eliminar</span></md-tooltip>
                 </md-button>
 
-                <md-button ng-click="vm.editModalConductor($event, 'Modificar')" class="md-icon-button"
+                <md-button ng-click="vm.editModalVehiculo($event, 'Modificar')" class="md-icon-button"
                            aria-label="Editar">
                     <md-icon md-font-icon="icon-pencil"></md-icon>
                     <md-tooltip><span>Editar</span></md-tooltip>
@@ -97,7 +97,7 @@
             <hr>
             <div class="image-content">
                 <h3 class="title-empresa"><b>{{vm.selected.placa}}</b></h3><br>
-                <img alt="Vehiculo" class="empresa-imagen"
+                <img alt="Vehiculo" class="empresa-imagen" ng-if="vm.selected.imagen !== null"
                      ng-src="http://api.viajaseguro.co/images/vehiculos/{{vm.selected.imagen}}">
             </div>
             <hr>
