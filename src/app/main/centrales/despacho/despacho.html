@@ -28,10 +28,17 @@
                          ng-include="'app/main/centrales/despacho/asignaciones/asignaciones.html'">
                     </div>
                     <div layout="row">
-                        <span flex></span>
-                        <md-button class="boton-guardar-dialog brad-30" ng-click="vm.despachar()">
-                            Despachar conductor
-                        </md-button>
+                        <div flex layout="row" layout-align="start end">
+                            <md-button ng-click="vm.detalles($event)" class="md-icon-button" aria-label="detalles">
+                                <md-icon md-font-icon="icon-clipboard-text"></md-icon>
+                                <md-tooltip>Visualizar detalles</md-tooltip>
+                            </md-button>
+                        </div>
+                        <div>
+                            <md-button class="boton-guardar-dialog brad-30" ng-click="vm.despachar()">
+                                &nbsp;Despachar conductor&nbsp;
+                            </md-button>
+                        </div>
                         <span flex></span>
                     </div>
                 </div>

@@ -1,0 +1,27 @@
+<md-dialog aria-label="Detalles despacho" flex>
+    <form ng-cloak>
+        <md-toolbar class="toolbar-empresa">
+            <div class="md-toolbar-tools">
+                <h2>Detalles despacho</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="vm.cancel()">
+                    <md-icon md-font-icon="icon-close"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div layout="column" id="despacho-especial" ng-include="'app/main/centrales/despacho/detalles_despacho/especial.tmpl.html'"></div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button class="boton-guardar-dialog brad-30" ng-click="vm.despachar()">
+                &nbsp;Despachar conductor&nbsp;
+            </md-button>
+            <md-button class="boton-guardar-dialog brad-30" ng-click="vm.despachar()">
+                Aceptar
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

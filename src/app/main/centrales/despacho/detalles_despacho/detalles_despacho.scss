@@ -1,0 +1,13 @@
+#despacho-especial {
+  md-input-container {
+    margin: 0 !important;
+
+    &.md-input-has-value label {
+      margin-bottom: -8px !important;
+    }
+  }
+  fieldset{
+    adding-top: 20px;
+    margin-bottom: 10px;
+  }
+}
