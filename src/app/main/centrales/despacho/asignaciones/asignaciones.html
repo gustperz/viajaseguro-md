@@ -5,6 +5,7 @@
             <md-icon md-font-icon="icon-plus" class="md-icon-tab"></md-icon>
         </md-tab-label>
         <md-tab-body >
+            <!--FOMULARIO ADD PASAJERO-->
             <div layout-padding class="pl-0 pr-0" layout="column" ng-show="vm.despacho.conductor && vm.despacho.cupos_disponibles">
                 <form novalidate name="formViajero" class="form-viajero" layout="column">
                     <div ng-repeat="pasajero in vmasignaciones.solicitud.pasajeros" layout="row" flex>
@@ -45,20 +46,37 @@
                 </form>
                 <span id="numPasajeros" class="text-right" flex >Cupos disponibles: {{vm.despacho.cupos_disponibles}} </span>
             </div>
+            <!--LISTA PASAJEROS ASIGNADOS-->
             <md-content class="content-lista" layout="column" flex ms-scroll>
                 <div class="todo-item" md-ink-ripple layout="row" layout-align="start center"
                      ng-repeat="solicitud in vm.despacho.sa[vm.despacho.conductor.id] track by $index">
-                    <div class="info" layout="column" layout-align="start" flex>
-                        <div class="title">
-                            {{solicitud.pasajeros[0].nombre}} - {{solicitud.pasajeros[0].identificacion}}
+                    <div class="info" layout="row" layout-align="start" flex>
+                        <div layout="column" layout-align="center center">
+                            <md-button class="md-icon-button" aria-label="contratante"
+                                       ng-show="vm.despacho.contratante.identificacion == solicitud.pasajeros[0].identificacion">
+                                <md-icon md-font-icon="icon-account-check"></md-icon>
+                                <md-tooltip>Contratante</md-tooltip>
+                            </md-button>
+                            <md-button class="md-icon-button" aria-label="como contratante"
+                                       ng-click="vm.despacho.contratante = solicitud.pasajeros[0]"
+                                       ng-hide="vm.despacho.contratante.identificacion == solicitud.pasajeros[0].identificacion">
+                                <md-icon md-font-icon="icon-account-outline"></md-icon>
+                                <md-tooltip>Establecer como contratante</md-tooltip>
+                            </md-button>
                         </div>
-                        <div class="notes" ng-show="solicitud.direccion">
-                            {{solicitud.pasajeros.length}} pasajeros en: {{solicitud.direccion}}
-                        </div>
-                        <div class="notes" ng-hide="solicitud.direccion">
-                            En el sitio
+                        <div layout="column">
+                            <div class="title">
+                                {{solicitud.pasajeros[0].nombre}} - {{solicitud.pasajeros[0].identificacion}}
+                            </div>
+                            <div class="notes" ng-show="solicitud.direccion">
+                                {{solicitud.pasajeros.length}} pasajeros en: {{solicitud.direccion}}
+                            </div>
+                            <div class="notes" ng-hide="solicitud.direccion">
+                                En el sitio
+                            </div>
                         </div>
                     </div>
+                    <!--MENU DE ACCIONES-->
                     <div class="md-menu-solicitudes">
                         <md-fab-speed-dial md-direction="left" md-open="demo.isOpen"
                                            class="md-scale md-fab-top-right md-hover-full"
@@ -120,8 +138,10 @@
                             </md-fab-actions>
                         </md-fab-speed-dial>
                     </div>
+                    <!--FIN MENU DE ACCEIONES-->
                 </div>
             </md-content>
+            <!--FIN LISTA-->
         </md-tab-body>
     </md-tab>
     <!--<md-tab>-->
