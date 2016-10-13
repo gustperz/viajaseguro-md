@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('app.auth.perfil')
+        .module('app.empresas.perfil')
         .controller('PerfilController', PerfilController);
 
     /** @ngInject */
@@ -38,7 +38,12 @@
             function success(response) {
                 vm.empresa = response;
                 // informacion general
-                vm.empresaIgeneral.nit = response.nit;
+                vm.empresaIgeneral.nit = vm.empresa.intermunicipal ? vm.empresa.nit_intermunicipal : vm.empresa.nit_especial;
+                if(vm.empresa.intermunicipal && vm.empresa.especial && vm.empresa.nit_intermunicipal != vm.empresa.nit_espcial) {
+                    vm.empresaIgeneral.nit = false;
+                }
+                console.log(vm.empresaIgeneral)
+                console.log(vm.empresa)
                 vm.empresaIgeneral.nombre_corto = response.nombre_corto;
                 vm.empresaIgeneral.nombre_largo = response.nombre_largo;
                 vm.empresaIgeneral.direccion = response.direccion;

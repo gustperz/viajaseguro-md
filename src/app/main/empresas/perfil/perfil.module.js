@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('app.auth.perfil', [])
+        .module('app.empresas.perfil', [])
         .config(config);
 
     /** @ngInject */
@@ -15,7 +15,7 @@
                 url: '/empresa/perfil',
                 views: {
                     'content@app': {
-                        templateUrl: 'app/auth/perfil/perfil.html',
+                        templateUrl: 'app/main/empresas/perfil/perfil.html',
                         controller: 'PerfilController as vm'
                     }
                 },

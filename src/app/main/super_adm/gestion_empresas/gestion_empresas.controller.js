@@ -113,7 +113,7 @@
         }
 
         function getEmpresas() {
-            var campos = 'nit, nombre_corto, direccion, telefono, activa, logo, nombre_largo, tipo';
+            var campos = 'nit_especial, nit_intermunicipal, nombre_corto, direccion, telefono, activa, logo, nombre_largo, especial, intermunicipal';
             Empresas.getList({fields: campos}).then(success, error)
             function success(response) {
                 vm.empresas = response;
