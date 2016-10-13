@@ -1,20 +1,10 @@
 function NewEmpresaController($mdDialog, Toast, Empresas, tipo, empresa, Modulos, $scope) {
     // variables
     var vm = this;
-    vm.empresa = {} || empresa;
+    vm.empresa = tipo == 'Nueva' ? {} : empresa;
     vm.tipoModal = tipo;
     vm.modulos = [];
     vm.listaModulosContratados = [];
-    vm.tipoEmpresas = [
-        {
-            id: 0,
-            nombre: 'Especial'
-        },
-        {
-            id: 1,
-            nombre: 'Intermunicipal'
-        }
-    ];
 
     // funciones
     vm.guardarEmpresa = guardarEmpresa;
@@ -71,30 +61,25 @@ function NewEmpresaController($mdDialog, Toast, Empresas, tipo, empresa, Modulos
     }
 
     function modificarEmpresa() {
-        if (vm.listaModulosContratados <= 0) {
-            Toast('No ha seleccionado ningun modulo de contrato')
-        } else {
-            vm.empresa.put().then(success, error);
-
-            function success(response) {
-                vm.empresa = {};
-                response.metadata.mensaje = "Empresa actualizada correctamente";
-                response.metadata.tipo = vm.tipoModal;
-                $mdDialog.hide(response);
-            }
-
-            function error(response) {
-                if (response.data.code == 'E_VALIDATION') {
-                    angular.forEach(response.data, function (campo) {
-                        if (campo.nit) {
-                            angular.forEach(campo.nit, function (rules) {
-                                if (rules.rule == 'unique') {
-                                    Toast('Ya se encuentra una empresa registrada con el NIT:  <b> ' + rules.value + '</b>. verificalo nuevamente!');
-                                }
-                            });
-                        }
-                    });
-                }
+        console.log(vm.empresa)
+        vm.empresa.put().then(success, error);
+        function success(response) {
+            vm.empresa = {};
+            response.metadata.mensaje = "Empresa actualizada correctamente";
+            response.metadata.tipo = vm.tipoModal;
+            $mdDialog.hide(response);
+        }
+        function error(response) {
+            if (response.data.code == 'E_VALIDATION') {
+                angular.forEach(response.data, function (campo) {
+                    if (campo.nit) {
+                        angular.forEach(campo.nit, function (rules) {
+                            if (rules.rule == 'unique') {
+                                Toast('Ya se encuentra una empresa registrada con el NIT:  <b> ' + rules.value + '</b>. verificalo nuevamente!');
+                            }
+                        });
+                    }
+                });
             }
         }
     }

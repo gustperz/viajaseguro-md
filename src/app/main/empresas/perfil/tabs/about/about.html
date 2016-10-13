@@ -8,10 +8,23 @@
             <form name="infoGeneral" novalidate>
                 <div class="content" layout="row" layout-wrap flex>
 
-                    <div class="info-line">
+                    <div class="info-line" ng-if="!vm.empresaIgeneral.nit">
+                        <md-input-container>
+                            <label for="nite">Nit Especial</label>
+                            <input id="nite" type="text" ng-model="vm.empresa.nit_especial" aria-label="nit" readonly>
+                        </md-input-container>
+                    </div>
+
+                    <div class="info-line" ng-if="!vm.empresaIgeneral.nit">
+                        <md-input-container>
+                            <label for="niti">Nit Intermunicipal</label>
+                            <input id="niti" type="text" ng-model="vm.empresa.nit_intermunicipal" aria-label="nit" readonly>
+                        </md-input-container>
+                    </div>
+                    <div class="info-line" ng-if="vm.empresaIgeneral.nit">
                         <md-input-container>
                             <label for="nit">Nit</label>
-                            <input id="nit" type="text" name="nit" ng-model="vm.empresaIgeneral.nit" aria-label="nit">
+                            <input id="nit" type="text" name="nit" ng-model="vm.empresaIgeneral.nit" aria-label="nit" readonly>
                         </md-input-container>
                     </div>
 

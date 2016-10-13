@@ -42,7 +42,6 @@
                 <thead>
                 <tr>
                     <th></th>
-                    <th hide-xs>Nit</th>
                     <th>Nombre</th>
                     <th hide-xs>Direccion</th>
                     <th hide-xs>Telefono</th>
@@ -58,7 +57,6 @@
                     <td>
                         <img ng-if="empresa.logo !== null" class="imagen-empresa" ng-src="http://api.viajaseguro.co/images/empresas/{{empresa.logo}}">
                     </td>
-                    <td class="name" hide-xs>{{empresa.nit}}</td>
                     <td class="type">{{empresa.nombre_corto}}</td>
                     <td class="owner" hide-xs>{{empresa.direccion}}</td>
                     <td class="size" hide-xs>{{empresa.telefono}}</td>
