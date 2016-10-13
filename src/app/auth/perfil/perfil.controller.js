@@ -45,6 +45,7 @@
                 vm.empresaIgeneral.telefono = response.telefono;
                 // persona juridica
                 vm.empresaPjuridica.pjuridica = response.pjuridica;
+                vm.empresaPjuridica.nombre_pjuridica = response.nombre_pjuridica;
                 // resolucion
                 vm.empresaResoculicon.nresolucon = response.nresolucon;
                 vm.empresaResoculicon.fecha_resolucion = new Date(response.fecha_resolucion);
