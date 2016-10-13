@@ -114,6 +114,7 @@
                 codigo: ruta.destino,
                 nombre: ruta.nombre_ciudad
             };
+            Despacho.trayecto = ruta.trayecto;
             Despacho.loadConductores(ruta);
         }
     }
