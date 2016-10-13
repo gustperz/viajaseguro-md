@@ -55,6 +55,8 @@
                     ng-click="vm.selectedVehiculo(vehiculo, $index)"
                     ng-class="{'selected' : vm.selected === vehiculo, 'vehi_doc_venc': vehiculo.doc_venc}">
                     <td>
+                        <img class="imagen-empresa" ng-if="vehiculo.imagen === null"
+                             ng-src="assets/images/vehiculo.png">
                         <img class="imagen-empresa" ng-if="vehiculo.imagen !== null"
                              ng-src="http://api.viajaseguro.co/images/vehiculos/{{vehiculo.imagen}}">
                     </td>
@@ -97,12 +99,14 @@
             <hr>
             <div class="image-content">
                 <h3 class="title-empresa"><b>{{vm.selected.placa}}</b></h3><br>
+                <img alt="Vehiculo" class="empresa-imagen" ng-if="vm.selected.imagen === null"
+                     ng-src="assets/images/vehiculo.png">
                 <img alt="Vehiculo" class="empresa-imagen" ng-if="vm.selected.imagen !== null"
                      ng-src="http://api.viajaseguro.co/images/vehiculos/{{vm.selected.imagen}}">
             </div>
             <hr>
         </div>
-
+        <br>
         <div ng-if="vm.selected == null" class="center">
             No se ha seleccionado ningun vehiculo
         </div>

@@ -29,6 +29,7 @@
 
         vm.newModalConductor = newModalConductor;
         vm.editModalConductor = editModalConductor;
+        vm.updateEstado = updateEstado;
         vm.deleteConductor = deleteConductor;
         //////////
         getConductores();
@@ -49,6 +50,8 @@
         }
 
         function getConductores() {
+            vm.conductores = [];
+            vm.conductoresInactivos = [];
             Conductores.getList({fields: campos})
                 .then(function (data) {
                     data.forEach(function (conductor) {
@@ -151,6 +154,19 @@
                 }, function (reponse) {
 
                 });
+        }
+
+        function updateEstado() {
+            delete vm.selected.vehiculo;
+            vm.selected.put(vm.selected).then(success, error);
+            function success(response) {
+                getConductores();
+                if(vm.alternarConductores == false|| vm.conductoresInactivos.length <= 0)
+                    vm.alternarConductores = true;
+            }
+            function error(response) {
+
+            }
         }
 
         function deleteConductor(ev) {

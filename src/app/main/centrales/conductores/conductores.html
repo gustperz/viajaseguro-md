@@ -31,7 +31,8 @@
                    ng-repeat="conductor in vm.conductores | filter: buscar">
             <ms-widget-front class="padding-16 md-white-bg" layout="column" layout-align="center center">
                 <div class="media">
-                    <img ng-src="http://api.viajaseguro.co/images/conductores/{{conductor.imagen}}">
+                    <img ng-if="conductor.imagen === null" ng-src="assets/images/profile.jpg">
+                    <img ng-if="conductor.imagen !== null" ng-src="http://api.viajaseguro.co/images/conductores/{{conductor.imagen}}">
                 </div>
                 <span flex></span>
                 <div class="widget-conductores-nombre" layout="row" layout-fill>
@@ -52,9 +53,9 @@
                     </md-button>
                 </div>
                 <div id="widget-conductores-data">
-                    <span>Identificacion: {{conductor.identificacion}}<span><br>
-                    <span>Telefono: {{conductor.telefono}}<span><br>
-                    <span>Direccion: {{conductor.direccion}}<span>
+                    <span>Identificacion: {{conductor.identificacion}}</span><br>
+                    <span>Telefono: {{conductor.telefono}}</span><br>
+                    <span>Direccion: {{conductor.direccion}}</span>
                 </div>
                 <!-- Back content -->
             </ms-widget-back>
