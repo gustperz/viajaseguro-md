@@ -12,8 +12,11 @@
         vm.despacho = Despacho;
 
         vm.detalles = detalles;
+        vm.establecerContratante = establecerContratante;
 
         //////////
+
+        Despacho.contratante = JSON.parse(sessionStorage.getItem('contratante_despacho'));
 
         //////////
 
@@ -31,6 +34,11 @@
                 }, function() {
                     $scope.status = 'You cancelled the dialog.';
                 });
+        }
+
+        function establecerContratante(pasajero) {
+            vm.despacho.contratante = pasajero;
+            sessionStorage.setItem('contratante_despacho', JSON.stringify(pasajero));
         }
     }
 })();

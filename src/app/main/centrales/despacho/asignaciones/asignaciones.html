@@ -58,7 +58,7 @@
                                 <md-tooltip>Contratante</md-tooltip>
                             </md-button>
                             <md-button class="md-icon-button" aria-label="como contratante"
-                                       ng-click="vm.despacho.contratante = solicitud.pasajeros[0]"
+                                       ng-click="vm.establecerContratante(solicitud.pasajeros[0])"
                                        ng-hide="vm.despacho.contratante.identificacion == solicitud.pasajeros[0].identificacion">
                                 <md-icon md-font-icon="icon-account-outline"></md-icon>
                                 <md-tooltip>Establecer como contratante</md-tooltip>
