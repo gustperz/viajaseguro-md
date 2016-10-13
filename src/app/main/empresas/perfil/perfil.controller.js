@@ -46,6 +46,7 @@
                 vm.empresaIgeneral.nombre_largo = response.nombre_largo;
                 vm.empresaIgeneral.direccion = response.direccion;
                 vm.empresaIgeneral.telefono = response.telefono;
+                vm.empresaIgeneral.fax = response.fax;
                 // persona juridica
                 vm.empresaPjuridica.pjuridica = response.pjuridica;
                 vm.empresaPjuridica.nombre_pjuridica = response.nombre_pjuridica;
