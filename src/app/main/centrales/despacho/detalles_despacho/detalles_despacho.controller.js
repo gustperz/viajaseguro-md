@@ -42,8 +42,6 @@
 
         function querySearch (query) {
             vm.vehiculos = []
-            if(query.length < 3) return vm.vehiculos;
-
             var fields = 'placa, marca, modelo, clase, codigo_vial, ntarjoperacion';
             return Vehiculos.getList({fields: fields, where:{'placa': { startsWith: query.toUpperCase() }}})
                 .then(function (vehiculos) {
