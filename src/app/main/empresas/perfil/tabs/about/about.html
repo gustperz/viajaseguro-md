@@ -134,9 +134,21 @@
                                        md-placeholder="Fecha resolución">
                         </md-datepicker>
                     </div>
+
+                </div>
+                <div class="content" style="margin-top: -55px;" layout="row" flex>
+                    <md-input-container flex>
+                        <label>Numero Direccion Territorial</label>
+                        <md-select ng-model="vm.empresaResoculicon.ndireccion_terr">
+                            <md-option><em>Seleccione</em></md-option>
+                            <md-option ng-repeat="state in vm.dirterr" ng-value="state.num">
+                                {{state.num}} - {{state.nombre}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
                 </div>
 
-                <div style="margin-top: -45px; text-align: center">
+                <div style="margin-top: -25px; text-align: center">
                     <md-button ng-click="vm.modificarResolucion()"
                                class="boton-guardar-dialog brad-30">
                         Modificar

@@ -27,11 +27,39 @@
 
         vm.usuario = authService.getCurrentUser();
 
+        vm.dirterr = [
+            {num: '305', nombre: 'Antioquia, Chocó '},
+            {num: '208', nombre: 'Atlántico'},
+            {num: '213', nombre: 'Bolívar, San Andrés y Providencia'},
+            {num: '415', nombre: 'Boyacá, Casanare'},
+            {num: '317', nombre: 'Caldas'},
+            {num: '319', nombre: 'Cauca'},
+            {num: '220', nombre: 'César'},
+            {num: '223', nombre: 'Córdoba, Sucre'},
+            {num: '425', nombre: 'Cundinamarca'},
+            {num: '241', nombre: 'La Guajira'},
+            {num: '441', nombre: 'Huila, Caquetá'},
+            {num: '247', nombre: 'Magdalena'},
+            {num: '550', nombre: 'Meta, Vaupés, Vichada'},
+            {num: '352', nombre: 'Nariño, Putumayo'},
+            {num: '454', nombre: 'Norte de Santander, Arauca'},
+            {num: '363', nombre: 'Quindío'},
+            {num: '366', nombre: 'Risaralda'},
+            {num: '468', nombre: 'Santander'},
+            {num: '473', nombre: 'Tolima'},
+            {num: '376', nombre: 'Valle del Cauca'},
+        ]
+
+        //////////
+
+        datosEmpresa();
+
+        //////////
+
         function fueraDeServicio() {
             Toast('<b>Esta funcion se agregara proximamente al sistema, sea paciente.<b>')
         }
 
-        datosEmpresa();
         function datosEmpresa() {
             Empresas.get(vm.usuario.empresa.id).then(success, error);
 
@@ -52,7 +80,8 @@
                 vm.empresaPjuridica.nombre_pjuridica = response.nombre_pjuridica;
                 // resolucion
                 vm.empresaResoculicon.nresolucon = response.nresolucon;
-                vm.empresaResoculicon.fecha_resolucion = new Date(response.fecha_resolucion);
+                vm.empresaResoculicon.fecha_resolucion = moment(response.fecha_resolucion).toDate();
+                vm.empresaResoculicon.ndireccion_terr = response.ndireccion_terr;
             }
 
             function error(response) {
