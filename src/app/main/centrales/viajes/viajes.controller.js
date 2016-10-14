@@ -23,10 +23,10 @@
                 headers: {
                     'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
                 },
-                // responseType: 'arraybuffer'
+                responseType: 'arraybuffer'
             };
             $http(pet).then(function (response) {
-                var file = new Blob([response.data], {type: 'text/html'});
+                var file = new Blob([response.data], {type: 'application/pdf'});
                 var fileURL = URL.createObjectURL(file);
                 $window.open(fileURL);
             });
@@ -35,7 +35,7 @@
 
         getViajes();
         function getViajes() {
-            var campos = 'id, ruta, conductor, vehiculo';
+            var campos = 'id, origen, destino, fuec, conductor, vehiculo';
             Viajes.getList({fields: campos})
                 .then(function (data) {
                     vm.viajes = data;

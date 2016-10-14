@@ -32,8 +32,7 @@
                 <thead>
                 <tr>
                     <th></th>
-                    <th>Origen</th>
-                    <th hide-xs>Destino</th>
+                    <th>Numero fuec</th>
                     <th hide-xs>Conductor</th>
                     <th hide-xs>Vehiculo</th>
                     <th ></th>
@@ -43,8 +42,7 @@
                 <tbody>
                 <tr ng-repeat="viaje in vm.viajes | filter: filtro">
                     <td></td>
-                    <td class="type">{{viaje.ruta.origen}}</td>
-                    <td class="owner" hide-xs>{{viaje.ruta.destino}}</td>
+                    <td class="type"><b>{{viaje.fuec}}</b></td>
                     <td class="size" hide-xs>{{viaje.conductor.nombre}}</td>
                     <td class="size" hide-xs>{{viaje.vehiculo.placa}}</td>
                     <td class="show-details">
