@@ -3,13 +3,13 @@
         <div layout="row" layout-align="start center" flex>
             <md-button class="md-icon-button navigation-toggle"
                        ng-click="vm.toggleSidenav('navigation')"
-                       hide-gt-sm aria-label="Toggle navigation">
+                       hide-gt-md aria-label="Toggle navigation">
                 <md-icon md-font-icon="icon-menu" class="icon"></md-icon>
             </md-button>
 
             <md-button class="md-icon-button navigation-toggle navigation-fold-toggle"
                        ng-click="vm.toggleMsNavigationFolded()"
-                       hide show-gt-sm aria-label="Toggle navigation fold">
+                       hide show-gt-md aria-label="Toggle navigation fold">
                 <md-icon md-font-icon="icon-backburger" class="icon"></md-icon>
             </md-button>
 
@@ -27,19 +27,19 @@
             <div layout-align="start center">
                 <md-button class="toolbar-perfil" ng-if="vm.usuario.rol == 'EMPRESA'" ng-click="vm.irPerfil()" aria-label="User settings">
                     <div layout="row" layout-align="space-between center">
-                        <md-icon md-font-icon="icon-account-circle" class="icon"/>
+                        <md-icon md-font-icon="icon-account-circle" class="icon"></md-icon>
                         <span class="username">Mi perfil</span>
                     </div>
                 </md-button>
             </div>
             <div class="toolbar-date" layout-align="start center">
-                <md-datepicker ng-model="vm.fecha" md-min-date="vm.fecha" md-max-date="vm.fecha"/>
+                <md-datepicker ng-model="vm.fecha" md-min-date="vm.fecha" md-max-date="vm.fecha"></md-datepicker>
                 <span hide show-gt-sm>{{vm.fecha | amDateFormat:'dddd, DD [de] MMMM'}}</span>
             </div>
             <div  layout-align="start center">
                 <md-button class="toolbar-logout" ng-click="vm.logout()" aria-label="User settings">
                     <div layout="row" layout-align="space-between center">
-                        <md-icon md-font-icon="icon-logout" class="icon"/>
+                        <md-icon md-font-icon="icon-logout" class="icon"></md-icon>
                         <span class="username">Salir</span>
                     </div>
                 </md-button>
