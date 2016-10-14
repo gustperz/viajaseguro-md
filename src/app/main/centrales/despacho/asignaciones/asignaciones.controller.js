@@ -12,7 +12,7 @@
 
         vm.solicitud = {
             pasajeros: [{
-                identififcacion: '',
+                identificacion: '',
                 nombre: ''
             }],
             telefono : undefined,
@@ -56,7 +56,7 @@
 
         function addPasajero() {
             vm.solicitud.pasajeros.push({
-                identififcacion: '',
+                identificacion: '',
                 nombre: ''
             });
         }
@@ -68,7 +68,7 @@
         function clear() {
             vm.solicitud = {
                 pasajeros: [{
-                    identififcacion: '',
+                    identificacion: '',
                     nombre: ''
                 }],
                 telefono : undefined,

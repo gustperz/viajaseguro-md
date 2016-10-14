@@ -145,6 +145,7 @@
   }
 
   .content-lista {
+    margin-top: 3px;
     .todo-list-pane {
       background: white;
       &.single-scroll {
@@ -171,11 +172,18 @@
       cursor: pointer;
 
       &:hover{
-        border-width: 3px;
+        color: $primary-color !important;
       }
 
       .info {
         margin: 0 16px 0 8px;
+
+        .md-icon-button {
+          margin: 0 !important;
+          padding: 8px 0 !important;
+          max-width: 30px !important;
+          margin-left: -10px !important;
+        }
 
         .title {
           font-size: 15px;
