@@ -21,12 +21,13 @@
         vm.despacho.vigencia_fi = moment().format('DD-MM-YYYY');
         vm.despacho.vigencia_fn = moment().format('DD-MM-YYYY');
 
-        if(!vm.despacho.conductor.vehiculo){
+        if(!vm.despacho.conductor.loaded){
             Conductores.get(vm.despacho.conductor.id, {populate: 'vehiculo'}).then(function (conductor) {
                 vm.despacho.conductor = conductor;
                 vm.despacho.conductor.nombre_completo = vm.despacho.conductor.nombres+' '+vm.despacho.conductor.apellidos;
                 vm.despacho.conductor.fecha_licencia = moment(vm.despacho.conductor.fecha_licencia).format('DD-MM-YYYY');
                 vm.searchText = conductor.vehiculo.placa;
+                vm.despacho.conductor.loaded = true;
             });
         }
 
