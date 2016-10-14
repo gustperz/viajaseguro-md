@@ -58,9 +58,6 @@
                             Despacho.sp.push(new Solicitud(solicitud));
                         }
                     });
-                    if(!Despacho.contratante){
-                        Despacho.contratante = Despacho.sa[0].pasajeros[0];
-                    }
                 }
             });
         }

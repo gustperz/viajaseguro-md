@@ -7,7 +7,7 @@
         .controller('AsignacionesController', controller);
 
     /** @ngInject */
-    function controller(Despacho, SolicitudesRepository){
+    function controller(Despacho, SolicitudesRepository, OneRequest){
         var vm = this;
 
         vm.solicitud = {
@@ -18,9 +18,12 @@
             telefono : undefined,
             direccion: undefined
         }
+        vm.telefonos = [];
+        vm.direcciones = [];
 
         vm.addPasajero = addPasajero;
         vm.removePasajero = removePasajero;
+        vm.loadCliente = loadCliente;
         vm.clear = clear;
         vm.saveSolicitud = saveSolicitud;
         vm.pasarSolicitudaPendiente = pasarSolicitudaPendiente;
@@ -65,6 +68,20 @@
             vm.solicitud.pasajeros.splice(index, 1);
         }
 
+        function loadCliente(index) {
+            var identificacion = vm.solicitud.pasajeros[index].identificacion;
+            OneRequest.to('clientes/'+identificacion).then(function (cliente) {
+                if(cliente) {
+                    vm.solicitud.pasajeros[index] = {
+                        identificacion: cliente.identificacion,
+                        nombre: cliente.nombre
+                    };
+                    cliente.telefono && vm.telefonos.push(cliente.telefono);
+                    cliente.direccion && vm.direcciones.push(cliente.direccion);
+                }
+            });
+        }
+
         function clear() {
             vm.solicitud = {
                 pasajeros: [{
@@ -77,18 +94,28 @@
         }
 
         function pasarSolicitudaPendiente(solicitud){
-            Despacho.cupos_disponibles = Despacho.cupos_disponibles + solicitud.pasajeros.length;
+            Despacho.cupos_disponibles += solicitud.pasajeros.length;
+            checkContrtante(solicitud.pasajeros[0].identificacion);
             solicitud.setAsPendiente();
         }
 
         function rejectSolicitud(solicitud){
-            Despacho.cupos_disponibles = Despacho.cupos_disponibles + solicitud.pasajeros.length;
+            Despacho.cupos_disponibles += solicitud.pasajeros.length;
+            checkContrtante(solicitud.pasajeros[0].identificacion);
             solicitud.reject();
         }
 
         function reasignarSolicitud(solicitud, conductor) {
-            Despacho.cupos_disponibles = Despacho.cupos_disponibles + solicitud.pasajeros.length;
+            Despacho.cupos_disponibles += solicitud.pasajeros.length;
+            checkContrtante(solicitud.pasajeros[0].identificacion);
             solicitud.assignTo(conductor);
+        }
+        
+        function checkContrtante(identificacion) {
+            if(Despacho.contratante && Despacho.contratante.identificacion == identificacion){
+                Despacho.contratante = undefined;
+                sessionStorage.removeItem('contratante_despacho');
+            }
         }
 
     }
