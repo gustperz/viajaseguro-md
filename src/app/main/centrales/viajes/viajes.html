@@ -1,0 +1,101 @@
+<div id="file-manager" class="page-layout simple right-sidenav" layout="row">
+    <!-- CENTER -->
+    <div class="center" layout="column" flex>
+        <!-- HEADER -->
+        <div class="header">
+
+            <div class="header-content" layout="column" layout-align="space-between">
+                <!-- TOOLBAR -->
+                <div class="toolbar" layout="row" layout-align="space-between">
+                    <div class="white-fg" layout="column" layout-align="start start">
+                        <div class="h1" layout="row" layout-align="start center">
+                            <!--<md-icon md-font-icon="icon-store"></md-icon>-->
+                            <span>Viajes</span>
+                        </div>
+                    </div>
+
+                    <div class="right-side" layout="row">
+                        <div class="search" layout="row" layout-align="start center" flex>
+                            <md-icon md-font-icon="icon-magnify" class="icon search-icon"></md-icon>
+                            <input id="search" class="search-input" ng-model="filtro" type="text" placeholder="Buscar">
+                        </div>
+                    </div>
+                </div>
+                <!-- / TOOLBAR -->
+            </div>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT -->
+        <md-content class="content" flex ms-scroll>
+            <table class="simple list-view">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Origen</th>
+                    <th hide-xs>Destino</th>
+                    <th hide-xs>Conductor</th>
+                    <th hide-xs>Vehiculo</th>
+                    <th ></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr ng-repeat="viaje in vm.viajes | filter: filtro">
+                    <td></td>
+                    <td class="type">{{viaje.ruta.origen}}</td>
+                    <td class="owner" hide-xs>{{viaje.ruta.destino}}</td>
+                    <td class="size" hide-xs>{{viaje.conductor.nombre}}</td>
+                    <td class="size" hide-xs>{{viaje.vehiculo.placa}}</td>
+                    <td class="show-details">
+                        <md-button ng-click="vm.formato(viaje)" class="md-icon-button" aria-label="detalles">
+                            <md-icon md-font-icon="icon-clipboard-text"></md-icon>
+                            <md-tooltip>Visualizar</md-tooltip>
+                        </md-button>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </md-content>
+        <!-- / CONTENT -->
+    </div>
+    <!-- / CENTER -->
+
+    <!-- SIDENAV -->
+    <!--<md-sidenav class="sidenav details-sidenav md-sidenav-right" md-is-locked-open="$mdMedia('gt-md')"-->
+                <!--md-component-id="details-sidenav" ms-scroll-->
+                <!--ms-sidenav-helper ng-if="vm.selected !== null">-->
+        <!--<div class="header" layout="column" layout-align="space-between">-->
+            <!--<div class="toolbar" layout="row" layout-align="end center">-->
+                <!--<md-switch class="md-warn" ng-change="vm.updateEstado()" ng-model="vm.selected.activa" aria-label="Activa">-->
+                    <!--<span ng-if="vm.selected.activa === true ">Desactivar</span>-->
+                    <!--<span ng-if="vm.selected.activa === false ">Activar</span>-->
+                <!--</md-switch>-->
+                <!--<md-button ng-click="vm.deleteEmpresa($event)" class="md-icon-button" aria-label="Eliminar">-->
+                    <!--<md-icon md-font-icon="icon-delete"></md-icon>-->
+                    <!--<md-tooltip><span>Eliminar</span></md-tooltip>-->
+                <!--</md-button>-->
+
+                <!--<md-button ng-click="vm.newModalEmpresa($event, 'Modificar')" class="md-icon-button"-->
+                           <!--aria-label="Editar">-->
+                    <!--<md-icon md-font-icon="icon-pencil"></md-icon>-->
+                    <!--<md-tooltip><span>Editar</span></md-tooltip>-->
+                <!--</md-button>-->
+            <!--</div>-->
+            <!--<hr>-->
+            <!--<div class="image-content">-->
+                <!--<h1 class="title-empresa">{{vm.selected.nombre_corto}}</h1><br>-->
+                <!--<img alt="{{vm.selected.nombre_corto}}" class="empresa-imagen" ng-if="vm.selected.logo !== null"-->
+                     <!--ng-src="http://api.viajaseguro.co/images/empresas/{{vm.selected.logo}}">-->
+            <!--</div>-->
+            <!--<hr>-->
+        <!--</div>-->
+
+        <!--&lt;!&ndash;contenido&ndash;&gt;-->
+        <!--<md-content class="content" flex ms-scroll>-->
+            <!--<h3 style="text-align: center"><b>{{vm.selected.nombre_largo}}</b></h3>-->
+        <!--</md-content>-->
+    <!--</md-sidenav>-->
+    <!-- / SIDENAV -->
+</div>
