@@ -160,13 +160,29 @@
         </md-input-container>
 
         <md-input-container flex="100" flex-gt-xs="50">
+            <md-icon md-font-icon="icon-calendar"></md-icon>
+            <input type="date" name="fecha_ingreso" ng-model="vm.conductor.fecha_ingreso"
+                   placeholder="Fecha de ingreso" required>
+            <div ng-messages="verticalStep1.fecha_ingreso.$error"
+                 ng-show="verticalStep1.fecha_ingreso.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>Esta fecha es requerida.</span>
+                </div>
+                <div ng-message="valid">
+                    <span>No es una fecha valida.</span>
+                </div>
+            </div>
+        </md-input-container>
+
+        <md-input-container flex="100" flex-gt-xs="50">
             <md-icon md-font-icon="icon-alphabetical"></md-icon>
             <label>Asignar a central</label>
             <md-select ng-model="vm.conductor.central" required name="central">
                 <md-content ms-scroll>
                     <md-option ng-disabled="true">Central a asignar</md-option>
                     <md-option ng-repeat="central in vm.centrales" ng-value="central.id"  title="{{central.ciudad}}"
-                               ng-selected="central.id === vm.conductor.central ? 'true' : 'false'">
+                               ng-selected="central.id === vm.conductor.central ">
                         {{central.ciudad}}
                     </md-option>
                 </md-content>

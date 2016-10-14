@@ -54,7 +54,7 @@
     <div layout="column" layout-gt-xs="row" flex class="menos-espaciado">
         <md-input-container flex="100" flex-gt-xs="50">
             <md-icon md-font-icon="icon-credit-card"></md-icon>
-            <input type="text" name="placa" ng-model="vm.conductor.vehiculo.placa"
+            <input type="text" id="placa" name="placa" ng-model="vm.conductor.vehiculo.placa"
                    placeholder="Placa del vehiculo"
                    required>
             <div ng-messages="verticalStep2.placa.$error"
@@ -122,7 +122,7 @@
 
         <md-input-container flex="100" flex-gt-xs="50">
             <md-icon md-font-icon="icon-numeric"></md-icon>
-            <input type="text" name="ntarjoperacion" ng-model="vm.coductor.vehiculo.ntarjoperacion"
+            <input type="text" name="ntarjoperacion" ng-model="vm.conductor.vehiculo.ntarjoperacion"
                    placeholder="N° tarjeta de operacion" required>
             <div ng-messages="verticalStep1.ntarjoperacion.$error"
                  ng-show="verticalStep1.ntarjoperacion.$touched"

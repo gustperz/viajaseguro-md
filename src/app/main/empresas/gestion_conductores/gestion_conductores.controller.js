@@ -12,7 +12,7 @@
     function EmpresaConductoresController(Conductores, $mdSidenav, $mdDialog, Toast) {
         var vm = this;
         var campos = 'identificacion, nombres, apellidos, direccion, email, fecha_nacimiento, central,' +
-            ' telefono, activo, imagen, fecha_licencia, nlicencia, tipo_licencia, vehiculo, vehiculo.fecha_seguroac, ' +
+            ' telefono, activo, fecha_ingreso, imagen, fecha_licencia, nlicencia, tipo_licencia, vehiculo, vehiculo.fecha_seguroac, ' +
             'vehiculo.fecha_soat, vehiculo.fecha_tecnomecanica';
         vm.conductores = [];
         vm.conductoresInactivos = [];
@@ -131,6 +131,7 @@
             vm.selected.fecha_licencia = new Date(vm.selected.fecha_licencia);
             vm.selected.fecha_seguroac = new Date(vm.selected.fecha_seguroac);
             vm.selected.fecha_nacimiento = new Date(vm.selected.fecha_nacimiento);
+            vm.selected.fecha_ingreso = new Date(vm.selected.fecha_ingreso);
 
             $mdDialog.show({
                 locals: {
