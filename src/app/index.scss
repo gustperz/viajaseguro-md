@@ -38,6 +38,17 @@ $green-color: #94c11e;
   background: $primary-color; /* Gecko Browsers */
   color: white;
 }
+md-autocomplete.no-float > md-autocomplete-wrap > md-input-container {
+  margin-top: 0px;
+  > label {
+    -webkit-transform: translate3d(1px,28px,0) scale(1) !important;
+    transform: translate3d(1px,28px,0) scale(1) !important;
+    color: #BDBDBD;  // input placeholder gray
+  }
+  &.md-input-has-value > label {
+    display: none !important;
+  }
+}
 
 /**
  *  Do not remove this comments bellow. It's the markers used by wiredep to inject

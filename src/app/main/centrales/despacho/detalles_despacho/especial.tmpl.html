@@ -58,6 +58,7 @@
         <md-autocomplete flex required
                          md-input-name="placa"
                          md-search-text="vm.searchText"
+                         md-min-length="3"
                          md-items="item in vm.querySearch(vm.searchText)"
                          md-selected-item-change="vm.selectedVehiclo(item)"
                          md-item-text="item.display"

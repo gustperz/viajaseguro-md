@@ -11,7 +11,7 @@
                     <div ng-repeat="pasajero in vmasignaciones.solicitud.pasajeros" layout="row" flex>
                         <md-input-container md-no-float flex="30" class="md-block">
                             <input ng-model="pasajero.identificacion" type="text" placeholder="Identificacion" id="identificacionPasajero"
-                                   focus-me="setFocusId" required autofocus>
+                                   focus-me="setFocusId" ng-enter="vmasignaciones.loadCliente($index)" ng-blur="vmasignaciones.loadCliente($index)" required autofocus>
                         </md-input-container>
                         <md-input-container md-no-float flex class="md-block">
                             <input ng-model="pasajero.nombre" type="text" placeholder="Nombre" required>
@@ -28,12 +28,16 @@
                         </md-button>
                     </div>
                     <div layout="row" flex>
-                        <md-input-container md-no-float flex="30" class="md-block">
-                            <input ng-model="vmasignaciones.solicitud.telefono" type="text" placeholder="Telefono">
-                        </md-input-container>
-                        <md-input-container md-no-float flex class="md-block">
-                            <input ng-model="vmasignaciones.solicitud.direccion" type="text" placeholder="Direccion">
-                        </md-input-container>
+                        <md-autocomplete md-search-text="vmasignaciones.solicitud.telefono" flex class="no-float"
+                                         md-floating-label="Telefono" placeholder="Telefono"
+                                         md-items="item in vmasignaciones.telefonos" md-item-text="item">
+                            <span md-highlight-text="vmasignaciones.solicitud.telefono">{{item}}</span>
+                        </md-autocomplete>
+                        <md-autocomplete md-search-text="vmasignaciones.solicitud.direccion" flex class="no-float"
+                                         md-floating-label="Direccion" placeholder="Direccion"
+                                         md-items="item in vmasignaciones.direcciones" md-item-text="item">
+                            <span md-highlight-text="vmasignaciones.solicitud.direccion">{{item}}</span>
+                        </md-autocomplete>
                         <md-button ng-disabled="formViajero.$invalid" ng-click="vmasignaciones.saveSolicitud()" class="md-icon-button" aria-label="Guardar">
                             <md-icon md-font-icon="icon-content-save"></md-icon>
                             <md-tooltip>Guardar</md-tooltip>
