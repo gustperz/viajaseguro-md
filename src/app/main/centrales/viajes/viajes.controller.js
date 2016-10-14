@@ -17,17 +17,16 @@
         vm.formato = formato;
 
         function formato(viaje) {
-            console.log(viaje)
             var pet = {
                 method: 'GET',
                 url:  api + 'viajes/'+viaje.id+'/fuec',
                 headers: {
                     'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
                 },
-                responseType: 'arraybuffer'
+                // responseType: 'arraybuffer'
             };
             $http(pet).then(function (response) {
-                var file = new Blob([response.data], {type: 'application/pdf'});
+                var file = new Blob([response.data], {type: 'text/html'});
                 var fileURL = URL.createObjectURL(file);
                 $window.open(fileURL);
             });
