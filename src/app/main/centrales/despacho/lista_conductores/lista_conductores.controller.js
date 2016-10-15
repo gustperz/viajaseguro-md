@@ -107,13 +107,10 @@
         function updateTurnos() {
             if(ruta.no_central) return updateTurnosLocalStorage();
 
-            console.log(vm.turnos)
-
             var turnos = vm.turnos.map(function (turno, index) {
                 turno.pos = index + 1;
                 return { pos: turno.pos, conductor: turno.conductor.id };
             });
-            console.log(turnos)
             ruta.post('turnos', {turnos: turnos})
         }
 
