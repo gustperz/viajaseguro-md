@@ -7,7 +7,8 @@
 
     angular
         .module('app.repositories')
-        .factory('Rutas', factory);
+        .factory('Rutas', factory)
+        .run(setMethod);
 
     /* @ngInject */
     function factory(AbstractRepository) {
@@ -22,5 +23,37 @@
         }
 
         return new Repository();
+    }
+    /* @ngInject */
+    function setMethod(Restangular, SailsRequest, $sails, $q) {
+        Restangular.extendModel('rutas', function(model) {
+            model.getTurnos = function(cb){
+                var deferred = $q.defer();
+                if(!$sails['listeningTurnosRuta'+model.id]){
+                    SailsRequest({ method: 'get', url: '/rutas/'+model.id+'/turnos' }, function (response) {
+                        if (response.code == 'OK'){
+                            cb(response.data);
+                            deferred.resolve();
+                        } else {
+                            deferred.reject();
+                        }
+                    });
+
+                    var last = $sails['listeningTurnosRutaLast'];
+                    if(last) {
+                        $sails.off('turnosRuta' + last + 'Cahnged');
+                        $sails['listeningTurnosRuta' + last] = false;
+                    }
+
+                    $sails['listeningTurnosRutaLast'] = model.id;
+                    $sails['listeningTurnosRuta'+model.id] = true;
+                    $sails.on('turnosRuta'+model.id+'Cahnged', function (turnos) {
+                        cb(turnos);
+                    });
+                } else deferred.reject();
+                return deferred.promise;
+            };
+            return model;
+        });
     }
 })();

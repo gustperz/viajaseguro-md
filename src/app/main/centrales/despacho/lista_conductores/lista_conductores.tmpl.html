@@ -7,7 +7,7 @@
 <md-content class="dnd-conductores" ms-scroll="{suppressScrollX: true}">
     <div ng-show="vmconductores.turnos.length">
         <ul dnd-list="vmconductores.turnos">
-            <li ng-repeat="turno in vmconductores.turnos | orderBy: 'pos'"
+            <li ng-repeat="turno in vmconductores.turnos | orderBy: 'pos' track by $index"
                 dnd-draggable="turno" layout="column"
                 dnd-moved="vmconductores.turnos.splice($index, 1)"
                 dnd-effect-allowed="move"

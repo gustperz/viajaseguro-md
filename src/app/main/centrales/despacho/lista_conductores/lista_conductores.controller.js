@@ -11,7 +11,7 @@
         .controller('ListaConductoresController', controller);
 
     /** @ngInject */
-    function controller(Despacho, Rutas, $mdDialog, SolicitudesRepository){
+    function controller(Despacho, Rutas, $mdDialog, SolicitudesRepository, SailsRequest){
         var vm = this;
         var ruta = {};
 
@@ -53,10 +53,9 @@
             }
 
             ruta = Despacho._ruta = Rutas.get(_ruta.id);
-            ruta.getList('turnos').then(function (turnos) {
+            ruta.getTurnos(function (turnos) {
                 vm.turnos = turnos;
-                selectConductorPos1();
-            });
+            }).then(selectConductorPos1);
         }
 
         function loadConductoresLocalStorage(ruta) {
@@ -108,10 +107,13 @@
         function updateTurnos() {
             if(ruta.no_central) return updateTurnosLocalStorage();
 
+            console.log(vm.turnos)
+
             var turnos = vm.turnos.map(function (turno, index) {
                 turno.pos = index + 1;
                 return { pos: turno.pos, conductor: turno.conductor.id };
             });
+            console.log(turnos)
             ruta.post('turnos', {turnos: turnos})
         }
 
