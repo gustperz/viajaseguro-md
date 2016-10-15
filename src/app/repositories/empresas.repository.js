@@ -6,12 +6,12 @@
     'use strict';
 
     angular
-        .module('app.empresas.gestion_conductores')
-        .factory('Centrales', factory);
+        .module('app.repositories')
+        .factory('Empresas', factory);
 
     /* @ngInject */
     function factory(RepositoriesFactory) {
 
-        return new RepositoriesFactory.new('centrales');
+        return new RepositoriesFactory.new('empresas');
     }
 })();

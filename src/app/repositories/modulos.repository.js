@@ -6,12 +6,12 @@
     'use strict';
 
     angular
-        .module('app.super_adm.gestion_empresas')
-        .factory('Empresas', factory);
+        .module('app.repositories')
+        .factory('Modulos', factory);
 
     /* @ngInject */
     function factory(RepositoriesFactory) {
 
-        return new RepositoriesFactory.new('empresas');
+        return new RepositoriesFactory.new('modulos');
     }
 })();

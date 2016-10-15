@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('app.core')
+        .module('app.repositories')
         .factory('RepositoriesFactory', factory);
 
     /* @ngInject */

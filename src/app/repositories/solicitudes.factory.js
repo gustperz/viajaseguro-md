@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('app.centrales.despacho')
+        .module('app.repositories')
         .factory('SolicitudesRepository', SocketcSailsService);
 
     /* @ngInject */

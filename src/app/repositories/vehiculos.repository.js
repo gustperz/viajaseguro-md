@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('app.empresas.gestion_vehiculos')
+        .module('app.repositories')
         .factory('Vehiculos', factory);
 
     /* @ngInject */
