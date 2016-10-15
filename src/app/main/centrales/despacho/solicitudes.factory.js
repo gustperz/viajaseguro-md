@@ -9,11 +9,12 @@
         .factory('SolicitudesRepository', SocketcSailsService);
 
     /* @ngInject */
-    function SocketcSailsService($sails, Notify, Solicitud, Despacho) {
+    function SocketcSailsService($sails, SailsRequest, Notify, Solicitud, Despacho) {
         var subscribed = false;
 
         return {
             'load': load,
+            'reload': reload,
             'create': create
         };
 
@@ -46,7 +47,7 @@
         }
 
         function reload() {
-            sails({ method: 'get', url: '/solicitudes' }, function (response) {
+            SailsRequest({ method: 'get', url: '/solicitudes' }, function (response) {
                 if (response.code == 'OK'){
                     Despacho.sp = []; Despacho.sa = {};
                     response.data.forEach(function (solicitud) {
@@ -66,17 +67,6 @@
             sails({ method: 'post', url: '/solicitudes' , data: solicitud, }, function () {
                 reload();
             });
-        }
-
-        function sails(request, cb) {
-            $sails.request({
-                method: request.method,
-                url: request.url,
-                data: request.data,
-                headers: {
-                    'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
-                }
-            }, cb);
         }
     }
 })();

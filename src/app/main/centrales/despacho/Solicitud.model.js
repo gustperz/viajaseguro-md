@@ -9,38 +9,32 @@
         .factory('Solicitud', factory);
 
     /* @ngInject */
-    function factory($sails) {
+    function factory(SailsRequest) {
         function Solicitud(data) {
             angular.extend(this, data);
 
             this.constructor.prototype.reject = rejectSolicitud;
             this.constructor.prototype.setAsPendiente = setPendiente;
             this.constructor.prototype.assignTo = assignTo;
+            this.constructor.prototype.finish = finish;
         }
 
         return Solicitud;
 
         function rejectSolicitud(motivo) {
-            sails({ method: 'post', url: '/solicitudes/'+this.id+'/reject', data: motivo });
+            SailsRequest({ method: 'post', url: '/solicitudes/'+this.id+'/reject', data: motivo });
         }
 
         function setPendiente() {
-            sails({ method: 'put', url: '/solicitudes/'+this.id+'/estado', data: {estado: 'p'} });
+            SailsRequest({ method: 'put', url: '/solicitudes/'+this.id+'/estado', data: {estado: 'p'} });
         }
 
         function assignTo(conductor) {
-            sails({ method: 'put', url: '/solicitudes/'+this.id+'/estado', data: {estado: 'a', conductor: conductor} });
+            SailsRequest({ method: 'put', url: '/solicitudes/'+this.id+'/estado', data: {estado: 'a', conductor: conductor} });
         }
 
-        function sails(request, cb) {
-            $sails.request({
-                method: request.method,
-                url: request.url,
-                data: request.data,
-                headers: {
-                    'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
-                }
-            }, cb);
+        function finish() {
+            SailsRequest({ method: 'post', url: '/solicitudes/'+this.id+'/finish', data: {} });
         }
     }
 })();
