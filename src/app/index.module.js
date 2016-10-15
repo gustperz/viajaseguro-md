@@ -15,6 +15,8 @@
             'app.constansts',
             // Errors
             'app.errors',
+            // Repos
+            'app.repositories',
             // Navigation
             'app.navigation',
             // Toolbar
