@@ -53,7 +53,6 @@
                     SolicitudesRepository.create(vm.solicitud);
                 });
             }
-            Despacho.cupos_disponibles = Despacho.cupos_disponibles - solicitud.pasajeros.length;
             clear();
         }
 
@@ -94,19 +93,16 @@
         }
 
         function pasarSolicitudaPendiente(solicitud){
-            Despacho.cupos_disponibles += solicitud.pasajeros.length;
             checkContrtante(solicitud.pasajeros[0].identificacion);
             solicitud.setAsPendiente();
         }
 
         function rejectSolicitud(solicitud){
-            Despacho.cupos_disponibles += solicitud.pasajeros.length;
             checkContrtante(solicitud.pasajeros[0].identificacion);
             solicitud.reject();
         }
 
         function reasignarSolicitud(solicitud, conductor) {
-            Despacho.cupos_disponibles += solicitud.pasajeros.length;
             checkContrtante(solicitud.pasajeros[0].identificacion);
             solicitud.assignTo(conductor);
         }

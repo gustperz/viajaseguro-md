@@ -59,15 +59,14 @@
             SailsRequest({ method: 'get', url: '/solicitudes' }, function (response) {
                 if (response.code == 'OK'){
                     Despacho.sp = []; Despacho.sa = {};
-                    console.log(response.data)
+                    Despacho.cupos_disponibles = 4;
                     response.data.forEach(function (solicitud) {
                         if(solicitud.conductor && solicitud.estado == 'a'){
                             var conductor = solicitud.conductor;
                             Despacho.sa[conductor] || (Despacho.sa[conductor] = []);
                             Despacho.sa[conductor].push(new Solicitud(solicitud));
-                            Despacho.cupos_disponible = 4;
-                            if(Despacho.conductor.id && Despacho.conductor.id == conductor) {
-                                Despacho.cupos_disponibles -= solicitud.pasajeros.length;
+                            if(Despacho.conductor && Despacho.conductor.id === conductor) {
+                                Despacho.cupos_disponibles = Despacho.cupos_disponibles - solicitud.pasajeros.length;
                             }
                         } else {
                             Despacho.sp.push(new Solicitud(solicitud));
