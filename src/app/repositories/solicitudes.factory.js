@@ -65,6 +65,10 @@
                             var conductor = solicitud.conductor;
                             Despacho.sa[conductor] || (Despacho.sa[conductor] = []);
                             Despacho.sa[conductor].push(new Solicitud(solicitud));
+                            Despacho.cupos_disponible = 4;
+                            if(Despacho.conductor.id && Despacho.conductor.id == conductor) {
+                                Despacho.cupos_disponibles -= solicitud.pasajeros.length;
+                            }
                         } else {
                             Despacho.sp.push(new Solicitud(solicitud));
                         }
