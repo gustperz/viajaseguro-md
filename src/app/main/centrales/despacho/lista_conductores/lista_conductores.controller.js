@@ -73,27 +73,28 @@
         }
 
         function addConductor(event) {
-            $mdDialog.show({
+            var promise = $mdDialog.show({
                 controller: 'DialogConductoresController as vm',
                 templateUrl: 'app/main/centrales/despacho/lista_conductores/dialog_conductores.tmpl.html',
                 parent: angular.element(document.body),
                 targetEvent: event,
                 clickOutsideToClose:true,
-            }).then(function (conductores) {
-                console.log(conductores)
-                if(ruta.no_central) return addConductoresLocalStorage(conductores);
+            });
+            promise.then(function (conductores) {
+                if (ruta.no_central) return addConductoresLocalStorage(conductores);
 
                 var turnos = vm.turnos.map(function (turno, index) {
                     turno.pos = index + 1;
-                    return { pos: turno.pos, conductor: turno.conductor.id };
+                    return {pos: turno.pos, conductor: turno.conductor.id};
                 });
                 conductores.forEach(function (conductor) {
                     var pos = vm.turnos.length + 1;
-                    vm.turnos.push({ pos: pos, conductor: conductor });
-                    turnos.push({ pos: pos, conductor: conductor.id, isNew: true });
+                    vm.turnos.push({pos: pos, conductor: conductor});
+                    turnos.push({pos: pos, conductor: conductor.id, isNew: true});
                 });
-                ruta.post('turnos', {turnos: turnos});
-            }, function () {});
+                ruta.updateTurnos(turnos);
+            }, function () {
+            });
         }
 
         function addConductoresLocalStorage(conductores) {
@@ -111,7 +112,7 @@
                 turno.pos = index + 1;
                 return { pos: turno.pos, conductor: turno.conductor.id };
             });
-            ruta.post('turnos', {turnos: turnos})
+            ruta.updateTurnos(turnos);
         }
 
         function updateTurnosLocalStorage() {

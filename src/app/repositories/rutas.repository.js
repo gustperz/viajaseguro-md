@@ -27,7 +27,11 @@
     /* @ngInject */
     function setMethod(Restangular, SailsRequest, $sails, $q) {
         Restangular.extendModel('rutas', function(model) {
-            model.getTurnos = function(cb){
+            model.getTurnos = getTurnos;
+            model.updateTurnos = updateTurnos;
+            return model;
+
+            function getTurnos(cb){
                 var deferred = $q.defer();
                 if(!$sails['listeningTurnosRuta'+model.id]){
                     SailsRequest({ method: 'get', url: '/rutas/'+model.id+'/turnos' }, function (response) {
@@ -48,12 +52,30 @@
                     $sails['listeningTurnosRutaLast'] = model.id;
                     $sails['listeningTurnosRuta'+model.id] = true;
                     $sails.on('turnosRuta'+model.id+'Cahnged', function (turnos) {
+                        console.log('turnosRuta'+model.id+'Cahnged');
                         cb(turnos);
                     });
                 } else deferred.reject();
                 return deferred.promise;
             };
-            return model;
+
+            function updateTurnos(turnos) {
+                console.log(turnos)
+                return model.post('turnos', {turnos: turnos});
+                // var deferred = $q.defer();
+                // SailsRequest({
+                //     method: 'post',
+                //     url: '/rutas/'+model.id+'/turnos',
+                //     data: {turnos: turnos}
+                // }, function (response) {
+                //     if (response.code == 'OK'){
+                //         deferred.resolve();
+                //     } else {
+                //         deferred.reject();
+                //     }
+                // });
+                // return deferred.promise;
+            }
         });
     }
 })();
