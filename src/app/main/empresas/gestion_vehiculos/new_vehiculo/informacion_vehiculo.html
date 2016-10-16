@@ -169,5 +169,28 @@
                 </div>
             </div>
         </md-input-container>
+
+        <md-input-container flex="100" flex-gt-xs="50">
+            <md-icon md-font-icon="icon-alphabetical"></md-icon>
+            <label>Asignar modalidad</label>
+            <md-select ng-model="vm.vehiculo.modalidad" required name="modalidad">
+                <md-content ms-scroll>
+                    <md-option ng-disabled="true">Modalidad del vehiculo</md-option>
+                    <md-option ng-value="0"  title="Especial" ng-selected="vm.vehiculo.modalidad === false ">
+                        Especial
+                    </md-option>
+                    <md-option ng-value="1"  title="Intermunicipal" ng-selected="vm.vehiculo.modalidad === true ">
+                        Intermunicipal
+                    </md-option>
+                </md-content>
+            </md-select>
+            <div ng-messages="verticalStep1.modalidad.$error"
+                 ng-show="verticalStep1.modalidad.$touched"
+                 role="alert">
+                <div ng-message="required">
+                    <span>La modalidad es requerida.</span>
+                </div>
+            </div>
+        </md-input-container>
     </div>
 </div>

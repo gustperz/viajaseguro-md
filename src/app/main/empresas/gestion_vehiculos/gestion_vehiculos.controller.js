@@ -14,7 +14,7 @@
         var campos = 'placa, modelo, color, codigo_vial, fecha_soat, ' +
             'fecha_tecnomecanica, soat, tecnomecanica, fecha_seguroac, ' +
             ' tarjeta_propiedad, cupos, cedula_propietario,' +
-            ' nombre_propietario, telefono_propietario, imagen, marca, clase, ntarjoperacion';
+            ' nombre_propietario, telefono_propietario, imagen, marca, clase, ntarjoperacion, modalidad';
         vm.vehiculos = [];
         vm.selected = null;
         vm.n_vehi_doc_venc = 0;
