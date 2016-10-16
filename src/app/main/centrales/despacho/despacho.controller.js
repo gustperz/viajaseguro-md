@@ -7,7 +7,7 @@
         .controller('DespachoController', DespachoController);
 
     /** @ngInject */
-    function DespachoController(Despacho, Conductores, $mdDialog, OneRequest){
+    function DespachoController(Despacho, Toast, $mdDialog, OneRequest){
         var vm = this;
         vm.despacho = Despacho;
 
@@ -43,6 +43,7 @@
         }
 
         function despachar() {
+            if(!Despacho.contratante) return Toast('Seleccione el contratante');
             var pasajeros = [];
             Despacho.sa[Despacho.conductor.id].forEach(function (solicitud) {
                 pasajeros = pasajeros.concat(solicitud.pasajeros);

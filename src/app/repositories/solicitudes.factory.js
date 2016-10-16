@@ -26,18 +26,27 @@
                         tittle: 'Nueva solicitud',
                         message : 'Has recivido una nueva solicitud, verificala en la lista'
                     });
+                    console.log('newSolicitud')
                     reload();
                 });
 
                 $sails.on('cancel', function () {
+                    console.log('cancel')
                     reload();
                 });
 
                 $sails.on('reject', function () {
+                    console.log('reject')
                     reload();
                 });
 
                 $sails.on('updateEstado', function () {
+                    console.log('updateEstado')
+                    reload();
+                });
+
+                $sails.on('makingDespacho', function () {
+                    console.log('makingDespacho')
                     reload();
                 });
 
@@ -50,6 +59,7 @@
             SailsRequest({ method: 'get', url: '/solicitudes' }, function (response) {
                 if (response.code == 'OK'){
                     Despacho.sp = []; Despacho.sa = {};
+                    console.log(response.data)
                     response.data.forEach(function (solicitud) {
                         if(solicitud.conductor && solicitud.estado == 'a'){
                             var conductor = solicitud.conductor;
@@ -64,7 +74,7 @@
         }
 
         function create(solicitud) {
-            sails({ method: 'post', url: '/solicitudes' , data: solicitud, }, function () {
+            SailsRequest({ method: 'post', url: '/solicitudes' , data: solicitud, }, function () {
                 reload();
             });
         }

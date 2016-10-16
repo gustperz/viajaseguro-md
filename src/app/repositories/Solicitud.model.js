@@ -32,10 +32,6 @@
         function assignTo(conductor) {
             SailsRequest({ method: 'put', url: '/solicitudes/'+this.id+'/estado', data: {estado: 'a', conductor: conductor} });
         }
-
-        function finish() {
-            SailsRequest({ method: 'post', url: '/solicitudes/'+this.id+'/finish', data: {} });
-        }
     }
 })();
 
