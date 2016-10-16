@@ -21,7 +21,7 @@
 
         Conductores.getList({
             fields:  'identificacion, nombres, apellidos, imagen, codigo_vial',
-            where: {activo: true, estacion: Despacho.origen.codigo}
+            where: {activo: true, estacion: Despacho.origen.codigo, estado: {'!': 'en_turno'}}
         }).then(function (conductores) {
             vm.conductores = conductores.plain();
         })
