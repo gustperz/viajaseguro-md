@@ -52,6 +52,7 @@
                 trayecto: Despacho.trayecto,
                 origen: Despacho.origen.nombre,
                 destino: Despacho.destino.nombre,
+                estacion: Despacho.destino.codigo,
                 ruta: Despacho._ruta.id,
                 conductor: Despacho.conductor.id,
                 vehiculo: Despacho.conductor.vehiculo,

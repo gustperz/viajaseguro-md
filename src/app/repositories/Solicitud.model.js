@@ -16,7 +16,6 @@
             this.constructor.prototype.reject = rejectSolicitud;
             this.constructor.prototype.setAsPendiente = setPendiente;
             this.constructor.prototype.assignTo = assignTo;
-            this.constructor.prototype.finish = finish;
         }
 
         return Solicitud;
