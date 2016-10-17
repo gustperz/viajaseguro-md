@@ -33,15 +33,16 @@
 
             function getTurnos(cb){
                 var deferred = $q.defer();
+                SailsRequest({ method: 'get', url: '/rutas/'+model.id+'/turnos' }, function (response) {
+                    if (response.code == 'OK'){
+                        cb(response.data);
+                        deferred.resolve();
+                    } else {
+                        deferred.reject();
+                    }
+                });
+
                 if(!$sails['listeningTurnosRuta'+model.id]){
-                    SailsRequest({ method: 'get', url: '/rutas/'+model.id+'/turnos' }, function (response) {
-                        if (response.code == 'OK'){
-                            cb(response.data);
-                            deferred.resolve();
-                        } else {
-                            deferred.reject();
-                        }
-                    });
 
                     var last = $sails['listeningTurnosRutaLast'];
                     if(last) {
@@ -55,26 +56,14 @@
                         console.log('turnosRuta'+model.id+'Cahnged');
                         cb(turnos);
                     });
-                } else deferred.reject();
+                }
+
                 return deferred.promise;
             };
 
             function updateTurnos(turnos) {
                 console.log(turnos)
                 return model.post('turnos', {turnos: turnos});
-                // var deferred = $q.defer();
-                // SailsRequest({
-                //     method: 'post',
-                //     url: '/rutas/'+model.id+'/turnos',
-                //     data: {turnos: turnos}
-                // }, function (response) {
-                //     if (response.code == 'OK'){
-                //         deferred.resolve();
-                //     } else {
-                //         deferred.reject();
-                //     }
-                // });
-                // return deferred.promise;
             }
         });
     }
