@@ -43,7 +43,7 @@
                 <tr ng-repeat="viaje in vm.viajes | filter: filtro">
                     <td></td>
                     <td class="type"><b>{{viaje.fuec}}</b></td>
-                    <td class="size" hide-xs>{{viaje.conductor.nombre}}</td>
+                    <td class="size" hide-xs>{{viaje.conductor.nombres}} {{viaje.conductor.apellidos}}</td>
                     <td class="size" hide-xs>{{viaje.vehiculo.placa}}</td>
                     <td class="show-details">
                         <md-button ng-click="vm.formato(viaje)" class="md-icon-button" aria-label="detalles">

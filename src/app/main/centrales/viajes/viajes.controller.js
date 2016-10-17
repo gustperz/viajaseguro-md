@@ -35,7 +35,7 @@
 
         getViajes();
         function getViajes() {
-            var campos = 'id, origen, destino, fuec, conductor, vehiculo, clientes';
+            var campos = 'id, origen, destino, fuec, conductor, vehiculo';
             Viajes.getList({fields: campos})
                 .then(function (data) {
                     vm.viajes = data;

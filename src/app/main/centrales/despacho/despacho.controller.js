@@ -7,7 +7,7 @@
         .controller('DespachoController', DespachoController);
 
     /** @ngInject */
-    function DespachoController(Despacho, Toast, $mdDialog, OneRequest){
+    function DespachoController(Despacho, Toast, $mdDialog, $window,$http, api){
         var vm = this;
         vm.despacho = Despacho;
 
@@ -60,11 +60,30 @@
                 contratante_nombre: Despacho.contratante.nombre,
                 pasajeros: pasajeros
             }
-            OneRequest.post('viajes', data).then(function (response) {
-                console.log(response)
+
+            var req = {
+                method: 'POST',
+                url: api + 'viajes',
+                headers: {
+                    // 'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
+                },
+                data: data,
+                responseType: 'arraybuffer'
+            };
+            $http(req).then(function (response) {
+                var file = new Blob([response.data], {type: 'application/pdf'});
+                var fileURL = URL.createObjectURL(file);
+                $window.open(fileURL);
             }, function (error) {
-                console.log(error)
-            })
+                console.log(error);
+            });
+
+
+            // OneRequest.post('viajes', data).then(function (response) {
+            //     console.log(response)
+            // }, function (error) {
+            //     console.log(error)
+            // })
         }
     }
 })();
