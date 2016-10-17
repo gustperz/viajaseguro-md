@@ -52,8 +52,8 @@
 
                     $sails['listeningTurnosRutaLast'] = model.id;
                     $sails['listeningTurnosRuta'+model.id] = true;
-                    $sails.on('turnosRuta'+model.id+'Cahnged', function (turnos) {
-                        console.log('turnosRuta'+model.id+'Cahnged');
+                    $sails.on('turnosRuta'+model.id+'Changed', function (turnos) {
+                        console.log('turnosRuta'+model.id+'Changed');
                         cb(turnos);
                     });
                 }
