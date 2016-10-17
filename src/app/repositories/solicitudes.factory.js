@@ -9,7 +9,7 @@
         .factory('SolicitudesRepository', SocketcSailsService);
 
     /* @ngInject */
-    function SocketcSailsService($sails, SailsRequest, Notify, Solicitud, Despacho) {
+    function SocketcSailsService($sails, SailsRequest, Notify, Solicitud, Despacho, $rootScope) {
         var subscribed = false;
 
         return {
@@ -72,6 +72,7 @@
                             Despacho.sp.push(new Solicitud(solicitud));
                         }
                     });
+                    $rootScope.$apply();
                 }
             });
         }
