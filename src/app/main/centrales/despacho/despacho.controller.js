@@ -30,10 +30,10 @@
                 clickOutsideToClose:true,
                 fullscreen: true// Only for -xs, -sm breakpoints.
             })
-                .then(function(answer) {
-                    $scope.status = 'You said the information was "' + answer + '".';
+                .then(function() {
+                    despachar();
                 }, function() {
-                    $scope.status = 'You cancelled the dialog.';
+
                 });
         }
 
@@ -55,13 +55,14 @@
                 estacion: Despacho.destino.codigo,
                 ruta: Despacho._ruta.id,
                 conductor: Despacho.conductor.id,
-                vehiculo: Despacho.conductor.vehiculo,
+                vehiculo: typeof Despacho.conductor.vehiculo == 'object' ? Despacho.conductor.vehiculo.id : Despacho.conductor.vehiculo,
                 contratante_identificacion: Despacho.contratante.identificacion,
                 contratante_nombre: Despacho.contratante.nombre,
                 pasajeros: pasajeros
             }
             OneRequest.post('viajes', data).then(function (response) {
                 console.log(response)
+                Despacho.loadConductores(Despacho._ruta);
             }, function (error) {
                 console.log(error)
             })
