@@ -38,7 +38,7 @@
                                          md-items="item in vmasignaciones.direcciones" md-item-text="item">
                             <span md-highlight-text="vmasignaciones.solicitud.direccion">{{item}}</span>
                         </md-autocomplete>
-                        <md-button ng-disabled="formViajero.$invalid" ng-click="vmasignaciones.saveSolicitud()" class="md-icon-button" aria-label="Guardar">
+                        <md-button ng-disabled="formViajero.$invalid" ng-click="vmasignaciones.saveSolicitud(); setFocusId = true;" class="md-icon-button" aria-label="Guardar">
                             <md-icon md-font-icon="icon-content-save"></md-icon>
                             <md-tooltip>Guardar</md-tooltip>
                         </md-button>
