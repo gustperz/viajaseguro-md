@@ -176,10 +176,10 @@
             <md-select ng-model="vm.vehiculo.modalidad" required name="modalidad">
                 <md-content ms-scroll>
                     <md-option ng-disabled="true">Modalidad del vehiculo</md-option>
-                    <md-option ng-value="0"  title="Especial" ng-selected="vm.vehiculo.modalidad === false ">
+                    <md-option ng-value="'especial'"  title="Especial" ng-selected="vm.vehiculo.modalidad === 'especial' ">
                         Especial
                     </md-option>
-                    <md-option ng-value="1"  title="Intermunicipal" ng-selected="vm.vehiculo.modalidad === true ">
+                    <md-option ng-value="'intermunicipal'"  title="Intermunicipal" ng-selected="vm.vehiculo.modalidad === 'intermunicipal' ">
                         Intermunicipal
                     </md-option>
                 </md-content>

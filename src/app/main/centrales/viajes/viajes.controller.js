@@ -21,7 +21,9 @@
                 method: 'GET',
                 url:  api + 'viajes/'+viaje.id+'/fuec',
                 headers: {
-                    'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
+                    // 'Authorization': 'Bearer ' + sessionStorage.getItem('jwt'),
+                    // 'Content-Type': 'application/pdf',
+                    'accept': 'application/json'
                 },
                 responseType: 'arraybuffer'
             };
