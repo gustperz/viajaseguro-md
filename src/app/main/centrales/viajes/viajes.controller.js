@@ -9,9 +9,10 @@
         .controller('ViajesController', controller);
 
     /** @ngInject */
-    function controller(Viajes, $http, api, $window, $sce) {
+    function controller(Viajes, $http, api, $window, $sce, authService) {
         var vm = this;
         vm.viajes = null;
+        vm.user = authService.getCurrentUser();
 
         // metodos
         vm.formato = formato;

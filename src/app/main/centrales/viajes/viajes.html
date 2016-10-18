@@ -28,7 +28,7 @@
 
         <!-- CONTENT -->
         <md-content class="content" flex ms-scroll>
-            <fieldset class="f-especial">
+            <fieldset class="f-especial" ng-if="vm.user.espec === true ">
                 <legend><b>Modalidad especial</b></legend>
                 <table class="simple list-view" >
                     <thead>
@@ -42,7 +42,7 @@
                     </thead>
 
                     <tbody>
-                    <tr ng-repeat="viaje in vm.viajes | filter: filtro" ng-if="viaje.vehiculo.modalidad === 'especial' ">
+                    <tr ng-repeat="viaje in vm.viajes | filter: filtro" >
                         <td></td>
                         <td class="type"><b>{{viaje.fuec}}</b></td>
                         <td class="size" hide-xs>{{viaje.conductor.nombres}} {{viaje.conductor.apellidos}}</td>
@@ -59,7 +59,7 @@
                 </table>
             </fieldset>
 
-            <fieldset class="f-especial">
+            <fieldset class="f-especial" ng-if="vm.user.mod_intmpal === true ">
                 <legend><b>Modalidad intermunicipal</b></legend>
                 <table class="simple list-view">
                     <thead>
@@ -73,7 +73,7 @@
                     </thead>
 
                     <tbody>
-                    <tr ng-repeat="viaje in vm.viajes | filter: filtro" ng-if="viaje.vehiculo.modalidad === 'intermunicipal'">
+                    <tr ng-repeat="viaje in vm.viajes | filter: filtro">
                         <td></td>
                         <td class="type"><b>{{viaje.contrato}}</b></td>
                         <td class="size" hide-xs>{{viaje.conductor.nombres}} {{viaje.conductor.apellidos}}</td>
