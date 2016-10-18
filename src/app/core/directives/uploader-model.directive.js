@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('fuse')
+        .module('app.core')
         .directive('uploaderModel', ['$parse', function ($parse) {
             return {
                 restrict: 'A', link: function (scope, iElement, iAttrs) {
