@@ -43,7 +43,9 @@
         }
 
         function despachar() {
-            if(!Despacho.contratante) return Toast('Seleccione el contratante');
+            if(!Despacho.contratante || !(Despacho.sa[Despacho.conductor.id] && Despacho.sa[Despacho.conductor.id].length )) {
+                return Toast('Es necesario establecer un pasajero como contratante para realizar el despacho');
+            }
             var pasajeros = [];
             Despacho.sa[Despacho.conductor.id].forEach(function (solicitud) {
                 pasajeros = pasajeros.concat(solicitud.pasajeros);
