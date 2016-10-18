@@ -170,27 +170,30 @@
             </div>
         </md-input-container>
 
-        <md-input-container flex="100" flex-gt-xs="50">
-            <md-icon md-font-icon="icon-alphabetical"></md-icon>
-            <label>Asignar modalidad</label>
-            <md-select ng-model="vm.conductor.vehiculo.modalidad" required name="modalidad">
-                <md-content ms-scroll>
-                    <md-option ng-disabled="true">Modalidad del vehiculo</md-option>
-                    <md-option ng-value="'especial'"  title="Especial" ng-selected="vm.conductor.vehiculo.modalidad === 'especial' ">
-                        Especial
-                    </md-option>
-                    <md-option ng-value="'intermunicipal'"  title="Intermunicipal" ng-selected="vm.conductor.vehiculo.modalidad === 'intermunicipal' ">
-                        Intermunicipal
-                    </md-option>
-                </md-content>
-            </md-select>
-            <div ng-messages="verticalStep1.modalidad.$error"
-                 ng-show="verticalStep1.modalidad.$touched"
-                 role="alert">
-                <div ng-message="required">
-                    <span>La modalidad es requerida.</span>
+        <div flex="100" flex-gt-xs="50" layout="row">
+            <md-input-container flex ng-if="currentUser.espec && currentUser.intmpal">
+                <md-icon md-font-icon="icon-alphabetical"></md-icon>
+                <label>Asignar modalidad</label>
+                <md-select ng-model="vm.conductor.vehiculo.modalidad" required name="modalidad">
+                    <md-content ms-scroll>
+                        <md-option ng-disabled="true">Modalidad del vehiculo</md-option>
+                        <md-option ng-value="'especial'" title="Especial">
+                            Especial
+                        </md-option>
+                        <md-option ng-value="'intermunicipal'" title="Intermunicipal">
+                            Intermunicipal
+                        </md-option>
+                    </md-content>
+                </md-select>
+                <div ng-messages="verticalStep1.modalidad.$error"
+                     ng-show="verticalStep1.modalidad.$touched"
+                     role="alert">
+                    <div ng-message="required">
+                        <span>La modalidad es requerida.</span>
+                    </div>
                 </div>
-            </div>
-        </md-input-container>
+
+            </md-input-container>
+        </div>
     </div>
 </div>
