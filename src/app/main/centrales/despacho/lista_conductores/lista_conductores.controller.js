@@ -23,7 +23,7 @@
             chosenClass: 'sortable-chosen',
             forceFallback: true,
             scroll: true,
-            onSort: updateTurnos,
+            onEnd: updateTurnos,
         };
 
         vm.addConductor = addConductor;
