@@ -5,33 +5,29 @@
     </md-button>
 </h2>
 <md-content class="dnd-conductores" ms-scroll="{suppressScrollX: true}">
-    <div ng-show="vmconductores.turnos.length">
-        <ul dnd-list="vmconductores.turnos">
-            <li ng-repeat="turno in vmconductores.turnos | orderBy: 'pos' track by $index"
-                dnd-draggable="turno" layout="column"
-                dnd-moved="vmconductores.turnos.splice($index, 1)"
-                dnd-effect-allowed="move"
-                dnd-selected="vmconductores.selectConductor(turno.conductor)"
-                dnd-dragend="vmconductores.updateTurnos()" dnd-auto-scroll="true"
-                class=" grey lighten-3  collection-item"
-                ng-class="{'selected': vmconductores.selectedConductor.id == turno.conductor.id}">
-                <div layout="row">
-                    <div class="text-turno">
-                        <b>{{turno.pos}}</b>
-                    </div>
-                    <span flex></span>
-                    <md-button class="md-icon-button button-quitar-turno" aria-label="quitar-conductor"
-                               ng-click="vmconductores.removerConductor($index)">
-                        <md-icon md-font-icon="icon-close" class="icon"></md-icon>
-                        <md-tooltip>Quitar</md-tooltip>
-                    </md-button>
+    <!--<div ng-show="vmconductores.turnos.length">-->
+    <div ng-sortable="vmconductores.sortableConf">
+        <div ng-repeat="turno in vmconductores.turnos | orderBy: 'pos' track by $index"
+            layout="column"
+            ng-click="vmconductores.selectConductor(turno.conductor)"
+            class=" grey lighten-3  collection-item"
+            ng-class="{'selected': vmconductores.selectedConductor.id == turno.conductor.id}">
+            <div layout="row">
+                <div class="text-turno">
+                    <b>{{turno.pos}}</b>
                 </div>
-                <img ng-if="turno.conductor.imagen === null" class="image-dnd-list" ng-src="assets/images/profile.jpg" alt="">
-                <img ng-if="turno.conductor.imagen !== null" class="image-dnd-list" ng-src="http://api.viajaseguro.co/images/conductores/{{turno.conductor.imagen}}" alt="">
-                <br>
-                <span class="title">{{turno.conductor.codigo_vial}} - {{turno.conductor.nombres}} {{turno.conductor.apellidos}}</span>
-            </li>
-        </ul>
+                <span flex></span>
+                <md-button class="md-icon-button button-quitar-turno" aria-label="quitar-conductor"
+                           ng-click="vmconductores.removerConductor($index)">
+                    <md-icon md-font-icon="icon-close" class="icon"></md-icon>
+                    <md-tooltip>Quitar</md-tooltip>
+                </md-button>
+            </div>
+            <img ng-if="turno.conductor.imagen === null" class="image-dnd-list" ng-src="assets/images/profile.jpg" alt="">
+            <img ng-if="turno.conductor.imagen !== null" class="image-dnd-list" ng-src="http://api.viajaseguro.co/images/conductores/{{turno.conductor.imagen}}" alt="">
+            <br>
+            <span class="title">{{turno.conductor.codigo_vial}} - {{turno.conductor.nombres}} {{turno.conductor.apellidos}}</span>
+        </div>
     </div>
     <div ng-hide="vmconductores.turnos.length">
         <span>La ruta seleccionada no posee conductores en turno</span>

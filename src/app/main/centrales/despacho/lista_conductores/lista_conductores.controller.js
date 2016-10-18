@@ -17,6 +17,15 @@
 
         vm.turnos = [];
 
+        vm.sortableConf = {
+            animation: 250,
+            ghostClass: 'item-ghost',
+            chosenClass: 'sortable-chosen',
+            forceFallback: true,
+            scroll: true,
+            onSort: updateTurnos,
+        };
+
         vm.addConductor = addConductor;
         vm.updateTurnos = updateTurnos;
         vm.removerConductor = removerConductor;

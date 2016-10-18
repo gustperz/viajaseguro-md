@@ -48,10 +48,12 @@
                     if(last) {
                         $sails.off('turnosRuta' + last + 'Cahnged');
                         $sails['listeningTurnosRuta' + last] = false;
+                        console.log('Off:listeningTurnosRuta'+last);
                     }
 
                     $sails['listeningTurnosRutaLast'] = model.id;
                     $sails['listeningTurnosRuta'+model.id] = true;
+                    console.log('On:listeningTurnosRuta'+model.id);
                     $sails.on('turnosRuta'+model.id+'Changed', function (turnos) {
                         console.log('turnosRuta'+model.id+'Changed');
                         cb(turnos);
@@ -62,7 +64,6 @@
             };
 
             function updateTurnos(turnos) {
-                console.log(turnos)
                 return model.post('turnos', {turnos: turnos});
             }
         });

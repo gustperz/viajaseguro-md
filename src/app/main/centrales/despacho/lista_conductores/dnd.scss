@@ -1,77 +1,62 @@
-/**
- * For the correct positioning of the placeholder element, the dnd-list and
- * it's children must have position: relative
- */
 .dnd-conductores{
     min-width: 220px;
-}
 
-.dnd-conductores ul[dnd-list]{
-    -webkit-padding-start: 0px !important;
-}
+    div[ng-sortable]{
+        margin: 0;
+        padding: 0;
 
-.dnd-conductores ul[dnd-list] > li {
-	position: relative;
-    border-radius: $radio !important;
-}
+        .collection-item {
+            position: relative;
+            border-radius: $radio !important;
+            text-align: center;
+            background-color: #EDEDED;
+            display: block;
+            float: left;
+            height: 125px;
+            width: 100%;
+            min-width: 220px;
+            margin-bottom: 10px;
+            cursor: move;
 
-/**
- * The dnd-list should always have a min-height,
- * otherwise you can't drop to it once it's empty
- */
-/*.dnd-conductores ul[dnd-list] {*/
-    /*border: 0;*/
-    /*min-height: 42px;*/
-    /*padding-left: 0px;*/
-/*}*/
+            &:last-child {
+                margin-bottom: 0px;
+            }
 
-/**
- * The dndDraggingSource class will be applied to
- * the source element of a drag operation. It makes
- * sense to hide it to give the user the feeling
- * that he's actually moving it.
- */
-.dnd-conductores ul[dnd-list] .dndDraggingSource {
-    display: none;
-}
+            &.selected {
+                background-color: $primary-color;
+                * {color: white !important;}
+            }
 
-/**
- * An element with .dndPlaceholder class will be
- * added to the dnd-list while the user is dragging
- * over it.
- */
-.dnd-conductores ul[dnd-list] .dndPlaceholder {
-    display: block;
-    background-color: #ddd;
-    min-height: 42px;
-}
+            .image-dnd-list{
+                text-align: center;
+                margin-top: -30px;
+                margin-bottom: 5px;
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                border: none !important;
+            }
+            .text-turno{
+                font-size: 16px;
+                margin: 0 6px;
+                padding: 8px;
+            }
+            .button-quitar-turno{
+                margin-right: 3px;
+            }
+            .title{
+                font-size: 1.4rem !important;
+                font-weight: bold;
+                display:inline-block;
+                width: 90%;
+                white-space: nowrap;
+                overflow:hidden !important;
+                text-overflow: ellipsis;
+            }
+        }
 
-/**
- * The dnd-lists's child elements currently MUST have
- * position: relative. Otherwise we can not determine
- * whether the mouse pointer is in the upper or lower
- * half of the element we are dragging over. In other
- * browsers we can use event.offsetY for this.
- */
-.dnd-conductores ul[dnd-list] li {
-    text-align: center;
-    background-color: #EDEDED;
-    /*border: 1px solid #ddd;*/
-    display: block;
-    /*padding: 10px 15px;*/
-    /*margin: 2px 2px;*/
-    float: left;
-    height: 145px;
-    width: 100%;
-    min-width: 220px;
-    /*zoom: 85%;*/
-    margin-bottom: 10px;
-}
-
-/**
- * Show selected elements in green
- */
-.dnd-conductores ul[dnd-list] li.selected {
-    background-color: $primary-color;
-    * {color: white !important;}
+        .item-ghost {
+            opacity: .3;
+        }
+    }
 }
