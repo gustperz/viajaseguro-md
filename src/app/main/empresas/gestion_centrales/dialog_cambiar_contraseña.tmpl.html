@@ -1,0 +1,36 @@
+<md-dialog aria-label="cambiar conraseña">
+    <md-toolbar>
+        <div class="md-toolbar-tools white-bg black-text">
+            <h2>Cambiar contraseña</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="vm.cancel()">
+                <md-icon md-font-icon="icon-close" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content class="pt-15 pb-0" layout="column">
+        <md-input-container class="m-0" flex>
+            <label for="npassword">Nueva contrase&ntilde;a</label>
+            <input id="npassword" type="text" name="npassword" ng-model="vm.user.password"
+                   aria-label="npassword" required>
+        </md-input-container>
+        <md-input-container class="m-0" flex>
+            <label for="cpassword">Confirmar contrase&ntilde;a</label>
+            <input id="cpassword" type="text" name="cpassword" ng-model="vm.confirmPassword"
+                   aria-label="cpassword" required>
+        </md-input-container>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+        <md-button class="boton-guardar-dialog brad-30"
+                   ng-disabled="!vm.user.password || vm.user.password != vm.confirmPassword"
+                   ng-click="vm.hide(vm.central)">
+            Actualizar
+        </md-button>
+        <md-button class="boton-cancel-dialog brad-30"
+                   ng-click="vm.cancel()">
+            Cancelar
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

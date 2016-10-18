@@ -1,0 +1,37 @@
+<md-toolbar id="toolbar">
+    <div layout="row" layout-align="start center">
+        <div layout="row" layout-align="start center" flex>
+            <div class="logo" layout="row" layout-align="start center">
+                <img src="assets/images/logo-positivo.png">
+            </div>
+        </div>
+        <div layout="row"  layout-align="start center">
+            <div layout-align="start center">
+                <md-progress-circular id="toolbar-progress" ng-if="$root.loadingProgress" class="md-accent"
+                                      md-mode="indeterminate" md-diameter="32">
+                </md-progress-circular>
+            </div>
+            <img class="user-imagen" g-src="http://api.viajaseguro.co/images/empresas/{{currentUser.logo}}">
+            <div layout-align="start center">
+                <md-button class="toolbar-perfil" ng-if="vm.usuario.rol == 'EMPRESA'" ng-click="vm.irPerfil()" aria-label="User settings">
+                    <div layout="row" layout-align="space-between center">
+                        <md-icon md-font-icon="icon-account-circle" class="icon"></md-icon>
+                        <span class="username">Mi perfil</span>
+                    </div>
+                </md-button>
+            </div>
+            <div class="toolbar-date" layout-align="start center">
+                <md-datepicker ng-model="vm.fecha" md-min-date="vm.fecha" md-max-date="vm.fecha"></md-datepicker>
+                <span hide show-gt-sm>{{vm.fecha | amDateFormat:'dddd, DD [de] MMMM'}}</span>
+            </div>
+            <div  layout-align="start center">
+                <md-button class="toolbar-logout" ng-click="vm.logout()" aria-label="User settings">
+                    <div layout="row" layout-align="space-between center">
+                        <md-icon md-font-icon="icon-logout" class="icon"></md-icon>
+                        <span class="username">Salir</span>
+                    </div>
+                </md-button>
+            </div>
+        </div>
+    </div>
+</md-toolbar>

@@ -15,7 +15,7 @@
         authService.getCurrentUser();
 
         // create roles for app
-        var roles = ['CENTRAL_EMPRESA', 'EMPRESA', 'SUPER_ADM'];
+        var roles = ['CENTRAL_EMPRESA', 'DESPACHADOR_EMPRESA', 'EMPRESA', 'SUPER_ADM'];
         angular.forEach(roles, function (rol) {
             PermRoleStore.defineRole(rol, function (roleName, stateParams) {
                 return authService.hasPermission(roleName);

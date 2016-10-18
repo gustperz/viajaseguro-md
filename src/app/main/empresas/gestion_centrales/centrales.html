@@ -54,13 +54,29 @@
                         <h3>{{vm.central.telefono}}</h3>
                     </div>
                 </md-list-item>
+                <md-divider></md-divider>
                 <md-list-item class="md-2-line">
                     <div class="md-list-item-text">
-                        <p>Nombre de usuario:</p>
+                        <p>Usuario:</p>
                         <h3>{{vm.central.user.username}}</h3>
                     </div>
+                    <md-button class="md-secondary md-icon-button" ng-click="vm.cambiarPassCentral($event)" aria-label="edit">
+                        <md-icon md-font-icon="icon-account-key"></md-icon>
+                        <md-tooltip>Cambiar Conraseña</md-tooltip>
+                    </md-button>
                 </md-list-item>
-                <br>
+                <md-divider></md-divider>
+                <md-list-item class="md-2-line">
+                    <div class="md-list-item-text">
+                        <p>Despachador: <span ng-if="vm.central.despachador.rol == 'DESPACHADOR_EMPRESA_DES'">desactivado</span></p>
+                        <h3 ng-hide="vm.central.despachador">No</h3>
+                        <h3 ng-show="vm.central.despachador">{{vm.central.despachador.username}}</h3>
+                    </div>
+                    <md-button class="md-secondary md-icon-button" ng-click="vm.editarDespachador($event)" aria-label="edit despachador">
+                        <md-icon md-font-icon="icon-comment-account-outline"></md-icon>
+                        <md-tooltip>Cambiar Conraseña</md-tooltip>
+                    </md-button>
+                </md-list-item>
                 <md-divider></md-divider>
             </md-list>
             <md-content id="rutas" class="content" flex ms-scroll>
@@ -78,6 +94,7 @@
                         </div>
                         <md-button class="md-secondary md-icon-button" ng-click="vm.deleteRoute(ruta, $index)" aria-label="delete">
                             <md-icon md-font-icon="icon-close"></md-icon>
+                            <md-tooltip>Eliminar Ruta</md-tooltip>
                         </md-button>
                     </md-list-item>
                 </md-list>

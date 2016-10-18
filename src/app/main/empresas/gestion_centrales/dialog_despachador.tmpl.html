@@ -1,0 +1,50 @@
+<md-dialog aria-label="despachdor central" flex="40">
+    <md-toolbar class="toolbar-empresa">
+        <div class="md-toolbar-tools">
+            <h2>Despachador Central</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="vm.cancel()">
+                <md-icon md-font-icon="icon-close" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content class="pt-15 pb-0" layout="column">
+        <div layout="row">
+            <md-input-container class="m-0" flex>
+                <label for="nombre">Nombre de usuario</label>
+                <input id="nombre" type="text" name="npassword" ng-model="vm.user.username"
+                       aria-label="nombre" ng-readonly="!vm.user.new">
+            </md-input-container>
+            &nbsp;
+            <md-switch class="md-warn m-0" ng-model="vm.user.activo" aria-label="activar descativar">
+                <span ng-hide="vm.user.activo">Desactivar</span>
+                <span ng-show="vm.user.activo">Activar</span>
+            </md-switch>
+        </div>
+        <md-input-container class="m-0" flex>
+            <label for="npassword">Nueva contrase&ntilde;a</label>
+            <input id="npassword" type="password" name="npassword" ng-model="vm.user.password"
+                   aria-label="npassword" required>
+        </md-input-container>
+        <md-input-container class="m-0" flex>
+            <label for="cpassword">Confirmar contrase&ntilde;a</label>
+            <input id="cpassword" type="password" name="cpassword" ng-model="vm.confirmPassword"
+                   aria-label="cpassword" required>
+        </md-input-container>
+        <div class="error-label" ng-show="vm.user.password != vm.confirmPassword">las contraseñas no coinciden</div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" layout-align="center">
+        <md-button class="boton-guardar-dialog brad-30"
+                   ng-disabled="vm.user.password != vm.confirmPassword"
+                   ng-click="vm.hide(vm.central)">
+            <span ng-hide="vm.user.new">Actualizar</span>
+            <span ng-show="vm.user.new">Guardar</span>
+        </md-button>
+        <md-button class="boton-cancel-dialog brad-30"
+                   ng-click="vm.cancel()">
+            Cancelar
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

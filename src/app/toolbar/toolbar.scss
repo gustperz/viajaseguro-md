@@ -11,25 +11,11 @@ $toolbarHeight: 60px;
         color: white;
     }
 
-    #language-menu {
-        height: $toolbarHeight;
-
-        .language-button {
-            min-width: $toolbarHeight;
-            height: $toolbarHeight;
-            margin: 0;
-            padding: 0 16px;
-            border-radius: 0;
-
-            .iso {
-                margin-left: 5px;
-                text-transform: capitalize;
-            }
-
-            .flag {
-                margin-right: 8px;
-            }
-        }
+    .user-imagen {
+        height: 50px;
+        width: 50px;
+        border: 2px solid $primary-color;
+        border-radius: 50%;
     }
     .navigation-toggle {
         width: $toolbarHeight;

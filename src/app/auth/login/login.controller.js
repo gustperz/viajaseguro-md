@@ -72,10 +72,12 @@
         function redirectRoles(rol) {
             if (rol == 'CENTRAL_EMPRESA') {
                 $state.go('app.central_despacho');
+            } else if (rol == 'DESPACHADOR_EMPRESA') {
+                $state.go('app.central_despacho_nomenu');
             } else if (rol == 'EMPRESA') {
-                $state.go('app.empresa_centrales')
+                $state.go('app.empresa_centrales');
             } else if (rol == 'SUPER_ADM') {
-                $state.go('app.gestion_empresas')
+                $state.go('app.gestion_empresas');
             }
         }
     }
