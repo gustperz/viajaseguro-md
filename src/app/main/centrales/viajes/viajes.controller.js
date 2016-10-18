@@ -20,11 +20,11 @@
             var pet = {
                 method: 'GET',
                 url:  api + 'viajes/'+viaje.id+'/fuec',
-                headers: {
+                // headers: {
                     // 'Authorization': 'Bearer ' + sessionStorage.getItem('jwt'),
                     // 'Content-Type': 'application/pdf',
-                    'accept': 'application/json'
-                },
+                    // 'Content-Type': 'application/json'
+                // },
                 responseType: 'arraybuffer'
             };
             $http(pet).then(function (response) {
