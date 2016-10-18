@@ -68,11 +68,13 @@
                 url: api + 'viajes',
                 headers: {
                     // 'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
+                    'Content-Type:': 'application/json'
                 },
                 data: data,
                 responseType: 'arraybuffer'
             };
             $http(req).then(function (response) {
+                console.log(response)
                 var file = new Blob([response.data], {type: 'application/pdf'});
                 var fileURL = URL.createObjectURL(file);
                 $window.open(fileURL);
