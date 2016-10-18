@@ -10,8 +10,9 @@
         .factory('authService', UserService);
 
     /** @ngInject **/
-    function UserService($q, PermRoleStore, jwtHelper, $http, api) {
+    function UserService($q, PermRoleStore, jwtHelper, $http, api, $rootScope) {
         var currentUser = JSON.parse(sessionStorage.getItem('user'));
+        $rootScope.currentUser = currentUser;
         var jwt = sessionStorage.getItem('jwt');
 
         var service = {
