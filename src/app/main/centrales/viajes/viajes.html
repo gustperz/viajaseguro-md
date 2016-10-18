@@ -28,33 +28,67 @@
 
         <!-- CONTENT -->
         <md-content class="content" flex ms-scroll>
-            <table class="simple list-view">
-                <thead>
-                <tr>
-                    <th></th>
-                    <th>Numero fuec</th>
-                    <th hide-xs>Conductor</th>
-                    <th hide-xs>Vehiculo</th>
-                    <th ></th>
-                </tr>
-                </thead>
+            <fieldset class="f-especial">
+                <legend><b>Modalidad especial</b></legend>
+                <table class="simple list-view" >
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Numero fuec</th>
+                        <th hide-xs>Conductor</th>
+                        <th hide-xs>Vehiculo</th>
+                        <th ></th>
+                    </tr>
+                    </thead>
 
-                <tbody>
-                <tr ng-repeat="viaje in vm.viajes | filter: filtro">
-                    <td></td>
-                    <td class="type"><b>{{viaje.fuec}}</b></td>
-                    <td class="size" hide-xs>{{viaje.conductor.nombres}} {{viaje.conductor.apellidos}}</td>
-                    <td class="size" hide-xs>{{viaje.vehiculo.placa}}</td>
-                    <td class="show-details">
-                        <md-button ng-click="vm.formato(viaje)" class="md-icon-button" aria-label="detalles">
-                            <md-icon md-font-icon="icon-clipboard-text"></md-icon>
-                            <md-tooltip>Visualizar</md-tooltip>
-                        </md-button>
-                    </td>
-                </tr>
+                    <tbody>
+                    <tr ng-repeat="viaje in vm.viajes | filter: filtro" ng-if="viaje.vehiculo.modalidad === 'especial' ">
+                        <td></td>
+                        <td class="type"><b>{{viaje.fuec}}</b></td>
+                        <td class="size" hide-xs>{{viaje.conductor.nombres}} {{viaje.conductor.apellidos}}</td>
+                        <td class="size" hide-xs>{{viaje.vehiculo.placa}}</td>
+                        <td class="show-details">
+                            <md-button ng-click="vm.formato(viaje)" class="md-icon-button" aria-label="detalles">
+                                <md-icon md-font-icon="icon-clipboard-text"></md-icon>
+                                <md-tooltip>Visualizar</md-tooltip>
+                            </md-button>
+                        </td>
 
-                </tbody>
-            </table>
+                    </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+
+            <fieldset class="f-especial">
+                <legend><b>Modalidad intermunicipal</b></legend>
+                <table class="simple list-view">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Contrato</th>
+                        <th hide-xs>Conductor</th>
+                        <th hide-xs>Vehiculo</th>
+                        <th ></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr ng-repeat="viaje in vm.viajes | filter: filtro" ng-if="viaje.vehiculo.modalidad === 'intermunicipal'">
+                        <td></td>
+                        <td class="type"><b>{{viaje.contrato}}</b></td>
+                        <td class="size" hide-xs>{{viaje.conductor.nombres}} {{viaje.conductor.apellidos}}</td>
+                        <td class="size" hide-xs>{{viaje.vehiculo.placa}}</td>
+                        <td class="show-details">
+                            <md-button ng-click="vm.formato(viaje)" class="md-icon-button" aria-label="detalles">
+                                <md-icon md-font-icon="icon-clipboard-text"></md-icon>
+                                <md-tooltip>Visualizar</md-tooltip>
+                            </md-button>
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </fieldset>
         </md-content>
         <!-- / CONTENT -->
     </div>
