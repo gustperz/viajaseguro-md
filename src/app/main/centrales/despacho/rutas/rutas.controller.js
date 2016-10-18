@@ -17,8 +17,12 @@
 
         vm.addDestino = addDestino;
         vm.addOrigen = addOrigen;
+        vm.OrigenChanged = OrigenChanged;
+        vm.DestinoChanged = DestinoChanged;
         vm.selectOrigen = selectOrigen;
         vm.selectDestino = selectDestino;
+        vm.cancel = cancel;
+
 
         //////////
 
@@ -63,38 +67,48 @@
             }
         }
 
-        function addOrigen(ciudad) {
-            Centrales.getList({fields: 'id', ciudad: ciudad.codigo, empresa: authService.getCurrentUser().empresa.id})
+        function OrigenChanged() {
+            var place = this.getPlace();
+            vm.ciudad_origen = {
+                nombre: place.name,
+                codigo: place.place_id
+            }
+        }
+
+        function addOrigen() {
+            Centrales.getList({fields: 'id', ciudad_place_id: vm.ciudad_origen.codigo, empresa: authService.getCurrentUser().empresa.id})
                 .then(function (central) {
                     if(central.length){
-                        Toast('No se puede seleccionar '+ciudad.nombre+' como origen, los despachos desde esa ciudad, los debe hacer la central local')
+                        Toast('No se puede seleccionar '+vm.ciudad_origen.nombre+' como origen, los despachos desde esa ciudad, los debe hacer la central local')
                     } else {
                         vm.ciudades_origen[ciudad.codigo] = {
-                            nombre: ciudad.nombre,
-                            codigo: ciudad.codigo,
+                            nombre: vm.ciudad_origen.nombre,
+                            codigo: vm.ciudad_origen.codigo,
                             rutas: []
                         };
                         sessionStorage.setItem('ciudades_origen', JSON.stringify(vm.ciudades_origen));
-                        Despacho.origen = {
-                            codigo: ciudad.codigo,
-                            nombre: ciudad.nombre
-                        }
+                        selectOrigen(vm.ciudad_origen);
+                        vm.ciudad_origen = undefined;
                         $mdMenu.hide();
                     }
                 });
         }
 
-        function addDestino(ciudad, trayecto) {
-            var ruta = {
-                nombre_ciudad: ciudad.nombre,
-                destino: ciudad.codigo,
-                trayecto: trayecto,
+        function DestinoChanged() {
+            var place = this.getPlace();
+            vm.ciudad_destino = {
+                nombre_ciudad: place.name,
+                destino: place.place_id,
                 no_central: true
             };
-            vm.ciudades_origen[Despacho.origen.codigo].rutas.push(ruta);
+        }
+
+        function addDestino() {
+            vm.ciudad_destino.trayecto = vm.trayecto,
+            vm.ciudades_origen[Despacho.origen.codigo].rutas.push(vm.ciudad_destino);
             sessionStorage.setItem('ciudades_origen', JSON.stringify(vm.ciudades_origen));
-            Despacho.destino = { codigo: ciudad.codigo, nombre: ciudad.nombre };
-            selectDestino(ruta);
+            selectDestino(vm.ciudad_destino);
+            vm.ciudad_destino = undefined;
             $mdMenu.hide();
         }
 
@@ -117,6 +131,12 @@
             };
             Despacho.trayecto = ruta.trayecto;
             Despacho.loadConductores(ruta);
+        }
+
+        function cancel(campo) {
+            vm[campo] = undefined;
+            vm.trayecto_ruta = '';
+            $mdMenu.hide();
         }
     }
 })();
