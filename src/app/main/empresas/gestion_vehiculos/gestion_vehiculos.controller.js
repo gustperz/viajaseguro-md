@@ -12,8 +12,8 @@
     function EmpresaVehiculosController(Vehiculos, $mdSidenav, $mdDialog, Toast) {
         var vm = this;
         var campos = 'placa, modelo, color, codigo_vial, fecha_soat, ' +
-            'fecha_tecnomecanica, soat, tecnomecanica, fecha_seguroac, ' +
-            ' tarjeta_propiedad, cupos, cedula_propietario,' +
+            'fecha_tecnomecanica, fecha_seguroac, ' +
+            ' cupos, cedula_propietario,' +
             ' nombre_propietario, telefono_propietario, imagen, marca, clase, ntarjoperacion, modalidad';
         vm.vehiculos = [];
         vm.selected = null;

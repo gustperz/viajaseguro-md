@@ -11,9 +11,10 @@
     /** @ngInject */
     function EmpresaConductoresController(Conductores, $mdSidenav, $mdDialog, Toast) {
         var vm = this;
-        var campos = 'identificacion, nombres, apellidos, direccion, email, fecha_nacimiento, central,' +
-            ' telefono, activo, fecha_ingreso, imagen, fecha_licencia, nlicencia, tipo_licencia, vehiculo, vehiculo.fecha_seguroac, ' +
-            'vehiculo.fecha_soat, vehiculo.fecha_tecnomecanica';
+        var campos = 'identificacion, nombres, apellidos, direccion, email, fecha_nacimiento,' +
+            ' central, telefono, activo, fecha_ingreso, imagen, fecha_licencia, ' +
+            ' nlicencia, tipo_licencia, vehiculo, vehiculo.fecha_seguroac, ' +
+            ' vehiculo.fecha_tecnomecanica, vehiculo.fecha_soat';
         vm.conductores = [];
         vm.conductoresInactivos = [];
         vm.selected = null;
@@ -84,10 +85,12 @@
 
         function documentacionPorVencer(conductor) {
             var doc_vencida = false
-            conductor.pv_licencia = check(conductor.fecha_licencia) && vm.n_cond_doc_venc++;
-            conductor.pv_seguroac = check(conductor.fecha_seguroac) && vm.n_cond_doc_venc++;
-            conductor.pv_soat = check(conductor.vehiculo.fecha_soat) && vm.n_cond_doc_venc++;
-            conductor.pv_tecnomecanica = check(conductor.vehiculo.fecha_tecnomecanica) && vm.n_cond_doc_venc++;
+            if(conductor.vehiculo){
+                conductor.pv_licencia = check(conductor.fecha_licencia) && vm.n_cond_doc_venc++;
+                conductor.pv_seguroac = check(conductor.fecha_seguroac) && vm.n_cond_doc_venc++;
+                conductor.pv_soat = check(conductor.vehiculo.fecha_soat) && vm.n_cond_doc_venc++;
+                conductor.pv_tecnomecanica = check(conductor.vehiculo.fecha_tecnomecanica) && vm.n_cond_doc_venc++;
+            }
 
             return doc_vencida;
 
