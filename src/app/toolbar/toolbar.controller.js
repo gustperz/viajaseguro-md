@@ -54,6 +54,7 @@
          */
         function logout()
         {
+            authService.storeUser();
             sessionStorage.clear();
             $state.go('app.login');
         }
