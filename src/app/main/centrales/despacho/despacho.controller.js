@@ -56,6 +56,7 @@
                 destino: Despacho.destino.nombre,
                 estacion: Despacho.destino.codigo,
                 ruta: Despacho._ruta.id,
+                valor_viaje: Despacho.valor_viaje,
                 conductor: Despacho.conductor.id,
                 vehiculo: typeof Despacho.conductor.vehiculo == 'object' ? Despacho.conductor.vehiculo.id : Despacho.conductor.vehiculo,
                 contratante_identificacion: Despacho.contratante.identificacion,
@@ -77,6 +78,12 @@
                 var file = new Blob([response.data], {type: 'application/pdf'});
                 var fileURL = URL.createObjectURL(file);
                 $window.open(fileURL);
+                Despacho.trayecto = {};
+                Despacho.origen = {};
+                Despacho.destino = {};
+                Despacho.destino = {};
+                Despacho.valor_viaje = 0;
+                Despacho.conductor = {};
                 Despacho.loadConductores(Despacho._ruta);
             }, function (error) {
                 console.log(error);

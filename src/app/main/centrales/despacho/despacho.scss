@@ -108,6 +108,24 @@
         color: #f00000;
       }
     }
+
+    #valor-viaje {
+      border: 1px solid $primary-color;
+      border-radius: 15px;
+      background-color: white;
+      padding: 5px 10px;
+      md-input-container{
+        margin: 0 !important;
+        input {
+          height: 25px!important;
+          text-align: right;
+          font-weight: bold;
+        }
+        .md-errors-spacer{
+          min-height: 0 !important;
+        }
+      }
+    }
   }
 
   #solicitudes {
