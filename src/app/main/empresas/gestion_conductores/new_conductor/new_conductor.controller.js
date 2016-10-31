@@ -1,12 +1,13 @@
 /**
  * Created by Jose Soto Acosta on 14/09/2016.
  */
-function NewConductorController($mdDialog, Toast, Conductores, tipo, conductor, Centrales) {
+function NewConductorController($mdDialog, Toast, Conductores, tipo, conductor, Centrales, $rootScope) {
 // variables
     var vm = this;
     vm.conductor = {};
     vm.tipoModal = tipo;
     vm.centrales = [];
+    vm.user = $rootScope.currentUser;
     vm.tiposLicencia = [
         {
             nombre: 'A1',
