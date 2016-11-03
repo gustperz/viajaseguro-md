@@ -80,6 +80,7 @@
                 $window.open(fileURL);
                 Despacho.valor_viaje = 0;
                 Despacho.conductor = {};
+                Despacho.contratante = {};
                 Despacho.loadConductores(Despacho._ruta);
             }, function (error) {
                 console.log(error);
