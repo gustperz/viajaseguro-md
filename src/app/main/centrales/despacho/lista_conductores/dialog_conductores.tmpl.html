@@ -10,8 +10,8 @@
     </md-toolbar>
     <md-content class="content" ms-scroll flex layout-padding>
         <md-list-item ng-repeat="conductor in vm.conductores" ng-click="goToPerson(conductor.name, $event)" class="noright">
-            <img ng-if="conductor.imagen === null" alt="{{ conductor.identificacion }}" ng-src="assets/images/profile.jpg" class="md-avatar" />
-            <img ng-if="conductor.imagen !== null" alt="{{ conductor.identificacion }}" ng-src="http://api.viajaseguro.co/images/conductores/{{ conductor.imagen }}" class="md-avatar" />
+            <img ng-if="!conductor.imagen" alt="{{ conductor.identificacion }}" ng-src="assets/images/profile.jpg" class="md-avatar" />
+            <img ng-if="conductor.imagen" alt="{{ conductor.identificacion }}" ng-src="http://api.viajaseguro.co/images/conductores/{{ conductor.imagen }}" class="md-avatar" />
             <p>{{conductor.codigo_vial}} - {{ conductor.nombres }} {{ conductor.apellidos }}</p>
             <md-checkbox class="md-secondary" ng-model="conductor.selected"></md-checkbox>
         </md-list-item>

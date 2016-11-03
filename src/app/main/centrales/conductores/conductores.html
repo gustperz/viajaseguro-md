@@ -31,8 +31,8 @@
                    ng-repeat="conductor in vm.conductores | filter: buscar">
             <ms-widget-front class="padding-16 md-white-bg" layout="column" layout-align="center center">
                 <div class="media">
-                    <img ng-if="conductor.imagen === null" ng-src="assets/images/profile.jpg">
-                    <img ng-if="conductor.imagen !== null" ng-src="http://api.viajaseguro.co/images/conductores/{{conductor.imagen}}">
+                    <img ng-if="!conductor.imagen" ng-src="assets/images/profile.jpg">
+                    <img ng-if="conductor.imagen" ng-src="http://api.viajaseguro.co/images/conductores/{{conductor.imagen}}">
                 </div>
                 <span flex></span>
                 <div class="widget-conductores-nombre" layout="row" layout-fill>

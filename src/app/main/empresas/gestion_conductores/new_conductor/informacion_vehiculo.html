@@ -171,10 +171,10 @@
         </md-input-container>
 
         <div flex="100" flex-gt-xs="50" layout="row">
-            <md-input-container flex>
+            <md-input-container flex ng-if="vm.user.espec && vm.user.intmpal">
                 <md-icon md-font-icon="icon-alphabetical"></md-icon>
                 <label>Asignar modalidad</label>
-                <md-select ng-model="vm.conductor.vehiculo.modalidad" required name="modalidad">
+                <md-select ng-model="vm.conductor.vehiculo.modalidad" ng-required="vm.user.espec && vm.user.intmpal" name="modalidad">
                     <md-content ms-scroll>
                         <md-option ng-disabled="true">Modalidad del vehiculo</md-option>
                         <md-option ng-value="'especial'" title="Especial" ng-if="vm.user.espec">
