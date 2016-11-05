@@ -79,12 +79,9 @@
                 var file = new Blob([response.data], {type: 'application/pdf'});
                 var fileURL = URL.createObjectURL(file);
                 $window.open(fileURL);
-                Despacho.trayecto = {};
-                Despacho.origen = {};
-                Despacho.destino = {};
-                Despacho.destino = {};
                 Despacho.valor_viaje = 0;
                 Despacho.conductor = {};
+                Despacho.contratante = {};
                 Despacho.loadConductores(Despacho._ruta);
             }, function (error) {
                 console.log(error);

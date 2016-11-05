@@ -68,9 +68,9 @@
                     ng-click="vm.selectedConductor(conductor, $index)"
                     ng-class="{'selected' : vm.selected === conductor, 'cond_doc_venc': conductor.doc_venc}">
                     <td>
-                        <img class="imagen-empresa" ng-if="conductor.imagen === null"
+                        <img class="imagen-empresa" ng-if="!conductor.imagen"
                              ng-src="assets/images/profile.jpg">
-                        <img class="imagen-empresa" ng-if="conductor.imagen !== null"
+                        <img class="imagen-empresa" ng-if="conductor.imagen"
                              ng-src="http://api.viajaseguro.co/images/conductores/{{conductor.imagen}}">
                     </td>
                     <td class="name" hide-xs>{{conductor.identificacion}}</td>
@@ -110,9 +110,9 @@
                     ng-click="vm.selectedConductor(conductor, $index)"
                     ng-class="{'selected' : vm.selected === conductor, 'cond_doc_venc': conductor.doc_venc}">
                     <td>
-                        <img class="imagen-empresa" ng-if="conductor.imagen === null"
+                        <img class="imagen-empresa" ng-if="!conductor.imagen"
                              ng-src="assets/images/profile.jpg">
-                        <img class="imagen-empresa" ng-if="conductor.imagen !== null"
+                        <img class="imagen-empresa" ng-if="conductor.imagen"
                              ng-src="http://api.viajaseguro.co/images/conductores/{{conductor.imagen}}">
                     </td>
                     <td class="name" hide-xs>{{conductor.identificacion}}</td>
