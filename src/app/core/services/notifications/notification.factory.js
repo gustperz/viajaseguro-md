@@ -12,7 +12,8 @@
     function NotifitationFactory(Toast) {
         return function (data) {
             var options = {
-                body: data.message
+                body: data.message,
+                icon: 'http://api.viajaseguro.co/' + data.url_imagen
             };
             var notificacion = new Notification(data.tittle, options);
             if ('Notification' in window) {

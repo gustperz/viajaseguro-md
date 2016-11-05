@@ -7,10 +7,11 @@
         .controller('DespachoController', DespachoController);
 
     /** @ngInject */
-    function DespachoController(Despacho, Toast, $mdDialog, $window,$http, api){
+    function DespachoController(Despacho, Toast, $mdDialog, $window,$http, api, NotificacionesRepository){
         var vm = this;
         vm.despacho = Despacho;
-
+        NotificacionesRepository.estados();
+        NotificacionesRepository.incidencia();
         vm.detalles = detalles;
         vm.establecerContratante = establecerContratante;
         vm.despachar = despachar;
@@ -56,7 +57,7 @@
                 destino: Despacho.destino.nombre,
                 estacion: Despacho.destino.codigo,
                 ruta: Despacho._ruta.id,
-                valor_viaje: Despacho.valor_viaje,
+                valor: Despacho.valor_viaje,
                 conductor: Despacho.conductor.id,
                 vehiculo: typeof Despacho.conductor.vehiculo == 'object' ? Despacho.conductor.vehiculo.id : Despacho.conductor.vehiculo,
                 contratante_identificacion: Despacho.contratante.identificacion,
