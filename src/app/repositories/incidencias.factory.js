@@ -10,15 +10,20 @@
 
     /* @ngInject */
     function SocketcSailsService($sails, Notify) {
-        var subscribed = false;
+        var subscribed_incidencia = false;
+        var subscribed_estados = false;
 
         return {
-            'incidencia': incidencia,
-            'estados': estados
+            'load': load
         };
 
+        function load() {
+            incidencia()
+            estados()
+        }
+
         function incidencia() {
-            if(!subscribed){
+            if(!subscribed_incidencia){
                 console.log('Suscrito a incidencias');
                 $sails.on('newIncidencia', function (response) {
                     console.log(response)
@@ -31,12 +36,12 @@
                     });
                     console.log('newIncidencia')
                 });
-                subscribed = true;
+                subscribed_incidencia = true;
             }
         }
 
         function estados() {
-            if(!subscribed){
+            if(!subscribed_estados){
                 console.log('Suscrito a cambio de estados');
 
                 $sails.on('cambioEstado', function (response) {
@@ -50,7 +55,7 @@
                         url_imagen: 'images/conductores/' + response.imagen
                     });
                 });
-                subscribed = true;
+                subscribed_estados   = true;
             }
         }
     }

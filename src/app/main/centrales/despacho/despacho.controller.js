@@ -10,8 +10,7 @@
     function DespachoController(Despacho, Toast, $mdDialog, $window,$http, api, NotificacionesRepository){
         var vm = this;
         vm.despacho = Despacho;
-        NotificacionesRepository.estados();
-        NotificacionesRepository.incidencia();
+        NotificacionesRepository.load();
         vm.detalles = detalles;
         vm.establecerContratante = establecerContratante;
         vm.despachar = despachar;
