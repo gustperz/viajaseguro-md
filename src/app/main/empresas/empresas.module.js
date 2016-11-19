@@ -10,7 +10,8 @@
             'app.empresas.gestion_conductores',
             'app.empresas.gestion_vehiculos',
             'app.empresas.gestion_centrales',
-            'app.empresas.perfil'
+            'app.empresas.perfil',
+            'app.tracking'
         ])
         .config(config);
 
@@ -42,6 +43,16 @@
             title    : 'Vehiculos',
             icon     : 'icon-taxi',
             state    : 'app.empresa_vehiculos',
+            /*stateParams: {
+             'param1': 'page'
+             },*/
+            weight:1
+        });
+
+        msNavigationServiceProvider.saveItem('tracking', {
+            title    : 'Mapa',
+            icon     : 'icon-taxi',
+            state    : 'app.tracking',
             /*stateParams: {
              'param1': 'page'
              },*/

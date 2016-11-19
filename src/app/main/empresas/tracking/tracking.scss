@@ -1,0 +1,66 @@
+#tracking-map {
+  ng-map {
+      height: 100% !important;
+  }
+
+  #control-centrales {
+    padding: 0 !important;
+    margin: 10px;
+    position: absolute !important;
+    z-index: 10;
+    .md-nav-bar {
+      border: 0 !important;
+      height: 31px;
+      .md-nav-item {
+        color: rgb(0, 0, 0);
+        background-color: rgb(255, 255, 255) !important;
+        box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+        height: 31px;
+        &:first-child {
+          margin: 0;
+          border-top-left-radius: 2px;
+          border-bottom-left-radius: 2px;
+        }
+        &:last-child {
+          border-top-right-radius: 2px;
+          border-bottom-right-radius: 2px;
+        }
+        ._md-nav-button{
+          text-align: center;
+          text-transform: capitalize;
+          font-size: 11px;
+          font-weight: 400;
+          color: rgb(86, 86, 86);
+          padding: 3.5px 7px;
+          margin: 0;
+          min-height: 31px;
+          &.md-active{
+            font-weight: 500;
+            color: rgb(0, 0, 0);
+          }
+        }
+      }
+      md-nav-ink-bar{
+        background-color: $primary-color;
+      }
+    }
+  }
+
+  #control-conductores-stats {
+    color: whitesmoke;
+    background-color: #676a6c !important;
+    border-radius: 2px;
+    box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+    margin: 10px;
+    min-width: 200px;
+    md-list{
+      padding: 0;
+      md-list-item {
+        min-height: 35px;
+        .md-secondary{
+          color: $primary-color;
+        }
+      }
+    }
+  }
+}

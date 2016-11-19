@@ -1,0 +1,55 @@
+<div class="page-layout simple fullwidth" layout="row">
+    <div id="tracking-map" flex>
+
+        <div flex id="control-centrales">
+            <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
+                <md-nav-item
+                        ng-repeat="central in vm.centrales"
+                        md-nav-click="vm.trackingCentral(central)" >
+                    {{central.ciudad}}
+                </md-nav-item>
+            </md-nav-bar>
+        </div>
+        
+        <ng-map center="{{vm.simpleMap.center}}" zoom="{{vm.simpleMap.zoom}}"
+                map-type-control-options="{style:'HORIZONTAL_BAR', position:'TOP_RIGHT'}"
+                zoom-control="true"
+                zoom-control-options="{style:'LARGE', position:'LEFT_CENTER'}"
+                street-view-control="false"
+                street-view-control-options="{position:'LEFT_TOP'}">
+
+            <marker position="{{vm.selectCentral.pos}}"></marker>
+
+            <marker ng-repeat="marker in vm.markers" position="{{marker.pos}}"></marker>
+
+            <custom-control id="control-conductores-stats" position="RIGHT_BOTTOM" index="1">
+                <md-list class="md-dense">
+                    <md-list-item>
+                        <h3>Conductores</h3>
+                    </md-list-item>
+                    <md-divider></md-divider>
+                    <md-list-item>
+                        <p>En turno:</p>
+                        <span class="md-secondary">3</span>
+                    </md-list-item>
+                    <md-divider></md-divider>
+                    <md-list-item>
+                        <p>En ruta:</p>
+                        <span class="md-secondary">3</span>
+                    </md-list-item>
+                    <md-divider></md-divider>
+                    <md-list-item>
+                        <p>Disponibles:</p>
+                        <span class="md-secondary">3</span>
+                    </md-list-item>
+                    <md-divider></md-divider>
+                    <md-list-item>
+                        <p>Ausentes</p>
+                        <span class="md-secondary">3</span>
+                    </md-list-item>
+                </md-list>
+            </custom-control>
+        </ng-map>
+    </div>
+</div>
+
