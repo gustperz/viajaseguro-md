@@ -51,7 +51,7 @@
 
         msNavigationServiceProvider.saveItem('tracking', {
             title    : 'Mapa',
-            icon     : 'icon-taxi',
+            icon     : 'icon-map-marker-radius',
             state    : 'app.tracking',
             /*stateParams: {
              'param1': 'page'

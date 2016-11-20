@@ -84,6 +84,7 @@
             sessionStorage.setItem('jwt', jwt);
             sessionStorage.setItem("user", JSON.stringify(user));
             currentUser = user;
+            $rootScope.currentUser = currentUser;
             return currentUser;
         }
     }
