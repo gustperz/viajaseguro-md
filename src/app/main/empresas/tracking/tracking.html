@@ -20,7 +20,7 @@
 
             <marker position="{{vm.selectCentral.pos}}"></marker>
 
-            <marker ng-repeat="marker in vm.markers" position="{{marker.pos}}"></marker>
+            <marker ng-repeat="marker in vm.markers" position="{{marker.pos}}" label="{{marker.codigo}}"></marker>
 
             <custom-control id="control-conductores-stats" position="RIGHT_BOTTOM" index="1">
                 <md-list class="md-dense">

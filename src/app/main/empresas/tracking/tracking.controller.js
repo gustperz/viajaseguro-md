@@ -63,7 +63,8 @@
                     setTimer(data.id);
                 } else {
                     vm.markers.push({
-                        pos: [data.lat, data.lng]
+                        pos: [data.lat, data.lng],
+                        codigo: data.codigo_vial
                     });
                     markersIndex[data.id] = vm.markers.length - 1;
                     setTimer(data.id);
@@ -72,8 +73,8 @@
 
             function setTimer (id) {
                 markersTimer[id] = $timeout(function(){
-                    delete vm.markers[markersIndex[id]];
-                    delete markersIndex[id]
+                    vm.markers.splice(markersIndex[id], 1);
+                    markersIndex[id] = -1;
                 }, 5*1000);
             }
         }
