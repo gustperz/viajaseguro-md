@@ -15,6 +15,7 @@
         var ciudad_place = undefined;
         vm.markers = [];
         var markersIndex = [];
+        var markersTimer = {};
         
         // metodos
         vm.trackingCentral = trackingCentral;
@@ -58,17 +59,23 @@
             central.posConductores(function(data) {
                 if (markersIndex[data.id] >= 0) {
                     vm.markers[markersIndex[data.id]].pos = [data.lat, data.lng];
+                    $timeout.cancel(markersTimer[data.id]);
+                    setTimer(data.id);
                 } else {
                     vm.markers.push({
                         pos: [data.lat, data.lng]
                     });
                     markersIndex[data.id] = vm.markers.length - 1;
+                    setTimer(data.id);
                 }
-                $timeout(function(){
-                    delete vm.markers[markersIndex[data.id]];
-                    delete markersIndex[data.id]
-                }, 5*1000);
             });
+
+            function setTimer (id) {
+                markersTimer[id] = $timeout(function(){
+                    delete vm.markers[markersIndex[id]];
+                    delete markersIndex[id]
+                }, 5*1000);
+            }
         }
 
     }
