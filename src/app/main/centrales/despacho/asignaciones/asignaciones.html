@@ -2,7 +2,7 @@
     <md-tab>
         <md-tab-label>
             Viajeros
-            <md-icon md-font-icon="icon-plus" class="md-icon-tab"></md-icon>
+            <!md-icon md-font-icon="icon-plus" class="md-icon-tab"><!md-icon>
         </md-tab-label>
         <md-tab-body >
             <!--FOMULARIO ADD PASAJERO-->
@@ -11,10 +11,11 @@
                     <div ng-repeat="pasajero in vmasignaciones.solicitud.pasajeros" layout="row" flex>
                         <md-input-container md-no-float flex="30" class="md-block">
                             <input ng-model="pasajero.identificacion" type="text" placeholder="Identificacion" id="identificacionPasajero"
-                                   focus-me="setFocusId" ng-enter="vmasignaciones.loadCliente($index)" required autofocus>
+                                   focus-me="vmasignaciones.focusId" ng-enter="vmasignaciones.loadCliente($index)" ng-blur="vmasignaciones.loadCliente($index)" required autofocus>
                         </md-input-container>
                         <md-input-container md-no-float flex class="md-block">
-                            <input ng-model="pasajero.nombre" type="text" placeholder="Nombre" required>
+                            <input ng-model="pasajero.nombre" type="text" placeholder="Nombre" focus-me="vmasignaciones.focusNombre"
+                                   ng-enter="vmasignaciones.saveSolicitud($index);" required>
                         </md-input-container>
                         <md-button class="md-icon-button" ng-if="$first" ng-disabled="vm.despacho.cupos_disponibles <= vmasignaciones.solicitud.pasajeros.length"
                                    ng-click="vmasignaciones.addPasajero()" aria-label="addPasajero">
@@ -38,11 +39,11 @@
                                          md-items="item in vmasignaciones.direcciones" md-item-text="item">
                             <span md-highlight-text="vmasignaciones.solicitud.direccion">{{item}}</span>
                         </md-autocomplete>
-                        <md-button ng-disabled="formViajero.$invalid" ng-click="vmasignaciones.saveSolicitud(); setFocusId = true;" class="md-icon-button" aria-label="Guardar">
+                        <md-button ng-disabled="formViajero.$invalid" ng-click="vmasignaciones.saveSolicitud();" class="md-icon-button" aria-label="Guardar">
                             <md-icon md-font-icon="icon-content-save"></md-icon>
                             <md-tooltip>Guardar</md-tooltip>
                         </md-button>
-                        <md-button class="md-icon-button" ng-click="vmasignaciones.clear(); setFocusId = true;" aria-label="clear">
+                        <md-button class="md-icon-button" ng-click="vmasignaciones.clear();" aria-label="clear">
                             <md-icon md-font-icon="icon-delete"></md-icon>
                             <md-tooltip>Borrar datos</md-tooltip>
                         </md-button>
