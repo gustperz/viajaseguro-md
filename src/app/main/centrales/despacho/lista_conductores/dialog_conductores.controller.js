@@ -52,16 +52,17 @@
 
         function selectConductores() {
             var conductores = vm.conductores_en_estacion.filter(function(conductor) {
-                if (conductor.selected) return conductor;
+                return conductor.selected;
             });
-            conductores.concat(vm.conductores_central.filter(function(conductor) {
-                if (conductor.selected) return conductor;
+            conductores = conductores.concat(vm.conductores_central.filter(function(conductor) {
+                return conductor.selected;
             }));
             angular.forEach(vm.centrales, function(central) {
-                angular.forEach(central.conductores, function(conductor) {
-                    if (conductor.selected) conductores.push(conductor);
-                });
+                conductores = conductores.concat(central.conductores.filter(function(conductor) {
+                    return conductor.selected;
+                }));
             });
+            console.log(conductores)
             $mdDialog.hide(conductores);
         };
 
