@@ -59,7 +59,7 @@
                     });
                 }
                 clear();
-            } else Toast('se debe ingresar toda la información de los pasajeros');
+            } else Toast('Se debe ingresar toda la información de los pasajeros');
         }
 
         function addPasajero() {
