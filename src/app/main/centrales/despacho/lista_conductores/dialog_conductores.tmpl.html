@@ -1,4 +1,4 @@
-<md-dialog aria-label="add-conductor" flex="50" class="dialog-empresa">
+<md-dialog aria-label="add-conductor" flex="90" class="dialog-empresa no-scroll">
     <md-toolbar class="toolbar-empresa">
         <div class="md-toolbar-tools">
             <h2><b>Seleccionar Conductores</b></h2>
@@ -8,14 +8,49 @@
             </md-button>
         </div>
     </md-toolbar>
-    <md-content class="content" ms-scroll flex layout-padding>
-        <md-list-item ng-repeat="conductor in vm.conductores" ng-click="goToPerson(conductor.name, $event)" class="noright">
-            <img ng-if="!conductor.imagen" alt="{{ conductor.identificacion }}" ng-src="assets/images/profile.jpg" class="md-avatar" />
-            <img ng-if="conductor.imagen" alt="{{ conductor.identificacion }}" ng-src="http://api.viajaseguro.co/images/conductores/{{ conductor.imagen }}" class="md-avatar" />
-            <p>{{conductor.codigo_vial}} - {{ conductor.nombres }} {{ conductor.apellidos }}</p>
-            <md-checkbox class="md-secondary" ng-model="conductor.selected"></md-checkbox>
-        </md-list-item>
-    </md-content>
+    <div layout="row">
+        <md-content flex="35" class="no-padding" ms-scroll>
+            <md-subheader>En camino</md-subheader>
+            <md-list-item ng-repeat="conductor in vm.conductores_en_estacion" class="md-2-line">
+                <img ng-if="!conductor.imagen" alt="{{ conductor.identificacion }}" ng-src="assets/images/profile.jpg" class="md-avatar" />
+                <img ng-if="conductor.imagen" alt="{{ conductor.identificacion }}" ng-src="http://api.viajaseguro.co/images/conductores/{{ conductor.imagen }}" class="md-avatar" />
+                <div class="md-list-item-text">
+                    <h3>{{conductor.codigo_vial}} - {{ conductor.nombres }} {{ conductor.apellidos }}</h3>
+                    <p>{{ conductor.estado }}</p>
+                </div>
+                <md-button class="md-secondary md-icon-button">
+                    <md-checkbox ng-model="conductor.selected"></md-checkbox>
+                </md-button>
+            </md-list-item>
+        </md-content>
+        <md-divider></md-divider>
+        <md-content flex="35" class="no-padding" ms-scroll>
+            <md-subheader>De la central</md-subheader>
+            <md-list-item ng-repeat="conductor in vm.conductores_central" class="md-2-line">
+                <img ng-if="!conductor.imagen" alt="{{ conductor.identificacion }}" ng-src="assets/images/profile.jpg" class="md-avatar" />
+                <img ng-if="conductor.imagen" alt="{{ conductor.identificacion }}" ng-src="http://api.viajaseguro.co/images/conductores/{{ conductor.imagen }}" class="md-avatar" />
+                <div class="md-list-item-text">
+                    <h3>{{conductor.codigo_vial}} - {{ conductor.nombres }} {{ conductor.apellidos }}</h3>
+                    <p>{{ conductor.estado }}</p>
+                </div>
+                <md-button class="md-secondary md-icon-button">
+                    <md-checkbox ng-model="conductor.selected"></md-checkbox>
+                </md-button>
+            </md-list-item>
+        </md-content>
+        <md-divider></md-divider>
+        <md-content flex="30" class="no-padding" ms-scroll>
+            <md-list ng-repeat="central in vm.centrales">
+                <md-subheader>De {{central.ciudad}}</md-subheader>
+                <md-list-item ng-repeat="conductor in central.conductores" flex>
+                    <img ng-if="!conductor.imagen" alt="{{ conductor.identificacion }}" ng-src="assets/images/profile.jpg" class="md-avatar" />
+                    <img ng-if="conductor.imagen" alt="{{ conductor.identificacion }}" ng-src="http://api.viajaseguro.co/images/conductores/{{ conductor.imagen }}" class="md-avatar" />
+                    <p>{{conductor.codigo_vial}} - {{ conductor.nombres }} {{ conductor.apellidos }}</p>
+                    <md-checkbox class="md-secondary" ng-model="conductor.selected"></md-checkbox>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </div>
     <md-dialog-actions layout="row">
         <span flex></span>
         <md-button class="boton-guardar-dialog brad-30"

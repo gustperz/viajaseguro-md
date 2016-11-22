@@ -11,8 +11,11 @@
         .controller('DialogConductoresController', controller);
 
     /** @ngInject */
-    function controller($mdDialog, Conductores, Despacho) {
+    function controller($mdDialog, Conductores, Despacho, authService, Centrales) {
         var vm = this;
+        vm.conductores_en_estacion = [];
+        vm.conductores_central = [];
+        vm.otros_conductores = [];
 
         vm.selectConductores = selectConductores;
         vm.cancel = cancel;
@@ -20,18 +23,46 @@
         //////////
 
         Conductores.getList({
-            fields:  'identificacion, nombres, apellidos, imagen, codigo_vial',
-            where: {activo: true, estacion: Despacho.origen.codigo, estado: {'!': 'en_turno'}}
+            fields:  'identificacion, nombres, apellidos, imagen, codigo_vial, estado, estacion, central',
+            where: {activo: true, estado: {'!': 'en_turno'}}
         }).then(function (conductores) {
-            vm.conductores = conductores.plain();
+            angular.forEach(conductores.plain(), function(conductor) {
+                if(conductor.estacion == Despacho.origen.codigo && ['en_ruta'].indexOf(conductor.estado) != -1) {
+                    vm.conductores_en_estacion.push(conductor);
+                }
+                else if(conductor.central == authService.getCurrentUser().central.id) {
+                    vm.conductores_central.push(conductor);
+                }
+                else {
+                    vm.otros_conductores.push(conductor);
+                }
+            });
+            Centrales.getList({fields: 'ciudad', where: { id: {'!': authService.getCurrentUser().central.id } } })
+            .then(function (centrales){
+                angular.forEach(centrales, function(central) {
+                    central.conductores = vm.otros_conductores.filter(function(conductor){
+                        return conductor.central == central.id;
+                    });
+                });
+                vm.centrales = centrales.plain();
+            });
         })
 
         //////////
 
         function selectConductores() {
-            $mdDialog.hide(vm.conductores.filter(function(conductor) {
+            var conductores = vm.conductores_en_estacion.filter(function(conductor) {
+                if (conductor.selected) return conductor;
+            });
+            conductores.concat(vm.conductores_central.filter(function(conductor) {
                 if (conductor.selected) return conductor;
             }));
+            angular.forEach(vm.centrales, function(central) {
+                angular.forEach(central.conductores, function(conductor) {
+                    if (conductor.selected) conductores.push(conductor);
+                });
+            });
+            $mdDialog.hide(conductores);
         };
 
         function cancel() {
