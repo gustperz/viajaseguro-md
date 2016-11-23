@@ -21,6 +21,7 @@
                 <md-button class="md-secondary md-icon-button">
                     <md-checkbox ng-model="conductor.selected"></md-checkbox>
                 </md-button>
+                <md-tooltip ng-if="!conductor.vehiculo">Deberá asignarle un vehículo</md-tooltip>
             </md-list-item>
         </md-content>
         <md-divider></md-divider>
@@ -36,6 +37,7 @@
                 <md-button class="md-secondary md-icon-button">
                     <md-checkbox ng-model="conductor.selected"></md-checkbox>
                 </md-button>
+                <md-tooltip ng-if="!conductor.vehiculo">Deberá asignarle un vehículo</md-tooltip>
             </md-list-item>
         </md-content>
         <md-divider></md-divider>
@@ -47,6 +49,7 @@
                     <img ng-if="conductor.imagen" alt="{{ conductor.identificacion }}" ng-src="http://api.viajaseguro.co/images/conductores/{{ conductor.imagen }}" class="md-avatar" />
                     <p>{{conductor.codigo_vial}} - {{ conductor.nombres }} {{ conductor.apellidos }}</p>
                     <md-checkbox class="md-secondary" ng-model="conductor.selected"></md-checkbox>
+                    <md-tooltip ng-if="!conductor.vehiculo">Deberá asignarle un vehículo</md-tooltip>
                 </md-list-item>
             </md-list>
         </md-content>

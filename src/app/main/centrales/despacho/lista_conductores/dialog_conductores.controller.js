@@ -23,18 +23,20 @@
         //////////
 
         Conductores.getList({
-            fields:  'identificacion, nombres, apellidos, imagen, codigo_vial, estado, estacion, central',
+            fields:  'identificacion, nombres, apellidos, imagen, vehiculo.id, vehiculo.modalidad, codigo_vial, estado, estacion, central',
             where: {activo: true, estado: {'!': 'en_turno'}}
         }).then(function (conductores) {
             angular.forEach(conductores.plain(), function(conductor) {
-                if(conductor.estacion == Despacho.origen.codigo && ['en_ruta'].indexOf(conductor.estado) != -1) {
-                    vm.conductores_en_estacion.push(conductor);
-                }
-                else if(conductor.central == authService.getCurrentUser().central.id) {
-                    vm.conductores_central.push(conductor);
-                }
-                else {
-                    vm.otros_conductores.push(conductor);
+                if(!conductor.vehiculo || conductor.vehiculo.modalidad){
+                    if(conductor.estacion == Despacho.origen.codigo && ['en_ruta'].indexOf(conductor.estado) != -1) {
+                        vm.conductores_en_estacion.push(conductor);
+                    }
+                    else if(conductor.central == authService.getCurrentUser().central.id) {
+                        vm.conductores_central.push(conductor);
+                    }
+                    else {
+                        vm.otros_conductores.push(conductor);
+                    }
                 }
             });
             Centrales.getList({fields: 'ciudad', where: { id: {'!': authService.getCurrentUser().central.id } } })
