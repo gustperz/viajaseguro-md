@@ -38,7 +38,7 @@
         
         function saveSolicitud() {
             var all_data = vm.solicitud.pasajeros.every(function(pasajero) {
-                return pasajero.identificacion != '' && pasajero.nombre != ''
+                return pasajero.nombre != ''
             });
 
             if(all_data) {
@@ -49,12 +49,12 @@
                 solicitud.estado = 'a';
 
                 if(solicitud.direccion){
-                    solicitud.cliente = solicitud.pasajeros[0].identificacion;
+                    solicitud.cliente = undefined
                     SolicitudesRepository.create(vm.solicitud);
                 } else {
                     angular.forEach(solicitud.pasajeros, function (pasajero) {
                         solicitud.pasajeros = [pasajero];
-                        solicitud.cliente = pasajero;
+                        solicitud.cliente = undefined;
                         SolicitudesRepository.create(vm.solicitud);
                     });
                 }
@@ -75,17 +75,19 @@
 
         function loadCliente(index) {
             var identificacion = vm.solicitud.pasajeros[index].identificacion;
-            OneRequest.to('clientes/'+identificacion).then(function (cliente) {
-                if(cliente.id) {
-                    vm.solicitud.pasajeros[index] = {
-                        identificacion: cliente.identificacion,
-                        nombre: cliente.nombre
-                    };
-                    vm.focusNombre = true;
-                    cliente.telefono && vm.telefonos.push(cliente.telefono);
-                    cliente.direccion && vm.direcciones.push(cliente.direccion);
-                }
-            });
+            if(identificacion){
+                OneRequest.to('clientes/'+identificacion).then(function (cliente) {
+                    if(cliente.id) {
+                        vm.solicitud.pasajeros[index] = {
+                            identificacion: cliente.identificacion,
+                            nombre: cliente.nombre
+                        };
+                        vm.focusNombre = true;
+                        cliente.telefono && vm.telefonos.push(cliente.telefono);
+                        cliente.direccion && vm.direcciones.push(cliente.direccion);
+                    }
+                });
+            }
         }
 
         function clear() {
@@ -94,6 +96,7 @@
                     identificacion: '',
                     nombre: ''
                 }],
+                cliente  : undefined,
                 telefono : undefined,
                 direccion: undefined
             }

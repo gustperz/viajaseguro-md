@@ -11,7 +11,7 @@
                     <div ng-repeat="pasajero in vmasignaciones.solicitud.pasajeros" layout="row" flex>
                         <md-input-container md-no-float flex="30" class="md-block">
                             <input ng-model="pasajero.identificacion" type="text" placeholder="Identificacion" id="identificacionPasajero"
-                                   focus-me="vmasignaciones.focusId" ng-enter="vmasignaciones.loadCliente($index)" ng-blur="vmasignaciones.loadCliente($index)" required autofocus>
+                                   focus-me="vmasignaciones.focusId" ng-enter="vmasignaciones.loadCliente($index)" ng-blur="vmasignaciones.loadCliente($index)" autofocus>
                         </md-input-container>
                         <md-input-container md-no-float flex class="md-block">
                             <input ng-model="pasajero.nombre" type="text" placeholder="Nombre" focus-me="vmasignaciones.focusNombre"
