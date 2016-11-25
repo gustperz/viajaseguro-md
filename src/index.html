@@ -25,6 +25,7 @@
               rel='stylesheet' type='text/css'>
 
         <script src="https://maps.google.com/maps/api/js?key=AIzaSyCVxOkgg0X-PBWjiRyGYRrT1jp4QBCXp0w&libraries=geometry,places"></script>
+        <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async='async'></script>
     </head>
 
     <!--[if lt IE 10]>
@@ -56,6 +57,17 @@
         <!-- run `gulp inject` to automatically populate bower script dependencies -->
         <!-- endbower -->
         <!-- endbuild -->
+        <script>
+            var OneSignal = window.OneSignal || [];
+            OneSignal.push(["init", {
+                appId: "82e0b3fe-0075-4603-826b-3e9a7a9eb8d6",
+                autoRegister: false, /* Set to true to automatically prompt visitors */
+                subdomainName: 'app-viajaseguro',
+                notifyButton: {
+                    enable: true /* Set to false to hide */
+                }
+            }]);
+        </script>
         <!--<script type="text/javascript">-->
             <!--io.sails.url = 'http://localhost:1337';-->
         <!--</script>-->
