@@ -3771,7 +3771,7 @@
         }, {
             key: "_onSubscriptionChanged", value: function o(n) {
                 if (e.__doNotShowWelcomeNotification) {
-                    b["default"].debug("Not showing welcome notification because user state was reset.");
+                    b["default"].debug("No se muestra la notificación de bienvenida porque se ha restablecido el estado del usuario.");
                     return
                 }
                 if (true === n)Promise.all([e.getUserId(), e.getAppId()]).then(function (n) {
@@ -3781,14 +3781,14 @@
                     var r = e.config.welcomeNotification;
                     var l = void 0 !== r && true === r.disable;
                     var s = void 0 !== r && void 0 !== r.title && null !== r.title ? r.title : "";
-                    var u = void 0 !== r && void 0 !== r.message && null !== r.message && r.message.length > 0 ? r.message : "Thanks for subscribing!";
+                    var u = void 0 !== r && void 0 !== r.message && null !== r.message && r.message.length > 0 ? r.message : "Gracias por permitir las notificaciones!";
                     var c = new URL(location.href);
                     c = c.origin + "?_osp=do_not_open";
                     var f = r && r.url && r.url.length > 0 ? r.url : c;
                     s = (0, I.decodeHtmlEntities)(s);
                     u = (0, I.decodeHtmlEntities)(u);
                     if (!l) {
-                        b["default"].debug("Sending welcome notification.");
+                        b["default"].debug("Envío de la notificación de bienvenida.");
                         d["default"].sendNotification(o, [i], {en: s}, {en: u}, f, null, {__isOneSignalWelcomeNotification: true});
                         w["default"].trigger(e.EVENTS.WELCOME_NOTIFICATION_SENT, {title: s, message: u, url: f})
                     }
@@ -5518,9 +5518,9 @@
         function e(n) {
             r(this, e);
             if (!n)this.options = {}; else this.options = (0, y["default"])({}, n);
-            if (!this.options.modalTitle || "string" != typeof this.options.modalTitle)this.options.modalTitle = "Thanks for subscribing";
-            if (!this.options.modalMessage || "string" != typeof this.options.modalMessage)this.options.modalMessage = "You're now subscribed to notifications. You can unsubscribe at any time.";
-            if (!this.options.modalButtonText || "string" != typeof this.options.modalButtonText)this.options.modalButtonText = "Close";
+            if (!this.options.modalTitle || "string" != typeof this.options.modalTitle)this.options.modalTitle = "Gracias por permitir las notificaciones";
+            if (!this.options.modalMessage || "string" != typeof this.options.modalMessage)this.options.modalMessage = "Ahora estás permitiendo las notificaciones. Puede denegar esto en cualquier momento.";
+            if (!this.options.modalButtonText || "string" != typeof this.options.modalButtonText)this.options.modalButtonText = "Cerrar";
             this.options.modalTitle = this.options.modalTitle.substring(0, 50);
             this.options.modalMessage = this.options.modalMessage.substring(0, 90);
             this.options.modalButtonText = this.options.modalButtonText.substring(0, 35)
@@ -7307,9 +7307,9 @@
         function e(n) {
             r(this, e);
             if (!n)this.options = {}; else this.options = (0, y["default"])({}, n);
-            if (!this.options.actionMessage || "string" != typeof this.options.actionMessage)this.options.actionMessage = "We'd like to show you notifications for the latest news and updates.";
-            if (!this.options.acceptButtonText || "string" != typeof this.options.acceptButtonText)this.options.acceptButtonText = "Allow";
-            if (!this.options.cancelButtonText || "string" != typeof this.options.cancelButtonText)this.options.cancelButtonText = "No Thanks";
+            if (!this.options.actionMessage || "string" != typeof this.options.actionMessage)this.options.actionMessage = "Nos gustaría mostrarle las notificaciones de las últimas noticias y actualizaciones.";
+            if (!this.options.acceptButtonText || "string" != typeof this.options.acceptButtonText)this.options.acceptButtonText = "Permitir";
+            if (!this.options.cancelButtonText || "string" != typeof this.options.cancelButtonText)this.options.cancelButtonText = "No Gracias!";
             this.options.actionMessage = this.options.actionMessage.substring(0, 90);
             this.options.acceptButtonText = this.options.acceptButtonText.substring(0, 15);
             this.options.cancelButtonText = this.options.cancelButtonText.substring(0, 15);
