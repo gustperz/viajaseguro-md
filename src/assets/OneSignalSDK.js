@@ -1658,20 +1658,20 @@
         }, {
             key: "STATES", get: function i() {
                 return {
-                    UNINITIALIZED: "uninitialized",
-                    SUBSCRIBED: "subscribed",
-                    UNSUBSCRIBED: "unsubscribed",
-                    BLOCKED: "blocked"
+                    UNINITIALIZED: "no inicializado",
+                    SUBSCRIBED: "suscrito",
+                    UNSUBSCRIBED: "cancelado",
+                    BLOCKED: "obstruido"
                 }
             }
         }, {
             key: "TEXT_SUBS", get: function o() {
                 return {
                     "prompt.native.grant": {
-                        "default": "Allow",
-                        chrome: "Allow",
-                        firefox: "Always Receive Notifications",
-                        safari: "Allow"
+                        "default": "Permitir",
+                        chrome: "Permitir",
+                        firefox: "Siempre recibir notificaciones",
+                        safari: "Permitir"
                     }
                 }
             }
@@ -3235,7 +3235,7 @@
                     this.method = u(n.method || this.method || "GET");
                     this.mode = n.mode || this.mode || null;
                     this.referrer = null;
-                    if (("GET" === this.method || "HEAD" === this.method) && t)throw new TypeError("Body not allowed for GET or HEAD requests");
+                    if (("GET" === this.method || "HEAD" === this.method) && t)throw new TypeError("No se permite el cuerpo para las solicitudes GET o HEAD");
                     this._initBody(t)
                 }
 
@@ -4398,7 +4398,7 @@
                     b["default"].debug("Called %cloadSubdomainIFrame()", (0, I.getConsoleStyle)("code"));
                     var i = e.config.dangerouslyWipeData;
                     if (i)e.iframeUrl += "?&dangerouslyWipeData=true";
-                    b["default"].debug("Loading subdomain iFrame:", e.iframeUrl);
+                    b["default"].debug("Cargando el iFrame del subdominio:", e.iframeUrl);
                     var o = H["default"].createHiddenDomIFrame(e.iframeUrl);
                     o.onload = function () {
                         b["default"].info("iFrame onload event was called for:", o.src);
@@ -4785,7 +4785,7 @@
                     w["default"].trigger(e.EVENTS.PERMISSION_PROMPT_DISPLAYED);
                     return H["default"].requestNotificationPermissionPromise()
                 }).then(function (e) {
-                    if ("granted" !== e)throw new Error("User did not grant push permission to allow notifications."); else return (0, I.executeAndTimeoutPromiseAfter)(n.pushManager.subscribe({userVisibleOnly: true}), 25e3, "A possible Chrome bug (https://bugs.chromium.org/p/chromium/issues/detail?id=623062) is preventing this subscription from completing.")
+                    if ("granted" !== e)throw new Error("El usuario no concedió permiso para permitir notificaciones."); else return (0, I.executeAndTimeoutPromiseAfter)(n.pushManager.subscribe({userVisibleOnly: true}), 25e3, "A possible Chrome bug (https://bugs.chromium.org/p/chromium/issues/detail?id=623062) is preventing this subscription from completing.")
                 }).then(function (n) {
                     b["default"].debug("Finished calling %cServiceWorkerRegistration.pushManager.subscribe()", (0, I.getConsoleStyle)("code"));
                     b["default"].debug("Subscription details:", n);
@@ -7080,7 +7080,7 @@
                         } else if (v.firefox)l = k.HOST_URL + "/bell/firefox-unblock.jpg"; else if (v.safari)l = k.HOST_URL + "/bell/safari-unblock.jpg";
                         var s = "";
                         if (l)s = '\n\n            <a href="' + l + '" target="_blank"><img src="' + l + '"></a></div>\n            ';
-                        if ((v.mobile || v.tablet) && v.chrome)s = "\n            <ol>\n            <li>Access <strong>Settings</strong> by tapping the three menu dots <strong>⋮</strong></li>\n            <li>Click <strong>Site settings</strong> under Advanced.</li>\n            <li>Click <strong>Notifications</strong>.</li>\n            <li>Find and click this entry for this website.</li>\n            <li>Click <strong>Notifications</strong> and set it to <strong>Allow</strong>.</li>\n            </ol>\n          ";
+                        if ((v.mobile || v.tablet) && v.chrome)s = "\n            <ol>\n            <li>Accede <strong>a ajustes</strong> Tocando los tres puntos del menú <strong>⋮</strong></li>\n            <li>Click <strong>Configuración</strong> avanzada.</li>\n            <li>Click <strong>Notificaciones</strong>.</li>\n            <li>Busque y haga clic en esta entrada para ir al sitio web.</li>\n            <li>Click <strong>Notificaciones</strong> y póngalo en <strong>Perminir</strong>.</li>\n            </ol>\n          ";
                         t = "\n                  <h1>" + e.bell.text["dialog.blocked.title"] + '</h1>\n                  <div class="divider"></div>\n                  <div class="instructions">\n                  <p>' + e.bell.text["dialog.blocked.message"] + "</p>\n                  " + s + "\n                  </div>\n                  " + i + "\n                "
                     }
                     addDomElement(document.querySelector(e.nestedContentSelector), "beforeend", t);

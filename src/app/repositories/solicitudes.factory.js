@@ -24,7 +24,8 @@
                 $sails.on('newSolicitud', function (solicitud) {
                     Notify({
                         tittle: 'Nueva solicitud',
-                        message : 'Has recivido una nueva solicitud, verificala en la lista'
+                        message : 'Has recivido una nueva solicitud, verificala en la lista',
+                        url_imagen: 'images/icono.png'
                     });
                     console.log('newSolicitud')
                     reload();
