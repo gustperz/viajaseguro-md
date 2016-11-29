@@ -116,8 +116,8 @@
                     // var fileURL = URL.createObjectURL(file);
                     // $window.open(fileURL);
                     Despacho.valor_viaje = 0;
-                    Despacho.conductor = {};
-                    Despacho.contratante = {};
+                    Despacho.conductor = undefined;
+                    Despacho.contratante = undefined;
                     Despacho.loadConductores(Despacho._ruta);
                     $mdDialog.cancel();
                 }, function (error) {
