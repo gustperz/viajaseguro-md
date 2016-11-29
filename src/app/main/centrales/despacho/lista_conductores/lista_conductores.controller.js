@@ -64,6 +64,7 @@
             ruta = Despacho._ruta = Rutas.get(_ruta.id);
             ruta.getTurnos(function (turnos) {
                 vm.turnos = turnos;
+                if(!vm.turnos.length) Despacho.conductor = undefined;
             }).then(selectConductorPos1);
         }
 
