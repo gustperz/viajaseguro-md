@@ -9,13 +9,18 @@
         .controller('TrackingController', TrackingController);
 
     /** @ngInject */
-    function TrackingController(Centrales, NavigatorGeolocation, NgMap, $timeout) {
+    function TrackingController(Centrales, NavigatorGeolocation, NgMap, $timeout, $rootScope) {
         // variables
         var vm = this;
         var ciudad_place = undefined;
         vm.markers = [];
         var markersIndex = [];
         var markersTimer = {};
+        $rootScope.no_disponibles = 0;
+        $rootScope.disponibles = 0;
+        $rootScope.ausentes = 0;
+        $rootScope.en_turno = 0;
+        $rootScope.en_ruta = 0;
         
         // metodos
         vm.trackingCentral = trackingCentral;
@@ -66,6 +71,21 @@
                         pos: [data.lat, data.lng],
                         codigo: data.codigo_vial
                     });
+                    if(data.estado === 'disponible'){
+                        $rootScope.disponibles += 1;
+                    }else if(data.estado === 'en_turno'){
+                        $rootScope.disponibles -= 1;
+                        $rootScope.en_turno += 1;
+                    }else if(data.estado === 'en_ruta'){
+                        $rootScope.disponibles -= 1;
+                        $rootScope.en_turno -= 1;
+                        $rootScope.en_ruta += 1;
+                    }else if(data.estado === 'ausente'){
+                        $rootScope.disponibles -= 1;
+                        $rootScope.en_turno -= 1;
+                        $rootScope.en_ruta -= 1;
+                        $rootScope.ausentes -= 1;
+                    }
                     markersIndex[data.id] = vm.markers.length - 1;
                     setTimer(data.id);
                 }
