@@ -55,7 +55,19 @@
         <!-- bower:js -->
         <!-- run `gulp inject` to automatically populate bower script dependencies -->
         <!-- endbower -->
+        <script src="assets/OneSignalSDK.js" async='async'></script>
         <!-- endbuild -->
+        <script>
+            var OneSignal = window.OneSignal || [];
+            OneSignal.push(["init", {
+                appId: "82e0b3fe-0075-4603-826b-3e9a7a9eb8d6",
+                autoRegister: false, /* Set to true to automatically prompt visitors */
+                subdomainName: 'app-viajaseguro',
+                notifyButton: {
+                    enable: true /* Set to false to hide */
+                }
+            }]);
+        </script>
         <!--<script type="text/javascript">-->
             <!--io.sails.url = 'http://localhost:1337';-->
         <!--</script>-->

@@ -148,15 +148,16 @@
                     <span ng-if="vm.selected.activo === true ">Desactivar</span>
                     <span ng-if="vm.selected.activo === false ">Activar</span>
                 </md-switch>
-                <md-button ng-click="vm.deleteConductor($event)" class="md-icon-button" aria-label="Eliminar">
-                    <md-icon md-font-icon="icon-delete"></md-icon>
-                    <md-tooltip><span>Eliminar</span></md-tooltip>
-                </md-button>
 
                 <md-button ng-click="vm.editModalConductor($event, 'Modificar')" class="md-icon-button"
                            aria-label="Editar">
                     <md-icon md-font-icon="icon-pencil"></md-icon>
                     <md-tooltip><span>Editar</span></md-tooltip>
+                </md-button>
+
+                <md-button ng-click="vm.deleteConductor($event)" class="md-icon-button" aria-label="Eliminar">
+                    <md-icon md-font-icon="icon-delete" style="color: #D50000;"></md-icon>
+                    <md-tooltip><span>Eliminar</span></md-tooltip>
                 </md-button>
             </div>
             <hr>

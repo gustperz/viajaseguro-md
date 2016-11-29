@@ -82,7 +82,7 @@
                 return true;
             }
         }
-
+        
         function sendDespacho(){
             if(chechDespacho()){
                 var pasajeros = [];
@@ -104,19 +104,26 @@
                     pasajeros: pasajeros
                 }
 
-                var req = { method: 'POST', url: api + 'viajes', data: data, responseType: 'arraybuffer' };
+                var req = { method: 'POST', url: api + 'viajes', data: data};
                 
                 $http(req).then(function (response) {
-                    var file = new Blob([response.data], {type: 'application/pdf'});
-                    var fileURL = URL.createObjectURL(file);
-                    $mdDialog.cancel();
-                    $window.open(fileURL);
+                    var ventimp = window.open(' ', 'popimpr');
+                    ventimp.document.write( response.data);
+                    ventimp.document.close();
+                    ventimp.print( );
+                    ventimp.close();
+                    // var file = new Blob([response.data], {type: 'application/pdf'});
+                    // var fileURL = URL.createObjectURL(file);
+                    // $window.open(fileURL);
                     Despacho.valor_viaje = 0;
                     Despacho.conductor = {};
                     Despacho.contratante = {};
                     Despacho.loadConductores(Despacho._ruta);
+                    $mdDialog.cancel();
                 }, function (error) {
-                    console.log(error);
+                    if(error.data.code === 'E_INCOMPLETE_EMPRESA_DATA'){
+                        Toast('Espera!, Aun faltan datos importante en tu empresa, favor notifica al gerente sobre este problema.')
+                    }
                 });
             }else{
                 $mdDialog.cancel();

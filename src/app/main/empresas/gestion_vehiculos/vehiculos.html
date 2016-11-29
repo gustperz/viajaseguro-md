@@ -85,15 +85,16 @@
                 ms-sidenav-helper ng-if="vm.selected !== null">
         <div class="header" layout="column" layout-align="space-between" >
             <div class="toolbar" layout="row" layout-align="end center">
-                <md-button ng-click="vm.deleteVehiculo($event)" class="md-icon-button" aria-label="Eliminar">
-                    <md-icon md-font-icon="icon-delete"></md-icon>
-                    <md-tooltip><span>Eliminar</span></md-tooltip>
-                </md-button>
 
                 <md-button ng-click="vm.editModalVehiculo($event, 'Modificar')" class="md-icon-button"
                            aria-label="Editar">
                     <md-icon md-font-icon="icon-pencil"></md-icon>
                     <md-tooltip><span>Editar</span></md-tooltip>
+                </md-button>
+
+                <md-button ng-click="vm.deleteVehiculo($event)" class="md-icon-button" aria-label="Eliminar">
+                    <md-icon md-font-icon="icon-delete" style="color: #D50000;"></md-icon>
+                    <md-tooltip><span>Eliminar</span></md-tooltip>
                 </md-button>
             </div>
             <hr>

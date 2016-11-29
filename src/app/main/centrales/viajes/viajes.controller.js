@@ -26,12 +26,20 @@
                     // 'Content-Type': 'application/pdf',
                     // 'Content-Type': 'application/json'
                 // },
-                responseType: 'arraybuffer'
+                // responseType: 'arraybuffer'
             };
             $http(pet).then(function (response) {
-                var file = new Blob([response.data], {type: 'application/pdf'});
-                var fileURL = URL.createObjectURL(file);
-                $window.open(fileURL);
+                // var ficha = document.getElementById(nombre);
+                var ventimp = window.open(' ', 'popimpr');
+                ventimp.document.write( response.data);
+                ventimp.document.close();
+                ventimp.print( );
+                ventimp.close();
+
+
+                // var file = new Blob([response.data], {type: 'application/pdf'});
+                // var fileURL = URL.createObjectURL(file);
+                // $window.open(fileURL);
             });
         }
 
