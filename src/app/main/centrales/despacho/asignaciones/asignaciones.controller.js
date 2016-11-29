@@ -37,6 +37,8 @@
         //////////
         
         function saveSolicitud() {
+            if(!Despacho.conductor) return Toast('Debes seleccionar un conductor');
+
             var all_data = vm.solicitud.pasajeros.every(function(pasajero) {
                 return pasajero.nombre != ''
             });
