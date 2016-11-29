@@ -74,16 +74,22 @@
                     if(data.estado === 'disponible'){
                         $rootScope.disponibles += 1;
                     }else if(data.estado === 'en_turno'){
-                        $rootScope.disponibles -= 1;
+                        if($rootScope.disponibles > 0)
+                            $rootScope.disponibles -= 1;
                         $rootScope.en_turno += 1;
                     }else if(data.estado === 'en_ruta'){
-                        $rootScope.disponibles -= 1;
-                        $rootScope.en_turno -= 1;
+                        if($rootScope.disponibles > 0)
+                            $rootScope.disponibles -= 1;
+                        if($rootScope.en_turno > 0)
+                            $rootScope.en_turno -= 1;
                         $rootScope.en_ruta += 1;
                     }else if(data.estado === 'ausente'){
-                        $rootScope.disponibles -= 1;
-                        $rootScope.en_turno -= 1;
-                        $rootScope.en_ruta -= 1;
+                        if($rootScope.disponibles > 0)
+                            $rootScope.disponibles -= 1;
+                        if($rootScope.en_turno > 0)
+                            $rootScope.en_turno -= 1;
+                        if($rootScope.en_ruta > 0)
+                            $rootScope.en_ruta -= 1;
                         $rootScope.ausentes -= 1;
                     }
                     markersIndex[data.id] = vm.markers.length - 1;

@@ -33,8 +33,11 @@
                 var ventimp = window.open(' ', 'popimpr');
                 ventimp.document.write( response.data);
                 ventimp.document.close();
-                ventimp.print( );
-                ventimp.close();
+                setTimeout(function () {
+                    ventimp.print( );
+                    ventimp.close();
+                }, 5);
+
 
 
                 // var file = new Blob([response.data], {type: 'application/pdf'});
