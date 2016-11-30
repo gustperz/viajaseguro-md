@@ -61,21 +61,33 @@
                 zoom-control-options="{style:'LARGE', position:'LEFT_CENTER'}"
                 street-view-control="false"
                 street-view-control-options="{position:'LEFT_TOP'}">
-                
-            <custom-marker ng-if="vm.selectCentral.pos" id="central"
-                zIndex="1"
-                opacity="0.7"
-                position="{{vm.selectCentral.pos}}">
-                <img ng-if="currentUser.empresa.logo" alt="image" class="user-imagen" 
-                ng-src="http://api.viajaseguro.co/images/empresas/{{currentUser.empresa.logo}}">
-            </custom-marker>
 
             <marker ng-repeat="marker in vm.markers" 
-                    position="{{marker.pos}}"   
-                    label="{{marker.codigo}}"
-                    on-click="vm.showInfo(event, marker)"
-                    icon="assets/images/marker_vehiculo.png">
+                position="{{marker.pos}}" 
+                zIndex="100"  
+                label="{{marker.codigo}}"
+                on-click="vm.showInfo(event, marker)"
+                icon="assets/images/marker_vehiculo.png">
             </marker>
+                
+            <custom-marker ng-if="vm.selectCentral.pos"
+                zIndex="1"
+                position="{{vm.selectCentral.pos}}">
+                <div id="central">
+                    <img ng-if="currentUser.empresa.logo" alt="image" class="user-imagen" 
+                    ng-src="http://api.viajaseguro.co/images/empresas/{{currentUser.empresa.logo}}">
+                </div>
+            </custom-marker>
+
+            <custom-marker ng-repeat="marker in vm.centrales_markers"
+                scale="0.7"
+                position="{{marker.pos}}">
+                <div id="otras-centrales">
+                    <img ng-if="currentUser.empresa.logo" alt="image" class="user-imagen" 
+                    ng-src="http://api.viajaseguro.co/images/empresas/{{currentUser.empresa.logo}}">
+                </div>
+            </custom-marker>
+
         </ng-map>
     </div>
 </div>
