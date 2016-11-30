@@ -33,20 +33,23 @@
                     }
                 });
 
-                if(!$sails['listeningPosCentral'+model.id]){
+                if(!$sails['listeningPos'+model.ciudad_place_id]){
 
-                    var last = $sails['listeningPosCentralLast'];
+                    var last = $sails['listeningPosLast'];
                     if(last) {
-                        $sails.off('Central' + last + 'Cahnged');
-                        $sails['listeningPosCentral' + last] = false;
-                        console.log('Off:empresa'+model.empresa+'ubicacionWhacher'+model.ciudad_place_id+':posConductor');
+                        $sails.off('posConductores'+last);
+                        $sails['listeningPos' + last] = false;
+                        console.log('Off:empresa'+model.empresa+'ubicacionWhacher:posConductores'+model.ciudad_place_id);
                     }
 
-                    $sails['listeningPosCentralLast'] = model.id;
-                    $sails['listeningPosCentral'+model.id] = true;
-                    console.log('On:empresa'+model.empresa+'ubicacionWhacher'+model.ciudad_place_id+':posConductor');
-                    $sails.on('posConductor', function (data) {
-                        console.log('posConductor');
+                    $sails['listeningPosLast'] = model.ciudad_place_id;
+                    $sails['listeningPos'+model.ciudad_place_id] = true;
+                    console.log('On:empresa'+model.empresa+'ubicacionWhacher:posConductores'+model.ciudad_place_id);
+                    $sails.on('connect', function(response){
+                        console.log('connect',response)
+                    })
+                    $sails.on('posConductores'+model.ciudad_place_id, function (data) {
+                        console.log('posConductores'+model.ciudad_place_id);
                         cb(data);
                     });
                 }

@@ -10,19 +10,22 @@
                 </md-nav-item>
             </md-nav-bar>
         </div>
-        
-        <ng-map center="{{vm.simpleMap.center}}" zoom="{{vm.simpleMap.zoom}}"
-                map-type-control-options="{style:'HORIZONTAL_BAR', position:'TOP_RIGHT'}"
-                zoom-control="true"
-                zoom-control-options="{style:'LARGE', position:'LEFT_CENTER'}"
-                street-view-control="false"
-                street-view-control-options="{position:'LEFT_TOP'}">
 
-            <marker position="{{vm.selectCentral.pos}}"></marker>
-
-            <marker ng-repeat="marker in vm.markers" position="{{marker.pos}}" label="{{marker.codigo}}"></marker>
-
-            <custom-control id="control-conductores-stats" position="RIGHT_BOTTOM" index="1">
+        <div id="controles-right">
+            <div id="control-conductor-selected">
+                <md-list class="md-dense" ng-if="vm.conductor">
+                    <md-list-item class="md-3-line">
+                        <img ng-if="!vm.conductor.imagen" alt="{{ vm.conductor.identificacion }}" ng-src="assets/images/profile.jpg" class="md-avatar" />
+                        <img ng-if="vm.conductor.imagen" alt="{{ vm.conductor.identificacion }}" ng-src="http://api.viajaseguro.co/images/conductores/{{ vm.conductor.imagen }}" class="md-avatar" />
+                        <div class="md-list-item-text" layout="column">
+                            <h3>{{ vm.conductor.nombre }}</h3>
+                            <h4>{{ vm.conductor.estado }}</h4>
+                            <p>{{ vm.conductor.distancia }}</p>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </div>
+            <div id="control-conductores-stats">
                 <md-list class="md-dense">
                     <md-list-item>
                         <h3>Conductores</h3>
@@ -48,7 +51,31 @@
                         <span class="md-secondary">{{ausentes}}</span>
                     </md-list-item>
                 </md-list>
-            </custom-control>
+            </div>
+        </div>
+        
+        <ng-map center="{{vm.simpleMap.center}}" zoom="{{vm.simpleMap.zoom}}"
+                trigger-resize="true"
+                map-type-control-options="{style:'HORIZONTAL_BAR', position:'TOP_RIGHT'}"
+                zoom-control="true"
+                zoom-control-options="{style:'LARGE', position:'LEFT_CENTER'}"
+                street-view-control="false"
+                street-view-control-options="{position:'LEFT_TOP'}">
+                
+            <custom-marker ng-if="vm.selectCentral.pos" id="central"
+                zIndex="1"
+                opacity="0.7"
+                position="{{vm.selectCentral.pos}}">
+                <img ng-if="currentUser.empresa.logo" alt="image" class="user-imagen" 
+                ng-src="http://api.viajaseguro.co/images/empresas/{{currentUser.empresa.logo}}">
+            </custom-marker>
+
+            <marker ng-repeat="marker in vm.markers" 
+                    position="{{marker.pos}}"   
+                    label="{{marker.codigo}}"
+                    on-click="vm.showInfo(event, marker)"
+                    icon="assets/images/marker_vehiculo.png">
+            </marker>
         </ng-map>
     </div>
 </div>

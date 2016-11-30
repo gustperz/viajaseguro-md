@@ -9,21 +9,23 @@
         .controller('TrackingController', TrackingController);
 
     /** @ngInject */
-    function TrackingController(Centrales, NavigatorGeolocation, NgMap, $timeout, $rootScope) {
+    function TrackingController(Centrales, NavigatorGeolocation, NgMap, $timeout, $rootScope, Conductores) {
         // variables
         var vm = this;
         var ciudad_place = undefined;
         vm.markers = [];
         var markersIndex = [];
         var markersTimer = {};
-        $rootScope.no_disponibles = 0;
-        $rootScope.disponibles = 0;
-        $rootScope.ausentes = 0;
-        $rootScope.en_turno = 0;
-        $rootScope.en_ruta = 0;
+        console.log(new google.maps.Size(20, 32))
+        
+        vm.marker_vehiculo = {
+            url:'assets/images/marker_vehiculo.png', 
+            //size: new google.maps.Size(20, 32)
+        }
         
         // metodos
         vm.trackingCentral = trackingCentral;
+        vm.showInfo = showInfo;
 
         //////////
 
@@ -32,12 +34,16 @@
 
         NgMap.getMap().then(function(map) {
             vm.map = map;
+            google.maps.event.addListener(map, "idle", function(){
+                google.maps.event.trigger(map, 'resize'); 
+            }); 
         });
 
         //////////
 
         function loadCentrales() {
-            Centrales.getList({fields: 'id, ciudad, direccion, pos_lat, pos_lng, ciudad_place_id, empresa'}).then(function (centrales) {
+            Centrales.getList({fields: 'id, ciudad, direccion, pos_lat, pos_lng, ciudad_place_id, empresa'})
+            .then(function (centrales) {
                 vm.centrales = centrales;
             })
         }        
@@ -53,11 +59,38 @@
                 });
         }
 
+        function showInfo(event, marker) {
+            if (this.getAnimation() != null) {
+                this.setAnimation(null);
+                vm.conductor = undefined;                
+            } else {
+                this.setAnimation(google.maps.Animation.BOUNCE);
+                if(!marker.conductor) {
+                    Conductores.get(marker.id).then(function (conductor) {
+                        marker.conductor = {
+                            nombre: conductor.nombres+' '+conductor.apellidos,
+                            estado: conductor.estado,
+                            imagen: conductor.imagen,
+                            identificacion: conductor.identificacion,
+                            id: conductor.id
+                        };
+                        vm.conductor = marker.conductor;          
+                    });
+                } else {
+                    vm.conductor = marker.conductor;
+                }
+            }
+        }
+
         function trackingCentral(central) {
+            vm.markers = [];
+            var markersIndex = [];
+            var markersTimer = {};
+            
             vm.selectCentral = central;
             vm.selectCentral.pos = [central.pos_lat, central.pos_lng];
             vm.map.panTo({lat: parseFloat(central.pos_lat), lng: parseFloat(central.pos_lng)});
-            vm.map.setZoom(10);
+            vm.map.setZoom(9);
             //vm.simpleMap.center = [central.pos_lat, central.pos_lng];
             //vm.simpleMap.zoom = 9;
             
@@ -68,34 +101,18 @@
                     setTimer(data.id);
                 } else {
                     vm.markers.push({
+                        id: data.id,
                         pos: [data.lat, data.lng],
-                        codigo: data.codigo_vial
+                        codigo: {text: data.codigo_vial, color: 'white', fontWeight: '500'}
                     });
-                    if(data.estado === 'disponible'){
-                        $rootScope.disponibles += 1;
-                    }else if(data.estado === 'en_turno'){
-                        if($rootScope.disponibles > 0)
-                            $rootScope.disponibles -= 1;
-                        $rootScope.en_turno += 1;
-                    }else if(data.estado === 'en_ruta'){
-                        if($rootScope.disponibles > 0)
-                            $rootScope.disponibles -= 1;
-                        if($rootScope.en_turno > 0)
-                            $rootScope.en_turno -= 1;
-                        $rootScope.en_ruta += 1;
-                    }else if(data.estado === 'ausente'){
-                        if($rootScope.disponibles > 0)
-                            $rootScope.disponibles -= 1;
-                        if($rootScope.en_turno > 0)
-                            $rootScope.en_turno -= 1;
-                        if($rootScope.en_ruta > 0)
-                            $rootScope.en_ruta -= 1;
-                        $rootScope.ausentes -= 1;
-                    }
+                    
                     markersIndex[data.id] = vm.markers.length - 1;
                     setTimer(data.id);
                 }
+
             });
+
+            function rad(x) { return x * Math.PI / 180; };
 
             function setTimer (id) {
                 markersTimer[id] = $timeout(function(){

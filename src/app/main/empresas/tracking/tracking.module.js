@@ -22,7 +22,7 @@
                 },
                 data: {
                     permissions: {
-                        only: ['EMPRESA']
+                        only: ['EMPRESA', 'CENTRAL_EMPRESA']
                     }
                 }
             });
