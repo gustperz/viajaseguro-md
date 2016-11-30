@@ -30,7 +30,6 @@
 
         //////////
 
-        loadCentrales();
         currentPos();
 
         NgMap.getMap().then(function(map) {
@@ -40,14 +39,21 @@
             }); 
         });
 
-        //////////
-
-        function loadCentrales() {
+        if($rootScope.currentUser.rol == 'CENTRAL_EMPRESA'){
+            Centrales.get($rootScope.currentUser.central.id)
+            .then(function (central) {
+                trackingCentral(central);
+            })
+        }
+        else {
+            vm.show_rutas = true;
             Centrales.getList({fields: 'id, ciudad, direccion, pos_lat, pos_lng, ciudad_place_id, empresa'})
             .then(function (centrales) {
                 vm.centrales = centrales;
             })
-        }        
+        }
+
+        //////////      
 
         function currentPos() {
             NavigatorGeolocation.getCurrentPosition()

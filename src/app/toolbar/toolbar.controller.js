@@ -7,7 +7,7 @@
         .controller('ToolbarController', ToolbarController);
 
     /** @ngInject */
-    function ToolbarController($mdSidenav, msNavigationService, $state, authService)
+    function ToolbarController($mdSidenav, msNavigationService, $state, authService, $window)
     {
         var vm = this;
         vm.usuario = authService.getCurrentUser();
@@ -57,6 +57,7 @@
             authService.storeUser();
             sessionStorage.clear();
             $state.go('app.login');
+            $window.location.reload();
         }
 
         /**

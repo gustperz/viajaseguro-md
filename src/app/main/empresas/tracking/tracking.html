@@ -1,7 +1,7 @@
 <div class="page-layout simple fullwidth" layout="row">
     <div id="tracking-map" flex>
 
-        <div flex id="control-centrales">
+        <div flex id="control-centrales" ng-if="vm.show_rutas">
             <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
                 <md-nav-item
                         ng-repeat="central in vm.centrales"
@@ -64,7 +64,7 @@
 
             <marker ng-repeat="marker in vm.markers" 
                 position="{{marker.pos}}" 
-                zIndex="100"  
+                zIndex="1000"  
                 label="{{marker.codigo}}"
                 on-click="vm.showInfo(event, marker)"
                 icon="assets/images/marker_vehiculo.png">
