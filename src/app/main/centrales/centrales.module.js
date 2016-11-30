@@ -7,6 +7,7 @@
 
     angular
         .module('app.centrales', [
+            'angular-toArrayFilter',
             'app.centrales.despacho',
             'app.centrales.conductores',
             'app.centrales.viajes'

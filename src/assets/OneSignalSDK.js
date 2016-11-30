@@ -2159,8 +2159,8 @@
                 }
             }, {
                 key: "sendSelfNotification", value: function I(e, n, t, i, o, r) {
-                    if (!e)e = "OneSignal Test Message";
-                    if (!n)n = "This is an example notification.";
+                    if (!e)e = "ViajaSeguro mensaje de prueba";
+                    if (!n)n = "Este es un ejemplo de la notificación.";
                     if (!t)t = new URL(location.href).origin + "?_osp=do_not_open";
                     Promise.all([R["default"].getAppId(), R["default"].getUserId()]).then(function (a) {
                         var s = l(a, 2);
@@ -4045,11 +4045,11 @@
                         var l = i[2];
                         var s = i[3];
                         if (true === s && (!n || false == n.force)) {
-                            b["default"].debug('OneSignal: Not showing popover because the user previously clicked "No Thanks".');
+                            b["default"].debug('OneSignal: No se muestra la ventana porque el usuario ha hecho clic anteriormente en "No gracias".');
                             return "popover-previously-dismissed"
                         }
                         if ("denied" === o) {
-                            b["default"].debug("OneSignal: Not showing popover because notification permissions are blocked.");
+                            b["default"].debug("OneSignal: No se muestra la ventana porque los permisos de notificación están bloqueados.");
                             return "notification-permission-blocked"
                         }
                         if (r) {
@@ -6127,7 +6127,7 @@
                     g["default"].debug("Called %conPushReceived(" + JSON.stringify(e, null, 4) + "):", (0, b.getConsoleStyle)("code"), e);
                     e.waitUntil(n.parseOrFetchNotifications(e).then(function (e) {
                         if (!e || 0 == e.length) {
-                            g["default"].debug("Because no notifications were retrieved, we'll display the last known notification, so long as it isn't the welcome notification.");
+                            g["default"].debug("Debido a que no se recuperaron notificaciones, mostraremos la última notificación conocida, siempre y cuando no sea la notificación de bienvenida.");
                             return n.displayBackupNotification()
                         }
                         var t = [];
@@ -6347,7 +6347,7 @@
                 key: "displayBackupNotification", value: function T() {
                     return p["default"].get("Ids", "backupNotification").then(function (e) {
                         var t = {persistNotification: false, data: {__isOneSignalBackupNotification: true}};
-                        if (e)return n.displayNotification(e, t); else return n.displayNotification({content: "You have new updates."}, t)
+                        if (e)return n.displayNotification(e, t); else return n.displayNotification({content: "Tienes nuevas actualizaciones."}, t)
                     })
                 }
             }, {
@@ -6669,7 +6669,7 @@
                             }
                         }).then(function (n) {
                             for (var i = 0; i < n.length; i++)t.push(JSON.parse(n[i]));
-                            if (0 == t.length)g["default"].warn("OneSignal Worker: Received a GCM push signal, but there were no messages to retrieve. Are you using the wrong API URL?", l.API_URL);
+                            if (0 == t.length)g["default"].warn("OneSignal Worker: Recibió una señal de GCM push, pero no había mensajes que recuperar. ¿Está usando la URL de la API equivocada?", l.API_URL);
                             e(t)
                         })["catch"](function (e) {
                             g["default"].error(e);

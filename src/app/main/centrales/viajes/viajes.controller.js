@@ -9,9 +9,9 @@
         .controller('ViajesController', controller);
 
     /** @ngInject */
-    function controller(Viajes, $http, api, $window, $sce, authService) {
+    function controller(Viajes, $http, api, OneRequest, authService) {
         var vm = this;
-        vm.viajes = null;
+        // vm.viajes = {};
         vm.user = authService.getCurrentUser();
 
         // metodos
@@ -49,13 +49,18 @@
 
         getViajes();
         function getViajes() {
-            var campos = 'id, origen, destino, fuec, conductor, vehiculo';
-            Viajes.getList({fields: campos})
-                .then(function (data) {
-                    vm.viajes = data;
-                }, function (error) {
-                    console.log(error);
-                });
+            var campos = 'id,origen,destino,contrato,fuec,conductor,vehiculo';
+
+            OneRequest.get('viajes?fields='+campos+'&populate=conductor,vehiculo&where={central:'+vm.user.central.id+'}').then(function (response) {
+                vm.viajes = response;
+            })
+            // Viajes.get({fields: campos, where:{central: vm.user.central.id}, populate: 'conductor, vehiculo'})
+            //     .then(function (response) {
+            //         vm.viajes = response;
+            //         console.log(vm.viajes)
+            //     }, function (error) {
+            //         console.log(error);
+            //     });
         }
 
     }

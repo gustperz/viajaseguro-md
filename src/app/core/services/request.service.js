@@ -16,6 +16,7 @@
             post: sendPost,
             put: sendPut,
             delete: sendDelete,
+            get: sendGet,
             base: Restangular
         }
         return service;

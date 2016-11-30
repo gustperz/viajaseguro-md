@@ -18,9 +18,9 @@
         var markersTimer = {};
         var route_directions = [];
         vm.centrales_markers = [];
-        
+
         vm.marker_vehiculo = {
-            url:'assets/images/marker_vehiculo.png', 
+            url:'assets/images/marker_vehiculo.png',
             //size: new google.maps.Size(20, 32)
         }
         
@@ -35,8 +35,8 @@
         NgMap.getMap().then(function(map) {
             vm.map = map;
             google.maps.event.addListener(map, "idle", function(){
-                google.maps.event.trigger(map, 'resize'); 
-            }); 
+                google.maps.event.trigger(map, 'resize');
+            });
         });
 
         if($rootScope.currentUser.rol == 'CENTRAL_EMPRESA'){
@@ -53,7 +53,7 @@
             })
         }
 
-        //////////      
+        //////////
 
         function currentPos() {
             NavigatorGeolocation.getCurrentPosition()
@@ -69,7 +69,7 @@
         function showInfo(event, marker) {
             if (this.getAnimation() != null) {
                 this.setAnimation(null);
-                vm.conductor = undefined;                
+                vm.conductor = undefined;
             } else {
                 this.setAnimation(google.maps.Animation.BOUNCE);
                 if(!marker.conductor) {
@@ -81,7 +81,7 @@
                             identificacion: conductor.identificacion,
                             id: conductor.id
                         };
-                        vm.conductor = marker.conductor;          
+                        vm.conductor = marker.conductor;
                     });
                 } else {
                     vm.conductor = marker.conductor;
@@ -93,7 +93,7 @@
             vm.markers = [];
             var markersIndex = [];
             var markersTimer = {};
-            
+
             vm.selectCentral = central;
             vm.selectCentral.pos = [central.pos_lat, central.pos_lng];
             vm.map.panTo({lat: parseFloat(central.pos_lat), lng: parseFloat(central.pos_lng)});
@@ -102,7 +102,7 @@
             //vm.simpleMap.zoom = 9;
 
             showRoutes(central);
-            
+
             central.posConductores(function(data) {
                 if (markersIndex[data.id] >= 0) {
                     vm.markers[markersIndex[data.id]].pos = [data.lat, data.lng];
@@ -114,7 +114,7 @@
                         pos: [data.lat, data.lng],
                         codigo: {text: data.codigo_vial, color: 'white', fontWeight: '500'}
                     });
-                    
+
                     markersIndex[data.id] = vm.markers.length - 1;
                     setTimer(data.id);
                 }
@@ -163,7 +163,7 @@
                     directionsDisplay.setMap(vm.map);
                     directionsDisplay.setDirections(directions);
                     route_directions.push(directionsDisplay);
-                    
+
                     var location = directions.routes[ 0 ].legs[ 0 ].start_location;
                     vm.centrales_markers.push({
                         pos: [location.lat(), location.lng()]

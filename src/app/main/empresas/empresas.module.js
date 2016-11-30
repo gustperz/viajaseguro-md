@@ -7,11 +7,13 @@
 
     angular
         .module('app.empresas', [
+            'angular-toArrayFilter',
             'app.empresas.gestion_conductores',
             'app.empresas.gestion_vehiculos',
             'app.empresas.gestion_centrales',
             'app.empresas.perfil',
-            'app.tracking'
+            'app.tracking',
+            'app.empresas.viajes2'
         ])
         .config(config);
 
@@ -53,6 +55,16 @@
             title    : 'Mapa',
             icon     : 'icon-map-marker-radius',
             state    : 'app.tracking',
+            /*stateParams: {
+             'param1': 'page'
+             },*/
+            weight:1
+        });
+
+        msNavigationServiceProvider.saveItem('Viajes', {
+            title    : 'Viajes',
+            icon     : 'icon-taxi',
+            state    : 'app.empresa_viajes',
             /*stateParams: {
              'param1': 'page'
              },*/

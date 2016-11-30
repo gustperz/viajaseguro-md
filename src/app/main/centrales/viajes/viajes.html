@@ -42,7 +42,7 @@
                     </thead>
 
                     <tbody>
-                    <tr ng-repeat="viaje in vm.viajes | filter: filtro" ng-if="viaje.vehiculo.modalidad === 'especial' ">
+                    <tr ng-repeat="viaje in vm.viajes | toArray:false | filter: filtro track by $index " ng-if="viaje.vehiculo !== null && viaje.vehiculo.modalidad === 'especial' ">
                         <td></td>
                         <td class="type"><b>{{viaje.fuec}}</b></td>
                         <td class="size" hide-xs>{{viaje.conductor.nombres}} {{viaje.conductor.apellidos}}</td>
@@ -65,7 +65,7 @@
                     <thead>
                     <tr>
                         <th></th>
-                        <th>Contrato</th>
+                        <th>Planilla</th>
                         <th hide-xs>Conductor</th>
                         <th hide-xs>Vehiculo</th>
                         <th ></th>
@@ -73,7 +73,7 @@
                     </thead>
 
                     <tbody>
-                    <tr ng-repeat="viaje in vm.viajes | filter: filtro" ng-if="viaje.vehiculo.modalidad === 'intermunicipal' ">
+                    <tr ng-repeat="viaje in vm.viajes | toArray:false| filter: filtro track by $index" ng-if="viaje.vehiculo !== null && viaje.vehiculo.modalidad === 'intermunicipal' ">
                         <td></td>
                         <td class="type"><b>{{viaje.contrato}}</b></td>
                         <td class="size" hide-xs>{{viaje.conductor.nombres}} {{viaje.conductor.apellidos}}</td>
