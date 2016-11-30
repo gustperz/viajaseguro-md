@@ -148,7 +148,7 @@
                 if (status === google.maps.DirectionsStatus.OK) {
                     directionsDisplay.setOptions({
                         preserveViewport: true,
-                        suppressMarkers: false,
+                        suppressMarkers: true,
                         polylineOptions: {
                             strokeColor: '#D50000',
                             strokeOpacity: 0.5
