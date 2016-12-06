@@ -36,7 +36,8 @@
                 setTimeout(function () {
                     ventimp.print( );
                     ventimp.close();
-                }, 5);
+                    // ventimp.focus();
+                }, 10);
 
 
 
