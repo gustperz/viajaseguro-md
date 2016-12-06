@@ -35,6 +35,7 @@
 
         Despacho.loadConductores = loadConductores;
         Despacho.getTurnos = getTurnos;
+        Despacho.selectConductor = selectConductor;
 
         //////////
 

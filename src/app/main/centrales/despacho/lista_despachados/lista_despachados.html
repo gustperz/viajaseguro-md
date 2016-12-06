@@ -1,0 +1,29 @@
+<h2 class="title-info"><b>Ultimos despachos</b>
+</h2>
+<md-content class="content-lista" flex ms-scroll>
+    <md-list class="md-dense" ng-cloak>
+        <md-list-item ng-repeat="viaje in vm.viajes" class="md-2-line">
+            <img ng-if="!viaje.conductor.imagen" class="md-avatar" ng-src="assets/images/profile.jpg" alt="">
+            <img ng-if="viaje.conductor.imagen" class="md-avatar" ng-src="http://api.viajaseguro.co/images/conductores/{{viaje.conductor.imagen}}" alt="">
+            <div class="md-list-item-text">
+                <h3>{{viaje.conductor.nombres}} {{viaje.conductor.apellidos}}</h3>
+            </div>
+            <div class="md-menu-solicitudes">
+                <md-fab-speed-dial md-direction="left" md-open="demo.isOpen"
+                                    class="md-scale md-fab-top-right md-hover-full"
+                                    ng-mouseenter="demo.isOpen=true" ng-mouseleave="demo.isOpen=false">
+                    <md-fab-trigger>
+                        &nbsp;
+                    </md-fab-trigger>
+                    <md-fab-actions>
+                        <md-button class="md-icon-button" aria-label="asignar-solicitud"
+                                    ng-click="vm.anular(viaje)">
+                            <md-icon md-font-icon="icon-reply" class="icon"></md-icon>
+                            <md-tooltip>Anular despacho</md-tooltip>
+                        </md-button>
+                    </md-fab-actions>
+                </md-fab-speed-dial>
+            </div>
+        </md-list-item>
+    </md-list>
+</md-content>

@@ -131,6 +131,7 @@
             };
             Despacho.trayecto = ruta.trayecto;
             Despacho.loadConductores(ruta);
+            Despacho.loadDespachados(ruta.id);
         }
 
         function cancel(campo) {

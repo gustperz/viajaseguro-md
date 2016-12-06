@@ -131,7 +131,8 @@
                                             <md-list-item ng-repeat="turno in vm.despacho.getTurnos()" class="md-2-line"
                                                           ng-if="turno.conductor.id != vm.despacho.conductor.id"
                                                           ng-click="vmasignaciones.reasignarSolicitud(solicitud, turno.conductor.id)">
-                                                <img ng-src="http://api.viajaseguro.co/images/conductores/{{turno.conductor.imagen}}" class="md-avatar" alt=""/>
+                                                <img ng-if="!turno.conductor.imagen" class="md-avatar" ng-src="assets/images/profile.jpg" alt="">
+                                                <img ng-if="turno.conductor.imagen" class="md-avatar" ng-src="http://api.viajaseguro.co/images/conductores/{{turno.conductor.imagen}}" alt="">
                                                 <div class="md-list-item-text">
                                                     <h3>{{turno.conductor.nombres}} {{turno.conductor.apellidos}}</h3>
                                                 </div>
