@@ -141,6 +141,22 @@
 
   }
 
+  #despachados {
+    max-height: 155px;
+    h2 {
+      font-size: 1.7rem;
+    }
+
+    md-list, md-list-item {
+      padding: 0;
+    }
+
+    md-list-item {
+      min-height: 50px;
+      height: 50px;
+    }
+  }
+
   .content-lista {
     margin-top: 3px;
     .todo-list-pane {

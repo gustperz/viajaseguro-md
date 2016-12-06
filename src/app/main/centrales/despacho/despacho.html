@@ -45,9 +45,16 @@
                 </div>
 
                 <!--SOLICITUDES-->
-                <div id="solicitudes" flex="35" layout="column" ms-scroll class="bordered p-10 ml-10"
-                     ng-controller="ListaSolicitudesController as vmsolicitudes" ng-show="vm.despacho.conductor"
-                     ng-include="'app/main/centrales/despacho/lista_solicitudes/lista_solicitudes.html'">
+                <div flex="35" layout="column">
+                    <div id="solicitudes" flex layout="column" ms-scroll class="bordered p-10 ml-10"
+                        ng-controller="ListaSolicitudesController as vmsolicitudes"
+                        ng-include="'app/main/centrales/despacho/lista_solicitudes/lista_solicitudes.html'"
+                        ng-show="vm.despacho.conductor">
+                    </div>
+                    <div id="despachados" flex="30" layout="column" ms-scroll class="bordered p-10 ml-10 mt-5"
+                        ng-controller="ListaDespachadosController as vm"
+                        ng-include="'app/main/centrales/despacho/lista_despachados/lista_despachados.html'">
+                    </div>
                 </div>
             </div>
 
