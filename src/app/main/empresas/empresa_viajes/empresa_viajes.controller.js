@@ -9,14 +9,14 @@
         .controller('EmpresaViajesController', controller);
 
     /** @ngInject */
-    function controller(Viajes, $http, api, OneRequest, authService, $filter, Toast) {
+    function controller(Viajes, $http, api, OneRequest, authService, $filter, Toast, $mdDialog) {
         var vm = this;
         // vm.viajes = {};
         vm.user = authService.getCurrentUser();
         vm.fechaInicio = new Date();
         vm.fechaFinal = new Date();
-        vm.viajesEspecs = []
-        vm.viajesIntes = []
+        vm.viajesEspecs = [];
+        vm.viajesIntes = [];
 
         // metodos
         vm.formato = formato;
@@ -58,16 +58,13 @@
         function getViajes() {
             var desde = $filter('date')(vm.fechaInicio, 'yyyy-MM-dd');
             var hasta = $filter('date')(vm.fechaFinal, 'yyyy-MM-dd');
-
-            var campos = 'id,origen,destino,contrato,fuec,conductor,vehiculo';
+            // var campos = 'id,origen,destino,contrato,fuec,conductor,vehiculo';
 
             OneRequest.get('empresa/'+vm.user.empresa.id+'/rango_fechas_viajes?fecha_desde='+desde+'&fecha_hasta='+hasta+'&populate=conductor,vehiculo').then(function (response) {
                 angular.forEach(response, function(viaje){
                     if(viaje.vehiculo.modalidad === 'especial'){
-                        console.log(viaje.vehiculo.modalidad)
                         vm.viajesEspecs.push(viaje);
                     }else if(viaje.vehiculo.modalidad === 'intermunicipal'){
-                        console.log(viaje.vehiculo.modalidad)
                         vm.viajesIntes.push(viaje);
                     }
                 })
@@ -83,7 +80,22 @@
 
         function printAllEspecial(){
             if(vm.viajesEspecs.length !== 0){
-                
+                $mdDialog.show({
+                    templateUrl: 'app/main/centrales/despacho/progress.html',
+                    parent: angular.element(document.body),
+                    clickOutsideToClose:false,
+                    fullscreen: false
+                });
+                OneRequest.get('empresa/'+vm.user.empresa.id+'/print_all_fuec?fecha_desde='+vm.fechaInicio+'&fecha_hasta='+vm.fechaFinal, {contrato: vm.contrato}).then(function (response) {
+                    var ventimp = window.open(' ', 'popimpr');
+                    ventimp.document.write( response);
+                    ventimp.document.close();
+                    setTimeout(function () {
+                        ventimp.print( );
+                        ventimp.close();
+                    }, 100);
+                    $mdDialog.cancel();
+                })
             }else{
                 Toast('No existen planillas para imprimir.')
             }
@@ -91,7 +103,22 @@
 
         function printAllInt(){
             if(vm.viajesIntes.length !== 0){
-                
+                $mdDialog.show({
+                    templateUrl: 'app/main/centrales/despacho/progress.html',
+                    parent: angular.element(document.body),
+                    clickOutsideToClose:false,
+                    fullscreen: false
+                });
+                OneRequest.get('empresa/'+vm.user.empresa.id+'/print_all_generic?fecha_desde='+vm.fechaInicio+'&fecha_hasta='+vm.fechaFinal).then(function (response) {
+                    var ventimp = window.open(' ', 'popimpr');
+                    ventimp.document.write( response);
+                    ventimp.document.close();
+                    setTimeout(function () {
+                        ventimp.print( );
+                        ventimp.close();
+                    }, 100);
+                    $mdDialog.cancel();
+                })
             }else{
                 Toast('No existen planillas para imprimir.')
             }
