@@ -1,0 +1,30 @@
+.f-especial{
+  text-align: center !important;
+  border-color: $primary-color !important;
+  margin: 10px 10px 10px 10px !important;
+  border-radius: 15px !important;
+  legend{
+    font-size: 16px;
+  }
+}
+form {
+  md-datepicker {
+    position: relative;
+    left: -16px;
+
+    .md-datepicker-input-container{
+      margin-left: 0;
+    }
+    .md-datepicker-button.md-icon-button {
+      margin-right: 0;
+    }
+  }
+}
+
+.input-rango-fecha{
+  margin-top: 10px !important;
+  margin-right: 10px !important;
+}
+.todo-izquierda{
+  float: right !important;
+}
