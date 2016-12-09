@@ -7,6 +7,7 @@ function NewConductorController($mdDialog, Toast, Conductores, tipo, conductor, 
     vm.conductor = {};
     vm.tipoModal = tipo;
     vm.centrales = [];
+    vm.opcional = true;
     vm.user = $rootScope.currentUser;
     vm.tiposLicencia = [
         {

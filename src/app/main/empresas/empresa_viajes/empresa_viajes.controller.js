@@ -62,9 +62,9 @@
 
             OneRequest.get('empresa/'+vm.user.empresa.id+'/rango_fechas_viajes?fecha_desde='+desde+'&fecha_hasta='+hasta+'&populate=conductor,vehiculo').then(function (response) {
                 angular.forEach(response, function(viaje){
-                    if(viaje.vehiculo.modalidad === 'especial'){
+                    if(viaje.modalidad === 'especial'){
                         vm.viajesEspecs.push(viaje);
-                    }else if(viaje.vehiculo.modalidad === 'intermunicipal'){
+                    }else if(viaje.modalidad === 'intermunicipal'){
                         vm.viajesIntes.push(viaje);
                     }
                 })
@@ -137,9 +137,9 @@
                         if (response.length <= 0) {
                             Toast('No se registraron viajes en la fecha o fechas seleccionadas');
                         } else {
-                            if(viaje.vehiculo.modalidad === 'especial'){
+                            if(viaje.modalidad === 'especial'){
                             vm.viajesEspecs.push(viaje);
-                        }else if(viaje.vehiculo.modalidad === 'intermunicipal'){
+                        }else if(viaje.modalidad === 'intermunicipal'){
                             vm.viajesIntes.push(viaje);
                         }
                         }
