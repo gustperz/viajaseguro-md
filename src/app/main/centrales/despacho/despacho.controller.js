@@ -149,10 +149,12 @@
 
         function despachoError(error) {
             if(error.data.code === 'E_INCOMPLETE_EMPRESA_DATA'){
-                Toast('Espera!, Aun faltan datos importante en tu empresa, favor notifica al gerente sobre este problema.')
+                Toast('Espera!, Aun faltan datos importante en tu empresa, favor notifica al gerente sobre este problema.');
+                $mdDialog.cancel();
             }
             if(error.data.code === 'E_NC_USED'){
-                Toast(error.data.message)
+                Toast(error.data.message);
+                $mdDialog.cancel();
             }
         }
     }
