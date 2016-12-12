@@ -132,7 +132,13 @@
             // $window.open(fileURL);
 
             if(Despacho.conductor.modalidad == 'especial'){
-                localStorage.setItem('nContrato', ++Despacho.contrato);
+                if(Despacho.cont_aux) {
+                    Despacho.contrato = Despacho.cont_aux;
+                    delete Despacho.cont_aux
+                    localStorage.setItem('nContrato', Despacho.contrato);                    
+                } else {
+                    localStorage.setItem('nContrato', ++Despacho.contrato);
+                }
             }
             Despacho.valor_viaje = 0;
             Despacho.conductor = undefined;

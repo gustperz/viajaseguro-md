@@ -58,9 +58,12 @@
         }
 
         function anular(viaje) {
-            var numero = viaje.fuec;
-            reloadSolicitudes(viaje);
-            addTurno(viaje.conductor)
+            viaje.remove().then(function(oldData) {
+                Despacho.cont_aux = Despacho.contrato;
+                Despacho.contrato = Number(oldData.contrato);
+                reloadSolicitudes(viaje);
+                addTurno(viaje.conductor)
+            });
         }
 
         function reloadSolicitudes(viaje) {
