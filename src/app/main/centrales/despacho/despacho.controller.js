@@ -18,6 +18,7 @@
         //////////
 
         Despacho.contratante = JSON.parse(sessionStorage.getItem('contratante_despacho'));
+        Despacho.contrato = Number(localStorage.getItem('nContrato'));
 
         //////////
 
@@ -56,21 +57,25 @@
                 Despacho.conductor.fecha_licencia = moment(Despacho.conductor.fecha_licencia).format('DD-MM-YYYY');
                 vm.searchText = conductor.vehiculo.placa;
                 Despacho.conductor.loaded = true;
-                
-                sendDespacho();                
+
+                sendDespacho();
             });
         }
 
         function chechDespacho(){
-            if(!Despacho.conductor.vehiculo){
+            if(Despacho.conductor.modalidad == 'especial' && !Despacho.contrato){
+                Toast('Escribe el numero de contrato');
+                return false;
+            }
+            else if(!Despacho.conductor.vehiculo){
                 Toast('Este conductor no tiene asignado un vehiculo, no es posible realizar el despacho');
-                return false;                
+                return false;
             }
             else if(!(Despacho.sa[Despacho.conductor.id] && Despacho.sa[Despacho.conductor.id].length )) {
                 Toast('No puedes realizar un despacho sin pasajeros');
                 return false;
             }
-            else if(Despacho.conductor.vehiculo.modalidad == 'especial' && !Despacho.contratante) {
+            else if(Despacho.conductor.modalidad == 'especial' && !Despacho.contratante) {
                 Toast('Es necesario establecer un pasajero como contratante para realizar el despacho');
                 return false;
             }
@@ -82,11 +87,11 @@
                 return true;
             }
         }
-        
+
         function sendDespacho(){
             if(chechDespacho()){
                 var pasajeros = [];
-                Despacho.sa[Despacho.conductor.id].forEach(function (solicitud) {
+                angular.forEach(Despacho.sa[Despacho.conductor.id], function (solicitud) {
                     pasajeros = pasajeros.concat(solicitud.pasajeros);
                 });
 
@@ -95,41 +100,53 @@
                     origen: Despacho.origen.nombre,
                     destino: Despacho.destino.nombre,
                     estacion: Despacho.destino.codigo,
+                    contrato: Despacho.contrato,
                     ruta: Despacho._ruta.id,
                     valor: Despacho.valor_viaje,
                     conductor: Despacho.conductor.id,
-                    modalidad: Despacho.conductor.vehiculo.modalidad ,
+                    modalidad: Despacho.conductor.modalidad ,
                     vehiculo: typeof Despacho.conductor.vehiculo == 'object' ? Despacho.conductor.vehiculo.id : Despacho.conductor.vehiculo,
-                    contratante_identificacion: Despacho.contratante ? Despacho.contratante.identificacion : null,
-                    contratante_nombre: Despacho.contratante ? Despacho.contratante.nombre : null,
+                    contratante_identificacion: Despacho.contratante.identificacion,
+                    contratante_nombre: Despacho.contratante.nombre,
                     pasajeros: pasajeros
                 }
 
                 var req = { method: 'POST', url: api + 'viajes', data: data};
-                
-                $http(req).then(function (response) {
-                    var ventimp = window.open(' ', 'popimpr');
-                    ventimp.document.write( response.data);
-                    ventimp.document.close();
-                    setTimeout(function () {
-                        ventimp.print( );
-                        ventimp.close();
-                    }, 5);
-                    // var file = new Blob([response.data], {type: 'application/pdf'});
-                    // var fileURL = URL.createObjectURL(file);
-                    // $window.open(fileURL);
-                    Despacho.valor_viaje = 0;
-                    Despacho.conductor = undefined;
-                    Despacho.contratante = undefined;
-                    Despacho.loadConductores(Despacho._ruta);
-                    $mdDialog.cancel();
-                }, function (error) {
-                    if(error.data.code === 'E_INCOMPLETE_EMPRESA_DATA'){
-                        Toast('Espera!, Aun faltan datos importante en tu empresa, favor notifica al gerente sobre este problema.')
-                    }
-                });
+
+                $http(req).then(despachoSucces, despachoError);
             }else{
                 $mdDialog.cancel();
+            }
+        }
+
+        function despachoSucces(response) {
+            var ventimp = window.open(' ', 'popimpr');
+            ventimp.document.write( response.data);
+            ventimp.document.close();
+            setTimeout(function () {
+                ventimp.print( );
+                ventimp.close();
+            }, 5);
+            // var file = new Blob([response.data], {type: 'application/pdf'});
+            // var fileURL = URL.createObjectURL(file);
+            // $window.open(fileURL);
+
+            if(Despacho.conductor.modalidad == 'especial'){
+                localStorage.setItem('nContrato', ++Despacho.contrato);
+            }
+            Despacho.valor_viaje = 0;
+            Despacho.conductor = undefined;
+            Despacho.contratante = undefined;
+            Despacho.loadConductores(Despacho._ruta);
+            $mdDialog.cancel();
+        }
+
+        function despachoError(error) {
+            if(error.data.code === 'E_INCOMPLETE_EMPRESA_DATA'){
+                Toast('Espera!, Aun faltan datos importante en tu empresa, favor notifica al gerente sobre este problema.')
+            }
+            if(error.data.code === 'E_NC_USED'){
+                Toast(error.data.message)
             }
         }
     }

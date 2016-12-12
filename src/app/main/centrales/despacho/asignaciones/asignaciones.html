@@ -1,179 +1,168 @@
-<md-tabs flex>
-    <md-tab>
-        <md-tab-label>
-            Viajeros
-            <!-- md-icon md-font-icon="icon-plus" class="md-icon-tab"><!md-icon -->
-        </md-tab-label>
-        <md-tab-body >
-            <!--FOMULARIO ADD PASAJERO-->
-            <div layout-padding class="pl-0 pr-0" layout="column" ng-show="vm.despacho.conductor && vm.despacho.cupos_disponibles">
-                <form novalidate name="formViajero" class="form-viajero" layout="column">
-                    <div ng-repeat="pasajero in vmasignaciones.solicitud.pasajeros" layout="row" flex>
-                        <md-input-container md-no-float flex="30" class="md-block">
-                            <input ng-model="pasajero.identificacion" type="text" placeholder="Identificacion" id="identificacionPasajero"
-                                   focus-me="vmasignaciones.focusId" ng-enter="vmasignaciones.loadCliente($index)" ng-blur="vmasignaciones.loadCliente($index)" autofocus>
-                        </md-input-container>
-                        <md-input-container md-no-float flex class="md-block">
-                            <input ng-model="pasajero.nombre" type="text" placeholder="Nombre" focus-me="vmasignaciones.focusNombre"
-                                   ng-enter="vmasignaciones.saveSolicitud($index);" required>
-                        </md-input-container>
-                        <md-button class="md-icon-button" ng-if="$first" ng-disabled="vm.despacho.cupos_disponibles <= vmasignaciones.solicitud.pasajeros.length"
-                                   ng-click="vmasignaciones.addPasajero()" aria-label="addPasajero">
-                            <md-icon md-font-icon="icon-plus"></md-icon>
-                            <md-tooltip>Agregar Pasajero</md-tooltip>
-                        </md-button>
-                        <md-button class="md-icon-button" ng-if="!$first" id="delete"
-                                   ng-click="vmasignaciones.removePasajero($index)" aria-label="removePasajero">
-                            <md-icon md-font-icon="icon-minus"></md-icon>
-                            <md-tooltip>Quitar Pasajero</md-tooltip>
-                        </md-button>
-                    </div>
-                    <div layout="row" flex>
-                        <md-autocomplete md-search-text="vmasignaciones.solicitud.telefono" flex class="no-float"
-                                         md-floating-label="Telefono" placeholder="Telefono"
-                                         md-items="item in vmasignaciones.telefonos" md-item-text="item">
-                            <span md-highlight-text="vmasignaciones.solicitud.telefono">{{item}}</span>
-                        </md-autocomplete>
-                        <md-autocomplete md-search-text="vmasignaciones.solicitud.direccion" flex class="no-float"
-                                         md-floating-label="Direccion" placeholder="Direccion"
-                                         md-items="item in vmasignaciones.direcciones" md-item-text="item">
-                            <span md-highlight-text="vmasignaciones.solicitud.direccion">{{item}}</span>
-                        </md-autocomplete>
-                        <md-button ng-disabled="formViajero.$invalid" ng-click="vmasignaciones.saveSolicitud();" class="md-icon-button" aria-label="Guardar">
-                            <md-icon md-font-icon="icon-content-save"></md-icon>
-                            <md-tooltip>Guardar</md-tooltip>
-                        </md-button>
-                        <md-button class="md-icon-button" ng-click="vmasignaciones.clear();" aria-label="clear">
-                            <md-icon md-font-icon="icon-delete"></md-icon>
-                            <md-tooltip>Borrar datos</md-tooltip>
-                        </md-button>
-                    </div>
-                </form>
-                <span id="numPasajeros" class="text-right" flex >Cupos disponibles: {{vm.despacho.cupos_disponibles}} </span>
-            </div>
-            <!--LISTA PASAJEROS ASIGNADOS-->
-            <md-content class="content-lista" layout="column" flex ms-scroll>
-                <div class="todo-item" md-ink-ripple layout="row" layout-align="start center"
-                     ng-repeat="solicitud in vm.despacho.sa[vm.despacho.conductor.id] track by $index">
-                    <div class="info" layout="row" layout-align="start" flex>
-                        <div layout="column" layout-align="center center">
-                            <md-button class="md-icon-button" aria-label="contratante"
-                                       ng-show="vm.despacho.contratante.identificacion == solicitud.pasajeros[0].identificacion">
-                                <md-icon md-font-icon="icon-account-check"></md-icon>
-                                <md-tooltip>Contratante</md-tooltip>
-                            </md-button>
-                            <md-button class="md-icon-button" aria-label="como contratante"
-                                       ng-click="vm.establecerContratante(solicitud.pasajeros[0])"
-                                       ng-hide="vm.despacho.contratante.identificacion == solicitud.pasajeros[0].identificacion">
-                                <md-icon md-font-icon="icon-account-outline"></md-icon>
-                                <md-tooltip>Establecer como contratante</md-tooltip>
-                            </md-button>
-                        </div>
-                        <div layout="column">
-                            <div class="title">
-                                {{solicitud.pasajeros[0].nombre}} - {{solicitud.pasajeros[0].identificacion}}
-                            </div>
-                            <div class="notes" ng-show="solicitud.direccion">
-                                {{solicitud.pasajeros.length}} pasajeros en: {{solicitud.direccion}}
-                            </div>
-                            <div class="notes" ng-hide="solicitud.direccion">
-                                En el sitio
-                            </div>
-                        </div>
-                    </div>
-                    <!--MENU DE ACCIONES-->
-                    <div class="md-menu-solicitudes">
-                        <md-fab-speed-dial md-direction="left" md-open="demo.isOpen"
-                                           class="md-scale md-fab-top-right md-hover-full"
-                                           ng-mouseenter="demo.isOpen=true" ng-mouseleave="demo.isOpen=false">
-                            <md-fab-trigger>
-                                &nbsp;
-                            </md-fab-trigger>
-                            <md-fab-actions>
-                                <md-menu class="md-menu-solicitudes">
-                                    <md-button class="md-icon-button" aria-label="add-solicitud"
-                                               ng-click="$mdOpenMenu($event)" ng-show="solicitud.telefono">
-                                        <md-icon md-font-icon="icon-eye" class="icon"></md-icon>
-                                        <md-tooltip>Detalles</md-tooltip>
-                                    </md-button>
-                                    <md-menu-content width="6">
-                                        <div layout="row">
-                                            <div flex>
-                                                <div class="title" layout-padding ng-repeat="pasajero in solicitud.pasajeros">
-                                                    <span>{{pasajero.nombre}} - {{pasajero.identificacion}}</span>
-                                                </div>
-                                                <div class="title" layout-padding>
-                                                    <span>Dirección: {{solicitud.direccion}}</span>
-                                                    <span>Telefono: {{solicitud.telefono}}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </md-menu-content>
-                                </md-menu>
-                                <md-button class="md-icon-button" aria-label="asignar-solicitud"
-                                           ng-click="vmasignaciones.pasarSolicitudaPendiente(solicitud, $event)">
-                                    <md-icon md-font-icon="icon-arrow-right" class="icon"></md-icon>
-                                    <md-tooltip>Pasar a Pendientes</md-tooltip>
-                                </md-button>
-                                <md-button class="md-icon-button" aria-label="asignar-solicitud"
-                                           ng-click="vmasignaciones.rejectSolicitud(solicitud)">
-                                    <md-icon md-font-icon="icon-close" class="icon"></md-icon>
-                                    <md-tooltip>Eliminar</md-tooltip>
-                                </md-button>
-                                <md-menu class="md-menu-solicitudes">
-                                    <md-button class="md-icon-button" aria-label="add-solicitud"
-                                               ng-click="$mdOpenMenu($event)">
-                                        <md-icon md-font-icon="icon-twitter-retweet" class="icon"></md-icon>
-                                        <md-tooltip>Asignar a otro conductor</md-tooltip>
-                                    </md-button>
-                                    <md-menu-content width="6" class="list-conductores" ms-scroll>
-                                        <md-list class="md-dense" ng-cloak>
-                                            <md-list-item ng-repeat="turno in vm.despacho.getTurnos()" class="md-2-line"
-                                                          ng-if="turno.conductor.id != vm.despacho.conductor.id"
-                                                          ng-click="vmasignaciones.reasignarSolicitud(solicitud, turno.conductor.id)">
-                                                <img ng-if="!turno.conductor.imagen" class="md-avatar" ng-src="assets/images/profile.jpg" alt="">
-                                                <img ng-if="turno.conductor.imagen" class="md-avatar" ng-src="http://api.viajaseguro.co/images/conductores/{{turno.conductor.imagen}}" alt="">
-                                                <div class="md-list-item-text">
-                                                    <h3>{{turno.conductor.nombres}} {{turno.conductor.apellidos}}</h3>
-                                                </div>
-                                                <md-divider ng-if="!$last"></md-divider>
-                                            </md-list-item>
-                                        </md-list>
-                                    </md-menu-content>
-                                </md-menu>
-                            </md-fab-actions>
-                        </md-fab-speed-dial>
-                    </div>
-                    <!--FIN MENU DE ACCEIONES-->
-                </div>
-            </md-content>
-            <!--FIN LISTA-->
-            <div id="valor-viaje" layout="row" layout-align="start center" flex>
-                <span>
-                    Valor viaje:
-                </span>
-                <md-input-container md-no-float flex class="md-block">
-                    <input ng-model="vm.despacho.valor_viaje" type="number" required aria-label="valor viaje">
+<div layout="row">
+    <!-- md-icon md-font-icon="icon-plus" class="md-icon-tab"><!md-icon -->
+    <h2 class="m-0 p-5" flex>
+        Viajeros
+    </h2>
+    <div id="valor-viaje" layout="row" layout-align="start center" class="w-160"
+        ng-if="vm.despacho.conductor.modalidad == 'especial'">
+        <span>
+            # Contrato:
+        </span>
+        <md-input-container md-no-float flex class="md-block">
+            <input ng-model="vm.despacho.contrato" type="number" required aria-label="valor viaje">
+        </md-input-container>
+    </div>
+</div>
+<md-content>
+    <!--FOMULARIO ADD PASAJERO-->
+    <div layout-padding class="pl-0 pr-0" layout="column" ng-show="vm.despacho.cupos_disponibles">
+        <form novalidate name="formViajero" class="form-viajero" layout="column">
+            <div ng-repeat="pasajero in vmasignaciones.solicitud.pasajeros" layout="row" flex>
+                <md-input-container md-no-float flex="30" class="md-block">
+                    <input ng-model="pasajero.identificacion" type="text" placeholder="Identificacion" id="identificacionPasajero"
+                            focus-me="vmasignaciones.focusId" ng-enter="vmasignaciones.loadCliente($index)" ng-blur="vmasignaciones.loadCliente($index)" autofocus>
                 </md-input-container>
+                <md-input-container md-no-float flex class="md-block">
+                    <input ng-model="pasajero.nombre" type="text" placeholder="Nombre" focus-me="vmasignaciones.focusNombre"
+                            ng-enter="vmasignaciones.saveSolicitud($index);" required>
+                </md-input-container>
+                <md-button class="md-icon-button" ng-if="$first" ng-disabled="vm.despacho.cupos_disponibles <= vmasignaciones.solicitud.pasajeros.length"
+                            ng-click="vmasignaciones.addPasajero()" aria-label="addPasajero">
+                    <md-icon md-font-icon="icon-plus"></md-icon>
+                    <md-tooltip>Agregar Pasajero</md-tooltip>
+                </md-button>
+                <md-button class="md-icon-button" ng-if="!$first" id="delete"
+                            ng-click="vmasignaciones.removePasajero($index)" aria-label="removePasajero">
+                    <md-icon md-font-icon="icon-minus"></md-icon>
+                    <md-tooltip>Quitar Pasajero</md-tooltip>
+                </md-button>
             </div>
-        </md-tab-body>
-    </md-tab>
-    <!--<md-tab>-->
-    <!--<md-tab-label>-->
-    <!--Giros-->
-    <!--<md-icon class="md-icon-tab" md-font-icon="icon-plus"></md-icon>-->
-    <!--</md-tab-label>-->
-    <!--<md-tab-body>-->
-    <!--Giros-->
-    <!--</md-tab-body>-->
-    <!--</md-tab>-->
-    <!--<md-tab>-->
-    <!--<md-tab-label>-->
-    <!--Paquetes-->
-    <!--<md-icon class="md-icon-tab" md-font-icon="icon-plus"></md-icon>-->
-    <!--</md-tab-label>-->
-    <!--<md-tab-body>-->
-    <!--Paquetes-->
-    <!--</md-tab-body>-->
-    <!--</md-tab>-->
-</md-tabs>
+            <div layout="row" flex>
+                <md-autocomplete md-search-text="vmasignaciones.solicitud.telefono" flex class="no-float"
+                                    md-floating-label="Telefono" placeholder="Telefono"
+                                    md-items="item in vmasignaciones.telefonos" md-item-text="item">
+                    <span md-highlight-text="vmasignaciones.solicitud.telefono">{{item}}</span>
+                </md-autocomplete>
+                <md-autocomplete md-search-text="vmasignaciones.solicitud.direccion" flex class="no-float"
+                                    md-floating-label="Direccion" placeholder="Direccion"
+                                    md-items="item in vmasignaciones.direcciones" md-item-text="item">
+                    <span md-highlight-text="vmasignaciones.solicitud.direccion">{{item}}</span>
+                </md-autocomplete>
+                <md-button ng-disabled="formViajero.$invalid" ng-click="vmasignaciones.saveSolicitud();" class="md-icon-button" aria-label="Guardar">
+                    <md-icon md-font-icon="icon-content-save"></md-icon>
+                    <md-tooltip>Guardar</md-tooltip>
+                </md-button>
+                <md-button class="md-icon-button" ng-click="vmasignaciones.clear();" aria-label="clear">
+                    <md-icon md-font-icon="icon-delete"></md-icon>
+                    <md-tooltip>Borrar datos</md-tooltip>
+                </md-button>
+            </div>
+        </form>
+        <span id="numPasajeros" class="text-right" flex >Cupos disponibles: {{vm.despacho.cupos_disponibles}} </span>
+    </div>
+    <!--LISTA PASAJEROS ASIGNADOS-->
+    <md-content class="content-lista" layout="column" flex ms-scroll>
+        <div class="todo-item" md-ink-ripple layout="row" layout-align="start center"
+                ng-repeat="solicitud in vm.despacho.sa[vm.despacho.conductor.id] track by $index">
+            <div class="info" layout="row" layout-align="start" flex>
+                <div layout="column" layout-align="center center">
+                    <md-button class="md-icon-button" aria-label="contratante"
+                                ng-show="vm.despacho.contratante.identificacion == solicitud.pasajeros[0].identificacion">
+                        <md-icon md-font-icon="icon-account-check"></md-icon>
+                        <md-tooltip>Contratante</md-tooltip>
+                    </md-button>
+                    <md-button class="md-icon-button" aria-label="como contratante"
+                                ng-click="vm.establecerContratante(solicitud.pasajeros[0])"
+                                ng-hide="vm.despacho.contratante.identificacion == solicitud.pasajeros[0].identificacion">
+                        <md-icon md-font-icon="icon-account-outline"></md-icon>
+                        <md-tooltip>Establecer como contratante</md-tooltip>
+                    </md-button>
+                </div>
+                <div layout="column">
+                    <div class="title">
+                        {{solicitud.pasajeros[0].nombre}} - {{solicitud.pasajeros[0].identificacion}}
+                    </div>
+                    <div class="notes" ng-show="solicitud.direccion">
+                        {{solicitud.pasajeros.length}} pasajeros en: {{solicitud.direccion}}
+                    </div>
+                    <div class="notes" ng-hide="solicitud.direccion">
+                        En el sitio
+                    </div>
+                </div>
+            </div>
+            <!--MENU DE ACCIONES-->
+            <div class="md-menu-solicitudes">
+                <md-fab-speed-dial md-direction="left" md-open="demo.isOpen"
+                                    class="md-scale md-fab-top-right md-hover-full"
+                                    ng-mouseenter="demo.isOpen=true" ng-mouseleave="demo.isOpen=false">
+                    <md-fab-trigger>
+                        &nbsp;
+                    </md-fab-trigger>
+                    <md-fab-actions>
+                        <md-menu class="md-menu-solicitudes">
+                            <md-button class="md-icon-button" aria-label="add-solicitud"
+                                        ng-click="$mdOpenMenu($event)" ng-show="solicitud.telefono">
+                                <md-icon md-font-icon="icon-eye" class="icon"></md-icon>
+                                <md-tooltip>Detalles</md-tooltip>
+                            </md-button>
+                            <md-menu-content width="6">
+                                <div layout="row">
+                                    <div flex>
+                                        <div class="title" layout-padding ng-repeat="pasajero in solicitud.pasajeros">
+                                            <span>{{pasajero.nombre}} - {{pasajero.identificacion}}</span>
+                                        </div>
+                                        <div class="title" layout-padding>
+                                            <span>Dirección: {{solicitud.direccion}}</span>
+                                            <span>Telefono: {{solicitud.telefono}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </md-menu-content>
+                        </md-menu>
+                        <md-button class="md-icon-button" aria-label="asignar-solicitud"
+                                    ng-click="vmasignaciones.pasarSolicitudaPendiente(solicitud, $event)">
+                            <md-icon md-font-icon="icon-arrow-right" class="icon"></md-icon>
+                            <md-tooltip>Pasar a Pendientes</md-tooltip>
+                        </md-button>
+                        <md-button class="md-icon-button" aria-label="asignar-solicitud"
+                                    ng-click="vmasignaciones.rejectSolicitud(solicitud)">
+                            <md-icon md-font-icon="icon-close" class="icon"></md-icon>
+                            <md-tooltip>Eliminar</md-tooltip>
+                        </md-button>
+                        <md-menu class="md-menu-solicitudes">
+                            <md-button class="md-icon-button" aria-label="add-solicitud"
+                                        ng-click="$mdOpenMenu($event)">
+                                <md-icon md-font-icon="icon-twitter-retweet" class="icon"></md-icon>
+                                <md-tooltip>Asignar a otro conductor</md-tooltip>
+                            </md-button>
+                            <md-menu-content width="6" class="list-conductores" ms-scroll>
+                                <md-list class="md-dense" ng-cloak>
+                                    <md-list-item ng-repeat="turno in vm.despacho.getTurnos()" class="md-2-line"
+                                                    ng-if="turno.conductor.id != vm.despacho.conductor.id"
+                                                    ng-click="vmasignaciones.reasignarSolicitud(solicitud, turno.conductor.id)">
+                                        <img ng-if="!turno.conductor.imagen" class="md-avatar" ng-src="assets/images/profile.jpg" alt="">
+                                        <img ng-if="turno.conductor.imagen" class="md-avatar" ng-src="http://api.viajaseguro.co/images/conductores/{{turno.conductor.imagen}}" alt="">
+                                        <div class="md-list-item-text">
+                                            <h3>{{turno.conductor.nombres}} {{turno.conductor.apellidos}}</h3>
+                                        </div>
+                                        <md-divider ng-if="!$last"></md-divider>
+                                    </md-list-item>
+                                </md-list>
+                            </md-menu-content>
+                        </md-menu>
+                    </md-fab-actions>
+                </md-fab-speed-dial>
+            </div>
+            <!--FIN MENU DE ACCEIONES-->
+        </div>
+    </md-content>
+    <!--FIN LISTA-->
+    <div id="valor-viaje" layout="row" layout-align="start center" flex>
+        <span>
+            Valor viaje:
+        </span>
+        <md-input-container md-no-float flex class="md-block">
+            <input ng-model="vm.despacho.valor_viaje" type="number" required aria-label="valor viaje">
+        </md-input-container>
+    </div>
+</md-content>

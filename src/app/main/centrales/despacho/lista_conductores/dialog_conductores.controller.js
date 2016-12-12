@@ -23,7 +23,7 @@
         //////////
 
         Conductores.getList({
-            fields:  'identificacion, nombres, apellidos, imagen, vehiculo.id, vehiculo.modalidad, codigo_vial, estado, estacion, central',
+            fields:  'identificacion, nombres, apellidos, imagen, vehiculo.id, vehiculo.modalidad, codigo_vial, estado, estacion, central, modalidad',
             where: {activo: true, estado: {'!': 'en_turno'}}
         }).then(function (conductores) {
             angular.forEach(conductores.plain(), function(conductor) {

@@ -53,6 +53,7 @@
                     nPasajeros += solicitud.pasajeros.length;
                 });
                 Despacho.cupos_disponibles = 4 - nPasajeros;
+                console.log('selectConductor '+conductor.id+', cupo: '+Despacho.cupos_disponibles)                
             }
         }
 
