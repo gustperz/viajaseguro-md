@@ -130,8 +130,7 @@
             // var file = new Blob([response.data], {type: 'application/pdf'});
             // var fileURL = URL.createObjectURL(file);
             // $window.open(fileURL);
-
-            if(Despacho.conductor.modalidad == 'especial'){
+            if(Despacho.modalidad !== 'especial'){
                 if(Despacho.cont_aux) {
                     Despacho.contrato = Despacho.cont_aux;
                     delete Despacho.cont_aux
@@ -153,7 +152,7 @@
                 $mdDialog.cancel();
             }
             if(error.data.code === 'E_NC_USED'){
-                Toast(error.data.message);
+                Toast(error.data.data);
                 $mdDialog.cancel();
             }
         }
