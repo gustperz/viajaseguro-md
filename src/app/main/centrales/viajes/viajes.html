@@ -30,7 +30,8 @@
         <md-content class="content" flex ms-scroll>
             <fieldset class="f-especial" ng-if="vm.user.espec === true ">
                 <legend><b>Modalidad especial</b></legend>
-                <table class="simple list-view" >
+                <div ng-if="vm.viajesEspecs.length === 0"><span><b>No se han registrado viajes el dia de hoy.</b></span></div>
+                <table class="simple list-view" ng-if="vm.viajesEspecs.length !== 0">
                     <thead>
                     <tr>
                         <th></th>
@@ -42,7 +43,7 @@
                     </thead>
 
                     <tbody>
-                    <tr ng-repeat="viaje in vm.viajes | toArray:false | filter: filtro track by $index " ng-if="viaje.vehiculo !== null && viaje.vehiculo.modalidad === 'especial' ">
+                    <tr ng-repeat="viaje in vm.viajesEspecs | toArray:false | filter: filtro track by $index " ng-if="viaje.vehiculo !== null">
                         <td></td>
                         <td class="type"><b>{{viaje.fuec}}</b></td>
                         <td class="size" hide-xs>{{viaje.conductor.nombres}} {{viaje.conductor.apellidos}}</td>
@@ -61,7 +62,8 @@
 
             <fieldset class="f-especial" ng-if="vm.user.intmpal === true ">
                 <legend><b>Modalidad intermunicipal</b></legend>
-                <table class="simple list-view">
+                <div ng-if="vm.viajesIntes.length === 0"><span><b>No se han registrado viajes el dia de hoy.</b></span></div>
+                <table class="simple list-view" ng-if="vm.viajesIntes.length !== 0 ">
                     <thead>
                     <tr>
                         <th></th>
@@ -73,7 +75,7 @@
                     </thead>
 
                     <tbody>
-                    <tr ng-repeat="viaje in vm.viajes | toArray:false| filter: filtro track by $index" ng-if="viaje.vehiculo !== null && viaje.vehiculo.modalidad === 'intermunicipal' ">
+                    <tr ng-repeat="viaje in vm.viajesIntes | toArray:false| filter: filtro track by $index" ng-if="viaje.vehiculo !== null">
                         <td></td>
                         <td class="type"><b>{{viaje.contrato}}</b></td>
                         <td class="size" hide-xs>{{viaje.conductor.nombres}} {{viaje.conductor.apellidos}}</td>

@@ -9,10 +9,14 @@
         .controller('ViajesController', controller);
 
     /** @ngInject */
-    function controller(Viajes, $http, api, OneRequest, authService) {
+    function controller(Viajes, $http, api, OneRequest, authService, $filter) {
         var vm = this;
         // vm.viajes = {};
         vm.user = authService.getCurrentUser();
+        vm.viajesEspecs = [];
+        vm.viajesIntes = [];
+        vm.fechaInicio = new Date();
+        vm.fechaFinal = new Date();
 
         // metodos
         vm.formato = formato;
@@ -50,11 +54,23 @@
 
         getViajes();
         function getViajes() {
+            var desde = $filter('date')(vm.fechaInicio, 'yyyy-MM-dd');
+            var hasta = $filter('date')(vm.fechaFinal, 'yyyy-MM-dd');
             var campos = 'id,origen,destino,contrato,fuec,conductor,vehiculo';
 
-            OneRequest.get('viajes?fields='+campos+'&populate=conductor,vehiculo&where={central:'+vm.user.central.id+'}').then(function (response) {
-                vm.viajes = response;
+            // OneRequest.get('viajes?fields='+campos+'&populate=conductor,vehiculo&where={central:'+vm.user.central.id+'}').then(function (response) {
+            //     vm.viajes = response;
+            // })
+            OneRequest.get('empresa/'+vm.user.empresa.id+'/rango_fechas_viajes?fecha_desde='+desde+'&fecha_hasta='+hasta+'&populate=conductor,vehiculo', {where: {central: vm.user.central.id}}).then(function (response) {
+                angular.forEach(response, function(viaje){
+                    if(viaje.modalidad === 'especial'){
+                        vm.viajesEspecs.push(viaje);
+                    }else if(viaje.modalidad === 'intermunicipal'){
+                        vm.viajesIntes.push(viaje);
+                    }
+                })
             })
+
             // Viajes.get({fields: campos, where:{central: vm.user.central.id}, populate: 'conductor, vehiculo'})
             //     .then(function (response) {
             //         vm.viajes = response;
