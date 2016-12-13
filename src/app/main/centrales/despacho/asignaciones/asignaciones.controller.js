@@ -49,14 +49,17 @@
                 solicitud.codigo_ruta = Despacho.destino.codigo;
                 solicitud.tipo = 'Pasajeros';
                 solicitud.estado = 'a';
+                solicitud.cliente = undefined;
 
                 if(solicitud.direccion){
-                    solicitud.cliente = undefined
+                    if(solicitud.pasajeros.length == 1){
+                        solicitud.pasajeros[0].direccion = solicitud.direccion;
+                        solicitud.pasajeros[0].telefono = solicitud.telefono;
+                    }
                     SolicitudesRepository.create(vm.solicitud);
                 } else {
                     angular.forEach(solicitud.pasajeros, function (pasajero) {
                         solicitud.pasajeros = [pasajero];
-                        solicitud.cliente = undefined;
                         SolicitudesRepository.create(vm.solicitud);
                     });
                 }
@@ -84,6 +87,10 @@
                             identificacion: cliente.identificacion,
                             nombre: cliente.nombre
                         };
+                        if(index == 0){
+                            vm.solicitud.direccion = cliente.direccion;
+                            vm.solicitud.telefono = cliente.telefono;
+                        }                        
                         vm.focusNombre = true;
                         cliente.telefono && vm.telefonos.push(cliente.telefono);
                         cliente.direccion && vm.direcciones.push(cliente.direccion);
@@ -102,6 +109,9 @@
                 telefono : undefined,
                 direccion: undefined
             }
+            vm.telefonos = [];
+            delete vm.direcciones;
+            vm.direcciones = [];
             vm.focusId = true;
         }
 
