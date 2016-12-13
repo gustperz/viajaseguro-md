@@ -14,7 +14,10 @@
         var campos = 'identificacion, nombres, apellidos, direccion, email, fecha_nacimiento,' +
             ' central, telefono, activo, fecha_ingreso, imagen, fecha_licencia, ' +
             ' nlicencia, tipo_licencia, vehiculo, vehiculo.fecha_seguroac, ' +
-            ' vehiculo.fecha_tecnomecanica, vehiculo.fecha_soat';
+            ' vehiculo.fecha_tecnomecanica, vehiculo.fecha_soat,vehiculo.id, vehiculo.placa,' +
+            ' vehiculo.modelo, vehiculo.color, vehiculo.clase, vehiculo.color, vehiculo.cupos, ' +
+            ' vehiculo.codigo_vial, vehiculo.ntarjoperacion, vehiculo.marca, vehiculo.modalidad,' +
+            ' vehiculo.cedula_propietario, vehiculo.telefono_propietario, vehiculo.nombre_propietario';
         vm.conductores = [];
         vm.conductoresInactivos = [];
         vm.selected = null;
@@ -127,7 +130,7 @@
         }
 
         function editModalConductor(ev, tipo) {
-            delete vm.selected.vehiculo;
+            // delete vm.selected.vehiculo;
             vm.selected.identificacion = parseInt(vm.selected.identificacion);
             vm.selected.telefono = parseInt(vm.selected.telefono);
             vm.selected.nlicencia = parseInt(vm.selected.nlicencia);
@@ -135,6 +138,14 @@
             vm.selected.fecha_seguroac = new Date(vm.selected.fecha_seguroac);
             vm.selected.fecha_nacimiento = new Date(vm.selected.fecha_nacimiento);
             vm.selected.fecha_ingreso = new Date(vm.selected.fecha_ingreso);
+            // vehiculo
+            if(vm.selected.vehiculo){
+                vm.selected.vehiculo.telefono_propietario = parseInt(vm.selected.vehiculo.telefono_propietario);
+                vm.selected.vehiculo.cedula_propietario = parseInt(vm.selected.vehiculo.telefono_propietario);
+                vm.selected.vehiculo.fecha_soat = new Date(vm.selected.vehiculo.fecha_soat);
+                vm.selected.vehiculo.fecha_tecnomecanica = new Date(vm.selected.vehiculo.fecha_tecnomecanica);
+                vm.selected.vehiculo.fecha_seguroac = new Date(vm.selected.vehiculo.fecha_seguroac)
+            }
 
             $mdDialog.show({
                 locals: {

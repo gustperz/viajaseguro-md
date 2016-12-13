@@ -1,13 +1,14 @@
 /**
  * Created by Jose Soto Acosta on 14/09/2016.
  */
-function NewConductorController($mdDialog, Toast, Conductores, tipo, conductor, Centrales, $rootScope) {
+function NewConductorController($mdDialog, Toast, Conductores, tipo, conductor, Centrales, $rootScope, OneRequest) {
 // variables
     var vm = this;
-    vm.conductor = {};
+    // vm.conductor = conductor || {};
+
     vm.tipoModal = tipo;
     vm.centrales = [];
-    vm.opcional = true;
+    vm.opcional = false;
     vm.user = $rootScope.currentUser;
     vm.tiposLicencia = [
         {
@@ -47,6 +48,7 @@ function NewConductorController($mdDialog, Toast, Conductores, tipo, conductor, 
     // funciones
     vm.guardarConductor = guardarConductor;
     vm.modificarConductor = modificarConductor;
+    vm.getVehiculo = getVehiculo;
     vm.cancel = cancel;
 
     //////////
@@ -56,6 +58,8 @@ function NewConductorController($mdDialog, Toast, Conductores, tipo, conductor, 
     //////////
 
     function guardarConductor() {
+        if(!vm.conductor.vehiculo)
+            delete (vm.conductor.vehiculo);
         Conductores.create(vm.conductor).then(success, error);
 
         function success(response) {
@@ -94,6 +98,8 @@ function NewConductorController($mdDialog, Toast, Conductores, tipo, conductor, 
     }
 
     function modificarConductor() {
+        if(!vm.conductor.vehiculo.placa)
+            delete (vm.conductor.vehiculo);
         vm.conductor.put().then(success, error);
 
         function success(response) {
@@ -123,6 +129,21 @@ function NewConductorController($mdDialog, Toast, Conductores, tipo, conductor, 
                 });
             }
         }
+    }
+
+    function getVehiculo() {
+        var campos = 'id, placa, modelo, color, codigo_vial, fecha_soat, ' +
+            'fecha_tecnomecanica, fecha_seguroac, ' +
+            ' cupos, cedula_propietario,' +
+            ' nombre_propietario, telefono_propietario, imagen, marca, clase, ntarjoperacion, modalidad';
+        OneRequest.get('vehiculos?fields='+campos, {where: {placa: vm.conductor.vehiculo.placa}}).then(function (response) {
+            response[0].telefono_propietario = parseInt(response[0].telefono_propietario);
+            response[0].cedula_propietario = parseInt(response[0].telefono_propietario);
+            response[0].fecha_soat = new Date(response[0].fecha_soat);
+            response[0].fecha_tecnomecanica = new Date(response[0].fecha_tecnomecanica);
+            response[0].fecha_seguroac = new Date(response[0].fecha_seguroac)
+            vm.conductor.vehiculo = response[0];
+        })
     }
 
     loadCentrales();

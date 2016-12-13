@@ -12,7 +12,7 @@
             <md-input-container>
                 <md-icon md-font-icon="icon-calendar"></md-icon>
                 <input type="date" name="fecha_tecnomecanica" ng-model="vm.conductor.vehiculo.fecha_tecnomecanica"
-                       placeholder="Fecha de vencimiento" required>
+                       placeholder="Fecha de vencimiento" ng-required="vm.conductor.vehiculo.placa">
                 <div ng-messages="verticalStep1.fecha_tecnomecanica.$error"
                      ng-show="verticalStep1.fecha_tecnomecanica.$touched"
                      role="alert">
@@ -33,7 +33,7 @@
             <md-input-container>
                 <md-icon md-font-icon="icon-calendar"></md-icon>
                 <input type="date" name="fecha_soat" ng-model="vm.conductor.vehiculo.fecha_soat"
-                       placeholder="Fecha de vencimiento" required>
+                       placeholder="Fecha de vencimiento" ng-required="vm.conductor.vehiculo.placa">
                 <div ng-messages="verticalStep1.fecha_soat.$error"
                      ng-show="verticalStep1.fecha_soat.$touched"
                      role="alert">
@@ -52,7 +52,7 @@
             <md-input-container flex="100">
                 <md-icon md-font-icon="icon-calendar"></md-icon>
                 <input type="date" name="fecha_seguroac" ng-model="vm.conductor.vehiculo.fecha_seguroac"
-                       placeholder="Fecha del seguro AC/CA" required>
+                       placeholder="Fecha del seguro AC/CA" ng-required="vm.conductor.vehiculo.placa">
                 <div ng-messages="verticalStep1.fecha_seguroac.$error"
                      ng-show="verticalStep1.fecha_seguroac.$touched"
                      role="alert">
