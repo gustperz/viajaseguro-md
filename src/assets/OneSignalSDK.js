@@ -4363,7 +4363,7 @@
             return OneSignal.getSubscription().then(function (n) {
                 o.clearDomElementChildren(document.querySelector(e.nestedContentSelector));
                 var t = "Nada que mostrar.", i = "";
-                if (e.bell.options.showCredit && (i = '<div class="divider"></div>\n                  <div class="kickback">Desarrollado para <a href="http://viajaseguro.co" class="kickback" target="_blank">ViajaSeguro</a></div>'), e.bell.state === l["default"].STATES.SUBSCRIBED && n === !0 || e.bell.state === l["default"].STATES.UNSUBSCRIBED && n === !1) {
+                if (e.bell.options.showCredit && (i = '<div class="divider"></div>\n                  <div class="kickback">Desarrollado para <a href="http://viajaseguro.co" class="kickback" target="_blank">ViajaSeguro <b style="font-size: 5px">by OneSignal</b></a></div>'), e.bell.state === l["default"].STATES.SUBSCRIBED && n === !0 || e.bell.state === l["default"].STATES.UNSUBSCRIBED && n === !1) {
                     var r = "", a = e.getPlatformNotificationIcon();
                     r = a ? '<div class="push-notification-icon"><img src="' + a + '"></div>' : '<div class="push-notification-icon push-notification-icon-default"></div>';
                     var c = "";
@@ -4785,7 +4785,7 @@
     "use strict";
     var i = t(1), o = t(2), r = t(3), a = t(9), s = function () {
         function e(e) {
-            e ? this.options = a({}, e) : this.options = {}, this.options.modalTitle && "string" == typeof this.options.modalTitle || (this.options.modalTitle = "Thanks for subscribing"), this.options.modalMessage && "string" == typeof this.options.modalMessage || (this.options.modalMessage = "You're now subscribed to notifications. You can unsubscribe at any time."), this.options.modalButtonText && "string" == typeof this.options.modalButtonText || (this.options.modalButtonText = "Close"), this.options.modalTitle = this.options.modalTitle.substring(0, 50), this.options.modalMessage = this.options.modalMessage.substring(0, 90), this.options.modalButtonText = this.options.modalButtonText.substring(0, 35), t(70)
+            e ? this.options = a({}, e) : this.options = {}, this.options.modalTitle && "string" == typeof this.options.modalTitle || (this.options.modalTitle = "Gracias por suscribirse"), this.options.modalMessage && "string" == typeof this.options.modalMessage || (this.options.modalMessage = "Ahora estás suscrito a las notificaciones. Puede darse de baja en cualquier momento."), this.options.modalButtonText && "string" == typeof this.options.modalButtonText || (this.options.modalButtonText = "Cerrar"), this.options.modalTitle = this.options.modalTitle.substring(0, 50), this.options.modalMessage = this.options.modalMessage.substring(0, 90), this.options.modalButtonText = this.options.modalButtonText.substring(0, 35), t(70)
         }
 
         return Object.defineProperty(e, "EVENTS", {
