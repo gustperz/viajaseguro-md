@@ -4148,7 +4148,7 @@
                 })
             })
         }, e.sendSelfNotification = function (e, n, t, r, a, l) {
-            return void 0 === e && (e = "OneSignal Test Message"), void 0 === n && (n = "This is an example notification."), void 0 === t && (t = new URL(location.href).origin + "?_osp=do_not_open"), i(this, void 0, void 0, function () {
+            return void 0 === e && (e = "Viajaseguro mensaje de prueba"), void 0 === n && (n = "Este es un ejemplo de notificación."), void 0 === t && (t = new URL(location.href).origin + "?_osp=do_not_open"), i(this, void 0, void 0, function () {
                 var i, u;
                 return o(this, function (o) {
                     switch (o.label) {
