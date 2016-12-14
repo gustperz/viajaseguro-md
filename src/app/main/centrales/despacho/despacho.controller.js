@@ -104,10 +104,10 @@
                     ruta: Despacho._ruta.id,
                     valor: Despacho.valor_viaje,
                     conductor: Despacho.conductor.id,
-                    modalidad: Despacho.conductor.modalidad ,
+                    modalidad: Despacho.conductor.modalidad,
                     vehiculo: typeof Despacho.conductor.vehiculo == 'object' ? Despacho.conductor.vehiculo.id : Despacho.conductor.vehiculo,
-                    contratante_identificacion: Despacho.contratante.identificacion,
-                    contratante_nombre: Despacho.contratante.nombre,
+                    contratante_identificacion: Despacho.contratante ? Despacho.contratante.identificacion : null,
+                    contratante_nombre: Despacho.contratante ? Despacho.contratante.nombre : null,
                     pasajeros: pasajeros
                 }
 

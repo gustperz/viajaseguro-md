@@ -100,6 +100,8 @@ function NewConductorController($mdDialog, Toast, Conductores, tipo, conductor, 
     function modificarConductor() {
         if(!vm.conductor.vehiculo.placa)
             delete (vm.conductor.vehiculo);
+        else
+            vm.conductor.codigo_vial = vm.conductor.vehiculo.codigo_vial;
         vm.conductor.put().then(success, error);
 
         function success(response) {
