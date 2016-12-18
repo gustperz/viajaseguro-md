@@ -127,10 +127,8 @@
                 ventimp.print( );
                 ventimp.close();
             }, 5);
-            // var file = new Blob([response.data], {type: 'application/pdf'});
-            // var fileURL = URL.createObjectURL(file);
-            // $window.open(fileURL);
-            if(Despacho.modalidad !== 'especial'){
+
+            if(Despacho.modalidad == 'especial'){
                 if(Despacho.cont_aux) {
                     Despacho.contrato = Despacho.cont_aux;
                     delete Despacho.cont_aux
@@ -139,9 +137,11 @@
                     localStorage.setItem('nContrato', ++Despacho.contrato);
                 }
             }
+
             Despacho.valor_viaje = 0;
             Despacho.conductor = undefined;
             Despacho.contratante = undefined;
+            console.log(Despacho)
             Despacho.loadConductores(Despacho._ruta);
             $mdDialog.cancel();
         }
