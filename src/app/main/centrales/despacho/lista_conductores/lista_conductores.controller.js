@@ -46,14 +46,15 @@
         function selectConductor(conductor) {
             vm.selectedConductor = Despacho.conductor = conductor;
             if(conductor) {
-                var conductor = Despacho.conductor.id;
+                var conductor_id = Despacho.conductor.id;
                 var nPasajeros = 0;
-                !(conductor in Despacho.sa) || SolicitudesRepository.load();
-                angular.forEach(Despacho.sa[conductor], function (solicitud) {
+                !(conductor_id in Despacho.sa) || SolicitudesRepository.load();
+                angular.forEach(Despacho.sa[conductor_id], function (solicitud) {
                     nPasajeros += solicitud.pasajeros.length;
                 });
                 Despacho.cupos_disponibles = 4 - nPasajeros;
-                console.log('selectConductor '+conductor.id+', cupo: '+Despacho.cupos_disponibles)                
+                Despacho.modalidad = conductor.modalidad;
+                console.log('selectConductor '+conductor_id+', cupo: '+Despacho.cupos_disponibles)                
             }
         }
 
