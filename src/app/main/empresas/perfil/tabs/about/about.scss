@@ -1,43 +1,46 @@
+
 #profile {
+  .correo {
+    text-transform: lowercase !important;
+  }
+  .about-tab {
+    max-width: 1200px;
 
-    .about-tab {
-        max-width: 1200px;
+    .about {
+      padding: 8px;
 
-        .about {
-            padding: 8px;
+      .general {
 
-            .general {
-
-            }
-        }
-
-        .about-sidebar {
-            padding: 8px 8px 8px 32px;
-
-            .friends {
-
-                .content {
-
-                    .friend {
-                        padding: 4px;
-                    }
-                }
-            }
-        }
+      }
     }
+
+    .about-sidebar {
+      padding: 8px 8px 8px 32px;
+
+      .friends {
+
+        .content {
+
+          .friend {
+            padding: 4px;
+          }
+        }
+      }
+    }
+  }
 }
 
 // RESPONSIVE
 @media screen and (max-width: $layout-breakpoint-sm) {
 
-    #profile {
+  #profile {
 
-        .about-tab {
+    .about-tab {
 
-            .about-sidebar {
-                padding: 8px
-            }
-        }
+      .about-sidebar {
+        padding: 8px
+      }
     }
+  }
 
 }
