@@ -1785,7 +1785,7 @@
             })
         }, e._onSubscriptionChanged = function (e) {
             return OneSignal.__doNotShowWelcomeNotification ? void a.debug("Not showing welcome notification because user state was reset.") : void(e === !0 && Promise.all([OneSignal.getUserId(), d["default"].getAppId()]).then(function (e) {
-                    var n = e[0], t = e[1], i = OneSignal.config.welcomeNotification, o = void 0 !== i && i.disable === !0, s = void 0 !== i && void 0 !== i.title && null !== i.title ? i.title : "", u = void 0 !== i && void 0 !== i.message && null !== i.message && i.message.length > 0 ? i.message : "Thanks for subscribing!", d = new URL(location.href).origin + "?_osp=do_not_open", g = i && i.url && i.url.length > 0 ? i.url : d;
+                    var n = e[0], t = e[1], i = OneSignal.config.welcomeNotification, o = void 0 !== i && i.disable === !0, s = void 0 !== i && void 0 !== i.title && null !== i.title ? i.title : "", u = void 0 !== i && void 0 !== i.message && null !== i.message && i.message.length > 0 ? i.message : "Gracuas por suscribirse!", d = new URL(location.href).origin + "?_osp=do_not_open", g = i && i.url && i.url.length > 0 ? i.url : d;
                     s = c.decodeHtmlEntities(s), u = c.decodeHtmlEntities(u), o || (a.debug("Sending welcome notification."), r["default"].sendNotification(t, [n], {en: s}, {en: u}, g, null, {__isOneSignalWelcomeNotification: !0}, void 0), l["default"].trigger(OneSignal.EVENTS.WELCOME_NOTIFICATION_SENT, {
                         title: s,
                         message: u,
