@@ -28,7 +28,7 @@
         vm.usuario = authService.getCurrentUser();
 
         vm.dirterr = [
-            {num: '305', nombre: 'Antioquia, Chocó '},
+            {num: '305', nombre: 'Antioquia, Chocó'},
             {num: '208', nombre: 'Atlántico'},
             {num: '213', nombre: 'Bolívar, San Andrés y Providencia'},
             {num: '415', nombre: 'Boyacá, Casanare'},
@@ -37,7 +37,7 @@
             {num: '220', nombre: 'César'},
             {num: '223', nombre: 'Córdoba, Sucre'},
             {num: '425', nombre: 'Cundinamarca'},
-            {num: '241', nombre: 'La Guajira'},
+            {num: '241', nombre: 'Riohacha, La Guajira'},
             {num: '441', nombre: 'Huila, Caquetá'},
             {num: '247', nombre: 'Magdalena'},
             {num: '550', nombre: 'Meta, Vaupés, Vichada'},
@@ -47,7 +47,7 @@
             {num: '366', nombre: 'Risaralda'},
             {num: '468', nombre: 'Santander'},
             {num: '473', nombre: 'Tolima'},
-            {num: '376', nombre: 'Valle del Cauca'},
+            {num: '376', nombre: 'Valle del Cauca'}
         ]
 
         //////////
@@ -59,10 +59,12 @@
         function fueraDeServicio() {
             Toast('<b>Esta funcion se agregara proximamente al sistema, sea paciente.<b>')
         }
+        vm.seccional = function (state) {
+            vm.empresaResoculicon.secc_resolucion = state.nombre;
+        };
 
         function datosEmpresa() {
             Empresas.get(vm.usuario.empresa.id).then(success, error);
-
             function success(response) {
                 vm.empresa = response;
                 // informacion general

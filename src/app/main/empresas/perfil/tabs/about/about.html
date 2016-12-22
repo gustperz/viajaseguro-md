@@ -67,6 +67,13 @@
                                    aria-label="fax">
                         </md-input-container>
                     </div>
+                    <div class="info-line">
+                        <md-input-container>
+                            <label for="fax">Correo electronico</label>
+                            <input id="correo" type="text" name="fax" ng-model="vm.empresaIgeneral.email"
+                                   aria-label="fax" placeholder="tuempresa@correo.com">
+                        </md-input-container>
+                    </div>
                     <br>
                 </div>
                 <div style="margin-top: -30px; text-align: center">
@@ -139,9 +146,9 @@
                 <div class="content" style="margin-top: -55px;" layout="row" flex>
                     <md-input-container flex>
                         <label>Numero Direccion Territorial</label>
-                        <md-select ng-model="vm.empresaResoculicon.ndireccion_terr">
+                        <md-select ng-model="vm.empresaResoculicon.ndireccion_terr" >
                             <md-option><em>Seleccione</em></md-option>
-                            <md-option ng-repeat="state in vm.dirterr" ng-value="state.num">
+                            <md-option ng-repeat="state in vm.dirterr" ng-value="state.num" ng-blur="vm.seccional(state)">
                                 {{state.num}} - {{state.nombre}}
                             </md-option>
                         </md-select>
