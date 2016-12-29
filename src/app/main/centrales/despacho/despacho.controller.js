@@ -106,9 +106,17 @@
                     conductor: Despacho.conductor.id,
                     modalidad: Despacho.conductor.modalidad,
                     vehiculo: typeof Despacho.conductor.vehiculo == 'object' ? Despacho.conductor.vehiculo.id : Despacho.conductor.vehiculo,
-                    contratante_identificacion: Despacho.contratante ? Despacho.contratante.identificacion : null,
-                    contratante_nombre: Despacho.contratante ? Despacho.contratante.nombre : null,
                     pasajeros: pasajeros
+                }
+
+                if(Despacho.contratante) {
+                    var index = pasajeros.findIndex(function (pasajero) {
+                        return pasajero.identificacion == Despacho.contratante.identificacion;
+                    });
+                    pasajeros.splice(index, 1);
+
+                    data.contratante_identificacion = Despacho.contratante ? Despacho.contratante.identificacion : null;
+                    data.contratante_nombre = Despacho.contratante ? Despacho.contratante.nombre : null;
                 }
 
                 var req = { method: 'POST', url: api + 'viajes', data: data};
