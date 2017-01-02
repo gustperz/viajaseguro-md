@@ -65,7 +65,7 @@
         <div class="todo-item" md-ink-ripple layout="row" layout-align="start center"
                 ng-repeat="solicitud in vm.despacho.sa[vm.despacho.conductor.id] track by $index">
             <div class="info" layout="row" layout-align="start" flex>
-                <div layout="column" layout-align="center center">
+                <div layout="column" layout-align="center center" ng-show="vm.despacho.modalidad == 'especial'">
                     <md-button class="md-icon-button" aria-label="contratante"
                                 ng-show="vm.despacho.contratante.identificacion == solicitud.pasajeros[0].identificacion">
                         <md-icon md-font-icon="icon-account-check"></md-icon>
@@ -76,6 +76,11 @@
                                 ng-hide="vm.despacho.contratante.identificacion == solicitud.pasajeros[0].identificacion">
                         <md-icon md-font-icon="icon-account-outline"></md-icon>
                         <md-tooltip>Establecer como contratante</md-tooltip>
+                    </md-button>
+                </div>
+                <div layout="column" layout-align="center center" ng-hide="vm.despacho.modalidad == 'especial'">
+                    <md-button class="md-icon-button" aria-label="pasajero">
+                        <md-icon md-font-icon="icon-account-outline"></md-icon>
                     </md-button>
                 </div>
                 <div layout="column">
