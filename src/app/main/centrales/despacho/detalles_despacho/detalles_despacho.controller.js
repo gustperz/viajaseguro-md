@@ -18,9 +18,6 @@
 
         //////////
 
-        vm.despacho.vigencia_fi = moment().format('DD-MM-YYYY');
-        vm.despacho.vigencia_fn = moment().format('DD-MM-YYYY');
-
         if(!vm.despacho.conductor.loaded){
             Conductores.get(vm.despacho.conductor.id, {populate: 'vehiculo'}).then(function (conductor) {
                 vm.despacho.conductor = conductor;
@@ -30,6 +27,8 @@
                 vm.despacho.conductor.loaded = true;
             });
         }
+
+        vm.min_fi = moment().toDate();
 
         //////////
 

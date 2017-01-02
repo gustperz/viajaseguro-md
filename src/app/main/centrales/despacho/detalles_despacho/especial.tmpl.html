@@ -41,14 +41,14 @@
 <fieldset class="datos-usuario-empresa">
     <legend>Vigencia</legend>
     <div layout="row">
-        <md-input-container flex>
-            <label>Fecha Inicial</label>
-            <input name="nombre" ng-model="vm.despacho.vigencia_fi" readonly>
-        </md-input-container>
-        <md-input-container flex>
-            <label>Fecha Vencimiento</label>
-            <input name="nombre" ng-model="vm.despacho.vigencia_fn" readonly>
-        </md-input-container>
+        <div flex>
+            <h4 class="m-0">Fecha Inicial</h4>
+            <md-datepicker ng-model="vm.despacho.vigencia_fi" md-min-date="vm.min_fi" ></md-datepicker>
+        </div>
+        <div flex>
+            <h4 class="m-0">Fecha Vencimiento</h4>
+            <md-datepicker ng-model="vm.despacho.vigencia_fn" md-min-date="vm.despacho.vigencia_fi"></md-datepicker>
+        </div>
     </div>
 </fieldset>
 

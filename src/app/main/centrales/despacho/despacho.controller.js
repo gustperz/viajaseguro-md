@@ -19,6 +19,7 @@
 
         Despacho.contratante = JSON.parse(sessionStorage.getItem('contratante_despacho'));
         Despacho.contrato = Number(localStorage.getItem('nContrato'));
+        Despacho.vigencia_fn = Despacho.vigencia_fi = moment().toDate();
 
         //////////
 
@@ -106,7 +107,9 @@
                     conductor: Despacho.conductor.id,
                     modalidad: Despacho.conductor.modalidad,
                     vehiculo: typeof Despacho.conductor.vehiculo == 'object' ? Despacho.conductor.vehiculo.id : Despacho.conductor.vehiculo,
-                    pasajeros: pasajeros
+                    pasajeros: pasajeros,
+                    vigencia_fi: Despacho.vigencia_fi,
+                    vigencia_fn: Despacho.vigencia_fn
                 }
 
                 if(Despacho.conductor.modalidad == 'especial' && Despacho.contratante) {
@@ -149,6 +152,7 @@
             Despacho.valor_viaje = 0;
             Despacho.conductor = undefined;
             Despacho.contratante = undefined;
+            Despacho.vigencia_fn = Despacho.vigencia_fi = moment().toDate();
             console.log(Despacho)
             Despacho.loadConductores(Despacho._ruta);
             $mdDialog.cancel();
