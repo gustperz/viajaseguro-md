@@ -115,8 +115,8 @@
                     });
                     pasajeros[index].es_contratante = true;
 
-                    data.contratante_identificacion = Despacho.contratante ? Despacho.contratante.identificacion : null;
-                    data.contratante_nombre = Despacho.contratante ? Despacho.contratante.nombre : null;
+                    data.contratante_identificacion = Despacho.contratante.identificacion;
+                    data.contratante_nombre = Despacho.contratante.nombre;
                 }
 
                 var req = { method: 'POST', url: api + 'viajes', data: data};
