@@ -109,14 +109,9 @@
                     pasajeros: pasajeros
                 }
 
-                if(Despacho.conductor.modalidad == 'especial' && Despacho.contratante) {
-                    var index = pasajeros.findIndex(function (pasajero) {
-                        return pasajero.identificacion == Despacho.contratante.identificacion;
-                    });
-                    pasajeros[index].es_contratante = true;
-
-                    data.contratante_identificacion = Despacho.contratante ? Despacho.contratante.identificacion : null;
-                    data.contratante_nombre = Despacho.contratante ? Despacho.contratante.nombre : null;
+                if(Despacho.contratante) {
+                    data.contratante_identificacion = Despacho.contratante.identificacion = null;
+                    data.contratante_nombre = Despacho.contratante.nombre = null;
                 }
 
                 var req = { method: 'POST', url: api + 'viajes', data: data};
