@@ -108,8 +108,8 @@
                     modalidad: Despacho.conductor.modalidad,
                     vehiculo: typeof Despacho.conductor.vehiculo == 'object' ? Despacho.conductor.vehiculo.id : Despacho.conductor.vehiculo,
                     pasajeros: pasajeros,
-                    vigencia_fi: Despacho.vigencia_fi,
-                    vigencia_fn: Despacho.vigencia_fn
+                    vigencia_fi: moment(Despacho.vigencia_fi).format('YYYY-MM-DD'),
+                    vigencia_fn: moment(Despacho.vigencia_fn).format('YYYY-MM-DD')
                 }
 
                 if(Despacho.conductor.modalidad == 'especial' && Despacho.contratante) {
