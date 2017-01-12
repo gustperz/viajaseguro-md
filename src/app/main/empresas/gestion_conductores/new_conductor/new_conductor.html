@@ -33,7 +33,7 @@
                 </md-tab>
 
                 <div id="md-tab-ed">
-                    <md-tab  id="md-tab-cond-2" >
+                    <md-tab  id="md-tab-cond-2" ng-disabled="wizardStep1.$invalid">
                         <md-tab-label >
                             <span class="ms-form-wizard-step-label">
                                 <span class="ms-form-wizard-step-number md-accent-bg"
@@ -52,7 +52,7 @@
                         </md-tab-body>
                     </md-tab>
 
-                    <md-tab id="md-tab-cond-3" >
+                    <md-tab id="md-tab-cond-3" ng-disabled="wizardStep2.$invalid">
                         <md-tab-label >
                             <span class="ms-form-wizard-step-label">
                                 <span class="ms-form-wizard-step-number md-accent-bg"
@@ -60,7 +60,7 @@
                                 <span class="ms-form-wizard-step-number md-accent-bg" ng-if="wizardStep3.$valid">
                                     <i class="icon-check s16"></i>
                                 </span>
-                                <span class="ms-form-wizard-step-text">Documentación del vehiculo</span>
+                                <span class="ms-form-wizard-step-text">Documentación del vehiculo (opcional)</span>
                             </span>
                         </md-tab-label>
                         <md-tab-body >
@@ -87,8 +87,12 @@
                     Siguiente
                 </md-button>
                 <md-button class="md-raised md-warn" ng-click="vm.guardarConductor(); msWizard.resetForm();"
-                           ng-show="msWizard.isLastStep()"
-                           >
+                           ng-show="msWizard.isFirstStep() && !vm.conductor.vehiculo.placa" ng-disabled="msWizard.currentStepInvalid()"
+                >
+                    Guardar
+                </md-button>
+                <md-button class="md-raised md-warn" ng-click="vm.guardarConductor(); msWizard.resetForm();"
+                           ng-show="msWizard.isLastStep()" ng-disabled="msWizard.currentStepInvalid()">
                     Guardar
                 </md-button>
             </div>
