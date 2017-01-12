@@ -9,20 +9,11 @@
                 <h3>{{viaje.conductor.nombres}} {{viaje.conductor.apellidos}}</h3>
             </div>
             <div class="md-menu-solicitudes">
-                <md-fab-speed-dial md-direction="left" md-open="demo.isOpen"
-                                    class="md-scale md-fab-top-right md-hover-full"
-                                    ng-mouseenter="demo.isOpen=true" ng-mouseleave="demo.isOpen=false">
-                    <md-fab-trigger>
-                        &nbsp;
-                    </md-fab-trigger>
-                    <md-fab-actions>
-                        <md-button class="md-icon-button" aria-label="asignar-solicitud"
-                                    ng-click="vm.anular(viaje)">
-                            <md-icon md-font-icon="icon-reply" class="icon"></md-icon>
-                            <md-tooltip>Anular despacho</md-tooltip>
-                        </md-button>
-                    </md-fab-actions>
-                </md-fab-speed-dial>
+                <md-button class="md-icon-button" aria-label="asignar-solicitud"
+                           ng-click="vm.anular(viaje)">
+                    <md-icon md-font-icon="icon-reply" class="icon"></md-icon>
+                    <md-tooltip>Anular despacho</md-tooltip>
+                </md-button>
             </div>
         </md-list-item>
     </md-list>
