@@ -29,7 +29,7 @@
         <!-- CONTENT -->
         <md-content class="content" flex ms-scroll>
             <fieldset class="f-especial" ng-if="vm.user.espec === true ">
-                <legend><b>Modalidad especial</b></legend>
+                <legend><b>Modalidad especial | viajes ({{vm.viajesEspecs.length}})</b></legend>
                 <div ng-if="vm.viajesEspecs.length === 0"><span><b>No se han registrado viajes el dia de hoy.</b></span></div>
                 <table class="simple list-view" ng-if="vm.viajesEspecs.length !== 0">
                     <thead>
@@ -61,7 +61,7 @@
             </fieldset>
 
             <fieldset class="f-especial" ng-if="vm.user.intmpal === true ">
-                <legend><b>Modalidad intermunicipal</b></legend>
+                <legend><b>Modalidad intermunicipal | viajes ({{vm.viajesIntes.length}})</b> </legend>
                 <div ng-if="vm.viajesIntes.length === 0"><span><b>No se han registrado viajes el dia de hoy.</b></span></div>
                 <table class="simple list-view" ng-if="vm.viajesIntes.length !== 0 ">
                     <thead>

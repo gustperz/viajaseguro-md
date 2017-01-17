@@ -37,7 +37,7 @@
         <!-- CONTENT -->
         <md-content class="content" flex ms-scroll>
             <fieldset class="f-especial" ng-if="vm.user.espec === true ">
-                <legend><b>Modalidad especial</b></legend>
+                <legend><b>Modalidad especial | viajes ({{vm.viajesEspecs.length}})</b></legend>
                 <div class="todo-izquierda" layout="row">
                     <md-checkbox ng-model="vm.contrato" aria-label="contrato" class="input-rango-fecha">
                         Contrato
@@ -78,7 +78,7 @@
             </fieldset>
 
             <fieldset class="f-especial" ng-if="vm.user.intmpal === true ">
-                <legend><b>Modalidad intermunicipal</b></legend>
+                <legend><b>Modalidad intermunicipal | viajes ({{vm.viajesIntes.length}})</b></legend>
                 <div class="todo-izquierda" layout="row">
                     <md-button class="md-icon-button" aria-label="More" ng-click="vm.printAllInt()">
                         <md-icon md-font-icon="icon-printer"></md-icon>
