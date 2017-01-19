@@ -125,7 +125,7 @@
                 markersTimer[id] = $timeout(function(){
                     vm.markers.splice(markersIndex[id], 1);
                     markersIndex[id] = -1;
-                }, 5*1000);
+                }, 30*1000);
             }
         }
 
