@@ -89,18 +89,24 @@
         function documentacionPorVencer(conductor) {
             var doc_vencida = false
             if(conductor.vehiculo){
-                conductor.pv_licencia = check(conductor.fecha_licencia) && vm.n_cond_doc_venc++;
-                conductor.pv_seguroac = check(conductor.fecha_seguroac) && vm.n_cond_doc_venc++;
-                conductor.pv_soat = check(conductor.vehiculo.fecha_soat) && vm.n_cond_doc_venc++;
-                conductor.pv_tecnomecanica = check(conductor.vehiculo.fecha_tecnomecanica) && vm.n_cond_doc_venc++;
+                (conductor.pv_licencia = check(conductor.fecha_licencia)) && vm.n_cond_doc_venc++;
+                (conductor.pv_seguroac = check(conductor.fecha_seguroac)) && vm.n_cond_doc_venc++;
+                (conductor.pv_soat = check(conductor.vehiculo.fecha_soat)) && vm.n_cond_doc_venc++;
+                (conductor.pv_tecnomecanica = check(conductor.vehiculo.fecha_tecnomecanica)) && vm.n_cond_doc_venc++;
             }
 
             return doc_vencida;
 
             function check(fecha) {
-                if (moment(fecha, "YYYY-MM-DD").diff(moment(), 'days') <= 30) {
+                var dias = moment(fecha, "YYYY-MM-DD").diff(moment(), 'days');
+                if(dias <= 30 && dias > 0) {
                     doc_vencida = true;
-                    return doc_vencida;
+                    return 1;
+                } else if(dias < 0) {
+                    doc_vencida = true;
+                    return -1;
+                } else {
+                    return 0;
                 }
             }
         }
