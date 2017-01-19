@@ -37,21 +37,21 @@
             google.maps.event.addListener(map, "idle", function(){
                 google.maps.event.trigger(map, 'resize');
             });
-        });
 
-        if($rootScope.currentUser.rol == 'CENTRAL_EMPRESA'){
-            Centrales.get($rootScope.currentUser.central.id)
-            .then(function (central) {
-                trackingCentral(central);
-            })
-        }
-        else {
-            vm.show_rutas = true;
-            Centrales.getList({fields: 'id, ciudad, direccion, pos_lat, pos_lng, ciudad_place_id, empresa'})
-            .then(function (centrales) {
-                vm.centrales = centrales;
-            })
-        }
+            if($rootScope.currentUser.rol == 'CENTRAL_EMPRESA'){
+                Centrales.get($rootScope.currentUser.central.id)
+                    .then(function (central) {
+                        trackingCentral(central);
+                    })
+            }
+            else {
+                vm.show_rutas = true;
+                Centrales.getList({fields: 'id, ciudad, direccion, pos_lat, pos_lng, ciudad_place_id, empresa'})
+                    .then(function (centrales) {
+                        vm.centrales = centrales;
+                    })
+            }
+        });
 
         //////////
 
