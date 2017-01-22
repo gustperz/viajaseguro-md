@@ -75,18 +75,7 @@
                 if(vm.empresa.intermunicipal && vm.empresa.especial && vm.empresa.nit_intermunicipal != vm.empresa.nit_espcial) {
                     vm.empresaIgeneral.nit = false;
                 }
-                vm.empresaIgeneral.nombre_corto = response.nombre_corto;
-                vm.empresaIgeneral.nombre_largo = response.nombre_largo;
-                vm.empresaIgeneral.direccion = response.direccion;
-                vm.empresaIgeneral.telefono = response.telefono;
-                vm.empresaIgeneral.fax = response.fax;
-                // persona juridica
-                vm.empresaPjuridica.pjuridica = response.pjuridica;
-                vm.empresaPjuridica.nombre_pjuridica = response.nombre_pjuridica;
-                // resolucion
-                vm.empresaResoculicon.nresolucon = response.nresolucon;
-                vm.empresaResoculicon.fecha_resolucion = moment(response.fecha_resolucion).toDate();
-                vm.empresaResoculicon.ndireccion_terr = response.ndireccion_terr;
+               vm.empresaResoculicon.fecha_resolucion = moment(response.fecha_resolucion).toDate();
             }
 
             function error(response) {
