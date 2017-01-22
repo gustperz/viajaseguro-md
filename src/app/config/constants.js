@@ -3,6 +3,6 @@
 
     angular
         .module('app.constansts', [])
-        .constant('api_domain', 'localhost')
-        .constant('api', 'http://localhost:1337/');
+        .constant('api_domain', 'api.viajaseguro.co')
+        .constant('api', 'http://api.viajaseguro.co/');
 })();

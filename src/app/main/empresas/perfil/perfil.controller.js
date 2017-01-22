@@ -95,7 +95,7 @@
         }
 
         function modificarInfoGeneral() {
-            vm.empresaIgeneral.put(vm.empresaIgeneral).then(success, error);
+            vm.empresaIgeneral.put().then(success, error);
             function success(response) {
                 Toast('Informacion general actualizada correctamente');
             }
@@ -105,7 +105,7 @@
         }
 
         function modificarPjuridica() {
-            vm.empresaPjuridica.put(vm.empresaPjuridica).then(success, error);
+            vm.empresaPjuridica.put().then(success, error);
             function success(response) {
                 Toast('Persona juridica actualziada correctamente');
             }
@@ -115,7 +115,7 @@
         }
 
         function modificarResolucion() {
-            vm.empresaResoculicon.put(vm.empresaResoculicon).then(success, error);
+            vm.empresaResoculicon.put().then(success, error);
             function success(response) {
                 Toast('Datos de resolucion actualizados correctamente');
             }
