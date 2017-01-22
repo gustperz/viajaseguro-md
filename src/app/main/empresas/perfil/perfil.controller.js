@@ -67,6 +67,9 @@
             Empresas.get(vm.usuario.empresa.id).then(success, error);
             function success(response) {
                 vm.empresa = response;
+                vm.empresaIgeneral = response;
+                vm.empresaPjuridica = response;
+                vm.empresaResoculicon = response;
                 // informacion general
                 vm.empresaIgeneral.nit = vm.empresa.intermunicipal ? vm.empresa.nit_intermunicipal : vm.empresa.nit_especial;
                 if(vm.empresa.intermunicipal && vm.empresa.especial && vm.empresa.nit_intermunicipal != vm.empresa.nit_espcial) {
@@ -92,7 +95,7 @@
         }
 
         function modificarInfoGeneral() {
-            vm.empresa.put(vm.empresaIgeneral).then(success, error);
+            vm.empresaIgeneral.put(vm.empresaIgeneral).then(success, error);
             function success(response) {
                 Toast('Informacion general actualizada correctamente');
             }
@@ -102,7 +105,7 @@
         }
 
         function modificarPjuridica() {
-            vm.empresa.put(vm.empresaPjuridica).then(success, error);
+            vm.empresaPjuridica.put(vm.empresaPjuridica).then(success, error);
             function success(response) {
                 Toast('Persona juridica actualziada correctamente');
             }
@@ -112,7 +115,7 @@
         }
 
         function modificarResolucion() {
-            vm.empresa.put(vm.empresaResoculicon).then(success, error);
+            vm.empresaResoculicon.put(vm.empresaResoculicon).then(success, error);
             function success(response) {
                 Toast('Datos de resolucion actualizados correctamente');
             }
