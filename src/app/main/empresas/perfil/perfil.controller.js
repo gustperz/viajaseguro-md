@@ -152,7 +152,7 @@
                 if(saveFirma().$$state.status != 0){
                     Toast('Error al subir la firma');
                 }else{
-                    Toast('Firma guardada correctamente');
+                    Toast('Firma guardada correctamente, podra visualizarla en su proximo inicio de sesion');
                 }
             }else{
                 console.log('Firma no se creo');
