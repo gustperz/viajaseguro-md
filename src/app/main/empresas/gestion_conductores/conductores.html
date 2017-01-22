@@ -200,7 +200,13 @@
                 <md-list-item class="md-2-line">
                     <div class="md-list-item-text">
                         <h3>Fecha de vencimineto de licencia</h3>
-                        <p>{{vm.selected.fecha_licencia | date}}</p>
+                        <p ng-show="vm.selected.pv_licencia == 0">{{vm.selected.fecha_licencia | amDateFormat:'DD [de] MMMM, YYYY'}}</p>
+                        <p ng-show="vm.selected.pv_licencia == 1">
+                            {{vm.selected.fecha_licencia | amDateFormat:'DD [de] MMMM'}}. Vence dentro de {{vm.selected.fecha_licencia | amDifference : null : 'days'}} dias
+                        </p>
+                        <p ng-show="vm.selected.pv_licencia == -1" class="cond_doc_venc">
+                            {{vm.selected.fecha_licencia | amDateFormat:'DD [de] MMMM'}}
+                        </p>
                     </div>
                 </md-list-item>
 
@@ -211,21 +217,39 @@
                     <md-list-item class="md-2-line">
                         <div class="md-list-item-text">
                             <h3>Vencimineto del soat</h3>
-                            <p>{{vm.selected.vehiculo.fecha_soat | date}}</p>
+                            <p ng-show="vm.selected.pv_soat == 0">{{vm.selected.vehiculo.fecha_soat | amDateFormat:'DD [de] MMMM, YYYY'}}</p>
+                            <p ng-show="vm.selected.pv_soat == 1">
+                                {{vm.selected.vehiculo.fecha_soat | amDateFormat:'DD [de] MMMM'}}. Vence dentro de {{vm.selected.vehiculo.fecha_soat | amDifference : null : 'days'}} dias
+                            </p>
+                            <p ng-show="vm.selected.pv_soat == -1" class="cond_doc_venc">
+                                {{vm.selected.vehiculo.fecha_soat | amDateFormat:'DD [de] MMMM'}}
+                            </p>
                         </div>
                     </md-list-item>
                     <md-divider ></md-divider>
                     <md-list-item class="md-2-line">
                         <div class="md-list-item-text">
                             <h3>Vencimineto de la tecnomecanica</h3>
-                            <p>{{vm.selected.vehiculo.fecha_tecnomecanica | date}}</p>
+                            <p ng-show="vm.selected.pv_tecnomecanica == 0">{{vm.selected.vehiculo.fecha_tecnomecanica | amDateFormat:'DD [de] MMMM, YYYY'}}</p>
+                            <p ng-show="vm.selected.pv_tecnomecanica == 1">
+                                {{vm.selected.vehiculo.fecha_tecnomecanica | amDateFormat:'DD [de] MMMM'}}. Vence dentro de {{vm.selected.vehiculo.fecha_tecnomecanica | amDifference : null : 'days'}} dias
+                            </p>
+                            <p ng-show="vm.selected.pv_tecnomecanica == -1" class="cond_doc_venc">
+                                {{vm.selected.vehiculo.fecha_tecnomecanica | amDateFormat:'DD [de] MMMM'}}
+                            </p>
                         </div>
                     </md-list-item>
                     <md-divider ></md-divider>
                     <md-list-item class="md-2-line">
                         <div class="md-list-item-text">
                             <h3>Vencimineto seguro AC/CA</h3>
-                            <p>{{vm.selected.vehiculo.fecha_seguroac | date}}</p>
+                            <p ng-show="vm.selected.pv_seguroac == 0">{{vm.selected.vehiculo.fecha_seguroac | amDateFormat:'DD [de] MMMM, YYYY'}}</p>
+                            <p ng-show="vm.selected.pv_seguroac == 1">
+                                {{vm.selected.vehiculo.fecha_seguroac | amDateFormat:'DD [de] MMMM'}}. Vence dentro de {{vm.selected.vehiculo.fecha_seguroac | amDifference : null : 'days'}} dias
+                            </p>
+                            <p ng-show="vm.selected.pv_seguroac == -1" class="cond_doc_venc">
+                                {{vm.selected.vehiculo.fecha_seguroac | amDateFormat:'DD [de] MMMM'}}
+                            </p>
                         </div>
                     </md-list-item>
                 </div>
