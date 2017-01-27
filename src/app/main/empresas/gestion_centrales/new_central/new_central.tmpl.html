@@ -1,0 +1,55 @@
+<form id="form" layout="column" layout-align="start" name="newCentralForm">
+    <h1>Nueva Central</h1>
+    <md-input-container flex>
+        <label>Ciudad</label>
+        <input name="ciudad"
+               required places-auto-complete size=80
+               ng-model="vm.ciudad_place"
+               component-restrictions="{country:'co'}"
+               types="['(regions)']"
+               on-place-changed="vm.placeChanged()"
+               placeholder="Introduce una ubicación">
+        <div ng-messages="newCentralForm.ciudad.$error">
+            <div ng-message="required">Este campo es obligatorio.</div>
+        </div>
+    </md-input-container>
+    <md-input-container flex>
+        <label>Direccion</label>
+        <input name="direccion" ng-model="vm.central.direccion" ng-model-options='{ debounce: 600 }' ng-change="vm.geocode()" required>
+        <div ng-messages="newCentralForm.direccion.$error">
+            <div ng-message="required">Este campo es obligatorio.</div>
+        </div>
+    </md-input-container>
+    <md-input-container flex>
+        <label>Telfono</label>
+        <input name="telefono" ng-model="vm.central.telefono" required>
+        <div ng-messages="newCentralForm.telefono.$error">
+            <div ng-message="required">Este campo es obligatorio.</div>
+        </div>
+    </md-input-container>
+    <fieldset class="datos-usuario-empresa" layout="column">
+        <legend>Datos de usuario</legend>
+        <md-input-container flex>
+            <label>Nombre de usuario</label>
+            <input name="username" ng-model="vm.central.user.username" required>
+            <div ng-messages="newCentralForm.username.$error">
+                <div ng-message="required">Digita el nombre de usuario</div>
+            </div>
+        </md-input-container>
+        <md-input-container flex>
+            <label>Contrase&ntilde;a</label>
+            <input type="password" name="password" ng-model="vm.central.user.password" required>
+            <div ng-messages="newCentralForm.password.$error">
+                <div ng-message="required">Este campo es obligatorio.</div>
+            </div>
+        </md-input-container>
+    </fieldset>
+    <div layout="row" layout-align="center">
+        <md-button class="boton-guardar-dialog brad-30" ng-disabled="newCentralForm.$invalid" ng-click="vm.save()">
+            Guardar
+        </md-button>
+        <md-button class="boton-cancel-dialog brad-30" ng-click="vm.cancel()">
+            Cancelar
+        </md-button>
+    </div>
+</form>

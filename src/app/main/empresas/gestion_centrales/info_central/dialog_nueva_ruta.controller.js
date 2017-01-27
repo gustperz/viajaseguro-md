@@ -10,13 +10,14 @@
         .controller('NuevaRutaCentralController', controller);
 
     /** @ngInject */
-    function controller(Rutas, $mdMenu, $scope){
+    function controller(Rutas, $mdDialog, central_id){
         var vm = this;
+        vm.trayecto_ruta = [];
 
         vm.DestinoChanged = DestinoChanged;
         vm.OrigenChanged = OrigenChanged;
         vm.saveNewRuta = saveNewRuta;
-        vm.cancelNewRuta = cancelNewRuta;
+        vm.cancel = cancel;
 
         //////////
 
@@ -46,24 +47,26 @@
             }
         }
 
-        function saveNewRuta(central) {
+        function saveNewRuta() {
             Rutas.create({
                 trayecto: vm.trayecto_ruta,
                 origen: vm.origen,
                 destino: vm.destino,
-                central: central.id
+                central: central_id
             }).then(function (ruta) {
-                central.rutas.push(ruta.plain());
-                cancelNewRuta();
-                $scope.vm.selectRuta(ruta.plain());
+                $mdDialog.hide(ruta.plain());
             })
         }
 
-        function cancelNewRuta() {
-            vm.origen_place = '';
-            vm.destino_place = '';
-            vm.trayecto_ruta = '';
-            $mdMenu.hide()
+        function cancel() {
+            $mdDialog.cancel();
         }
+
+        function deleteRoute(ruta, central, incex) {
+            Rutas.remove(ruta).then(function () {
+                central.rutas.splice(incex, 1);
+            });
+        }
+
     }
 })();

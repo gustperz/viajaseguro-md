@@ -30,7 +30,7 @@
                 <tr ng-repeat="central in vm.centrales | filter: filtro"
                     ng-click="vm.selectCentral(central)"
                     ng-class="{'selected' : vm.central.id === central.id}">
-                    <td class="name" hide-xs>{{central.id}}</td>
+                    <td class="name" hide-xs><md-icon md-font-icon="icon-flickr-before"></md-icon></td>
                     <td class="type">{{central.ciudad}}</td>
                 </tr>
                 </tbody>
@@ -39,122 +39,10 @@
         <!-- / CONTENT -->
     </div>
     <div id="detalles" class="bordered mt-10 mr-10 mb-10 p-10" layout="row" flex>
-        <div id="info" layout="column" flex="45" ng-hide="!vm.central.id">
-            <h1>{{vm.central.ciudad}}</h1>
-            <md-list>
-                <md-list-item class="md-2-line">
-                    <div class="md-list-item-text">
-                        <p>Direccion:</p>
-                        <h3>{{vm.central.direccion}}</h3>
-                    </div>
-                </md-list-item>
-                <md-list-item class="md-2-line">
-                    <div class="md-list-item-text">
-                        <p>Telefono:</p>
-                        <h3>{{vm.central.telefono}}</h3>
-                    </div>
-                </md-list-item>
-                <md-divider></md-divider>
-                <md-list-item class="md-2-line">
-                    <div class="md-list-item-text">
-                        <p>Usuario:</p>
-                        <h3>{{vm.central.user.username}}</h3>
-                    </div>
-                    <md-button class="md-secondary md-icon-button" ng-click="vm.cambiarPassCentral($event)" aria-label="edit">
-                        <md-icon md-font-icon="icon-account-key"></md-icon>
-                        <md-tooltip>Cambiar Conraseña</md-tooltip>
-                    </md-button>
-                </md-list-item>
-                <md-divider></md-divider>
-                <md-list-item class="md-2-line">
-                    <div class="md-list-item-text">
-                        <p>Despachador: <span ng-if="vm.central.despachador.rol == 'DESPACHADOR_EMPRESA_DES'">desactivado</span></p>
-                        <h3 ng-hide="vm.central.despachador">No</h3>
-                        <h3 ng-show="vm.central.despachador">{{vm.central.despachador.username}}</h3>
-                    </div>
-                    <md-button class="md-secondary md-icon-button" ng-click="vm.editarDespachador($event)" aria-label="edit despachador">
-                        <md-icon md-font-icon="icon-comment-account-outline"></md-icon>
-                        <md-tooltip>Cambiar Conraseña</md-tooltip>
-                    </md-button>
-                </md-list-item>
-                <md-divider></md-divider>
-            </md-list>
-            <md-content id="rutas" class="content" flex ms-scroll>
-                <md-list flex>
-                    <md-subheader>
-                        <span>Rutas</span>
-                        <ng-include src="'app/main/empresas/gestion_centrales/floating_form.tmpl.html'" ng-controller="NuevaRutaCentralController as vmf"></ng-include>
-                    </md-subheader>
-                    <md-list-item ng-repeat="ruta in vm.central.rutas" class="md-2-line"
-                                  ng-click="vm.selectRuta(ruta)"
-                                  ng-class="{'selected' : vm.selectedRuta.id === ruta.id}">
-                        <div class="md-list-item-text" layout="column">
-                            <h3>{{ruta.origen.ciudad}} - {{ruta.destino.ciudad}}</h3>
-                            <h4>{{ruta.trayecto}}</h4>
-                        </div>
-                        <md-button class="md-secondary md-icon-button" ng-click="vm.deleteRoute(ruta, $index)" aria-label="delete">
-                            <md-icon md-font-icon="icon-close"></md-icon>
-                            <md-tooltip>Eliminar Ruta</md-tooltip>
-                        </md-button>
-                    </md-list-item>
-                </md-list>
-            </md-content>
-        </div>
-        <form id="form" layout="column" layout-align="start" flex="45" name="newCentralForm" ng-show="!vm.central.id && vm.crearCentral">
-            <h1>Nueva Central</h1>
-            <md-input-container flex>
-                <label>Ciudad</label>
-                <input name="ciudad"
-                       required places-auto-complete size=80
-                       ng-model="vm.ciudad_place"
-                       component-restrictions="{country:'co'}"
-                       types="['(regions)']"
-                       on-place-changed="vm.placeChanged()"
-                       placeholder="Introduce una ubicación">
-                <div ng-messages="newCentralForm.ciudad.$error">
-                    <div ng-message="required">Este campo es obligatorio.</div>
-                </div>
-            </md-input-container>
-            <md-input-container flex>
-                <label>Direccion</label>
-                <input name="direccion" ng-model="vm.central.direccion" ng-model-options='{ debounce: 600 }' ng-change="vm.geocode()" required>
-                <div ng-messages="newCentralForm.direccion.$error">
-                    <div ng-message="required">Este campo es obligatorio.</div>
-                </div>
-            </md-input-container>
-            <md-input-container flex>
-                <label>Telfono</label>
-                <input name="telefono" ng-model="vm.central.telefono" required>
-                <div ng-messages="newCentralForm.telefono.$error">
-                    <div ng-message="required">Este campo es obligatorio.</div>
-                </div>
-            </md-input-container>
-            <fieldset class="datos-usuario-empresa" layout="column">
-                <legend>Datos de usuario</legend>
-                <md-input-container flex>
-                    <label>Nombre de usuario</label>
-                    <input name="username" ng-model="vm.central.user.username" required>
-                    <div ng-messages="newCentralForm.username.$error">
-                        <div ng-message="required">Digita el nombre de usuario</div>
-                    </div>
-                </md-input-container>
-                <md-input-container flex>
-                    <label>Contrase&ntilde;a</label>
-                    <input type="password" name="password" ng-model="vm.central.user.password" required>
-                    <div ng-messages="newCentralForm.password.$error">
-                        <div ng-message="required">Este campo es obligatorio.</div>
-                    </div>
-                </md-input-container>
-            </fieldset>
-            <div layout="row" layout-align="center">
-                <md-button class="boton-guardar-dialog brad-30" ng-disabled="newCentralForm.$invalid" ng-click="vm.save()">
-                    Guardar
-                </md-button>
-                <md-button class="boton-cancel-dialog brad-30" ng-click="vm.cancel()">
-                    Cancelar
-                </md-button>
-            </div>
-        </form>
+        <ng-include src="'app/main/empresas/gestion_centrales/info_central/info_central.tmpl.html'"
+                    ng-controller="InfoCentralesController as vm_info" flex="45" ng-hide="!vm.central.id"></ng-include>
+        <ng-include src="'app/main/empresas/gestion_centrales/new_central/new_central.tmpl.html'"
+                    flex="45" ng-show="!vm.central.id && vm.crearCentral"></ng-include>
         <div id="no-select" class="align-vertical text-center" ng-hide="vm.central" flex="45">
             Seleccione una central
         </div>

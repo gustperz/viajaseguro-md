@@ -21,11 +21,8 @@
         vm.geocode = geocode;
         vm.save = save;
         vm.cancel = cancel;
-        vm.selectRuta = selectRuta;
-        vm.deleteRoute = deleteRoute;
+        vm.selectRuta = selectRuta
         vm.showCrearCentral = showCrearCentral;
-        vm.cambiarPassCentral = cambiarPassCentral;
-        vm.editarDespachador = editarDespachador;
 
         //////////
 
@@ -79,63 +76,6 @@
             vm.destino_ruta = '';
             vm.selectedRuta = undefined;
             vm.simpleMap = {};
-        }
-
-        function cambiarPassCentral(ev) {
-            $mdDialog.show({
-                templateUrl: 'app/main/empresas/gestion_centrales/dialog_cambiar_contraseña.tmpl.html',
-                parent: angular.element(document.body),
-                targetEvent: ev,
-                clickOutsideToClose:true,
-                fullscreen: true,
-                controllerAs: 'vm',
-                controller: function () {
-                    var vm = this;
-                    vm.hide = function() {
-                        $mdDialog.hide(vm.user);
-                    };
-                    vm.cancel = $mdDialog.cancel;
-                }
-            }).then(function(user) {
-                OneRequest.put('user/'+vm.central.user.id+'/updateContrasena', user).then(function () {
-                    Toast('Contrase&ntilde;a actualizada correctamente');
-                });
-            });
-        }
-
-        function editarDespachador(ev) {
-            $mdDialog.show({
-                templateUrl: 'app/main/empresas/gestion_centrales/dialog_despachador.tmpl.html',
-                parent: angular.element(document.body),
-                targetEvent: ev,
-                clickOutsideToClose:true,
-                fullscreen: true,
-                locals: {
-                    user: vm.central.despachador
-                },
-                controllerAs: 'vm',
-                controller: function (user) {
-                    var vm = this;
-                    vm.user = user ? user : {'new': true};
-                    vm.user.activo = vm.user.rol == 'DESPACHADOR_EMPRESA_DES' ? false : true;
-                    vm.hide = function() {
-                        $mdDialog.hide(vm.user);
-                    };
-                    vm.cancel = $mdDialog.cancel;
-                }
-            }).then(function(user) {
-                if(user.new){
-                    OneRequest.post('centrales/'+vm.central.id+'/despachador', user).then(function () {
-                        Toast('Despachador asignado a la central');
-                        selectCentral(vm.central);
-                    });
-                } else {
-                    OneRequest.put('centrales/'+vm.central.id+'/despachador', user).then(function () {
-                        Toast('Datos despachador actualizados correctamente');
-                        selectCentral(vm.central);
-                    });
-                }
-            });
         }
 
         function placeChanged() {
@@ -198,10 +138,5 @@
             vm.simpleMap.zoom = 10;
         }
 
-        function deleteRoute(ruta, incex) {
-            Rutas.remove(ruta).then(function () {
-                vm.central.rutas.splice(incex, 1);
-            });
-        }
     }
 })();

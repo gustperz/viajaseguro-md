@@ -1,0 +1,76 @@
+<div id="info" layout="column">
+    <div layout="row">
+        <h1 class="m-0 ml-16">{{vm.central.ciudad}}</h1>
+        <span flex></span>
+        <!--<md-button ng-click="vm.editModalConductor($event, 'Modificar')" class="md-icon-button"-->
+                   <!--aria-label="Editar">-->
+            <!--<md-icon md-font-icon="icon-pencil"></md-icon>-->
+            <!--<md-tooltip><span>Editar</span></md-tooltip>-->
+        <!--</md-button>-->
+        <!--<md-button ng-click="vm.eliminarCentral()" class="md-icon-button" aria-label="Eliminar">-->
+            <!--<md-icon md-font-icon="icon-delete" style="color: #D50000;"></md-icon>-->
+            <!--<md-tooltip>Eliminar</md-tooltip>-->
+        <!--</md-button>-->
+    </div>
+    <md-list>
+        <md-list-item class="md-2-line">
+            <div class="md-list-item-text">
+                <p>Direccion:</p>
+                <h3>{{vm.central.direccion}}</h3>
+            </div>
+        </md-list-item>
+        <md-list-item class="md-2-line">
+            <div class="md-list-item-text">
+                <p>Telefono:</p>
+                <h3>{{vm.central.telefono}}</h3>
+            </div>
+        </md-list-item>
+        <md-divider></md-divider>
+        <md-list-item class="md-2-line">
+            <div class="md-list-item-text">
+                <p>Usuario:</p>
+                <h3>{{vm.central.user.username}}</h3>
+            </div>
+            <md-button class="md-secondary md-icon-button" ng-click="vm_info.cambiarPassCentral($event, vm.central)" aria-label="edit">
+                <md-icon md-font-icon="icon-account-key"></md-icon>
+                <md-tooltip>Cambiar Conraseña</md-tooltip>
+            </md-button>
+        </md-list-item>
+        <md-divider></md-divider>
+        <md-list-item class="md-2-line">
+            <div class="md-list-item-text">
+                <p>Despachador: <span ng-if="vm.central.despachador.rol == 'DESPACHADOR_EMPRESA_DES'">desactivado</span></p>
+                <h3 ng-hide="vm.central.despachador">No</h3>
+                <h3 ng-show="vm.central.despachador">{{vm.central.despachador.username}}</h3>
+            </div>
+            <md-button class="md-secondary md-icon-button" ng-click="vm_info.editarDespachador($event, vm.central)" aria-label="edit despachador">
+                <md-icon md-font-icon="icon-comment-account-outline"></md-icon>
+                <md-tooltip>Cambiar Conraseña</md-tooltip>
+            </md-button>
+        </md-list-item>
+        <md-divider></md-divider>
+    </md-list>
+    <md-content id="rutas" class="content" flex ms-scroll>
+        <md-list flex>
+            <md-subheader>
+                <span>Rutas</span>
+                <md-button class="md-icon-button" aria-label="add-ruta"
+                           ng-click="vm_info.nuevaRuta($event, vm.central)">
+                    <md-icon md-font-icon="icon-plus" class="icon"></md-icon>
+                </md-button>
+            </md-subheader>
+            <md-list-item ng-repeat="ruta in vm.central.rutas" class="md-2-line"
+                          ng-click="vm.selectRuta(ruta)"
+                          ng-class="{'selected' : vm.selectedRuta.id === ruta.id}" flex>
+                <div class="md-list-item-text" layout="column">
+                    <h3>{{ruta.origen.ciudad}} - {{ruta.destino.ciudad}}</h3>
+                    <h4>{{ruta.trayecto[0] | cut:40}}</h4>
+                </div>
+                <md-button class="md-secondary md-icon-button" ng-click="vm_info.editarRuta($event, ruta, vm.central, $index)" aria-label="delete">
+                    <md-icon md-font-icon="icon-pencil"></md-icon>
+                    <md-tooltip>Editar Ruta</md-tooltip>
+                </md-button>
+            </md-list-item>
+        </md-list>
+    </md-content>
+</div>
