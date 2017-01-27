@@ -151,8 +151,20 @@
                 .cancel('Cancelar');
 
             $mdDialog.show(confirm).then(function() {
-                vm.ciudades_origen[Despacho.origen.codigo].rutas.splice(index, 1);
-                sessionStorage.setItem('ciudades_origen', JSON.stringify(vm.ciudades_origen));
+                var ruta = vm.ciudades_origen[Despacho.origen.codigo].rutas[index];
+                var turnos = JSON.parse(sessionStorage.getItem('turnosruta'+ruta.destino));
+                if(!turnos || !turnos.length) {
+                    vm.ciudades_origen[Despacho.origen.codigo].rutas.splice(index, 1);
+                    sessionStorage.setItem('ciudades_origen', JSON.stringify(vm.ciudades_origen));
+                } else {
+                    $mdDialog.show(
+                        $mdDialog.alert()
+                            .title('Debe quitar todos los conductores en turno antes de eliminar')
+                            .ariaLabel('debe eliminar los turnos')
+                            .ok('ok')
+                            .targetEvent(event)
+                    );
+                }
             });
         }
 
@@ -166,9 +178,24 @@
                 .cancel('Cancelar');
 
             $mdDialog.show(confirm).then(function() {
-                delete vm.ciudades_origen[ciudad.codigo];
-                sessionStorage.setItem('ciudades_origen', JSON.stringify(vm.ciudades_origen));
+                var sin_turnos = vm.ciudades_origen[ciudad.codigo].rutas.every(function (ruta) {
+                    var turnos = JSON.parse(sessionStorage.getItem('turnosruta'+ruta.destino));
+                    return !turnos || !turnos.length;
+                })
+                if(sin_turnos) {
+                    delete vm.ciudades_origen[ciudad.codigo];
+                    sessionStorage.setItem('ciudades_origen', JSON.stringify(vm.ciudades_origen));
+                } else {
+                    $mdDialog.show(
+                        $mdDialog.alert()
+                            .title('Debe quitar todos los conductores en turno antes de eliminar')
+                            .ariaLabel('debe eliminar los turnos')
+                            .ok('ok')
+                            .targetEvent(event)
+                    );
+                }
             });
         }
+
     }
 })();
