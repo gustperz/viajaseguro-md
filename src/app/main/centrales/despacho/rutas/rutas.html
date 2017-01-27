@@ -6,6 +6,9 @@
                    ng-click="vmrutas.selectOrigen(ciudad)"
                    ng-class="{'selected': ciudad.codigo == vm.despacho.origen.codigo, 'first': $first, 'last': $last && !currentUser.espec}">
             {{ciudad.nombre}}
+            <md-icon ng-if="ciudad.no_central" md-font-icon="icon-close" class="delete-ruta" ng-click="vmrutas.eliminarOrigen($event, ciudad)">
+                <md-tooltip>Eliminar</md-tooltip>
+            </md-icon>
         </md-button>
         <md-menu ng-if="currentUser.espec">
             <md-button class="last" aria-label="add-ruta" ng-click="$mdOpenMenu($event)">+</md-button>
@@ -54,6 +57,9 @@
                    ng-click="vmrutas.selectDestino(ruta)"
                    ng-class="{'selected': ruta.destino == vm.despacho.destino.codigo, 'first': $first}">
             {{ruta.nombre_ciudad}}
+            <md-icon ng-if="ruta.no_central" md-font-icon="icon-close" class="delete-ruta" ng-click="vmrutas.eliminarDestino($event, $index)">
+                <md-tooltip>Eliminar</md-tooltip>
+            </md-icon>
         </md-button>
         <md-menu>
             <md-button class="last" aria-label="add-ruta" ng-click="$mdOpenMenu($event)"

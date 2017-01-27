@@ -11,7 +11,7 @@
         .controller('RutasDespachoController', RutasController);
 
     /** @ngInject */
-    function RutasController(Despacho, authService, Centrales, $mdMenu, Toast){
+    function RutasController(Despacho, authService, Centrales, $mdMenu, Toast, $mdDialog){
         var vm = this;
         vm.ciudades_origen = {};
 
@@ -22,7 +22,8 @@
         vm.selectOrigen = selectOrigen;
         vm.selectDestino = selectDestino;
         vm.cancel = cancel;
-
+        vm.eliminarDestino = eliminarDestino;
+        vm.eliminarOrigen = eliminarOrigen;
 
         //////////
 
@@ -72,7 +73,9 @@
             var place = this.getPlace();
             vm.ciudad_origen = {
                 nombre: place.name,
-                codigo: place.place_id
+                codigo: place.place_id,
+                rutas: [],
+                no_central: true
             }
         }
 
@@ -82,11 +85,7 @@
                     if(central.length){
                         Toast('No se puede seleccionar '+vm.ciudad_origen.nombre+' como origen, los despachos desde esa ciudad, los debe hacer la central local')
                     } else {
-                        vm.ciudades_origen[ciudad.codigo] = {
-                            nombre: vm.ciudad_origen.nombre,
-                            codigo: vm.ciudad_origen.codigo,
-                            rutas: []
-                        };
+                        vm.ciudades_origen[vm.ciudad_origen.codigo] = vm.ciudad_origen;
                         sessionStorage.setItem('ciudades_origen', JSON.stringify(vm.ciudades_origen));
                         selectOrigen(vm.ciudad_origen);
                         vm.ciudad_origen = undefined;
@@ -105,7 +104,7 @@
         }
 
         function addDestino() {
-            vm.ciudad_destino.trayecto = vm.trayecto,
+            vm.ciudad_destino.trayecto = [vm.trayecto],
             vm.ciudades_origen[Despacho.origen.codigo].rutas.push(vm.ciudad_destino);
             sessionStorage.setItem('ciudades_origen', JSON.stringify(vm.ciudades_origen));
             selectDestino(vm.ciudad_destino);
@@ -140,6 +139,36 @@
             vm[campo] = undefined;
             vm.trayecto_ruta = '';
             $mdMenu.hide();
+        }
+
+        function eliminarDestino(event, index) {
+            event.stopPropagation();
+            var confirm = $mdDialog.confirm()
+                .title('Esta seguro de eliminar el destino?')
+                .ariaLabel('Eliminar destino')
+                .targetEvent(event)
+                .ok('Si!')
+                .cancel('Cancelar');
+
+            $mdDialog.show(confirm).then(function() {
+                vm.ciudades_origen[Despacho.origen.codigo].rutas.splice(index, 1);
+                sessionStorage.setItem('ciudades_origen', JSON.stringify(vm.ciudades_origen));
+            });
+        }
+
+        function eliminarOrigen(event, ciudad) {
+            event.stopPropagation();
+            var confirm = $mdDialog.confirm()
+                .title('Esta seguro de eliminar el Origen?')
+                .ariaLabel('Eliminar origen')
+                .targetEvent(event)
+                .ok('Si!')
+                .cancel('Cancelar');
+
+            $mdDialog.show(confirm).then(function() {
+                delete vm.ciudades_origen[ciudad.codigo];
+                sessionStorage.setItem('ciudades_origen', JSON.stringify(vm.ciudades_origen));
+            });
         }
     }
 })();
