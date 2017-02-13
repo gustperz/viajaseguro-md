@@ -48,7 +48,7 @@
                                 vm.ciudades_origen[ruta.origen.ciudad_place_id].rutas.push({
                                     nombre_ciudad: ruta.destino.ciudad,
                                     destino: ruta.destino.ciudad_place_id,
-                                    trayecto: ruta.trayecto,
+                                    trayecto: ruta.trayecto ? ruta.trayecto : [],
                                     id: ruta.id
                                 });
                             }else{
@@ -58,7 +58,7 @@
                                     rutas: [{
                                         nombre_ciudad: ruta.destino.ciudad,
                                         destino: ruta.destino.ciudad_place_id,
-                                        trayecto: ruta.trayecto,
+                                        trayecto: ruta.trayecto ? ruta.trayecto : [],
                                         id: ruta.id
                                     }]
                                 };

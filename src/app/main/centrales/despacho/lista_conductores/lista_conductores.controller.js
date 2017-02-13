@@ -60,11 +60,13 @@
 
         function loadConductores(_ruta) {
             if(_ruta.no_central) {
-                ruta = Despacho._ruta = _ruta;
+                ruta = _ruta;
+                Despacho._ruta = _ruta;
                 return loadConductoresLocalStorage(ruta);
             }
 
-            ruta = Despacho._ruta = Rutas.get(_ruta.id);
+            ruta = Rutas.get(_ruta.id);
+            Despacho._ruta = Rutas.get(_ruta.id);
             ruta.getTurnos(function (turnos) {
                 vm.turnos = turnos;
                 if(!vm.turnos.length) Despacho.conductor = undefined;
